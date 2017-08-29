@@ -90,6 +90,7 @@ class ProductController extends Controller {
                 $file11 = UploadedFile::getInstances($model, 'profile');
                 $file12 = UploadedFile::getInstances($model, 'other_image');
 //            $model->item_ean = date(Ymdhis);
+                $model->profile= $file11[0]->extension;
                 $tag = $_POST['Product']['search_tag'];
                 $model->search_tag = implode(',', $tag);
                 $model->meta_description = $_POST['Product']['meta_description'];
@@ -154,6 +155,7 @@ class ProductController extends Controller {
             $file11 = UploadedFile::getInstances($model, 'profile');
             $file12 = UploadedFile::getInstances($model, 'other_image');
 //            $model->item_ean = date(Ymdhis);
+            $model->profile= $file11[0]->extension;
             $tag = $_POST['Product']['search_tag'];
             $model->search_tag = implode(',', $tag);
             $model->meta_description = $_POST['Product']['meta_description'];
@@ -188,17 +190,22 @@ class ProductController extends Controller {
         $model = new Product();
 
         $model1 = $this->findModel($id);
-        $ean = Product::find()->max('id');
-        if (empty($ean)) {
-            $model1->item_ean = date(Ymd);
-        } else {
-            $ean = $ean + 1;
-            $model1->item_ean = date(Ymd) . $ean;
-        }
         $model->setAttributes($model1->attributes);
         $model->search_tag = $model1->search_tag;
         $model->meta_description = $model1->meta_description;
         $model->meta_keywords = $model1->meta_keywords;
+        $ean = Product::find()->max('id');
+        $model->product_name = '';
+        $model->canonical_name = '';
+        $model->price = '';
+        $model->offer_price = '';
+        $model->stock = '';
+        if (empty($ean)) {
+            $model->item_ean = date(Ymd);
+        } else {
+            $ean = $ean + 1;
+            $model->item_ean = date(Ymd) . $ean;
+        }
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
 //                $model = new Product();
@@ -213,6 +220,9 @@ class ProductController extends Controller {
                 }
                 $file11 = UploadedFile::getInstances($model, 'profile');
                 $file12 = UploadedFile::getInstances($model, 'other_image');
+                if ($file11) {
+                $model->profile= $file11[0]->extension;
+            }
 //            $model->item_ean = date(Ymdhis);
                 $tag = $_POST['Product']['search_tag'];
                 $model->search_tag = implode(',', $tag);
@@ -240,6 +250,7 @@ class ProductController extends Controller {
                                 $delete[] = $source . $file;
                             }
                         }
+                        $this->rename($model->id, $model->canonical_name, 'profile');
                     }
                     if ($file12) {
                         for ($i = 0; $i < sizeof($file12); $i++) {
@@ -251,7 +262,10 @@ class ProductController extends Controller {
                         }
                     } else {
                         $this->makegallerydir($model->id);
-                        $this->copygallery($id,$model->id,'gallery');
+                        $this->copygallery($id, $model->id, 'gallery');
+                        $this->copygallery($id, $model->id, 'gallery_thumb');
+                        $this->rename($model->id, $model->canonical_name, 'gallery');
+                        $this->rename($model->id, $model->canonical_name, 'gallery_thumb');
                     }
                     return $this->redirect(['index']);
                 } else {
@@ -272,20 +286,63 @@ class ProductController extends Controller {
         }
     }
 
+    public function rename($id, $canonical_name, $name) {
+        $path = Yii::getAlias('@paths') . '/product/' . $id . '/'.$name;
+        if (count(glob("{$path}/*")) > 0) {
+            $k = 0;
+            foreach (glob("{$path}/*") as $file) {
+                $k++;
+                $arry = explode('/', $file);
+                $img_nmee = end($arry);
+                //test start
+                if (strpos($img_nmee, '_') !== false) {
+                    $test = explode('_', $img_nmee);
+                rename($path.'/'.$img_nmee,$path.'/'.$canonical_name.'_'.$test['1']);
+                } else {
+                    $test = explode('.', $img_nmee);
+                rename($path.'/'.$img_nmee,$path.'/'.$canonical_name.'.'.$test['1']);
+                }
+//                rename($test['0'],$canonical_name);
+
+
+//                                $test = explode('_', $img_nmee);
+//                                echo $test['0'];
+                //!org
+            }
+        }
+    }
+
     public function makedir($id) {
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/')) {
             mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/', 0644, true);
         }
         return TRUE;
     }
+
     public function makegallerydir($id) {
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery/')) {
-            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/', 0644, true);
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery/', 0644, true);
         }
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery_thumb/')) {
             mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery_thumb/', 0644, true);
         }
         return TRUE;
+    }
+
+    public function copygallery($id, $model_id, $name) {
+        $files = scandir(Yii::$app->basePath . '/../uploads/product/' . $id . '/' . $name);
+        // Identify directories
+        $source = Yii::$app->basePath . '/../uploads/product/' . $id . "/" . $name . '/';
+        $destination = Yii::$app->basePath . '/../uploads/product/' . $model_id . '/' . $name . '/';
+        // Cycle through all source files
+        foreach ($files as $file) {
+            if (in_array($file, array(".", "..")))
+                continue;
+            // If we copied this successfully, mark it for deletion
+            if (copy($source . $file, $destination . $file)) {
+                $delete[] = $source . $file;
+            }
+        }
     }
 
     /**
@@ -305,7 +362,7 @@ class ProductController extends Controller {
 //        echo yii::$app->homeUrl;exit;
         if ($image) {
             $img = explode('@', $image);
-            unlink(yii::$app->basepath . '/../uploads/product/' . $img['0'] . '/' . $img['1']);
+            unlink(yii::$app->basepath . '/../uploads/product/' . $img['0'] . '/gallery/' . $img['1']);
             unlink(yii::$app->basepath . '/../uploads/product/' . $img['0'] . '/gallery_thumb/' . $img['1']);
             echo json_encode(array('msg' => 'success', 'id' => $img['2']));
         } else {

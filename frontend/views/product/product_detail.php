@@ -11,10 +11,10 @@ $this->title = $product_details->canonical_name;
     <div class="row">
         <div class="col-sm-5">
             <h3>Other Products</h3>
-            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/small.jpg' ?>" width="100%" height="350px">
+            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/'.$product_details->canonical_name.'.'.$product_details->profile ?>" width="100%" height="350px">
             <div class="row" style="margin-top: 25px;"> 
                 <?php
-                $path = Yii::getAlias('@paths') . '/product/' . $product_details->id;
+                $path = Yii::getAlias('@paths') . '/product/' . $product_details->id.'/gallery_thumb';
                 if (count(glob("{$path}/*")) > 0) {
 
                     $k = 0;
@@ -28,7 +28,7 @@ $this->title = $product_details->canonical_name;
 
                             <div class = "col-md-2 img-box" id="<?= $k; ?>">
                                 <a href="<?php // Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/' . end($arry) ?>">
-                                    <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/' . end($arry) ?>" width="50px" height="30px"></a>
+                                    <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/gallery_thumb/' . end($arry) ?>" width="50px" height="30px"></a>
 
                             </div>
 

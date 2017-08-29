@@ -8,7 +8,7 @@ $this->title = 'Shopping Cart';
 <section class="checkout-wrp">
     <div class="container">
         <h3 class="inner-h3s">Shopping Cart</h3>
-        <!--<a class="check-btn" href="<?php // echo Yii::$app()->basepath;       ?>cart/proceed">Proceed To Checkout</a>-->
+        <!--<a class="check-btn" href="<?php // echo Yii::$app()->basepath;        ?>cart/proceed">Proceed To Checkout</a>-->
         <div class="checkout-box hidden-xs">
             <table class="table table-striped">
                 <div class="checkout-head">
@@ -32,7 +32,7 @@ $this->title = 'Shopping Cart';
                         <?php $product = Product::findOne($cart->product_id); ?>
                         <?php // $product = Products::model()->findByPk($cart->product_id);   ?>
                         <td>
-
+                            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '_thumb.' . $product->profile ?>">
 
                         </td>
                         <td>
@@ -47,7 +47,7 @@ $this->title = 'Shopping Cart';
                         <td>
                             <form action="<?php echo Yii::$app->homeUrl; ?>cart/updatecart" method="post" id="qty_<?php echo $cart->id; ?>">
                                 <input type="hidden" value="<?php echo $cart->id; ?>" name="cart_id" />
-                                <input class="form-cart" type="number" id="<?php echo $cart->id; ?>"  min="1" max='<?= $product->stock ?>' value="<?= $cart->quantity ?> " name="car_quantity">
+                                <input type='number' name='cart_quantity' class="cart_quantity" id="<?php echo $cart->id; ?>" value="<?= $cart->quantity ?>" min="1" max='<?= $product->stock ?>'>
                             </form
                         </td>
                         <td>
@@ -64,24 +64,24 @@ $this->title = 'Shopping Cart';
                 <?php } ?>
             </table>
             <div class="sub-tot-check">
-                        <div class="row">
-                                <div class="col-sm-offset-5 col-lg-offset-7 col-sm-7 col-lg-5">
-                                        <h4>Subtotal AED : <span><?= $subtotal?></span></h4>
-                                        
+                <div class="row">
+                    <div class="col-sm-offset-5 col-lg-offset-7 col-sm-7 col-lg-5">
+                        <h4>Subtotal AED : <span><?= $subtotal ?></span></h4>
 
-                                        <h4>Estimated Shipping AED : <span>0</span></h4>
-                                       
 
-                                        <div class="tot-check-line"></div>
-                                        <h4>Estimated Total <span class="esti-total"><?= $subtotal?></span></h4>
-                                        <div class="checkj-out-btn">
-                                                
-                                                <a class="check-btn" href="<?php echo Yii::$app->homeUrl;?>cart/proceed">Proceed To Checkout</a>
-                                                <div class="clearfix"></div>
-                                        </div>
-                                </div>
+                        <h4>Estimated Shipping AED : <span>0</span></h4>
+
+
+                        <div class="tot-check-line"></div>
+                        <h4>Estimated Total <span class="esti-total"><?= $subtotal ?></span></h4>
+                        <div class="checkj-out-btn">
+
+                            <a class="check-btn" href="<?php echo Yii::$app->homeUrl; ?>cart/proceed">Proceed To Checkout</a>
+                            <div class="clearfix"></div>
                         </div>
+                    </div>
                 </div>
+            </div>
         </div>
     </div>
 </section>

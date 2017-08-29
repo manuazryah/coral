@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = 'Update';
                         </div>
                         <div class="panel-body">
 				<?=  Html::a('<i class="fa-th-list"></i><span> Manage Product</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+				<?=  Html::a('<i class="fa-bars"></i><span> Copy</span>', ['product/copy?id='.$model->id], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                                 <div class="panel-body"><div class="product-create">
 						<?= $this->render('_form', [
                                                 'model' => $model,

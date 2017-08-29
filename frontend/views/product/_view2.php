@@ -11,7 +11,7 @@ use yii\helpers\Html;
 <div class="container">
     
         <div class="row">
-            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $model->id . '/profile/small.jpg' ?>" width="200px" height="130px"><br>
+            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $model->id . '/profile/'.$model->canonical_name.'.'.$model->profile ?>" width="200px" height="130px"><br>
         </div>
     <a href="<?= Yii::$app->homeUrl.'product/product_detail/'.$model->canonical_name?>"><h3><?= $model->product_name ?></h3></a><br>
         <label>Price <p style="color:red"><?= $model->price ?></p></label>
