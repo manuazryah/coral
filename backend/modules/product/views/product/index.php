@@ -114,9 +114,40 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // 'DOC',
                                 // 'DOU',
                                 // 'status',
-                                ['class' => 'yii\grid\ActionColumn',
-                                    'header' => 'Action',
-                                    'template' => '{update}{delete}'],
+//                                ['class' => 'yii\grid\ActionColumn',
+//                                    'header' => 'Action',
+//                                    'template' => '{update}{delete}'],
+                                             [
+          'class' => 'yii\grid\ActionColumn',
+          'header' => 'Action',
+//          'headerOptions' => ['style' => 'color:#337ab7'],
+          'template' => '{update}{delete}{copy}',
+          'buttons' => [
+            'copy' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
+                            'title' => Yii::t('app', 'lead-view'),
+                ]);
+            },
+//
+          ],
+          'urlCreator' => function ($action, $model, $key, $index) {
+            if ($action === 'copy') {
+                $url ='product/copy?id='.$model->id;
+                return $url;
+            }
+//
+            if ($action === 'update') {
+                $url ='update?id='.$model->id;
+                return $url;
+            }
+            if ($action === 'delete') {
+                $url ='delete?id='.$model->id;
+                return $url;
+            }
+//
+          }
+          
+          ],
                             ],
                         ]);
                         ?>

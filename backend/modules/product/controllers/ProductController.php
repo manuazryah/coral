@@ -117,7 +117,8 @@ class ProductController extends Controller {
 //                exit;
                 }
             } else {
-                echo validation_errors();
+                var_dump($model->getErrors());
+                exit;
             }
         } else {
             return $this->render('create', [
@@ -153,6 +154,12 @@ class ProductController extends Controller {
             $file11 = UploadedFile::getInstances($model, 'profile');
             $file12 = UploadedFile::getInstances($model, 'other_image');
 //            $model->item_ean = date(Ymdhis);
+            $tag = $_POST['Product']['search_tag'];
+            $model->search_tag = implode(',', $tag);
+            $model->meta_description = $_POST['Product']['meta_description'];
+            $model->meta_keywords = $_POST['Product']['meta_keywords'];
+            $model->profile_alt = $_POST['Product']['profile_alt'];
+            $model->gallery_alt = $_POST['Product']['gallery_alt'];
             if ($model->save()) {
                 if ($file11) {
                     if ($this->upload($model, $file11[0])) {
@@ -175,6 +182,110 @@ class ProductController extends Controller {
                         'model' => $model,
             ]);
         }
+    }
+
+    public function actionCopy($id) {
+        $model = new Product();
+
+        $model1 = $this->findModel($id);
+        $ean = Product::find()->max('id');
+        if (empty($ean)) {
+            $model1->item_ean = date(Ymd);
+        } else {
+            $ean = $ean + 1;
+            $model1->item_ean = date(Ymd) . $ean;
+        }
+        $model->setAttributes($model1->attributes);
+        $model->search_tag = $model1->search_tag;
+        $model->meta_description = $model1->meta_description;
+        $model->meta_keywords = $model1->meta_keywords;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+//                $model = new Product();
+//        $model->scenario = 'create';
+
+                $ean = Product::find()->max('id');
+                if (empty($ean)) {
+                    $model->item_ean = date(Ymd);
+                } else {
+                    $ean = $ean + 1;
+                    $model->item_ean = date(Ymd) . $ean;
+                }
+                $file11 = UploadedFile::getInstances($model, 'profile');
+                $file12 = UploadedFile::getInstances($model, 'other_image');
+//            $model->item_ean = date(Ymdhis);
+                $tag = $_POST['Product']['search_tag'];
+                $model->search_tag = implode(',', $tag);
+                $model->meta_description = $_POST['Product']['meta_description'];
+                $model->meta_keywords = $_POST['Product']['meta_keywords'];
+                $model->profile_alt = $_POST['Product']['profile_alt'];
+                $model->gallery_alt = $_POST['Product']['gallery_alt'];
+                if ($model->save()) {
+                    if ($file11) {
+                        if ($this->upload($model, $file11[0])) {
+                            $model->upload($file11[0], $model);
+                        }
+                    } else {
+                        $this->makedir($model->id);
+                        $files = scandir(Yii::$app->basePath . '/../uploads/product/' . $id . '/profile');
+                        // Identify directories
+                        $source = Yii::$app->basePath . '/../uploads/product/' . $id . "/profile/";
+                        $destination = Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/';
+                        // Cycle through all source files
+                        foreach ($files as $file) {
+                            if (in_array($file, array(".", "..")))
+                                continue;
+                            // If we copied this successfully, mark it for deletion
+                            if (copy($source . $file, $destination . $file)) {
+                                $delete[] = $source . $file;
+                            }
+                        }
+                    }
+                    if ($file12) {
+                        for ($i = 0; $i < sizeof($file12); $i++) {
+                            if ($model->uploadMultiple($file12[$i], $model->id, $model->canonical_name, $i)) {
+// file is uploaded successfully
+                            } else {
+                                echo 'Image Upload Failed:';
+                            }
+                        }
+                    } else {
+                        $this->makegallerydir($model->id);
+                        $this->copygallery($id,$model->id,'gallery');
+                    }
+                    return $this->redirect(['index']);
+                } else {
+
+//                    throw new UserException('Error Code 1001');
+                    var_dump($model->getErrors());
+                    exit;
+                }
+            } else {
+                var_dump($model->getErrors());
+                exit;
+//                echo validation_errors();
+            }
+        } else {
+            return $this->render('copy', [
+                        'model' => $model,
+            ]);
+        }
+    }
+
+    public function makedir($id) {
+        if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/')) {
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/', 0644, true);
+        }
+        return TRUE;
+    }
+    public function makegallerydir($id) {
+        if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery/')) {
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/', 0644, true);
+        }
+        if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery_thumb/')) {
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery_thumb/', 0644, true);
+        }
+        return TRUE;
     }
 
     /**
