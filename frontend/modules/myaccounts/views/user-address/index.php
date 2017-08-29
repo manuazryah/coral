@@ -70,6 +70,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 type: "POST",
                 data: {id: idd},
                 success: function (data) {
+                    if (data == 1) {
+                        $("#useraddress-" + idd).remove();
+                    }
                 }
             });
         });
