@@ -10,20 +10,20 @@ use common\models\Category;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="sub-category-form form-inline form-tab">
+<div class="sub-category-form index-form form-tab">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <div class='col-md-12  left_padd'>
         <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'category'), ['prompt' => 'select']) ?>
-    <label onclick="jQuery('#modal-1').modal('show', {backdrop: 'fade'});" class="btn  add_category" style="float: right">Add Category</label>
+        <label onclick="jQuery('#modal-1').modal('show', {backdrop: 'fade'});" class="btn  add_category" style="float: right">Add Category</label>
     </div>
     <!--<a href="javascript:;" onclick="jQuery('#modal-1').modal('show', {backdrop: 'fade'});" class="btn btn-primary btn-single btn-sm">Show Me</a>-->
-    
-    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
+
+    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
         <?= $form->field($model, 'sub_category')->textInput(['maxlength' => true]) ?>
     </div>
-    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
+    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
         <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable'], ['prompt' => 'Select']) ?>
     </div>
     <div class='col-md-12 col-sm-6 col-xs-12' style="float:right;">
@@ -47,7 +47,7 @@ use common\models\Category;
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['id' => 'add_category']); ?>
                 <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
+                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                         <?= $form->field($model, 'category')->textInput(['maxlength' => true]) ?>
                     </div>
                 </div>

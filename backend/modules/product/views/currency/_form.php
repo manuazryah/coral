@@ -8,11 +8,11 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="currency-form form-inline">
+<div class="currency-form index-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
+    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
         <?= $form->field($model, 'currency_name')->textInput(['maxlength' => true]) ?>
 
     </div>
@@ -20,11 +20,11 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'currency_symbol')->textInput(['maxlength' => true]) ?>
 
     </div>
-<!--    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>  
-        <?= $form->field($model, 'currency_value')->textInput(['maxlength' => true]) ?>
+    <!--    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
+    <?= $form->field($model, 'currency_value')->textInput(['maxlength' => true]) ?>
 
-    </div>-->
-    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>   
+        </div>-->
+    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
         <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable'], ['prompt' => 'Select']) ?>
     </div>
     <div class='col-md-4 col-sm-6 col-xs-12' style="float:right;">

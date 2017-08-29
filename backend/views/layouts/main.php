@@ -22,7 +22,7 @@ AppAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <script src="<?= yii::$app->homeUrl; ?>/js/jquery-1.11.1.min.js"></script>
         <script>
-        var homeUrl = '<?= yii::$app->homeUrl;?>'
+            var homeUrl = '<?= yii::$app->homeUrl; ?>'
         </script>
         <?php $this->head() ?>
     </head>
@@ -47,11 +47,11 @@ AppAsset::register($this);
                         <!-- logo -->
                         <div class="logo">
                             <a href="<?= yii::$app->homeUrl; ?>" class="logo-expanded">
-                                <img src="<?= yii::$app->homeUrl; ?>images/logo.jpg" width="80" alt="" />
+                                <img src="<?= yii::$app->homeUrl; ?>images/logo.jpg" width="104" alt="" />
                             </a>
 
                             <a href="<?= yii::$app->homeUrl; ?>" class="logo-collapsed">
-                                <img src="<?= yii::$app->homeUrl; ?>images/logo.jpg" width="40" alt="" />
+                                <img src="<?= yii::$app->homeUrl; ?>images/coralfav.png" width="40" alt="" />
                             </a>
                         </div>
 
@@ -75,18 +75,18 @@ AppAsset::register($this);
                     <ul id="main-menu" class="main-menu">
                         <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                         <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-                        <li class="active opened active">
+                        <li class="">
                             <a href="#">
                                 <i class="linecons-cog"></i>
                                 <span class="title">Admin</span>
                             </a>
                             <ul>
-                                <li class="active">
+                                <li>
                                     <a href="<?= yii::$app->homeUrl; ?>admin-post">
                                         <span class="title">Admin Post</span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="<?= yii::$app->homeUrl; ?>admin-user">
                                         <span class="title">Admin User</span>
                                     </a>
@@ -144,7 +144,7 @@ AppAsset::register($this);
                                                                     <span class="title">Sub Category</span>
                                                                 </a>
                                                             </li>
-                            
+
                                                         </ul>-->
                         </li>
                         <li>
@@ -166,47 +166,6 @@ AppAsset::register($this);
                             </ul>
                         </li>
 
-                        <li>
-                            <a href="ui-widgets.html">
-                                <i class="linecons-star"></i>
-                                <span class="title">Widgets</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mailbox-main.html">
-                                <i class="linecons-mail"></i>
-                                <span class="title">Mailbox</span>
-                                <span class="label label-success pull-right">5</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="mailbox-main.html">
-                                        <span class="title">Inbox</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="extra-gallery.html">
-                                <i class="linecons-beaker"></i>
-                                <span class="title">Extra</span>
-                                <span class="label label-purple pull-right hidden-collapsed">New Items</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="extra-icons-fontawesome.html">
-                                        <span class="title">Icons</span>
-                                    </a>
-                                    <ul>
-                                        <li>
-                                            <a href="extra-icons-fontawesome.html">
-                                                <span class="title">Font Awesome</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
 
                 </div>
@@ -473,14 +432,6 @@ AppAsset::register($this);
 
                     <!-- Right links for user info navbar -->
                     <ul class="user-info-menu right-links list-inline list-unstyled">
-                        <li class="search-form"><!-- You can add "always-visible" to show make the search input visible -->
-
-                            <form name="userinfo_search_form" method="get" action="extra-search.html">
-                                <input type="text" name="s" class="form-control search-field" placeholder="Type to search..." />
-
-                            </form>
-
-                        </li>
 
                         <li class="dropdown user-profile">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -535,7 +486,7 @@ AppAsset::register($this);
 
                         <!-- Add your copyright text here -->
                         <div class="footer-text">
-                            &copy; 2017 
+                            &copy; 2017
                             All Rights Reserved. Powered By Azryah Networks
                         </div>
 
@@ -623,14 +574,14 @@ AppAsset::register($this);
             <script src="assets/js/xenon-toggles.js"></script>
 
 
-             Imported scripts on this page 
+             Imported scripts on this page
             <script src="assets/js/xenon-widgets.js"></script>
             <script src="assets/js/devexpress-web-14.1/js/globalize.min.js"></script>
             <script src="assets/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
             <script src="assets/js/toastr/toastr.min.js"></script>
 
 
-             JavaScripts initializations and stuff 
+             JavaScripts initializations and stuff
             <script src="assets/js/xenon-custom.js"></script>-->
 
             <?php $this->endBody() ?>
