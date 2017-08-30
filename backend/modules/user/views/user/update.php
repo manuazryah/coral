@@ -5,11 +5,17 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = 'Update User: ' . $model->id;
+$this->title = 'User: ' . $model->first_name . ' ' . $model->last_name;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
+<style>
+    #user-gender label{
+        margin-right: 25px;
+        padding-top: 6px;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
 
@@ -21,6 +27,7 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
             <div class="panel-body">
                 <?= Html::a('<i class="fa-th-list"></i><span> Manage User</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                <?= Html::a('<i class="fa fa-shopping-cart"></i><span> View Cart</span>', ['view-cart', 'id' => $model->id], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                 <div class="panel-body"><div class="user-create">
                         <?=
                         $this->render('_form', [

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Personal Information';
+$this->title = 'Update Email/Mobile';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>admin/css/custom.css">
