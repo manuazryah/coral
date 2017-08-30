@@ -36,4 +36,34 @@ class SetValues extends Component {
         }
     }
 
+    /*
+     * Repeated followups Dates listing
+     */
+
+    public function Dates() {
+        $dates = [];
+        for ($i = 1; $i <= 31; $i++) {
+            $dates[$i] = $i;
+        }
+        return $dates;
+    }
+
+    /*
+     * Repeated followups Dates listing
+     */
+
+    public function Months() {
+        $months = array(1 => 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+        return $months;
+    }
+
+    /*
+     * Repeated followups Dates listing
+     */
+
+    public function Years() {
+        $years = range(date("Y"), 1910);
+        return $years;
+    }
+
 }

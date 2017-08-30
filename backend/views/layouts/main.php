@@ -77,26 +77,21 @@ AppAsset::register($this);
                         <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
                         <li class="">
                             <a href="#">
-                                <i class="linecons-cog"></i>
+                                <i class="fa fa-cog"></i>
                                 <span class="title">Admin</span>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="<?= yii::$app->homeUrl; ?>admin-post">
-                                        <span class="title">Admin Post</span>
-                                    </a>
+                                    <?= Html::a('Admin Post', ['/admin/admin-post/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
-                                    <a href="<?= yii::$app->homeUrl; ?>admin-user">
-                                        <span class="title">Admin User</span>
-                                    </a>
+                                    <?= Html::a('Admin User', ['/admin/admin-user/index'], ['class' => 'title']) ?>
                                 </li>
-
                             </ul>
                         </li>
                         <li>
                             <a href="layout-variants.html">
-                                <i class="linecons-desktop"></i>
+                                <i class="fa fa-desktop"></i>
                                 <span class="title">Products</span>
                             </a>
                             <ul>
@@ -106,62 +101,32 @@ AppAsset::register($this);
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="<?= yii::$app->homeUrl; ?>category">
-                                                <span class="title">Category</span>
-                                            </a>
+                                            <?= Html::a('Category', ['/product/category/index'], ['class' => 'title']) ?>
                                         </li>
                                         <li>
-                                            <a href="<?= yii::$app->homeUrl; ?>sub-category">
-                                                <span class="title">Sub Category</span>
-                                            </a>
+                                            <?= Html::a('Sub Category', ['/product/sub-category/index'], ['class' => 'title']) ?>
                                         </li>
                                         <li>
-                                            <a href="<?= yii::$app->homeUrl; ?>product/master-search-tag">
-                                                <span class="title">Search Tag</span>
-                                            </a>
+                                            <?= Html::a('Search Tag', ['/product/master-search-tag/index'], ['class' => 'title']) ?>
                                         </li>
                                     </ul>
                                 </li>
-
                                 <li>
-                                    <a href="<?= yii::$app->homeUrl; ?>product/product">
-                                        <span class="title">Product</span>
-                                    </a>
+                                    <?= Html::a('Product', ['/product/product/index'], ['class' => 'title']) ?>
                                 </li>
                             </ul>
-                            <!--                            <a href="layout-variants.html">
-                                                            <i class="linecons-desktop"></i>
-                                                            <span class="title">Products</span>
-                                                        </a>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="<?= yii::$app->homeUrl; ?>category">
-                                                                    <span class="title">Category</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="<?= yii::$app->homeUrl; ?>sub-category">
-                                                                    <span class="title">Sub Category</span>
-                                                                </a>
-                                                            </li>
-
-                                                        </ul>-->
                         </li>
                         <li>
                             <a href="#">
-                                <i class="linecons-mail"></i>
+                                <i class="fa fa-envelope-o"></i>
                                 <span class="title">Masters</span>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="<?= yii::$app->homeUrl; ?>product/unit">
-                                        <span class="title">Unit</span>
-                                    </a>
+                                    <?= Html::a('Unit', ['/product/unit/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
-                                    <a href="<?= yii::$app->homeUrl; ?>product/currency">
-                                        <span class="title">Currency</span>
-                                    </a>
+                                    <?= Html::a('Currency', ['/product/currency/index'], ['class' => 'title']) ?>
                                 </li>
                             </ul>
                         </li>
@@ -170,6 +135,19 @@ AppAsset::register($this);
                                 <i class="linecons-star"></i>
                                 <span class="title">Settings</span>
                             </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <i class="fa fa-user"></i>
+                                <span class="title">Users</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?= Html::a('Users', ['/user/user/index'], ['class' => 'title']) ?>
+                                </li>
+
+                            </ul>
                         </li>
 
                     </ul>

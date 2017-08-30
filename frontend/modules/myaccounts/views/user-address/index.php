@@ -10,6 +10,7 @@ use yii\grid\GridView;
 $this->title = 'User Addresses';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>admin/css/custom.css">
 <div class="user-address-index">
 
     <div class="row">

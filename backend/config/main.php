@@ -28,6 +28,9 @@ return [
         'product' => [
             'class' => 'backend\modules\product\Module',
         ],
+        'user' => [
+            'class' => 'backend\modules\user\Module',
+        ],
     ],
     'components' => [
         'request' => [
