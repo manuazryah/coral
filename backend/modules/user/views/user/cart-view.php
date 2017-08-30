@@ -23,8 +23,30 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::a('<i class="fa-th-list"></i><span> Manage User</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                 <div class="panel-body">
                     <div class="user-view">
-                        <?php if (!empty($cart_details)) { ?>
+                        <?php if (!empty($cart_details)) {
+                            ?>
+                            <table class="table responsive">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Product Name</th>
+                                        <th>Qty</th>
+                                        <th>Rate</th>
+                                    </tr>
+                                </thead>
 
+                                <tbody>
+                                    <?php foreach ($cart_details as $cart) { ?>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Arlind</td>
+                                            <td>Nushi</td>
+                                            <td>Nushi</td>
+                                        </tr>
+                                    <?php }
+                                    ?>
+                                </tbody>
+                            </table>
                         <?php }
                         ?>
                     </div>

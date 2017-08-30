@@ -48,7 +48,7 @@ class UserController extends Controller {
         $cart_details = Cart::find()->where(['user_id' => $id])->all();
         return $this->render('cart-view', [
                     'model' => $model,
-                    '$cart_details' => $cart_details,
+                    'cart_details' => $cart_details,
         ]);
     }
 
