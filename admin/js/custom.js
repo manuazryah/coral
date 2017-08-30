@@ -90,29 +90,29 @@ $(document).on('submit', '#add_unit', function (event) {
 /****      Add Search tag     *****/
 $(document).on('submit', '#add_searchtag', function (event) {
     event.preventDefault();
-        var tag = $('#search-tag').val();
-        var form = $('.modal-title4').attr('field_id');
-        $.ajax({
-            url: homeUrl + 'product/master-search-tag/ajaxaddtag',
-            type: "post",
-            data: {tag: tag},
-            success: function (data) {
-                var $data = JSON.parse(data);
-                if ($data.con === "1") {
-                    $('#' + form).append($('<option value="' + $data.id + '" >' + $data.tag + '</option>'));
+    var tag = $('#search-tag').val();
+    var form = $('.modal-title4').attr('field_id');
+    $.ajax({
+        url: homeUrl + 'product/master-search-tag/ajaxaddtag',
+        type: "post",
+        data: {tag: tag},
+        success: function (data) {
+            var $data = JSON.parse(data);
+            if ($data.con === "1") {
+                $('#' + form).append($('<option value="' + $data.id + '" >' + $data.tag + '</option>'));
 //                    $('#'+form).val('');
 //                    $('#subcategory-category_id').append($('<option value="' + $data.id + '" selected="selected">' + $data.category + '</option>'));
 //                    $('#subcategory-category').val('');
-                    $('#modal-4').modal('toggle');
-                } else if($data.con === "2"){
-                    alert($data.error);
-                }
-
-            }, error: function () {
-
+                $('#modal-4').modal('toggle');
+            } else if ($data.con === "2") {
+                alert($data.error);
             }
-        });
-    
+
+        }, error: function () {
+
+        }
+    });
+
 
 //$("#add_category").on(submit(function () {
 

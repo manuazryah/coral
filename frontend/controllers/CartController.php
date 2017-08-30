@@ -6,10 +6,13 @@ use yii;
 use common\models\Product;
 use common\models\Cart;
 use common\models\User;
+use common\models\Settings;
 use yii\base\Component;
 use yii\db\MigrationInterface;
 use yii\di\Instance;
 use yii\db\Expression;
+use common\models\OrderMaster;
+use common\models\OrderDetails;
 
 class CartController extends \yii\web\Controller {
 
@@ -29,7 +32,6 @@ class CartController extends \yii\web\Controller {
         $master_option_id = $_REQUEST['master_option'];
         $id = Product::findOne(['canonical_name' => $canonical_name])->id;
         $date = $this->date();
-
         if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
             $user_id = Yii::$app->user->identity->id;
 //            'date <= :date', ['date' => $date]
@@ -52,11 +54,11 @@ class CartController extends \yii\web\Controller {
 //            if (isset(Yii::$app->session['temp_user'])) {
 //                $condition = ['user_id' => $user_id, 'session_id' => Yii::$app->session['temp_user']];
 //            } else {
+        } else if (isset($sessonid)) {
+            $condition = ['session_id' => $sessonid];
 //                Yii::$app->session['temp_user'] = microtime(true);
 //                $condition = ['user_id' => $user_id, 'session_id' => Yii::$app->session['temp_user']];
 //            }
-        } else if (isset($sessonid)) {
-            $condition = ['session_id' => $sessonid];
 //            $condition = "session_id = $sessonid";
         }
         $cart = Cart::find()->where(['product_id' => $id])->andWhere($condition)->one();
@@ -382,6 +384,7 @@ class CartController extends \yii\web\Controller {
     public function actionMycart() {
 
         $date = $this->date();
+        $shipping_limit = Settings::findOne('1');
         if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
             $model1 = new User();
             $model = new User();
@@ -441,14 +444,160 @@ class CartController extends \yii\web\Controller {
                 $total = $cart_content->quantity * $price;
                 $subtotal = $subtotal + $total;
             }
-            
+
 // $this->render('new_buynow');
 //            return $this->render('buynow');
-            return $this->render('buynow', array('carts' => $cart_items, 'subtotal' => $subtotal, 'regform' => $model, 'loginform' => $model1));
+            return $this->render('buynow', array('carts' => $cart_items, 'subtotal' => $subtotal, 'regform' => $model, 'loginform' => $model1, 'shipping_limit' => $shipping_limit->value));
 //            $this->render('buynow', array('carts' => $cart_items, 'regform' => $model, 'loginform' => $model1, 'gift_user' => $gift_user, 'gift_options' => $gift_options, 'coupen_details' => $coupen_details, 'subtotal' => $subtotal, 'coupon_amount' => $coupon_amount, 'granttotal' => $granttotal));
         } else {
             return $this->render('emptycart');
         }
+    }
+
+    public function actionCart_remove() {
+        $cart_id = $_POST['cartid'];
+        if (isset($cart_id)) {
+            $cart = Cart::findone($cart_id);
+            if ($cart->delete()) {
+                echo json_encode(array('msg' => 'success', 'content' => 'Successfully Deleted'));
+            } else {
+                echo json_encode(array('msg' => 'error', 'content' => 'Cannot be deleted'));
+            }
+        } else {
+            echo json_encode(array('msg' => 'error', 'content' => 'Id cannot be set'));
+        }
+    }
+
+    public function actionUpdatecart() {
+        $cart_id = $_POST['cartid'];
+        $qty = $_POST['quantity'];
+        if (isset($cart_id)) {
+            $cart = Cart::findone($cart_id);
+            $cart->quantity = $qty;
+            if ($cart->save()) {
+                echo json_encode(array('msg' => 'success', 'content' => 'Successfully Changed'));
+            } else {
+                echo json_encode(array('msg' => 'error', 'content' => 'Cannot be Changed'));
+            }
+        } else {
+            echo json_encode(array('msg' => 'error', 'content' => 'Id cannot be set'));
+        }
+    }
+
+    public function actionProceed() {
+        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+            if (Yii::$app->session['orderid'] == '') {
+
+                $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+
+                if (!empty($cart)) {
+                    $order_id = $this->addOrder($cart);
+                    Yii::$app->session['orderid'] = $order_id;
+                    $this->orderProducts($order_id, $cart);
+                    $this->redirect(array('Checkout/CheckOut'));
+                } else {
+                    $this->redirect(array('Cart/Mycart'));
+                }
+            } else {
+                $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+
+                if (!empty($cart)) {
+
+                    $order_id = $this->addOrder($cart);
+                    Yii::$app->session['orderid'] = $order_id;
+                    $this->orderProducts($order_id, $cart);
+                    $this->redirect(array('Checkout/CheckOut'));
+                } else {
+                    $this->redirect(array('Cart/Mycart'));
+                }
+            }
+        } else if (Yii::$app->session['temp_user']) {
+            yii::$app->session['after_login'] = 'cart/proceed';
+            $this->redirect(array('site/login'));
+        }
+    }
+
+    public function addOrder($cart) {
+        $model1 = new OrderMaster;
+        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+            $model1->user_id = Yii::$app->user->identity->id;
+
+            $total_amt = $this->total($cart);
+            $model1->total_amount = $total_amt;
+            $model1->status = 0;
+            date_default_timezone_set('Asia/Kolkata');
+            $model1->order_date = date('Y-m-d H:i:s');
+            $model1->doc = date('Y-m-d');
+
+            if ($model1->save()) {
+                return $model1->id;
+            }
+        } else if (Yii::$app->session['temp_user']) {
+            yii::$app->session['after_login'] = 'cart/proceed';
+            $this->redirect(array('site/login'));
+        }
+    }
+
+    public function addOrder1($cart) {
+        $model1 = Order::model()->findByPk(Yii::app()->session['orderid']);
+        if (!empty($model1)) {
+            $model1->user_id = Yii::$app->user->identity->id;
+
+            $total_amt = $this->total($cart);
+            $model1->total_amount = $total_amt;
+            $model1->status = 0;
+            date_default_timezone_set('Asia/Kolkata');
+            $model1->order_date = date('Y-m-d H:i:s');
+            $model1->DOC = date('Y-m-d');
+            if ($model1->save()) {
+                return $model1->id;
+            }
+        } else {
+            $this->redirect(array('Cart/Mycart'));
+        }
+    }
+
+    public function orderProducts($orderid, $carts) {
+
+        foreach ($carts as $cart) {
+            $prod_details = Product::findOne($cart->product_id);
+            $check = OrderDetails::find()->where(['order_id' => $orderid, 'product_id' => $cart->product_id]);
+
+            if (!empty($check)) {
+                
+            } else {
+
+                $model_prod = new OrderDetails;
+                $model_prod->order_id = $orderid;
+                $model_prod->product_id = $cart->product_id;
+                $model_prod->quantity = $cart->quantity;
+                if ($prod_details->offer_price != '') {
+                    $price = $prod_details->offer_price;
+                } else {
+                    $price = $prod_details->price;
+                }
+                $model_prod->amount = $price;
+                $model_prod->rate = ($cart->quantity) * ($price);
+                if ($model_prod->save()) {
+                    
+                } else{
+                    var_dump($model_prod->getErrors());
+                }
+            }
+        }
+    }
+
+    public function total($cart) {
+        foreach ($cart as $cart_item) {
+            $product = Product::findOne($cart_item->product_id);
+            if ($product->offer_price != '') {
+                $price = $product->offer_price;
+            } else {
+                $price = $product->price;
+            }
+            $subtotal += ($price * $cart_item->quantity);
+        }
+        return $subtotal;
     }
 
     function date() {

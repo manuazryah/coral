@@ -165,6 +165,12 @@ AppAsset::register($this);
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="<?= yii::$app->homeUrl; ?>settings">
+                                <i class="linecons-star"></i>
+                                <span class="title">Settings</span>
+                            </a>
+                        </li>
 
                     </ul>
 

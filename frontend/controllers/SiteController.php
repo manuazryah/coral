@@ -88,7 +88,11 @@ class SiteController extends Controller {
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if (yii::$app->session['after_login'] != '') {
+                $this->redirect(array(yii::$app->session['after_login']));
+            } else {
+                return $this->goBack();
+            }
         } else {
             return $this->render('login', [
                         'model' => $model,
@@ -313,7 +317,6 @@ class SiteController extends Controller {
                     $model->update();
                     Yii::$app->getSession()->setFlash('success', 'password changed successfully');
                     $this->redirect('index');
-                   
                 } else {
                     Yii::$app->getSession()->setFlash('error', 'password mismatch  ');
                 }
