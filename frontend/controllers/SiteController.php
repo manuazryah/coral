@@ -145,6 +145,7 @@ class SiteController extends Controller {
      */
     public function actionSignup() {
         $model = new SignupForm();
+        $model->scenario = 'create';
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
@@ -313,7 +314,6 @@ class SiteController extends Controller {
                     $model->update();
                     Yii::$app->getSession()->setFlash('success', 'password changed successfully');
                     $this->redirect('index');
-                   
                 } else {
                     Yii::$app->getSession()->setFlash('error', 'password mismatch  ');
                 }

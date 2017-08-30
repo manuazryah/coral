@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\UserAddress */
+/* @var $model common\models\User */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'User Addresses', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         </div>
                         <div class="panel-body">
-                                <?=  Html::a('<i class="fa-th-list"></i><span> Manage User Address</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                                <div class="panel-body"><div class="user-address-view">
+                                <?=  Html::a('<i class="fa-th-list"></i><span> Manage User</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                                <div class="panel-body"><div class="user-view">
                                                 <p>
                                                         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                                                         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -37,19 +37,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'model' => $model,
                                                 'attributes' => [
                                                             'id',
-            'user_id',
-            'name',
-            'address:ntext',
-            'landmark',
-            'location',
-            'emirate',
-            'post_code',
-            'mobile_number',
+            'first_name',
+            'last_name',
+            'country',
+            'dob',
+            'gender',
+            'mobile_no',
+            'username',
+            'auth_key',
+            'password_hash',
+            'password_reset_token',
+            'email:email',
             'status',
-            'CB',
-            'UB',
-            'DOC',
-            'DOU',
+            'created_at',
+            'updated_at',
                                                 ],
                                                 ]) ?>
 </div>

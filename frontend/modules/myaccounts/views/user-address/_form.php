@@ -7,7 +7,6 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\UserAddress */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>admin/css/custom.css">
 <div class="user-address-form form-inline">
 
     <?php $form = ActiveForm::begin(); ?>
