@@ -29,19 +29,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Product Name</th>
+                                        <th>Product</th>
                                         <th>Qty</th>
                                         <th>Rate</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <?php foreach ($cart_details as $cart) { ?>
+                                    <?php
+                                    foreach ($cart_details as $cart) {
+                                        $product = common\models\Product::findOne($cart->product_id);
+                                        ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Arlind</td>
-                                            <td>Nushi</td>
-                                            <td>Nushi</td>
+                                            <td><img src="<?php echo yii::$app->homeUrl . '../uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '_thumb.' . $product->profile; ?>"></td>
+                                            <td><?= $product->product_name ?></td>
+                                            <td><?= $cart->quantity ?></td>
+                                            <td><?= $cart->rate ?></td>
                                         </tr>
                                     <?php }
                                     ?>

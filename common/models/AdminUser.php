@@ -33,6 +33,7 @@ use yii\web\IdentityInterface;
  * @property AdminPost $post
  */
 class AdminUser extends ActiveRecord implements IdentityInterface {
+
     public $created_at;
     public $updated_at;
 
@@ -42,26 +43,24 @@ class AdminUser extends ActiveRecord implements IdentityInterface {
     public static function tableName() {
         return 'admin_user';
     }
-     public function behaviors()
-    {
+
+    public function behaviors() {
         return [
             TimestampBehavior::className(),
         ];
     }
-
-
 
     /**
      * @inheritdoc
      */
     public function rules() {
         return [
-            [['post_id', 'user_name', 'password_hash', 'name', 'email', 'phone','status'], 'required'],
+            [['post_id', 'user_name', 'password_hash', 'name', 'email', 'phone', 'status'], 'required'],
             [['post_id', 'CB', 'UB', 'status'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['user_name', 'password_hash', 'name', 'email'], 'string', 'max' => 200],
             [['phone'], 'string', 'max' => 20],
-            [['email'],'unique','message'=>'Email Already exist'],
+            [['email'], 'unique', 'message' => 'Email Already exist'],
             [['user_name'], 'unique'],
             [['email'], 'unique'],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminPost::className(), 'targetAttribute' => ['post_id' => 'id']],

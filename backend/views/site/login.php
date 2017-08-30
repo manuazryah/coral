@@ -48,10 +48,10 @@ $form = ActiveForm::begin(
 <div class="login-footer">
     <a href="<?= yii::$app->homeUrl; ?>forgot-password">Forgot your password?</a>
 
-<!--    <div class="info-links">
-        <a href="#">ToS</a> -
-        <a href="#">Privacy Policy</a>
-    </div>-->
+    <!--    <div class="info-links">
+            <a href="#">ToS</a> -
+            <a href="#">Privacy Policy</a>
+        </div>-->
 
 </div>
 
