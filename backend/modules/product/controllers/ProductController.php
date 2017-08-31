@@ -90,9 +90,15 @@ class ProductController extends Controller {
                 $file11 = UploadedFile::getInstances($model, 'profile');
                 $file12 = UploadedFile::getInstances($model, 'other_image');
 //            $model->item_ean = date(Ymdhis);
-                $model->profile= $file11[0]->extension;
+                $model->profile = $file11[0]->extension;
                 $tag = $_POST['Product']['search_tag'];
-                $model->search_tag = implode(',', $tag);
+                if ($tag) {
+                    $model->search_tag = implode(',', $tag);
+                }
+                $tag1 = $_POST['Product']['related_product'];
+                if ($tag1) {
+                    $model->related_product = implode(',', $tag1);
+                }
                 $model->meta_description = $_POST['Product']['meta_description'];
                 $model->meta_keywords = $_POST['Product']['meta_keywords'];
                 $model->profile_alt = $_POST['Product']['profile_alt'];
@@ -129,10 +135,13 @@ class ProductController extends Controller {
     }
 
     public function Upload($model, $file) {
-//       echo  Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/'.$model->canonical_name.'.' . $file->extension;exit;
+        if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $model->id)) {
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $model->id);
+            chmod(\Yii::$app->basePath . '/../uploads/product/' . $model->id, 0777);
+        }
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/')) {
-            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/', 0644, true);
-//                chmod(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/', 0777);
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/');
+            chmod(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/', 0777);
         }
         $file->saveAs(Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $file->extension);
         return TRUE;
@@ -155,9 +164,17 @@ class ProductController extends Controller {
             $file11 = UploadedFile::getInstances($model, 'profile');
             $file12 = UploadedFile::getInstances($model, 'other_image');
 //            $model->item_ean = date(Ymdhis);
-            $model->profile= $file11[0]->extension;
+            if ($file11) {
+                    $model->profile = $file11[0]->extension;
+                }
             $tag = $_POST['Product']['search_tag'];
-            $model->search_tag = implode(',', $tag);
+                if ($tag) {
+                    $model->search_tag = implode(',', $tag);
+                }
+                $tag1 = $_POST['Product']['related_product'];
+                if ($tag1) {
+                    $model->related_product = implode(',', $tag1);
+                }
             $model->meta_description = $_POST['Product']['meta_description'];
             $model->meta_keywords = $_POST['Product']['meta_keywords'];
             $model->profile_alt = $_POST['Product']['profile_alt'];
@@ -221,11 +238,18 @@ class ProductController extends Controller {
                 $file11 = UploadedFile::getInstances($model, 'profile');
                 $file12 = UploadedFile::getInstances($model, 'other_image');
                 if ($file11) {
-                $model->profile= $file11[0]->extension;
-            }
+                    $model->profile = $file11[0]->extension;
+                }
 //            $model->item_ean = date(Ymdhis);
+                
                 $tag = $_POST['Product']['search_tag'];
-                $model->search_tag = implode(',', $tag);
+                if ($tag) {
+                    $model->search_tag = implode(',', $tag);
+                }
+                $tag1 = $_POST['Product']['related_product'];
+                if ($tag1) {
+                    $model->related_product = implode(',', $tag1);
+                }
                 $model->meta_description = $_POST['Product']['meta_description'];
                 $model->meta_keywords = $_POST['Product']['meta_keywords'];
                 $model->profile_alt = $_POST['Product']['profile_alt'];
@@ -287,7 +311,7 @@ class ProductController extends Controller {
     }
 
     public function rename($id, $canonical_name, $name) {
-        $path = Yii::getAlias('@paths') . '/product/' . $id . '/'.$name;
+        $path = Yii::getAlias('@paths') . '/product/' . $id . '/' . $name;
         if (count(glob("{$path}/*")) > 0) {
             $k = 0;
             foreach (glob("{$path}/*") as $file) {
@@ -297,14 +321,12 @@ class ProductController extends Controller {
                 //test start
                 if (strpos($img_nmee, '_') !== false) {
                     $test = explode('_', $img_nmee);
-                rename($path.'/'.$img_nmee,$path.'/'.$canonical_name.'_'.$test['1']);
+                    rename($path . '/' . $img_nmee, $path . '/' . $canonical_name . '_' . $test['1']);
                 } else {
                     $test = explode('.', $img_nmee);
-                rename($path.'/'.$img_nmee,$path.'/'.$canonical_name.'.'.$test['1']);
+                    rename($path . '/' . $img_nmee, $path . '/' . $canonical_name . '.' . $test['1']);
                 }
 //                rename($test['0'],$canonical_name);
-
-
 //                                $test = explode('_', $img_nmee);
 //                                echo $test['0'];
                 //!org
@@ -314,17 +336,20 @@ class ProductController extends Controller {
 
     public function makedir($id) {
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/')) {
-            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/', 0644, true);
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/', 0777, true);
+//            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/profile/', 0644, true);
         }
         return TRUE;
     }
 
     public function makegallerydir($id) {
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery/')) {
-            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery/', 0644, true);
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery/', 0777, true);
+//            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery/', 0644, true);
         }
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery_thumb/')) {
-            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery_thumb/', 0644, true);
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery_thumb/', 0777, true);
+//            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $id . '/gallery_thumb/', 0644, true);
         }
         return TRUE;
     }

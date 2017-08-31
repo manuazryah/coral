@@ -447,7 +447,7 @@ class CartController extends \yii\web\Controller {
 
 // $this->render('new_buynow');
 //            return $this->render('buynow');
-            return $this->render('buynow', array('carts' => $cart_items, 'subtotal' => $subtotal, 'regform' => $model, 'loginform' => $model1, 'shipping_limit' => $shipping_limit->value));
+            return $this->render('buynow', ['carts' => $cart_items, 'subtotal' => $subtotal, 'regform' => $model, 'loginform' => $model1, 'shipping_limit' => $shipping_limit->value]);
 //            $this->render('buynow', array('carts' => $cart_items, 'regform' => $model, 'loginform' => $model1, 'gift_user' => $gift_user, 'gift_options' => $gift_options, 'coupen_details' => $coupen_details, 'subtotal' => $subtotal, 'coupon_amount' => $coupon_amount, 'granttotal' => $granttotal));
         } else {
             return $this->render('emptycart');
@@ -494,7 +494,7 @@ class CartController extends \yii\web\Controller {
                     $order_id = $this->addOrder($cart);
                     Yii::$app->session['orderid'] = $order_id;
                     $this->orderProducts($order_id, $cart);
-                    $this->redirect(array('Checkout/CheckOut'));
+                    $this->redirect(array('checkout/checkout'));
                 } else {
                     $this->redirect(array('Cart/Mycart'));
                 }
@@ -506,7 +506,7 @@ class CartController extends \yii\web\Controller {
                     $order_id = $this->addOrder($cart);
                     Yii::$app->session['orderid'] = $order_id;
                     $this->orderProducts($order_id, $cart);
-                    $this->redirect(array('Checkout/CheckOut'));
+                    $this->redirect(array('checkout/checkout'));
                 } else {
                     $this->redirect(array('Cart/Mycart'));
                 }
@@ -558,15 +558,13 @@ class CartController extends \yii\web\Controller {
     }
 
     public function orderProducts($orderid, $carts) {
-
         foreach ($carts as $cart) {
             $prod_details = Product::findOne($cart->product_id);
-            $check = OrderDetails::find()->where(['order_id' => $orderid, 'product_id' => $cart->product_id]);
+            $check = OrderDetails::find()->where(['order_id' => $orderid, 'product_id' => $cart->product_id])->one();
 
             if (!empty($check)) {
                 
             } else {
-
                 $model_prod = new OrderDetails;
                 $model_prod->order_id = $orderid;
                 $model_prod->product_id = $cart->product_id;
@@ -580,7 +578,7 @@ class CartController extends \yii\web\Controller {
                 $model_prod->rate = ($cart->quantity) * ($price);
                 if ($model_prod->save()) {
                     
-                } else{
+                } else {
                     var_dump($model_prod->getErrors());
                 }
             }

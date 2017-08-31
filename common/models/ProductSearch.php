@@ -19,7 +19,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit', 'tax', 'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status'], 'integer'],
-            [['product_name', 'canonical_name', 'item_ean', 'brand', 'product_type', 'main_description', 'product_detail', 'DOC', 'DOU','profile','stock_availability'], 'safe'],
+            [['product_name', 'canonical_name', 'item_ean', 'brand', 'product_type', 'main_description', 'product_detail', 'DOC', 'DOU','profile','stock_availability','related_product'], 'safe'],
             [['price', 'offer_price'], 'number'],
         ];
     }
@@ -83,6 +83,7 @@ class ProductSearch extends Product
             'profile' => $this->profile,
             'profile_alt' => $this->profile_alt,
             'gallery_alt' => $this->gallery_alt,
+            'related_product' => $this->related_product,
         ]);
 
         $query->andFilterWhere(['like', 'product_name', $this->product_name])

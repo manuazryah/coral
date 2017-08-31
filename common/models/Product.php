@@ -105,6 +105,7 @@ class Product extends \yii\db\ActiveRecord {
             'other_image' => 'Other Images',
             'profile_alt' => 'Profile Alt',
             'gallery_alt' => 'Gallery Alt',
+            'related_product' => 'Related Products',
         ];
     }
 
@@ -132,7 +133,12 @@ class Product extends \yii\db\ActiveRecord {
                 mkdir(\yii::$app->basePath . '/../uploads/product/' . $product_id);
                 chmod(\yii::$app->basePath . '/../uploads/product/' . $product_id, 0777);
             }
-            $path = yii::$app->basePath . '/../uploads/product/' . $product_id;
+            if (!is_dir(\yii::$app->basePath . '/../uploads/product/' . $product_id.'/gallery')) {
+                mkdir(\yii::$app->basePath . '/../uploads/product/' . $product_id.'/gallery');
+                chmod(\yii::$app->basePath . '/../uploads/product/' . $product_id.'/gallery', 0777);
+            }
+            $path = yii::$app->basePath . '/../uploads/product/' . $product_id.'/gallery';
+            $main_path = yii::$app->basePath . '/../uploads/product/' . $product_id;
             $name = $this->fileExists($path, $canname, $image_name = $canname, $file->extension, 1);
             if ($file->saveAs($path . '/' . $name)) {
                 chmod($path . '/' . $name, 0777);
@@ -142,7 +148,7 @@ class Product extends \yii\db\ActiveRecord {
                 }
                 Image::thumbnail($path . '/' . $name, 500, 300)
                         ->resize(new Box(500, 200))
-                        ->save($path . '/gallery_thumb/' . $name, ['quality' => 70]);
+                        ->save($main_path . '/gallery_thumb/' . $name, ['quality' => 70]);
             }
 //            if ($file->saveAs(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/' . $file->name . '.' . $file->extension))
 //                chmod(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/' . $file->name . '.' . $file->extension, 0777);

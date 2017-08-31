@@ -18,6 +18,7 @@ use common\models\SubCategory;
 use common\models\Unit;
 use common\models\Currency;
 use common\models\MasterSearchTag;
+use common\models\Product;
 use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
@@ -117,6 +118,17 @@ use dosamigos\ckeditor\CKEditor;
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'condition')->dropDownList(['1' => 'New', '0' => 'Refurbished']) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?php
+                if (!$model->isNewRecord) {
+                    if (isset($model->related_product)) {
+                        $model->related_product = explode(',', $model->related_product);
+                    }
+                }
+                ?>
+                <?= $form->field($model, 'related_product')->dropDownList(ArrayHelper::map(Product::find()->where(['status' => '1'])->all(), 'id', 'product_name'), ['class' => 'form-control', 'id' => 'product-related_product', 'multiple' => 'multiple']) ?>
+                
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                 <?=
@@ -361,6 +373,14 @@ use dosamigos\ckeditor\CKEditor;
     {
         $("#product-search_tag").select2({
             placeholder: 'Choose product search Tag',
+            allowClear: true
+        }).on('select2-open', function ()
+        {
+            // Adding Custom Scrollbar
+            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+        });
+        $("#product-related_product").select2({
+            placeholder: 'Choose Related product',
             allowClear: true
         }).on('select2-open', function ()
         {
