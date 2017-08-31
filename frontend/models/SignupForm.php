@@ -41,10 +41,10 @@ class SignupForm extends Model {
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
             [['country', 'gender'], 'integer'],
-            [['dob', 'mobile_no', 'day', 'month', 'year'], 'safe'],
+            [['dob', 'mobile_no', 'day', 'month', 'year', 'password_repeat'], 'safe'],
             [['first_name', 'last_name'], 'string', 'max' => 50],
             [['first_name', 'last_name'], 'required'],
-            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match", 'on' => 'create'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match"],
         ];
     }
 

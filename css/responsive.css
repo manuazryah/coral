@@ -3,6 +3,11 @@
         background-size: contain;
     }
 }
+@media(min-width:1200px){
+    .country-select{
+        width: 94% !important;
+    }
+}
 @media(max-width:1200px) and (min-width:992px){
     .navbar-nav>li a{
         padding-left: 0px;
@@ -15,8 +20,8 @@
         margin-left: 10px;
     }
     figure.mz-figure {
-        width: auto; 
-        height: auto; 
+        width: auto;
+        height: auto;
     }
     #product-page .share{
         display: grid;
@@ -30,6 +35,9 @@
     }
     .gp_products_item:hover .text-center{
         bottom: 170px;
+    }
+    .country-select{
+        width: 94% !important;
     }
 }
 @media (max-width: 992px) and (min-width:768px){
@@ -72,8 +80,8 @@
         padding-top: 5px;
     }
     figure.mz-figure {
-        width: auto; 
-        height: auto; 
+        width: auto;
+        height: auto;
     }
     #product-page .share{
         display: grid;
@@ -173,11 +181,11 @@
 @media (max-width: 768px) and (min-width:458px){
     .private-label .private-cntnt {
         padding: 72px 15px;
-        width: auto; 
+        width: auto;
         padding: 145px 15px;
     }
     .top-nav ul li:first-child a{
-        padding: 5px 10px;  
+        padding: 5px 10px;
     }
     .top-nav ul li{
         padding: 0 10px;
@@ -305,7 +313,7 @@
         left: 0px;
         right: 0px;
         display: inline-block;
-    } 
+    }
     #footer .features{
         text-align: center;
         margin: 0 auto;
@@ -334,8 +342,8 @@
         margin-left:0px;
     }
     .product-img-view-box{
-        margin: 0 auto; 
-        text-align: center; 
+        margin: 0 auto;
+        text-align: center;
     }
     #product-page .details {
         margin-top: 50px;
@@ -359,7 +367,7 @@
 }
 @media(max-width:458px){
     .top-nav ul li:first-child a{
-        padding: 5px 10px;  
+        padding: 5px 10px;
     }
     .top-nav ul li{
         padding: 0 10px;
@@ -457,7 +465,7 @@
         background-size: cover;
     }
     .private-label .private-cntnt {
-        width: auto; 
+        width: auto;
         text-align: justify;
         padding: 145px 15px;
     }
@@ -500,7 +508,7 @@
         left: 0px;
         right: 0px;
         display: inline-block;
-    } 
+    }
     #footer .features{
         text-align: center;
         margin: 0 auto;
@@ -571,8 +579,8 @@
         height: auto;
     }
     .product-img-view-box{
-        margin: 0 auto; 
-        text-align: center; 
+        margin: 0 auto;
+        text-align: center;
     }
     #product-page .details {
         margin-top: 50px;

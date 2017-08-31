@@ -12,6 +12,7 @@ class AppAsset extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'https://fonts.googleapis.com/css?family=Roboto',
         'css/bootstrap.min.css',
         'css/font-awesome.min.css',
         'css/responsive_bootstrap_carousel_mega_min.css',
@@ -20,17 +21,17 @@ class AppAsset extends AssetBundle {
         'css/product-img-slider.css',
         'css/magiczoom.css',
         'css/xzoom.css',
-        'https://fonts.googleapis.com/css?family=Roboto',
+        'css/site.css',
         'css/style.css',
         'css/responsive.css',
     ];
     public $js = [
-        'js/jquery-3.2.1.min.js',
+//        'js/jquery-3.2.1.min.js',
         'js/bootstrap.min.js',
         'js/main-slider.js',
         'js/jquery.touchSwipe.min.js',
         'js/responsive_bootstrap_carousel.js',
-        'js/date-picker.js',
+//        'js/date-picker.js',
         'js/star-rating.js',
         'js/product-img-slider.js',
         'js/jquery.elevatezoom.js',

@@ -38,7 +38,7 @@ class SiteController extends Controller {
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -85,6 +85,15 @@ class SiteController extends Controller {
         return $this->render('our-products');
     }
 
+    public function actionLoginSignup() {
+        $model_login = new LoginForm();
+        $model = new SignupForm();
+        return $this->render('login-signup', [
+                    'model_login' => $model_login,
+                    'model' => $model,
+        ]);
+    }
+
     /**
      * Logs in a user.
      *
@@ -94,14 +103,37 @@ class SiteController extends Controller {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $model_login = new LoginForm();
+        $model = new SignupForm();
+        if ($model_login->load(Yii::$app->request->post()) && $model_login->login()) {
             return $this->goBack();
         } else {
-            return $this->render('login', [
+            return $this->render('login-signup', [
+                        'model_login' => $model_login,
                         'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Signs user up.
+     *
+     * @return mixed
+     */
+    public function actionSignup() {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+        $model_login = new LoginForm();
+        return $this->render('login-signup', [
+                    'model_login' => $model_login,
+                    'model' => $model,
+        ]);
     }
 
     /**
@@ -144,26 +176,6 @@ class SiteController extends Controller {
      */
     public function actionAbout() {
         return $this->render('about');
-    }
-
-    /**
-     * Signs user up.
-     *
-     * @return mixed
-     */
-    public function actionSignup() {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
-            }
-        }
-
-        return $this->render('signup', [
-                    'model' => $model,
-        ]);
     }
 
     /**
@@ -330,12 +342,6 @@ class SiteController extends Controller {
         }
         return $this->render('resetPassword', [
                     'model' => $model
-        ]);
-    }
-
-    public function actionLoginSignup() {
-        return $this->render('login-signup', [
-//                    'model' => $model
         ]);
     }
 

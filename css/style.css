@@ -254,7 +254,8 @@ button.black{
     -ms-user-select: none;
 }
 input[type="checkbox"] {
-    display: none;
+    margin-right: 10px;
+    position: relative;    top: 2px;
 }
 input[type="checkbox"] + label:before {
     border: 1px solid #d1d2d0;
@@ -1965,3 +1966,7 @@ a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
     margin-bottom: 30px;
 }
 /*******************************************************Our-product-end****************************************/
+
+.form-group1{
+    margin-bottom: 0px !important;
+}
