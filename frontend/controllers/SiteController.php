@@ -30,10 +30,10 @@ class SiteController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'login-signup', 'product-detail', 'our-products'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -77,6 +77,14 @@ class SiteController extends Controller {
         return $this->render('index');
     }
 
+    public function actionProductDetail() {
+        return $this->render('product-detail');
+    }
+
+    public function actionOurProducts() {
+        return $this->render('our-products');
+    }
+
     /**
      * Logs in a user.
      *
@@ -88,11 +96,7 @@ class SiteController extends Controller {
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if (yii::$app->session['after_login'] != '') {
-                $this->redirect(array(yii::$app->session['after_login']));
-            } else {
-                return $this->goBack();
-            }
+            return $this->goBack();
         } else {
             return $this->render('login', [
                         'model' => $model,
@@ -149,7 +153,6 @@ class SiteController extends Controller {
      */
     public function actionSignup() {
         $model = new SignupForm();
-        $model->scenario = 'create';
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
@@ -327,6 +330,12 @@ class SiteController extends Controller {
         }
         return $this->render('resetPassword', [
                     'model' => $model
+        ]);
+    }
+
+    public function actionLoginSignup() {
+        return $this->render('login-signup', [
+//                    'model' => $model
         ]);
     }
 
