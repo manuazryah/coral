@@ -23,6 +23,7 @@ class SignupForm extends Model {
     public $day;
     public $month;
     public $year;
+    public $terms_condition = false;
 
     /**
      * @inheritdoc
@@ -41,10 +42,20 @@ class SignupForm extends Model {
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
             [['country', 'gender'], 'integer'],
-            [['dob', 'mobile_no', 'day', 'month', 'year', 'password_repeat'], 'safe'],
+            [['dob', 'mobile_no', 'day', 'month', 'year', 'password_repeat', 'terms_condition'], 'safe'],
             [['first_name', 'last_name'], 'string', 'max' => 50],
             [['first_name', 'last_name'], 'required'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match"],
+            ['terms_condition', 'required', 'requiredValue' => 1, 'message' => 'Please accept terms and conditions.'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+        return [
+            'terms_condition' => 'By checking this box and clicking "Register" below, I acknowledge that I have read and agree to the Terms & Conditions and Privacy Policy.',
         ];
     }
 

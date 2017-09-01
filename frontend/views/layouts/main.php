@@ -97,7 +97,21 @@ and open the template in the editor.
                                         </div>
                                     </div>
                                     <ul class="navbar-right">
-                                        <li><?= Html::a('<span>Login / Signup</span>', ['site/login-signup'], ['class' => '']) ?></li>
+                                        <?php if (Yii::$app->user->isGuest) { ?>
+                                            <li><?= Html::a('<span>Login / Signup</span>', ['site/login-signup'], ['class' => '']) ?></li>
+                                        <?php } else {
+                                            ?>
+                                            <li><?= Html::a('<span>My Account</span>', ['myaccounts/user'], ['class' => '']) ?></li>
+                                            <?php
+                                            echo '<li>'
+                                            . Html::beginForm(['/site/logout'], 'post')
+                                            . Html::submitButton(
+                                                    'Logout (' . Yii::$app->user->identity->username . ')', ['style' => 'background: white;border: none;']
+                                            )
+                                            . Html::endForm()
+                                            . '</li>';
+                                        }
+                                        ?>
                                         <li><a href="#" id="cart"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Cart <span class="badge">(3)</span></a></li>
                                     </ul>
                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -172,10 +186,10 @@ and open the template in the editor.
                                     <li class="<?= $action == 'index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>About Us</span>', ['site/index'], ['class' => '']) ?></li>
                                     <li class="<?= $action == 'our-products' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['site/our-products'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>international products</span>', ['index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>private label</span>', ['index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>showrooms</span>', ['index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>contact us</span>', ['index'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>international products</span>', [''], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>private label</span>', [''], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>showrooms</span>', [''], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>contact us</span>', [''], ['class' => '']) ?></li>
                                     <!--                                    <li class="dropdown">
                                                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                                                                             <ul class="dropdown-menu">
