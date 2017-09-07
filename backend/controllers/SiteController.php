@@ -84,7 +84,7 @@ class SiteController extends Controller {
     }
 
     public function actionHome() {
-        if (!Yii::$app->user->isGuest) {
+        if (Yii::$app->user->isGuest) {
             return $this->redirect(array('site/index'));
         }
         return $this->render('index');
