@@ -22,15 +22,7 @@ $this->title = $product_details->canonical_name;
         <div class="row">
 
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 product-img-view-box">
-                <!--                <div class="xzoom-container app-figure" id="zoom-fig">
-                                    <img class="xzoom" id="xzoom-default" src="images/products/escape2.png" xoriginal="images/products/escape2.png" />
-                                    <div class="xzoom-thumbs">
-                                        <a href="images/products/escape2.png"><img class="xzoom-gallery" width="80" height="80" src="images/products/escape2.png"  xpreview="images/products/escape2.png"></a>
-                                        <a href="images/products/metal.png"><img class="xzoom-gallery" width="80" height="80" src="images/products/metal.png"></a>
-                                        <a href="images/gallery/original/03_r_car.jpg"><img class="xzoom-gallery" width="80" src="images/gallery/preview/03_r_car.jpg" title="The description goes here"></a>
-                                        <a href="images/gallery/original/04_g_car.jpg"><img class="xzoom-gallery" width="80" src="images/gallery/preview/04_g_car.jpg" title="The description goes here"></a>
-                                    </div>
-                                </div>        -->
+
 
 
                 <div class="app-figure" id="zoom-fig">
@@ -77,58 +69,49 @@ $this->title = $product_details->canonical_name;
                     </div>
                 </div>
                 <?php if ($product_details->offer_price != "0") { ?>
-                    <p class="price"><?= $product_details->offer_price?> AED  <span><?= $product_details->price?> AED</span> </p>
+                    <p class="price"><?= $product_details->offer_price ?> AED  <span><?= $product_details->price ?> AED</span> </p>
                 <?php } else { ?>
-                    <p class="price"><?= $product_details->price?> AED  </p>
+                    <p class="price"><?= $product_details->price ?> AED  </p>
                 <?php } ?>
                 <p class="message">FREE Shipping on orders over 150.00 AED</p>
                 <div class="hr-box">
                     <h5 class="sizes">sizes:
-                        <span class="size active-box" data-toggle="tooltip" title="xtra large">100ml</span>
-                        <span class="size" data-toggle="tooltip" title="large">90ml</span>
-                        <span class="size" data-toggle="tooltip" title="medium">50ml</span>
-                        <span class="size" data-toggle="tooltip" title="small">30ml</span>
+                        <?php $unit = Unit::findOne($product_details->size_unit); ?>
+                        <span class="size active-box" data-toggle="tooltip" title="xtra large"><?= $product_details->size . $unit->unit_name ?></span>
                     </h5>
                     <br/>
                     <h5 class="type">Fragrance Type:
-                        <span class="not-available active-box" data-toggle="tooltip" title="Many In store">Eau de Parfum</span>
+                        <span class="not-available active-box" data-toggle="tooltip" title="Many In store"><?= $product_details->product_type ?></span>
                         <!--<span class="not-available" data-toggle="tooltip" title="Not In store">Arabic Parfum</span>-->
                     </h5>
                 </div>
                 <p class="product-description"><?= $product_details->main_description ?></p>
-                <h5 class="availability">availability:
-                    <span>many in stock</span>
+                <?php if ($product_details->stock != '0') { ?>
+                    <h5 class="availability">availability:
+                        <span>many in stock</span>
+                    <?php } else { ?>
+                        <span style="color: red">Not in stock</span>
+                    <?php } ?>
                 </h5>
+                <input type = "hidden" value = "<?= $product_details->canonical_name; ?>" id="cano_name_<?= $product_details->id; ?>" name="cano_name">
                 <div class="col-lg-12 col-md-12 hidden-sm hidden-xs pad-0">
-                    <select min="0" max="5" id="number_passengers"  name="quantity" id="quantity">
+                    <?php if ($product_details->stock != '0') { ?>
+                        <select class="q_ty" id="number_passengers"  name="quantity" id="quantity">
+                            <?php
+                            for ($i = 1; $i <= $product_details->stock; $i++) {
+                                ?>
+                                <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php } ?>
 
-                        <option value="1">1</option>
 
-                        <option value="2">2</option>
+                        </select>
+                                        <!--<input type="number" min="0" max="5" id="number_passengers" value="1">-->
 
-                        <option value="3">3</option>
-
-                        <option value="4">4</option>
-
-                        <option value="5">5</option>
-
-                        <option value="6">6</option>
-
-                        <option value="7">7</option>
-
-                        <option value="8">8</option>
-
-                        <option value="9">9</option>
-
-                        <option value="10">10</option>
-
-                    </select>
-                                    <!--<input type="number" min="0" max="5" id="number_passengers" value="1">-->
-
-                    <div class="action">
-                        <a href="#" class="start-shopping">add to cart</a>
-                        <a href="#" class="start-shopping">buy now</a>
-                    </div>
+                        <div class="action">
+                            <?= Html::a('add to cart', 'javascript:void(0)', ['class' => 'start-shopping add_to_cart', 'id' => $product_details->id]) ?>
+                            <?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping']) ?>
+                        </div>
+                    <?php } ?>
                     <div class="share">
                         <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
                         <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -138,35 +121,23 @@ $this->title = $product_details->canonical_name;
                 </div>
             </div>
             <div class="hidden-lg hidden-md col-sm-12 col-xs-12 product-option-buttons">
-                <select min="0" max="5" id="number_passengers"  name="quantity" id="quantity">
+                <?php if ($product_details->stock != '0') { ?>
+                    <select class="q_ty" id="number_passengers"  name="quantity" id="quantity">
+                        <?php
+                        for ($i = 1; $i <= $product_details->stock; $i++) {
+                            ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php } ?>
 
-                    <option value="1">1</option>
 
-                    <option value="2">2</option>
-
-                    <option value="3">3</option>
-
-                    <option value="4">4</option>
-
-                    <option value="5">5</option>
-
-                    <option value="6">6</option>
-
-                    <option value="7">7</option>
-
-                    <option value="8">8</option>
-
-                    <option value="9">9</option>
-
-                    <option value="10">10</option>
-
-                </select>
+                    </select>
                                 <!--<input type="number" min="0" max="5" id="number_passengers" value="1">-->
 
-                <div class="action">
-                    <a href="#" class="start-shopping">add to cart</a>
-                    <a href="#" class="start-shopping">buy now</a>
-                </div>
+                    <div class="action">
+                        <?= Html::a('add to cart', 'javascript:void(0)', ['class' => 'start-shopping add_to_cart', 'id' => $product_details->id]) ?>
+                        <?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping']) ?>
+                    </div>
+                <?php } ?>
                 <div class="share">
                     <ul>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus" aria-hidden="true"></i></a>

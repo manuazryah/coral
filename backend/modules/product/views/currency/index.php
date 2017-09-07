@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'class' => 'yii\grid\ActionColumn',
 //                                    'contentOptions' => ['style' => 'width:100px;'],
                                     'header' => 'Actions',
-                                    'template' => '{update}{delete}',
+                                    'template' => '{update}',
                                     'buttons' => [
                                         'update' => function ($url, $model) {
                                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
@@ -97,10 +97,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                             $url = Url::to(['index', 'id' => $model->id]);
                                             return $url;
                                         }
-                                        if ($action === 'delete') {
-                                            $url = Url::to(['del', 'id' => $model->id]);
-                                            return $url;
-                                        }
+//                                        if ($action === 'delete') {
+//                                            $url = Url::to(['del', 'id' => $model->id]);
+//                                            return $url;
+//                                        }
                                     }
                                 ],
                             ],

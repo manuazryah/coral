@@ -124,8 +124,9 @@ class ProductController extends Controller {
 //                exit;
                 }
             } else {
-                var_dump($model->getErrors());
-                exit;
+                return $this->render('create', [
+                        'model' => $model,
+            ]);
             }
         } else {
             return $this->render('create', [

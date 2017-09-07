@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\SettingsSearch */
+/* @var $searchModel common\models\BrandSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Settings';
+$this->title = 'Brands';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="settings-index">
+<div class="brand-index">
 
     <div class="row">
         <div class="col-md-12">
@@ -26,23 +26,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+
+
+                    <?= Html::a('<i class="fa-th-list"></i><span> Create Brand</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                    <button class="btn btn-white" id="search-option" style="float: right;">
+                        <i class="linecons-search"></i>
+                        <span>Search</span>
+                    </button>
                     <div class="table-responsive" style="border: none">
-                        <button class="btn btn-white" id="search-option" style="float: right;">
-                            <i class="linecons-search"></i>
-                            <span>Search</span>
-                        </button>
                         <?=
                         GridView::widget([
                             'dataProvider' => $dataProvider,
                             'filterModel' => $searchModel,
                             'columns' => [
-                                    ['class' => 'yii\grid\SerialColumn'],
+                                ['class' => 'yii\grid\SerialColumn'],
 //                                'id',
-                                'label',
-                                'value',
-//                                'DOU',
+                                'brand',
+//                                'CB',
+//                                'UB',
+//                                'DOC',
+                                [
+                                    'attribute' => 'status',
+                                    'filter' => ['1' => 'Enable', '0' => 'Disable'],
+                                    'value' => function($data) {
+                                        return $data->status == 1 ? 'Enable' : 'Disable';
+                                    }
+                                ],
+                                // 'DOU',
+                                // 'status',
                                 ['class' => 'yii\grid\ActionColumn',
-                                    'template' => '{update}'],
+                                    'template' => '{update}{delete}'],
                             ],
                         ]);
                         ?>

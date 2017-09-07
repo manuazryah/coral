@@ -39,6 +39,7 @@ class AppAsset extends AssetBundle {
 //        'js/foundation.min.js',
 //        'js/setup.js',
         'js/xzoom.min.js',
+        'js/custom.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

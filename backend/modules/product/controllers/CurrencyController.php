@@ -125,20 +125,20 @@ class CurrencyController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionDel($id) {
-        if ($this->findModel($id)->delete()) {
-            Yii::$app->getSession()->setFlash('success', 'succuessfully deleted');
-        } else {
-            Yii::$app->getSession()->setFlash('error', "Can't delete the Item");
-        }
-        return $this->redirect(['index']);
-    }
-
-    public function actionDelete($id) {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
+//    public function actionDel($id) {
+//        if ($this->findModel($id)->delete()) {
+//            Yii::$app->getSession()->setFlash('success', 'succuessfully deleted');
+//        } else {
+//            Yii::$app->getSession()->setFlash('error', "Can't delete the Item");
+//        }
+//        return $this->redirect(['index']);
+//    }
+//
+//    public function actionDelete($id) {
+//        $this->findModel($id)->delete();
+//
+//        return $this->redirect(['index']);
+//    }
 
     /**
      * Finds the Currency model based on its primary key value.

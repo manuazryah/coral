@@ -9,6 +9,7 @@ use common\models\Unit;
 use common\models\Currency;
 use common\models\MasterSearchTag;
 use common\models\Product;
+use common\models\Brand;
 use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
@@ -38,6 +39,10 @@ use dosamigos\ckeditor\CKEditor;
                 <span class="visible-xs"><i class="fa-user"></i></span>
                 <span class="hidden-xs">Image</span>
             </a>
+        </li>
+        <li style="float: right;">
+                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
+
         </li>
     </ul>
 
@@ -69,29 +74,29 @@ use dosamigos\ckeditor\CKEditor;
                 <?= $form->field($model, 'item_ean')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'brand')->dropDownList(ArrayHelper::map(Brand::find()->all(), 'id', 'brand'), ['prompt' => 'select']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'gender_type')->dropDownList(['0' => 'Men', '1' => 'Women', '2' => 'Unisex'], ['prompt' => 'Select']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'price')->textInput(['type' => 'number', 'min' => '0']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'offer_price')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'offer_price')->textInput(['type' => 'number', 'min' => '0']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::find()->all(), 'id', 'currency_name')) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'stock')->textInput() ?>
+                <?= $form->field($model, 'stock')->textInput(['type' => 'number', 'min' => '0']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'stock_unit')->dropDownList(ArrayHelper::map(Unit::find()->all(), 'id', 'unit_name')) ?>
                 <label onclick="jQuery('#modal-3').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_unit" attr_id="product-stock_unit">Add Unit</label>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'stock_availability')->dropDownList(['1' => 'Available', '0' => 'Not Available'], ['prompt' => 'Select']) ?>
+                <?= $form->field($model, 'stock_availability')->dropDownList(['1' => 'Available', '0' => 'Not Available']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'tax')->textInput() ?>
@@ -188,12 +193,12 @@ use dosamigos\ckeditor\CKEditor;
                 <?= $form->field($model, 'gallery_alt')->textInput(['maxlength' => true]) ?>
             </div>
             <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'profile')->fileInput() ?>
+                <?= $form->field($model, 'profile')->fileInput()->label('profile Picture<i> (267*285)</i>') ?>
             </div>
             <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+                <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*'])->label('Gallery Images<i> (455*315)</i>') ?>
                 <?php if (!$model->isNewRecord) { ?>
-                                                                                                                                                            <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
+                                                                                                                                                                <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
                     <div class="row">
                         <?php
                         $path = Yii::getAlias('@paths') . '/product/' . $model->id . '/gallery_thumb';
@@ -229,10 +234,7 @@ use dosamigos\ckeditor\CKEditor;
                 }
                 ?>
             </div>
-            <div class="form-group" style="float: right;">
-                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
-
-            </div>
+            
 
         </div>
     </div>
@@ -390,7 +392,7 @@ use dosamigos\ckeditor\CKEditor;
 //            $('#product-canonical_name').val(canonical);
             $('#product-canonical_name').val(slug($(this).val()));
         });
-         $('#subcategory-category').keyup(function () {
+        $('#subcategory-category').keyup(function () {
             var name = slug($(this).val());
             $('#subcategory-categorycode').val(slug($(this).val()));
         });

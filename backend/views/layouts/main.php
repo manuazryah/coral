@@ -109,6 +109,9 @@ AppAsset::register($this);
                                         <li>
                                             <?= Html::a('Search Tag', ['/product/master-search-tag/index'], ['class' => 'title']) ?>
                                         </li>
+                                        <li>
+                                            <?= Html::a('Brand', ['/brand/index'], ['class' => 'title']) ?>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
