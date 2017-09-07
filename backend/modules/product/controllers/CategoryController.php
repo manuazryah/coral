@@ -164,8 +164,10 @@ class CategoryController extends Controller {
     //*******//
     public function actionAjaxaddcategory() {
         $category = $_POST['cat'];
+        $code = $_POST['code'];
         $model = new Category();
         $model->category = $category;
+        $model->category_code = $code;
         $model->status = '1';
         if (Yii::$app->SetValues->Attributes($model)) {
             if ($model->save()) {

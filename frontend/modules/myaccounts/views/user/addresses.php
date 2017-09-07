@@ -28,48 +28,7 @@ use yii\widgets\ActiveForm;
 
 <div id="our-product" class="my-account">
     <div class="container">
-        <div class="col-lg-4 col-md-4 col-sm-12 left-accordation">
-            <div class="panel panel-default">
-                <div class="panel-body lit-blue">
-                    <div class="slide-container">
-                        <div class="list-group" id="mg-multisidetabs">
-                            <a href="#" class="list-group-item active-head "><span>Orders</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
-                            <div class="panel list-sub" style="display: block">
-                                <div class="panel-body">
-                                    <div class="list-group">
-                                        <a href="my-orders.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>My orders</span></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <a href="#" class="list-group-item active-head "><span>My stuff</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
-                            <div class="panel list-sub" style="display: block">
-                                <div class="panel-body">
-                                    <div class="list-group">
-                                        <a href="reviews&ratings.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span></a>
-                                        <a href="wish-list.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>My wishlist</span></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <a href="#" class="list-group-item active-head "><span>settings</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
-                            <div class="panel list-sub" style="display: block">
-                                <div class="panel-body">
-                                    <div class="list-group">
-                                        <a href="personal-info.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>personal information</span></a>
-                                        <a href="change-password.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>change password</span></a>
-                                        <a href="addresses.php" class="list-group-item active"><span class="fa fa-caret-right pull-left"></span><span>addresses</span></a>
-                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>update email/mobile</span></a>
-                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>deactivate account</span></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div><!-- ./ end list-group -->
-                    </div><!-- ./ end slide-container -->
-                </div><!-- ./ end panel-body -->
-            </div><!-- ./ end panel panel-default-->
-        </div><!-- ./ endcol-lg-6 col-lg-offset-3 -->
+        <?= Yii::$app->controller->renderPartial('_leftside_menu'); ?>
         <div class="settings">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 right-box" style="padding: 50px 15px;">
                 <div class="col-lg-12 col-md-12 col-sm-8 col-xs-12 my-account-cntnt margin-auto align-center">

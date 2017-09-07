@@ -14,7 +14,7 @@ use yii\helpers\Html;
         <div class="gp_products_inner">
             <div class="gp_products_item_image">
                 <a href="<?= Yii::$app->homeUrl . 'product/product_detail/' . $model->canonical_name ?>">
-                    <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile ?>" height='217px' alt="1" />
+                    <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile ?>" height="100%" alt="1" />
                 </a>
             </div>
             <ul class="text-center">

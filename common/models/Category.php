@@ -33,6 +33,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             [['category','category_code'], 'required'],
             ['category', 'unique', 'targetAttribute' => ['category'], 'message' => 'Category must be unique.'],
+            ['category_code', 'unique', 'targetAttribute' => ['category_code'], 'message' => 'Category code must be unique.'],
             [['CB', 'UB', 'status'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['category'], 'string', 'max' => 255],

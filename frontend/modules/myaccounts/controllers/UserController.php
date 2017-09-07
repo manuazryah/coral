@@ -52,7 +52,25 @@ class UserController extends Controller {
     }
 
     public function actionChangePassword() {
-        return $this->render('change-password');
+        $model = User::findOne(Yii::$app->user->identity->id);
+        if (Yii::$app->request->post()) {
+            if (Yii::$app->getSecurity()->validatePassword(Yii::$app->request->post('old-password'), $model->password_hash)) {
+                if (Yii::$app->request->post('new-password') == Yii::$app->request->post('confirm-password')) {
+                    $model->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->request->post('confirm-password'));
+//                   echo $model->password_hash;exit;
+                    $model->update();
+                    Yii::$app->getSession()->setFlash('success', 'password changed successfully');
+                    $this->redirect('index');
+                } else {
+                    Yii::$app->getSession()->setFlash('error', 'password mismatch  ');
+                }
+            } else {
+                Yii::$app->getSession()->setFlash('error', 'Incorrect Password ');
+            }
+        }
+        return $this->render('change-password', [
+                    'model' => $model
+        ]);
     }
 
     public function actionPersonalInfo() {
@@ -77,7 +95,7 @@ class UserController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
+            
         }
         return $this->render('contact_info', [
                     'model' => $model,

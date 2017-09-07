@@ -193,7 +193,7 @@ use dosamigos\ckeditor\CKEditor;
             <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
                 <?php if (!$model->isNewRecord) { ?>
-                                                                                                                                                        <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
+                                                                                                                                                            <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
                     <div class="row">
                         <?php
                         $path = Yii::getAlias('@paths') . '/product/' . $model->id . '/gallery_thumb';
@@ -257,6 +257,10 @@ use dosamigos\ckeditor\CKEditor;
                     <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                         <label class="control-label" for="subcategory-category">Category</label>
                         <input type="text" id="subcategory-category" class="form-control" >
+                    </div>
+                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
+                        <label class="control-label" for="subcategory-category">Category code</label>
+                        <input type="text" id="subcategory-categorycode" readonly="readonly" class="form-control" >
                     </div>
                 </div>
                 <div class='col-md-12 col-sm-6 col-xs-12' style="float:right;">
@@ -385,6 +389,10 @@ use dosamigos\ckeditor\CKEditor;
 //            var canonical= name+-+size;
 //            $('#product-canonical_name').val(canonical);
             $('#product-canonical_name').val(slug($(this).val()));
+        });
+         $('#subcategory-category').keyup(function () {
+            var name = slug($(this).val());
+            $('#subcategory-categorycode').val(slug($(this).val()));
         });
 //        $('#product-size').keyup(function () {
 //            var name= slug($('#product-product_name').val());

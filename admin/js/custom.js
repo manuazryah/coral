@@ -10,11 +10,12 @@ $(document).on('submit', '#add_category', function (event) {
     event.preventDefault();
     if (valid()) {
         var category = $('#subcategory-category').val();
+        var code = $('#subcategory-categorycode').val();
         var form = $('.modal-title').attr('field_id');
         $.ajax({
             url: homeUrl + 'product/category/ajaxaddcategory',
             type: "post",
-            data: {cat: category, status: status},
+            data: {cat: category, status: status, code: code},
             success: function (data) {
                 var $data = JSON.parse(data);
                 if ($data.con === "1") {

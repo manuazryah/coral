@@ -114,7 +114,11 @@ class Product extends \yii\db\ActiveRecord {
             $path = yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $file->extension;
 
             Image::frame($path)
-                    ->thumbnail(new Box(100, 100))
+                    ->thumbnail(new Box(455, 315))
+                    ->save(\yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $file->extension, ['quality' => 50]);
+
+            Image::frame($path)
+                    ->thumbnail(new Box(70, 70))
                     ->save(\yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '_thumb.' . $file->extension, ['quality' => 50]);
 //            
             return true;
@@ -133,21 +137,24 @@ class Product extends \yii\db\ActiveRecord {
                 mkdir(\yii::$app->basePath . '/../uploads/product/' . $product_id);
                 chmod(\yii::$app->basePath . '/../uploads/product/' . $product_id, 0777);
             }
-            if (!is_dir(\yii::$app->basePath . '/../uploads/product/' . $product_id.'/gallery')) {
-                mkdir(\yii::$app->basePath . '/../uploads/product/' . $product_id.'/gallery');
-                chmod(\yii::$app->basePath . '/../uploads/product/' . $product_id.'/gallery', 0777);
+            if (!is_dir(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/gallery')) {
+                mkdir(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/gallery');
+                chmod(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/gallery', 0777);
             }
-            $path = yii::$app->basePath . '/../uploads/product/' . $product_id.'/gallery';
+            $path = yii::$app->basePath . '/../uploads/product/' . $product_id . '/gallery';
             $main_path = yii::$app->basePath . '/../uploads/product/' . $product_id;
             $name = $this->fileExists($path, $canname, $image_name = $canname, $file->extension, 1);
             if ($file->saveAs($path . '/' . $name)) {
                 chmod($path . '/' . $name, 0777);
-                if (!is_dir(\yii::$app->basePath . '/../uploads/product/' . $product_id. '/gallery_thumb/')) {
+                if (!is_dir(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/gallery_thumb/')) {
                     mkdir(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/gallery_thumb/');
                     chmod(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/gallery_thumb/', 0777);
                 }
-                Image::thumbnail($path . '/' . $name, 500, 300)
-                        ->resize(new Box(500, 200))
+                Image::frame($path . '/' . $name)
+                        ->thumbnail(new Box(455, 315))
+                        ->save($path . '/' . $name, ['quality' => 70]);
+                Image::frame($path . '/' . $name)
+                        ->thumbnail(new Box(100, 100))
                         ->save($main_path . '/gallery_thumb/' . $name, ['quality' => 70]);
             }
 //            if ($file->saveAs(\yii::$app->basePath . '/../uploads/product/' . $product_id . '/' . $file->name . '.' . $file->extension))

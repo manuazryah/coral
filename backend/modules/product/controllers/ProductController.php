@@ -116,7 +116,7 @@ class ProductController extends Controller {
                             echo 'Image Upload Failed:';
                         }
                     }
-                    return $this->redirect(['index']);
+                    return $this->redirect(['create']);
                 } else {
 
                     throw new UserException('Error Code 1001');

@@ -52,7 +52,7 @@ $this->title = $product_details->canonical_name;
                                     ?>
 
                                     <a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>">
-                                        <img srcset="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/gallery_thumb/' . end($arry) ?>" width="94px" height="93px"/>
+                                        <img srcset="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>" width="94px" height="93px"/>
                                     </a>
 
 
