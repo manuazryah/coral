@@ -1,11 +1,15 @@
-@media(max-width:1400px){
-    .private-label .private-bg{
-        background-size: contain;
-    }
-}
 @media(min-width:1200px){
     .country-select{
         width: 94% !important;
+    } 
+    .my-account .settings .right-box{
+        width: 65.333333%;
+        min-height: 519px;
+    }
+}
+@media(max-width:1400px){
+    .private-label .private-bg{
+        background-size: contain;
     }
 }
 @media(max-width:1200px) and (min-width:992px){
@@ -20,8 +24,8 @@
         margin-left: 10px;
     }
     figure.mz-figure {
-        width: auto;
-        height: auto;
+        width: auto; 
+        height: auto; 
     }
     #product-page .share{
         display: grid;
@@ -38,6 +42,10 @@
     }
     .country-select{
         width: 94% !important;
+    }
+    .my-account .settings .right-box{
+        width: 65%;
+        min-height: 519px;
     }
 }
 @media (max-width: 992px) and (min-width:768px){
@@ -80,8 +88,8 @@
         padding-top: 5px;
     }
     figure.mz-figure {
-        width: auto;
-        height: auto;
+        width: auto; 
+        height: auto; 
     }
     #product-page .share{
         display: grid;
@@ -177,15 +185,23 @@
         border-color: #61b346;
         /* background: red; */
     }
+    .my-account .settings .right-box{
+        width: 100%;
+        min-height: 519px;
+        margin-left: 0px;
+    }
+    .my-account .settings button.green2{
+        width: 100%;
+    }
 }
 @media (max-width: 768px) and (min-width:458px){
     .private-label .private-cntnt {
         padding: 72px 15px;
-        width: auto;
+        width: auto; 
         padding: 145px 15px;
     }
     .top-nav ul li:first-child a{
-        padding: 5px 10px;
+        padding: 5px 10px;  
     }
     .top-nav ul li{
         padding: 0 10px;
@@ -313,7 +329,7 @@
         left: 0px;
         right: 0px;
         display: inline-block;
-    }
+    } 
     #footer .features{
         text-align: center;
         margin: 0 auto;
@@ -342,8 +358,8 @@
         margin-left:0px;
     }
     .product-img-view-box{
-        margin: 0 auto;
-        text-align: center;
+        margin: 0 auto; 
+        text-align: center; 
     }
     #product-page .details {
         margin-top: 50px;
@@ -364,10 +380,49 @@
     .gp_products_item_caption>.gp_products_caption_rating>li:nth-child(2){
         left: 44%;
     }
+    .my-account .my-account-cntnt .price{
+        padding-left: 0px;
+    }
+    .my-account .my-account-cntnt .delivered-date{
+        text-align: left;
+        padding-left: 0px;
+    }
+    .my-account .pro-order-detail{
+        margin-top: 20px;
+    }
+    .track-btn{
+        margin-right: 0px;
+    }
+    #reviews-ratings .subject{
+        text-align: center;
+        margin-top: 15px;
+    }
+    #reviews-ratings i{
+        text-align: center;
+    }
+    .my-account .settings .right-box{
+        width: 100%;
+        min-height: 519px;
+        margin-left: 0px;
+    }
+    .my-account .settings button.green2{
+        width: 100%;
+    }
+    .breadcrumb{
+        float: none;
+        text-align: center;
+        padding: 15px 15px;
+    }
+    .breadcrumb .path{
+        clear: both;
+        padding-left: 0px;
+        width: 100%;
+        padding-top: 35px;
+    }
 }
 @media(max-width:458px){
     .top-nav ul li:first-child a{
-        padding: 5px 10px;
+        padding: 5px 10px;  
     }
     .top-nav ul li{
         padding: 0 10px;
@@ -465,7 +520,7 @@
         background-size: cover;
     }
     .private-label .private-cntnt {
-        width: auto;
+        width: auto; 
         text-align: justify;
         padding: 145px 15px;
     }
@@ -508,7 +563,7 @@
         left: 0px;
         right: 0px;
         display: inline-block;
-    }
+    } 
     #footer .features{
         text-align: center;
         margin: 0 auto;
@@ -539,20 +594,16 @@
         margin: 10px;
         margin-left:0px;
     }
-    .breadcrumb {
-        padding: 8px 15px;
-        margin-bottom: 20px;
+    .breadcrumb{
+        float: none;
         text-align: center;
+        padding: 15px 15px;
     }
     .breadcrumb .path{
-        margin: 0 auto;
-        text-align: center;
-        float: none;
-        left: 0px;
-        right: 0px;
-        display: inline-block;
+        clear: both;
         padding-left: 0px;
-        padding-top: 15px;
+        width: 100%;
+        padding-top: 35px;
     }
     .hide-xs{
         display: none;
@@ -579,8 +630,8 @@
         height: auto;
     }
     .product-img-view-box{
-        margin: 0 auto;
-        text-align: center;
+        margin: 0 auto; 
+        text-align: center; 
     }
     #product-page .details {
         margin-top: 50px;
@@ -609,5 +660,48 @@
     }
     #product-page select{
         margin-bottom: 10px;
+    }
+    .my-account .my-account-cntnt .price{
+        padding-left: 0px;
+    }
+    .my-account .my-account-cntnt .delivered-date{
+        text-align: left;
+        padding-left: 0px;
+    }
+    .my-account .my-account-cntnt .delivered-date span{
+        float: left;
+    }
+    .my-account .pro-order-detail{
+        margin-top: 20px;
+    }
+    .my-account .order-date{
+        width: 100%;
+    }
+    .my-account .order-total{
+        width: 100%;
+    }
+    .track-btn{
+        margin-right: 0px;
+    }
+    #reviews-ratings .subject{
+        text-align: center;
+        margin-top: 15px;
+    }
+    #reviews-ratings i{
+        text-align: center;
+    }
+    .my-account .settings .right-box{
+        width: 100%;
+        min-height: 519px;
+        margin-left: 0px;
+    }
+    .my-account .settings .dob{
+        width: 100%;
+    }
+    .my-account .settings .gender-selection{
+        width: 100%;
+    }
+    .my-account .settings button.green2 {
+        width: 100%;
     }
 }

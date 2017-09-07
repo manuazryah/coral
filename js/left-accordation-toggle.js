@@ -31,15 +31,17 @@ $(document).ready(function () {
                         }
                     });
                 },
-                init = function (options) {//initials
-                    if (options) {
-                        opt = options;
-                        parentid = '#' + options.id;
-                        //test();
-                        events();
-                    } else {
-                        alert('no options');
-                    }
+                init = function (options) 
+                {
+//                    initials
+//                    if (options) {
+//                        opt = options;
+//                        parentid = '#' + options.id;
+//                        //test();
+//                        events();
+//                    } else {
+//                        alert('no options');
+//                    }
                 }
 
         return {init: init};

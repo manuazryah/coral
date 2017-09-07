@@ -88,7 +88,16 @@ hr{
     margin-top: 0px;
     font-family: roboto-light;
 }
-button:active:focus{
+.span-msg{
+    font-family: roboto-light;
+    font-size: 13px;
+    color: #8c8c8c;
+    background: #fdf7bd;
+    padding: 7px 10px;
+    width: 500px;
+    margin-bottom: 20px;
+}
+button:focus{
     outline: none;
 }
 button.green{
@@ -255,7 +264,8 @@ button.black{
 }
 input[type="checkbox"] {
     margin-right: 10px;
-    position: relative;    top: 2px;
+    position: relative;
+    top: 2px;
 }
 input[type="checkbox"] + label:before {
     border: 1px solid #d1d2d0;
@@ -1928,6 +1938,8 @@ a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
 }
 #our-product .panel{
     background: transparent;
+    -webkit-box-shadow: 0 1px 1px #ddd;
+    box-shadow: 0 1px 1px #ddd;
 }
 #our-product .list-group{
     margin-bottom: 0px;
@@ -1967,6 +1979,243 @@ a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
 }
 /*******************************************************Our-product-end****************************************/
 
+/*******************************************************My-Account****************************************/
+
+.my-account .my-account-cntnt{
+    padding-top: 10px;
+}
+.my-account .customer-name{
+    color: #515452;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.my-account .my-account-cntnt p{
+    font-size: 14px;
+    font-family: roboto-light;
+}
+.my-account .orders-box{
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 1px #ddd;
+    box-shadow: 0 1px 1px #ddd;
+    margin-bottom: 15px;
+    padding: 0px;
+}
+.my-account .product-id{
+    background: #282828;
+    color: white;
+    font-size: 14px;
+    font-family: roboto;
+    padding: 8px 20px;
+    display: inline-block;
+    border: none;
+}
+.track-btn:focus{
+    outline: none;
+}
+.track-btn{
+    font-size: 14px;
+    font-family: roboto-light;
+    color: #515452;
+    background: transparent;
+    border: 1px solid #61b346;
+    padding: 5px 20px;
+    float: right;
+    margin-right: 40px;
+    margin-top: 2px;
+}
+.track{
+    display: flow-root;
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+    background: #f8f9fa;
+}
+.track-btn i{
+    margin-right: 5px;
+}
+.my-account .pro-img-box{
+    text-align: center;
+    top: 5px;
+}
+.my-account .pro-order-detail{
+    width: 100%;
+    display: inline-block;
+    padding: 10px 10px;
+    border-top: 1px solid #ddd;
+    padding-bottom: 0px;
+}
+.my-account .ordered-pro-dtls{
+    display: inline-table;
+    padding: 10px 10px;
+}
+.my-account .ordered-date{
+    float: left;
+    margin-bottom: 0px;
+}
+.my-account .product-discp{
+    margin-bottom: 0;
+}
+.my-account .order-total{
+    float: right;
+    margin-bottom: 0px;
+}
+.my-account .my-account-cntnt .price{
+    position: relative;
+    top: 25px;
+}
+.my-account .my-account-cntnt .delivered-date{
+    position: relative;
+    top: 25px;
+    right: 0px;
+    text-align: right;
+}
+.my-account .my-account-cntnt .delivered-date span{
+    color: #8c8c8c;
+    font-size: 12px;
+    float: right;
+}
+.cart-pro-heading{
+    line-height: 10px !important;
+    font-weight: 600 !important;
+    color: #515452 !important;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+.cart-pro-subheading{
+    line-height: 10px !important;
+    font-weight: 600 !important;
+    color: #515452 !important;
+}
+#reviews-ratings .subject{
+    font-size: 14px;
+    font-weight: 600;
+    color: #515452;
+    margin-bottom: 5px;
+}
+#reviews-ratings i{
+    font-family: roboto-light;
+    color: #8c8c8c;
+    margin-bottom: 15px;
+    display: block;
+}
+#reviews-ratings .message{
+    margin: 0px;
+    text-align: justify;
+}
+#reviews-ratings .orders-box{
+    border: 1px solid #ddd;
+    box-shadow: none;
+    margin-bottom: 0;
+    border-bottom: 0px;
+}
+#reviews-ratings .orders-box:last-child{
+    border-bottom: 1px solid #ddd;
+}
+#reviews-ratings .customer-reviews {
+    padding: 15px 5px;
+}
+.add-cart{
+    width: auto !important;
+    float: right;
+    margin-bottom: 0px !important;
+    padding: 10px 15px !important;
+    border: 1px solid #61b346 !important;
+}
+.remove-cart{
+    float: right;
+    padding: 10px 10px;
+    font-size: 14px;
+    color: #676767;
+    background: transparent;
+    border: none;
+    margin-left: 10px;
+}
+.remove-cart:focus{
+    outline: none;
+}
+.wish-list{
+    display: flow-root;
+}
+.wish-list .product-name{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #515452 !important;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.wish-list .dashed-price{
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #515452 !important;
+    text-transform: uppercase;
+    display: inline-block;
+    text-decoration: line-through;
+    margin-bottom: 5px;
+}
+.wish-list .offer{
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #515452 !important;
+    text-transform: uppercase;
+    margin-left: 15px;
+}
+.wish-list .offer-price{
+    font-size: 14px !important;
+    font-family: roboto-medium !important;
+    color: #515452 !important;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.wish-list .stock{
+    text-transform: capitalize;
+    color: #61b346;
+    font-size: 13px
+}
+.wish-list .message{
+    margin: 0px;
+}
+.wishlist-qntity{
+    font-size: 13px;
+    color: #515452;
+    text-align: right;
+    font-weight: 600;
+    padding: 0px;
+    text-transform: capitalize;
+    letter-spacing: 2.5px;
+    padding-bottom: 10px;
+}
+.my-account .settings .form-group .first-name{
+    padding-right: 0px;
+    margin-bottom: 30px;
+}
+.my-account .settings .form-group .last-name{
+    padding-left: 0px;
+}
+.my-account .settings button.green2{
+    /*width: 28%;*/
+    padding: 10px 9px;
+    float: right;
+    width: 160px;
+}
+.my-account .settings .form-feild-box {
+    margin-left: 0px;
+}
+.my-account .settings .save{
+    float: right;
+    padding: 0px;
+}
+.my-account .settings .right-box{
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 1px #ddd;
+    box-shadow: 0 1px 1px #ddd;
+    margin-left: 15px;
+}
+.align-center{
+    float: none;
+    margin: 0 auto;
+}
 .form-group1{
     margin-bottom: 0px !important;
 }
+/*******************************************************My-Account-end****************************************/

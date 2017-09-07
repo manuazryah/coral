@@ -36,7 +36,6 @@ class UserController extends Controller {
     public function actionIndex() {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
@@ -51,8 +50,8 @@ class UserController extends Controller {
                     'cart_details' => $cart_details,
         ]);
     }
-    
-     public function actionDisableUser($id) {
+
+    public function actionDisableUser($id) {
         $model = $this->findModel($id);
         $model->status = 0;
         $model->save();

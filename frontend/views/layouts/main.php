@@ -187,7 +187,7 @@ and open the template in the editor.
                                 <ul class="nav navbar-nav">
                                     <li class="<?= $action == 'index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>About Us</span>', ['site/index'], ['class' => '']) ?></li>
-                                    <li class="<?= $action == 'product' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
+                                    <li class="<?= $action == 'product' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>international products</span>', ['index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>private label</span>', ['index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>showrooms</span>', ['index'], ['class' => '']) ?></li>
