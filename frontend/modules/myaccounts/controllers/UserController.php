@@ -8,6 +8,7 @@ use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\UserAddress;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -153,6 +154,73 @@ class UserController extends Controller {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionUserAddress() {
+        $model = new UserAddress();
+        $user_address = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model)) {
+            if (empty($user_address)) {
+                $model->status = 1;
+            }
+            $model->user_id = Yii::$app->user->identity->id;
+            $model->save();
+            return $this->redirect(['/user/addresses']);
+        } else {
+            return $this->render('addresses', [
+                        'model' => $model,
+                        'user_address' => $user_address,
+            ]);
+        }
+    }
+
+    /**
+     * Change Default Address.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionChangeStatus() {
+        if (Yii::$app->request->isAjax) {
+            $id = $_POST['id'];
+            $model = UserAddress::findOne($id);
+            $data_exist = UserAddress::find()->where(['status' => 1])->one();
+            var_dump($data_exist);
+            if (!empty($data_exist)) {
+                $data_exist->status = 0;
+                $data_exist->save();
+            }
+            $model->status = 1;
+            $model->save();
+            echo 1;
+            exit;
+        }
+    }
+
+    /**
+     * Remove Address.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionRemoveAddress() {
+        if (Yii::$app->request->isAjax) {
+            $id = $_POST['id'];
+            $model = UserAddress::findOne($id);
+            if (!empty($model)) {
+                if ($model->delete()) {
+                    $data = UserAddress::find()->where(['status' => 1])->one();
+                    if (empty($data)) {
+                        $data_exist = UserAddress::find()->one();
+                        $data_exist->status = 1;
+                        $data_exist->save();
+                    }
+                    echo 1;
+                    exit;
+                } else {
+                    echo 0;
+                    exit;
+                }
+            }
         }
     }
 

@@ -25,7 +25,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
-        <!--<script src="<?= yii::$app->homeUrl; ?>/js/jquery-1.11.1.min.js"></script>-->
+        <script src="<?= yii::$app->homeUrl; ?>js/jquery-1.11.1.min.js"></script>
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
         <?php $this->head() ?>
     </head>
@@ -311,20 +311,6 @@ and open the template in the editor.
 <?php $this->endPage() ?>
 <!--======= pro-slider-end =========-->
 <script>
-//    (function () {
-//
-//        $("#cart").hover(function () {
-//            $(".shopping-cart").fadeToggle("slow");
-//            return false;
-//        });
-//    })();
-//
-//    ('#cart').hover(function () {
-//        $(".shopping-cart").show();
-//    }, function () {
-//        $(".shopping-cart").hide();
-//    }
-//    );
 
     $('ul.nav li.dropdown').hover(function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
@@ -340,13 +326,6 @@ and open the template in the editor.
         });
 
     })();
-
-//    jQuery('#cart').on('mouseover', function () {
-//        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeToggle("fast");
-//    });
-//    jQuery('#cart').on("mouseout", function () {
-//        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeOut("fast");
-//    });
     $(document).ready(function () {
 
         $("#addSchool").click(function () {
@@ -362,5 +341,43 @@ and open the template in the editor.
             zoomWindowFadeOut: 750
         });
 
+    });
+</script>
+<script type="text/javascript">
+    $('#radioBtn a').on('click', function () {
+        var sel = $(this).data('title');
+        var tog = $(this).data('toggle');
+        $('#' + tog).prop('value', sel);
+
+        $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+        $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+    });
+
+    $('#useraddress-mobile_number').keyup(function (e) {
+        if ((e.keyCode > 47 && e.keyCode < 58) || (e.keyCode < 106 && e.keyCode > 95)) {
+            this.value = this.value.replace(/(\d{3})\-?/g, '$1-');
+            return true;
+        }
+
+        //remove all chars, except dash and digits
+        this.value = this.value.replace(/[^\-0-9]/g, '');
+    });
+
+    $(function () {
+        $('input[name="default-address"]').click(function () {
+            var $radio = $(this);
+
+            // if this was previously checked
+
+            {
+                $radio.prop('checked', false);
+                $radio.data('waschecked', false);
+            }
+            else
+                    $radio.data('waschecked', true);
+
+            // remove was checked from other radios
+            $radio.siblings('input[name="rad"]').data('waschecked', false);
+        });
     });
 </script>

@@ -193,6 +193,18 @@
     .my-account .settings button.green2{
         width: 100%;
     }
+    .margin-auto .form-group{
+        padding: 0px;
+    }
+    .margin-auto{
+        margin: 0 auto !important;
+    }
+    .user-addresses h6{
+        left: 0px;
+    }
+    .user-adddress{
+        margin: 0px;
+    }
 }
 @media (max-width: 768px) and (min-width:458px){
     .private-label .private-cntnt {
@@ -418,6 +430,18 @@
         padding-left: 0px;
         width: 100%;
         padding-top: 35px;
+    }
+    .margin-auto .form-group{
+        padding: 0px;
+    }
+    .margin-auto{
+        margin: 0 auto !important;
+    }
+    .user-addresses h6{
+        left: 0px;
+    }
+    .user-adddress{
+        margin: 0px;
     }
 }
 @media(max-width:458px){
@@ -703,5 +727,17 @@
     }
     .my-account .settings button.green2 {
         width: 100%;
+    }
+    .margin-auto .form-group{
+        padding: 0px;
+    }
+    .margin-auto{
+        margin: 0 auto !important;
+    }
+    .user-addresses h6{
+        left: 0px;
+    }
+    .user-adddress{
+        margin: 0px;
     }
 }

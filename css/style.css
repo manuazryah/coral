@@ -2215,7 +2215,98 @@ a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
     float: none;
     margin: 0 auto;
 }
-.form-group1{
-    margin-bottom: 0px !important;
+.margin-auto{
+    margin: 0px !important;
+}
+.margin-auto .form-group{
+    padding: 0 15px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#Radio0 {
+    min-height: 20px;
+    padding-left: 0px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: roboto-light;
+    font-weight: 100;
+    color: #8c8c8c;
+    margin-left: 0px;
+    width: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+#Radio0 input{
+    margin-right: 5px;
+}
+#Radio0 input[type=radio]:before {
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: '';
+    position: absolute;
+    background: #edf7f5;
+    border: 1px solid #8c8c8c;
+    border-radius: 30px;
+}
+
+#Radio0 input[type=radio]:checked:before {
+    width: 12px;
+    height: 12px;
+    background: #8c8c8c;
+    border: 1px solid #8c8c8c;
+    border-radius: 30px;
+}
+.user-adddress{
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 1px #ddd;
+    box-shadow: 0 1px 1px #ddd;
+    padding: 20px;
+    margin: 0px 45px;
+    float: right;
+    margin-bottom: 70px;
+}
+.user-adddress .name{
+    margin-bottom: 0px;
+    font-weight: 600;
+    color: #8c8c8c;
+}
+.user-addresses{
+    margin-top: 20px;
+    clear: both;
+    display: inline-block;
+}
+.user-addresses h6{
+    font-size: 18px;
+    font-family: roboto;
+    color: #515452;
+    text-align: center;
+    position: inherit;
+    left: -40px;
+}
+.user-adddress p{
+    font-size: 14px;
+    font-family: roboto-light;
+    color: #8c8c8c;
+    margin-left: 0px;
+    line-height: 29px;
+}
+.delete-address{
+    font-size: 14px;
+    font-family: roboto-light;
+    color: #8c8c8c;
+    margin-left: 0px;
+}
+.delete-address i{
+    margin-right: 10px;
+}
+.delete-address:hover{
+    color: #8c8c8c !important;
 }
 /*******************************************************My-Account-end****************************************/
