@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <span class="current-page"><?= $catag->category ?></span>
         <ol class="path">
             <li><?= Html::a('<span>Home</span>', ['index'], ['class' => '']) ?></li>
-            <li><?= Html::a('<span>Our product</span>', ['site/our-products'], ['class' => '']) ?></li>
+            <li><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
             <li class="active"><?= $catag->category ?></li>
         </ol>
     </div>
@@ -48,15 +48,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="list-group">
                                         <?php
                                         foreach ($categories as $category) {
-                                            if($category->id == $catag->id){
+                                            if ($category->id == $catag->id) {
                                                 $active_class = 'list-group-item active';
-                                            }else{
+                                            } else {
                                                 $active_class = 'list-group-item';
                                             }
                                             ?>
-                                        <?= Html::a('<span>'.$category->category.'</span><span class="fa fa-caret-right pull-left">', ['product/index','id'=>$category->category_code], ['class' => $active_class]) ?>
-                                            <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
-                                       <?php }
+                                            <?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $category->category_code], ['class' => $active_class]) ?>
+                                                <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
+                                        <?php }
                                         ?>
 <!--                                        <a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>
                                         <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>international brands</span></a>
@@ -74,14 +74,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="col-md-9 product-list">
             <div class="international-brands">
-                
-                 <?=
-            ListView::widget([
-                'dataProvider' => $dataProvider,
-                'itemView' => '_view2',
-            ]);
-            ?>
-                
+
+                <?=
+                ListView::widget([
+                    'dataProvider' => $dataProvider,
+                    'itemView' => '_view2',
+                ]);
+                ?>
+
             </div>
         </div>
 

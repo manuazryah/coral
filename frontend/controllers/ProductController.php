@@ -12,7 +12,7 @@ use common\models\Category;
 class ProductController extends \yii\web\Controller {
 
     public function actionIndex($id) {
-        $catag = Category::find()->where(['category_code'=>$id])->one();
+        $catag = Category::find()->where(['category_code' => $id])->one();
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere(['category' => $catag->id]);
@@ -28,19 +28,21 @@ class ProductController extends \yii\web\Controller {
         ]);
 //        return $this->render('index');
     }
-    public function actionCategory($id){
+
+    public function actionCategory($id) {
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->where('category ='.$id);
+        $dataProvider->query->where('category =' . $id);
         $category = Category::find()->select('id,category')->where(['status' => 1])->all();
-         return $this->render('index', [
+        return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'category' => $category,
         ]);
     }
-    public function actionProduct_detail($product){
-        $product_details = Product::find()->where(['canonical_name'=>$product,'status'=>'1'])->one();
+
+    public function actionProduct_detail($product) {
+        $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
         return $this->render('product_detail', [
                     'product_details' => $product_details,
         ]);

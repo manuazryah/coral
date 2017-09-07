@@ -105,7 +105,6 @@ use yii\widgets\ActiveForm;
         });
         $('.delete-address').on('click', function () {
             var idd = $(this).attr('data-val');
-            alert(idd);
             $.ajax({
                 url: '<?= Yii::$app->homeUrl; ?>myaccounts/user/remove-address',
                 type: "POST",

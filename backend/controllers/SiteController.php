@@ -24,11 +24,11 @@ class SiteController extends Controller {
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                        [
+                    [
                         'actions' => ['login', 'error', 'index', 'home', 'forgot', 'new-password'],
                         'allow' => true,
                     ],
-                        [
+                    [
                         'actions' => ['logout', 'index', 'forgot'],
                         'allow' => true,
                         'roles' => ['@'],
@@ -61,9 +61,7 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
-
         if (!Yii::$app->user->isGuest) {
-
             return $this->redirect(array('site/home'));
         }
         $this->layout = 'adminlogin';
@@ -86,19 +84,10 @@ class SiteController extends Controller {
     }
 
     public function actionHome() {
-
-        if (isset(Yii::$app->user->identity->id)) {
-
-
-
-            if (Yii::$app->user->isGuest) {
-
-                return $this->redirect(array('site/index'));
-            }
-            return $this->render('index');
-        } else {
-            throw new \yii\web\HttpException(2000, 'Session Expired.');
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect(array('site/index'));
         }
+        return $this->render('index');
     }
 
     public function actionLogin() {
@@ -125,6 +114,7 @@ class SiteController extends Controller {
      */
     public function actionLogout() {
         Yii::$app->user->logout();
+        unset(Yii::$app->session['post']);
         return $this->goHome();
     }
 

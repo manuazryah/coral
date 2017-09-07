@@ -186,12 +186,12 @@ and open the template in the editor.
                                 ?>
                                 <ul class="nav navbar-nav">
                                     <li class="<?= $action == 'index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>About Us</span>', ['site/index'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>About Us</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class="<?= $action == 'product' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>international products</span>', ['index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>private label</span>', ['index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>showrooms</span>', ['index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>contact us</span>', ['index'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>international products</span>', ['/site/index'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>private label</span>', ['/site/index'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>showrooms</span>', ['/site/index'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>contact us</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <!--                                    <li class="dropdown">
                                                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                                                                             <ul class="dropdown-menu">
@@ -373,8 +373,7 @@ and open the template in the editor.
                 $radio.prop('checked', false);
                 $radio.data('waschecked', false);
             }
-            else
-                    $radio.data('waschecked', true);
+            $radio.data('waschecked', true);
 
             // remove was checked from other radios
             $radio.siblings('input[name="rad"]').data('waschecked', false);

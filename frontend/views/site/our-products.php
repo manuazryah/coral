@@ -11,7 +11,7 @@ use yii\helpers\Html;
         <span class="current-page">Featured Products</span>
         <ol class="path">
             <li><?= Html::a('<span>Home</span>', ['index'], ['class' => '']) ?></li>
-            <li><?= Html::a('<span>Our product</span>', ['site/our-products'], ['class' => '']) ?></li>
+            <li><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
             <li class="active">Featured Products</li>
         </ol>
     </div>
