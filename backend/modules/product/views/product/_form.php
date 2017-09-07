@@ -1,13 +1,3 @@
-<!--<style>
-    .form-inline .form-group{
-        /*position: relative;*/
-    }
-    .extra_btn{
-        position: absolute;
-        bottom: 5px;
-        right: 17px;
-    }
-</style>-->
 <?php
 
 use yii\helpers\Html;
@@ -131,7 +121,7 @@ use dosamigos\ckeditor\CKEditor;
                 }
                 ?>
                 <?= $form->field($model, 'related_product')->dropDownList(ArrayHelper::map(Product::find()->where(['status' => '1'])->all(), 'id', 'product_name'), ['class' => 'form-control', 'id' => 'product-related_product', 'multiple' => 'multiple']) ?>
-                
+
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                 <?=
@@ -150,7 +140,7 @@ use dosamigos\ckeditor\CKEditor;
                 ])
                 ?>
             </div>
-            
+
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
             </div>
@@ -203,8 +193,8 @@ use dosamigos\ckeditor\CKEditor;
             <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
                 <?php if (!$model->isNewRecord) { ?>
-                                                                                                                                                    <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
-                    <div class="row"> 
+                                                                                                                                                        <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
+                    <div class="row">
                         <?php
                         $path = Yii::getAlias('@paths') . '/product/' . $model->id . '/gallery_thumb';
                         if (count(glob("{$path}/*")) > 0) {
@@ -215,7 +205,7 @@ use dosamigos\ckeditor\CKEditor;
                                 $k++;
                                 $arry = explode('/', $file);
                                 $img_nmee = end($arry);
-                                
+
                                 $img_nmees = explode('.', $img_nmee);
                                 if ($img_nmees['1'] != '') {
                                     ?>
@@ -264,7 +254,7 @@ use dosamigos\ckeditor\CKEditor;
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['id' => 'add_category']); ?>
                 <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
+                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                         <label class="control-label" for="subcategory-category">Category</label>
                         <input type="text" id="subcategory-category" class="form-control" >
                     </div>
@@ -297,10 +287,10 @@ use dosamigos\ckeditor\CKEditor;
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['id' => 'add_subcategory']); ?>
                 <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
+                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                         <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'category'), ['prompt' => 'select', 'id' => 'product-prcat']) ?>
                     </div>
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
+                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                         <label class="control-label">Sub Category</label>
                         <input type="text" id="product_subcat" class="form-control" >
                     </div>
@@ -333,7 +323,7 @@ use dosamigos\ckeditor\CKEditor;
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['id' => 'add_unit']); ?>
                 <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
+                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                         <label class="control-label">Unit</label>
                         <input type="text" id="product_unit" class="form-control" >
                     </div>
@@ -366,7 +356,7 @@ use dosamigos\ckeditor\CKEditor;
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['id' => 'add_searchtag']); ?>
                 <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
+                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                         <label class="control-label" for="Search-tag">Tag name</label>
                         <input type="text" id="search-tag" class="form-control" >
                     </div>

@@ -64,8 +64,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return $model->dob;
                                     },
                                 ],
+                                            [
+                                    'attribute' => 'gender',
+                                    'value' => function ($model) {
+                                        if($model->gender == 1){
+                                            
+                                        }
+                                        return $model->dob;
+                                    },
+                                ],
                                 // 'gender',
-                                // 'mobile_no',
+                                 'mobile_no',
                                 // 'username',
                                 // 'auth_key',
                                 // 'password_hash',
@@ -74,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // 'status',
                                 // 'created_at',
                                 // 'updated_at',
-                                ['class' => 'yii\grid\ActionColumn'],
+//                                ['class' => 'yii\grid\ActionColumn'],
                             ],
                         ]);
                         ?>

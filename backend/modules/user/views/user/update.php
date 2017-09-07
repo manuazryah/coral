@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = 'Update';
             <div class="panel-body">
                 <?= Html::a('<i class="fa-th-list"></i><span> Manage User</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                 <?= Html::a('<i class="fa fa-shopping-cart"></i><span> View Cart</span>', ['view-cart', 'id' => $model->id], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                <?= Html::a('<span> Disable User</span>', ['disable-user', 'id' => $model->id], ['class' => 'btn btn-secondary','style'=>'float:right;']) ?>
                 <div class="panel-body"><div class="user-create">
                         <?=
                         $this->render('_form', [

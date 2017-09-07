@@ -33,13 +33,35 @@ class UserController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
+        return $this->render('index', [
+                    'model' => $model,
+        ]);
+    }
+
+    public function actionMyOrders() {
+        return $this->render('my-orders');
+    }
+
+    public function actionMyReviews() {
+        return $this->render('reviews-ratings');
+    }
+
+    public function actionWishList() {
+        return $this->render('wish-list');
+    }
+
+    public function actionChangePassword() {
+        return $this->render('change-password');
+    }
+
+    public function actionPersonalInfo() {
         $id = Yii::$app->user->identity->id;
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
-            return $this->render('index', [
+            return $this->render('personal-info', [
                         'model' => $model,
             ]);
         }

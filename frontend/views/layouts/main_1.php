@@ -67,13 +67,14 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
-                echo '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>';
+                $menuItems[] = '<li>'
+                        . Html::beginForm(['/site/logout'], 'post')
+                        . Html::submitButton(
+                                'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
+                        )
+                        . Html::endForm()
+                        . '</li>';
+                $menuItems[] = ['label' => 'Change Password', 'url' => ['/site/changepassword']];
             }
             ?>
             <a href="javascript:void(0)"><i class="fa fa-shopping-basket"></i> <span class="cart_items">0 Items</span></a>
@@ -101,25 +102,25 @@ AppAsset::register($this);
                 }
 
             </style>
-
-<!--<img src="<?php // yii::$app->ba;   ?>/../images/loading.gif">-->
+           
+        <!--<img src="<?php // yii::$app->ba;  ?>/../images/loading.gif">-->
             <div class="loader">
-                <img class="over-lay" src="<?= yii::$app->homeUrl; ?>images/loading.gif" width="300px">
-                <div class="shoper-cart hide">
-                    <div class="shoper-head">
-                        <h3>Your Order</h3>
-                        <h6>Price</h6>
-                    </div>
-                    <div class="shoper-content">
-                    </div>
-                    <div class="shoper-bottom">
-                        <h5>Total AED: <span><i class="fa amount"></i></span></h5>
-                    </div>
-                    <div class="shoper-buy-btn">
-                        <a href="<?= yii::$app->basePath; ?>"><i class="fa fa-long-arrow-left"></i> Continue Shopping</a>
-                        <a class="byu-btn btn-default" href="<?= yii::$app->homeUrl; ?>cart/mycart">Buy</a>
-                    </div>
+                 <img class="over-lay" src="<?= yii::$app->homeUrl; ?>images/loading.gif" width="300px">
+            <div class="shoper-cart hide">
+                <div class="shoper-head">
+                    <h3>Your Order</h3>
+                    <h6>Price</h6>
                 </div>
+                <div class="shoper-content">
+                </div>
+                <div class="shoper-bottom">
+                    <h5>Total AED: <span><i class="fa amount"></i></span></h5>
+                </div>
+                <div class="shoper-buy-btn">
+                    <a href="<?= yii::$app->basePath; ?>"><i class="fa fa-long-arrow-left"></i> Continue Shopping</a>
+                    <a class="byu-btn btn-default" href="<?= yii::$app->homeUrl; ?>cart/mycart">Buy</a>
+                </div>
+            </div>
             </div>
             <div class="container">
                 <?=

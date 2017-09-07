@@ -85,7 +85,7 @@ AppAsset::register($this);
                                     <?= Html::a('Admin Post', ['/admin/admin-post/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
-                                    <?= Html::a('Admin User', ['/admin/admin-user/index'], ['class' => 'title']) ?>
+                                    <?= Html::a('Admin User', ['/admin/admin-users/index'], ['class' => 'title']) ?>
                                 </li>
                             </ul>
                         </li>
@@ -132,7 +132,7 @@ AppAsset::register($this);
                         </li>
                         <li>
                             <a href="<?= yii::$app->homeUrl; ?>settings">
-                                <i class="linecons-star"></i>
+                                <i class="fa fa-star"></i>
                                 <span class="title">Settings</span>
                             </a>
                         </li>

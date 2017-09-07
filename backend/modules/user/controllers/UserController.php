@@ -51,6 +51,13 @@ class UserController extends Controller {
                     'cart_details' => $cart_details,
         ]);
     }
+    
+     public function actionDisableUser($id) {
+        $model = $this->findModel($id);
+        $model->status = 0;
+        $model->save();
+        return $this->redirect(['index']);
+    }
 
     /**
      * Displays a single User model.
@@ -90,7 +97,7 @@ class UserController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                         'model' => $model,

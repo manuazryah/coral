@@ -26,20 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-
-
-
-                    <button class="btn btn-white" id="search-option" style="float: right;">
-                        <i class="linecons-search"></i>
-                        <span>Search</span>
-                    </button>
                     <div class="table-responsive" style="border: none">
+                        <button class="btn btn-white" id="search-option" style="float: right;">
+                            <i class="linecons-search"></i>
+                            <span>Search</span>
+                        </button>
                         <?=
                         GridView::widget([
                             'dataProvider' => $dataProvider,
                             'filterModel' => $searchModel,
                             'columns' => [
-                                ['class' => 'yii\grid\SerialColumn'],
+                                    ['class' => 'yii\grid\SerialColumn'],
 //                                'id',
                                 'label',
                                 'value',

@@ -11,17 +11,20 @@ use common\models\Category;
 
 class ProductController extends \yii\web\Controller {
 
-    public function actionIndex() {
+    public function actionIndex($id) {
+        $catag = Category::find()->where(['category_code'=>$id])->one();
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $category = Category::find()->select('id,category')->where(['status' => 1])->all();
+        $dataProvider->query->andWhere(['category' => $catag->id]);
+        $categories = Category::find()->where(['status' => 1])->all();
 //$products = Product::find()->select('id,product_name,product_type,price,offer_price')->where(['status'=>1])->all();
 //        $searchModel = new SearchMembers();
 //    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
-                    'category' => $category,
+                    'categories' => $categories,
+                    'catag' => $catag,
         ]);
 //        return $this->render('index');
     }

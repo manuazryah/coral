@@ -1,16 +1,10 @@
-<?php
-/* @var $this \yii\web\View */
-/* @var $content string */
-
-use yii\helpers\Html;
-?>
 <div class="pad-20 hide-xs"></div>
 
 <div class="container">
     <div class="breadcrumb">
         <span class="current-page">My account</span>
         <ol class="path">
-            <li><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
+            <li><a href="index.php">Home</a></li>
             <li class="active">My account</li>
         </ol>
     </div>
@@ -27,7 +21,7 @@ use yii\helpers\Html;
                             <div class="panel list-sub" style="display: block">
                                 <div class="panel-body">
                                     <div class="list-group">
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/user/my-orders'], ['class' => 'list-group-item']) ?>
+                                        <a href="my-orders.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>My orders</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -36,8 +30,8 @@ use yii\helpers\Html;
                             <div class="panel list-sub" style="display: block">
                                 <div class="panel-body">
                                     <div class="list-group">
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span>', ['/myaccounts/user/my-reviews'], ['class' => 'list-group-item']) ?>
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My Wishlist</span>', ['/myaccounts/user/wish-list'], ['class' => 'list-group-item']) ?>
+                                        <a href="reviews&ratings.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span></a>
+                                        <a href="wish-list.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>My wishlist</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -46,12 +40,12 @@ use yii\helpers\Html;
                             <div class="panel list-sub" style="display: block">
                                 <div class="panel-body">
                                     <div class="list-group">
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>personal information</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>change password</span>', ['/myaccounts/user/change-password'], ['class' => 'list-group-item']) ?>
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>addresses</span>', ['/myaccounts/user-address/index'], ['class' => 'list-group-item']) ?>
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>profile settings</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>update email/mobile</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>deactivate account</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
+                                        <a href="personal-info.php" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>personal information</span></a>
+                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>change password</span></a>
+                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>addresses</span></a>
+                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>profile settings</span></a>
+                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>update email/mobile</span></a>
+                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>deactivate account</span></a>
                                     </div>
                                 </div>
                             </div>

@@ -34,7 +34,7 @@ $form = ActiveForm::begin(
 
 <div class="form-group">
 
-    <?= $form->field($model, 'username')->textInput(['class' => 'form-control input-dark'], ['autofocus' => true, 'placeholder' => "Username"]) ?>
+    <?= $form->field($model, 'user_name')->textInput(['class' => 'form-control input-dark'], ['autofocus' => true, 'placeholder' => "Username"]) ?>
 </div>
 
 <div class="form-group">

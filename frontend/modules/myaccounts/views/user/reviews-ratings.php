@@ -8,10 +8,11 @@ use yii\helpers\Html;
 
 <div class="container">
     <div class="breadcrumb">
-        <span class="current-page">My account</span>
+        <span class="current-page">My orders</span>
         <ol class="path">
             <li><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
-            <li class="active">My account</li>
+            <li><?= Html::a('<span>My account</span>', ['/myaccounts/user/index'], ['class' => '']) ?></li>
+            <li class="active">My orders</li>
         </ol>
     </div>
 </div>
@@ -36,7 +37,7 @@ use yii\helpers\Html;
                             <div class="panel list-sub" style="display: block">
                                 <div class="panel-body">
                                     <div class="list-group">
-                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span>', ['/myaccounts/user/my-reviews'], ['class' => 'list-group-item']) ?>
+                                        <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span>', ['/myaccounts/user/my-reviews'], ['class' => 'list-group-item active']) ?>
                                         <?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My Wishlist</span>', ['/myaccounts/user/wish-list'], ['class' => 'list-group-item']) ?>
                                     </div>
                                 </div>
@@ -63,10 +64,29 @@ use yii\helpers\Html;
         </div><!-- ./ endcol-lg-6 col-lg-offset-3 -->
 
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 my-account-cntnt">
-            <p class="span-msg">The account information has been saved.</p>
-            <p class="customer-name">Hello, Customer!</p>
-            <p>From  My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account
-                information. Select a link  to view or edit information.</p>
+            <div id="reviews-ratings">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 customer-reviews orders-box active">
+                    <div class="pro-img-box col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <img src="images/reviews/img-1.png"/>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <p class="subject"> Sooo Good</p>
+                        <i>vishal on Jul 30, 2017</i>
+                        <p class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat...</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 customer-reviews orders-box active">
+                    <div class="pro-img-box col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <img src="images/reviews/img-2.png"/>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <p class="subject"> Sooo Good</p>
+                        <i>vishal on Jul 30, 2017</i>
+                        <p class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat...</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
