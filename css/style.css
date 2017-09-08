@@ -741,6 +741,28 @@ li.dropdown:hover .dropdown-menu {
     text-align: center;
     line-height: initial;
 }
+.continue-shopping {
+    border: none;
+    color: #8c8c8c;
+    font-size: 14px;
+    letter-spacing: 2.6px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: transparent;
+    padding: 10px 25px;
+    text-align: center;
+    line-height: initial;
+}
+.continue-shopping:before{
+    content: "\f053";
+    font-family: FontAwesome;
+    font-size: 11px;
+    text-align: center;
+    vertical-align: middle;
+    top: -1px;
+    position: relative;
+    padding-right: 7px;
+}
 .start-shopping:hover{
     text-decoration: none;
 }
@@ -1357,6 +1379,9 @@ h1:after{
 
 #footer{
     background: #2d2d2d;
+    z-index: 90000000;
+    position: absolute;
+    width: 100%;
     /*padding-bottom: 20px;*/
 }
 #footer ul li a{
@@ -1608,6 +1633,7 @@ h1:after{
     padding: 20px 0px;
     text-align: justify;
     margin-bottom: 0px;
+    min-height: 175px;
 }
 #product-page .active-box{
     border: 1px solid #000 !important;
@@ -1852,9 +1878,9 @@ a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
 .app-figure a[data-zoom-id]:first-child{
     margin-left: 50px;
 }
-.mz-thumb img{
+/*.mz-thumb img{
     padding-top: 10px;
-}
+}*/
 #mzCrA31286606436{
     display: none !important;
 }
@@ -2312,4 +2338,311 @@ input[type=number]::-webkit-outer-spin-button {
 .delete-address:hover{
     color: #8c8c8c !important;
 }
+#cart-page .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    border: 1px solid #ddd;
+}
+#cart-page .table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th{
+    border: 1px solid #ddd;
+}
+#cart-page .thumbnail{
+    background: transparent;
+    border: none;
+}
+#cart-page tbody{
+    background: #edf7f5;
+}
+#cart-page tbody td{
+    background: #edf7f5;
+    vertical-align: middle;
+}
+#cart-page thead{
+    background: #b4e0de;
+}
+#cart-page thead tr th{
+    padding: 15px 8px;
+    color: #515452;
+    font-size: 16px;
+    font-family: roboto;
+}
+#cart-page .product-heading{
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-family: roboto-medium;
+    color: #515452;
+}
+#cart-page .brand-name{
+    margin-top: 0px;
+    font-size: 14px;
+    font-family: roboto;
+    color: #515452;
+}
+#cart-page .price{
+    font-size: 16px;
+    font-family: roboto-medium;
+    color: #61b346;
+}
+#cart-page total-price{
+    font-size: 16px;
+    font-family: roboto-medium;
+    color: #61b346;
+}
+#cart-page .btn-info {
+    color: black;
+    background-color: #ddd;
+    border-color: #ddd;
+    font-size: 10px;
+    padding: 12px 15px;
+    border-radius: 0px;
+    outline: none;
+}
+#cart-page .form-control{
+    height: 40px;
+    width: 50px;
+}
+#cart-page .input-group-addon, #cart-page .input-group-btn{
+    width: auto;
+}
+#cart-page .number-spinner{
+    display: inline-flex;
+}
+#cart-page .btn-remove{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    font-size: 18px;
+}
+#cart-page .table {
+    margin-bottom: 0;
+}
+#cart-page .sub-total{
+    clear: both;
+    display: grid;
+    float: none;
+    text-align: right;
+    padding: 20px 0;
+}
+#cart-page .sub-total h4{
+    font-size: 18px;
+}
+#cart-page .sub-total span.price{
+    font-size: 18px;
+    margin-left: 10px;
+}
+#cart-page .sub-total span.message{
+    font-size: 13px;
+    font-family: roboto;
+    color: #8c8c8c;
+    font-style: italic;
+    text-transform: uppercase;
+}
+#cart-page button.green2{
+    width: auto;
+}
+#cart-page .start-shopping{
+    margin-right: 0px;
+    margin-bottom: 15px;
+}
+#cart-page a:first-child{
+    margin-right: 10px;
+}
+.mob-car-list .media{
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 1px #ddd;
+    box-shadow: 0 1px 1px #ddd;
+}
+.mob-checkout-buttons{
+    margin-bottom: 20px;
+}
+.mob-car-list .media .item-total{
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+.mob-car-list .media .item-total .heading{
+    float: left;
+}
+.mob-car-list .media .item-total .amount{
+    float: right;
+}
+.mob-sub-total{
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 1px #ddd;
+    box-shadow: 0 1px 1px #ddd;
+    border-top: 0px;
+}
+.mob-car-list .sub-total{
+    text-align: center;
+    margin-bottom: 20px;
+}
 /*******************************************************My-Account-end****************************************/
+
+
+/*******************************************************CHECK-OUT****************************************/
+
+#checkout .heading{
+    background-color: #b3e0df;
+    padding: 10px;
+    color: #515452;
+    padding-left: 30px;
+    clear: both;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+#checkout .heading.active p{
+    color: white;
+}
+#checkout .heading p{
+    margin: 0px;
+    color: #515452;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+}
+#checkout .content{
+    padding: 40px 40px;
+    display: flex;
+}
+input[type="checkbox"]:before{
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: '';
+    position: absolute;
+    background: #edf7f5;
+    border: 1px solid #8c8c8c;
+    border-radius: 0px;
+}
+input[type="checkbox"]:checked:before {
+    content: "";
+    background-image: url(../images/check-mark.png);
+    background-repeat: no-repeat;
+    /*background: #515452;*/
+    border: none;
+}
+#checkout .form-group .first-name{
+    padding-right: 10px
+}
+#checkout .form-group .last-name{
+    padding-left: 10px
+}
+#checkout .tab-btn{
+    color: #8c8c8c;
+    font-size: 14px;
+    padding-bottom: 30px;
+}
+#checkout .tab-btn .active{
+    color: #515452;
+    font-weight: 600;
+}
+#checkout .tab-btn .guest:after{
+    content: " | ";
+    color: #515452;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+#checkout .login-group-checkbox label{
+    color: #8c8c8c;
+    font-size: 14px;
+    font-weight: 600;
+}
+#checkout .login-group-checkbox .checkbox-msg{
+    font-style: italic;
+    line-height: 20px;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin: 0px;
+    padding-left: 20px;
+    font-family: roboto-light;
+}
+#checkout .green2{
+    width: auto;
+    float: right;
+}
+#checkout .summery-box{
+    display: inline-block;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 1px #ddd;
+    box-shadow: 0 1px 1px #ddd;
+}
+#checkout .summery-box .thumbnail{
+    position: relative;
+    background: transparent;
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    text-align: center;
+    margin: 0 auto;
+    left: 0px;
+    right: 0px;
+    border-radius: 0px;
+}
+#checkout .summery-box .thumbnail a>img, #checkout .summery-box .thumbnail>img{
+    position: absolute;
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    left: 0px;
+    right: 0px;
+    top: 2px;
+    bottom: 0px;
+}
+#checkout .summery-box .product-heading{
+    font-size: 13px;
+    font-family: roboto-medium;
+    color: #515452;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+#checkout .summery-box .brand-name{
+    line-height: 10px;
+    font-size: 13px;
+    margin: 0px;
+    font-family: roboto-light;
+}
+#checkout .summery-box .price{
+    line-height: 10px;
+    font-size: 13px;
+    margin: 0px;
+    font-family: roboto-medium;
+    text-transform: uppercase;
+}
+#checkout .summery-box .sub-total .label{
+    line-height: 10px;
+    font-size: 13px;
+    margin: 0px;
+    font-family: roboto-light;
+    float: left;
+    text-align: left;
+    color: #8c8c8c;
+    padding: 5px 0;
+}
+#checkout .summery-box .sub-total .price{
+    line-height: 10px;
+    font-size: 13px;
+    margin: 0px;
+    font-family: roboto-light;
+    float: right;
+    text-align: right;
+    color: #8c8c8c;
+    padding: 5px 0;
+}
+#checkout .summery-box .total .label{
+    line-height: 10px;
+    font-size: 14px;
+    margin: 0px;
+    font-family: roboto;
+    float: left;
+    text-align: left;
+    color: #515452;
+    padding: 5px 0;
+}
+#checkout .summery-box .total .price{
+    line-height: 10px;
+    font-size: 14px;
+    margin: 0px;
+    font-family: roboto;
+    float: right;
+    text-align: right;
+    color: #515452;
+    padding: 5px 0;
+}
+
+/*******************************************************CHECK-OUT-end****************************************/

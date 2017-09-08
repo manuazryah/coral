@@ -8,25 +8,27 @@ use yii;
 use common\models\Product;
 use common\models\ProductSearch;
 use common\models\Category;
+use common\models\RecentlyViewed;
 
 class ProductController extends \yii\web\Controller {
 
+    /**
+     * Displays a Products based on category.
+     * @param category_code $id
+     * @return mixed
+     */
     public function actionIndex($id) {
         $catag = Category::find()->where(['category_code' => $id])->one();
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere(['category' => $catag->id]);
         $categories = Category::find()->where(['status' => 1])->all();
-//$products = Product::find()->select('id,product_name,product_type,price,offer_price')->where(['status'=>1])->all();
-//        $searchModel = new SearchMembers();
-//    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'categories' => $categories,
                     'catag' => $catag,
         ]);
-//        return $this->render('index');
     }
 
     public function actionCategory($id) {
@@ -41,11 +43,78 @@ class ProductController extends \yii\web\Controller {
         ]);
     }
 
+    /**
+     * Displays a Particular Product.
+     * @param prodict_id  $product
+     * @return mixed
+     */
     public function actionProduct_detail($product) {
         $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
+        $this->RecentlyViewed($product_details);
+        $recently_viewed = RecentlyViewed::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
         return $this->render('product_detail', [
                     'product_details' => $product_details,
+                    'recently_viewed' => $recently_viewed,
         ]);
+    }
+
+    /**
+     * Save recently viewed product.
+     * @param product array
+     * if user logged in set user id otherwise set temporary session id
+     */
+    public function RecentlyViewed($product) {
+        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+            $user_id = Yii::$app->user->identity->id;
+        } else {
+            if (!isset(Yii::$app->session['temp_user_product'])) {
+                $milliseconds = round(microtime(true) * 1000);
+                Yii::$app->session['temp_user_product'] = $milliseconds;
+            }
+            $sessonid = Yii::$app->session['temp_user_product'];
+        }
+        $model = RecentlyViewed::find()->where(['product_id' => $product->id, 'session_id' => Yii::$app->session['temp_user_product']])->one();
+        if (empty($model)) {
+            $model = new RecentlyViewed();
+            $model->user_id = $user_id;
+            $model->session_id = $sessonid;
+            $model->product_id = $product->id;
+            $model->date = date('Y-m-d');
+        } else {
+            $model->session_id = $sessonid;
+            $model->date = date('Y-m-d');
+        }
+        $model->save();
+        return;
+    }
+
+    /**
+     * Update recently viewed product.
+     * @param tmperory session for recently viewed product
+     * update session id to corresponding user user id
+     */
+    public function actionGetrecentproduct() {
+        if (isset(Yii::$app->user->identity->id)) {
+            if (isset(Yii::$app->session['temp_user_product'])) {
+                echo Yii::$app->session['temp_user_product'];
+                $models = RecentlyViewed::find()->where(['session_id' => Yii::$app->session['temp_user_product']])->all();
+
+                foreach ($models as $msd) {
+                    $data = RecentlyViewed::find()->where(['product_id' => $msd->product_id, 'user_id' => Yii::$app->user->identity->id])->one();
+                    if (empty($data)) {
+                        $msd->user_id = Yii::$app->user->identity->id;
+                        $msd->session_id = '';
+                        $msd->save();
+                    } else {
+                        $data->date = $msd->date;
+                        if ($data->save()) {
+                            $msd->delete();
+                        }
+                    }
+                }
+                unset(Yii::$app->session['temp_user_product']);
+            }
+        }
     }
 
 }

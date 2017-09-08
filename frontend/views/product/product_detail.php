@@ -26,9 +26,22 @@ $this->title = $product_details->canonical_name;
 
 
                 <div class="app-figure" id="zoom-fig">
-                    <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile ?>">
-                        <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile ?>" alt=""/>
-                    </a>
+                    <?php
+                    $product_image = Yii::$app->basePath . '/../uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile;
+                    if (file_exists($product_image)) {
+                        ?>
+                        <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile ?>">
+                            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile ?>?scale.height='400'" alt=""/>
+                        </a>
+                        <?php
+                    } else {
+                        ?>
+                        <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>">
+                            <img src="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>?scale.height='400'" alt=""/>
+                        </a>
+                    <?php }
+                    ?>
+
                     <div class="selectors">
                         <?php
                         $path = Yii::getAlias('@paths') . '/product/' . $product_details->id . '/gallery_thumb';
@@ -42,17 +55,18 @@ $this->title = $product_details->canonical_name;
                                 $img_nmees = explode('.', $img_nmee);
                                 if ($img_nmees['1'] != '') {
                                     ?>
-
                                     <a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>">
                                         <img srcset="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>" width="94px" height="93px"/>
                                     </a>
-
-
-
                                     <?php
                                 }
                             }
-                        }
+                        } else {
+                            ?>
+                            <a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>" data-image="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>?scale.height=400" >
+                                <img srcset="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>?scale.width=112 2x" src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_gallery_thump.png' ?>?scale.width=56"/>
+                            </a>
+                        <?php }
                         ?>
 
                     </div>
@@ -77,11 +91,11 @@ $this->title = $product_details->canonical_name;
                 <div class="hr-box">
                     <h5 class="sizes">sizes:
                         <?php $unit = Unit::findOne($product_details->size_unit); ?>
-                        <span class="size active-box" data-toggle="tooltip" title="xtra large"><?= $product_details->size . $unit->unit_name ?></span>
+                        <span class="size active-box" data-toggle="tooltip" title=""><?= $product_details->size . $unit->unit_name ?></span>
                     </h5>
                     <br/>
                     <h5 class="type">Fragrance Type:
-                        <span class="not-available active-box" data-toggle="tooltip" title="Many In store"><?= $product_details->product_type ?></span>
+                        <span class="not-available active-box" data-toggle="tooltip" title=""><?= $product_details->product_type ?></span>
                         <!--<span class="not-available" data-toggle="tooltip" title="Not In store">Arabic Parfum</span>-->
                     </h5>
                 </div>
@@ -195,151 +209,101 @@ $this->title = $product_details->canonical_name;
     <div class="clearfix"></div>
     <div class="pad-30"></div>
     <div class="container">
-        <div class="international-brands">
-            <h1>Recently viewed</h1>
-            <div class="product-slider">
-                <div id="adv_gp_products_1_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
-                    <!--========= Wrapper for slides =========-->
-                    <div class="carousel-inner" role="listbox">
+        <?php
+        if (!empty($recently_viewed)) {
+            ?>
+            <div class="international-brands">
+                <h1>Recently viewed</h1>
+                <div class="product-slider">
+                    <div id="adv_gp_products_1_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
+                        <!--========= Wrapper for slides =========-->
+                        <div class="carousel-inner" role="listbox">
 
-                        <!--========= 1st slide =========-->
-                        <div class="item active">
-                            <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl; ?>product-detail">
-                                            <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/1.png" alt="1" />
-                                        </a>
-                                    </div>
-                                    <ul class="text-center">
-                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                    </ul>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#">Waves</a></li>
-                                            <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <li>AED 200.00</li>
-                                            <li class="center">AED 400.00</li>
-                                            <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--========= 2nd slide =========-->
-                        <div class="item">
-                            <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl; ?>product-detail">
-                                            <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/2.png" alt="2" />
-                                        </a>
-                                    </div>
-                                    <ul class="text-center">
-                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                    </ul>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#">Waves</a></li>
-                                            <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <li>AED 200.00</li>
-                                            <li>AED 400.00</li>
-                                            <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--========= 3rd slide =========-->
-                        <div class="item">
-                            <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl; ?>product-detail">
-                                            <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/3.png" alt="3" />
-                                        </a>
-                                    </div>
-                                    <ul class="text-center">
-                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                    </ul>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#">Waves</a></li>
-                                            <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <li>AED 200.00</li>
-                                            <li>AED 400.00</li>
-                                            <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                        </ul>
+                            <!--========= 1st slide =========-->
+                            <?php
+                            $j = 0;
+                            foreach ($recently_viewed as $recent) {
+                                $j++;
+                                $model = \common\models\Product::findOne($recent->product_id);
+//                                echo $j;
+                                ?>
+                                <div class="item <?php if ($j == 1) {
+                            echo ' active';
+                        } ?>">
+                                    <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
+                                        <div class="gp_products_inner">
+                                            <div class="gp_products_item_image">
+                                                <a href="<?= Yii::$app->homeUrl . 'product/product_detail/' . $model->canonical_name ?>">
+                                                    <?php
+                                                    $product_image = Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile;
+                                                    if (file_exists($product_image)) {
+                                                        ?>
+                                                        <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile ?>" height="100%" alt="1" />
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <img src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_perfume.png' ?>" height="100%" alt="1" />
+        <?php }
+        ?>
+                                                </a>
+                                            </div>
+                                            <!--                                            <ul class="text-center">
+                                                                                            <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                                                                                            <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                                                                                            <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                                                                                        </ul>-->
+                                            <div class="gp_products_item_caption">
+                                                <ul class="gp_products_caption_name">
+                                                    <li><a href="#"><?= $model->product_name ?></a></li>
+                                                    <li><a href="#"><?= $model->product_type ?></a></li>
+                                                </ul>
+                                                <ul class="gp_products_caption_rating">
+                                                    <?php
+                                                    if ($model->offer_price != "0") {
+                                                        $percentage = round(100 - (($model->offer_price / $model->price) * 100));
+                                                        ?>
+                                                        <li>AED <?= $model->offer_price; ?></li>
+                                                        <li class="center">AED <?= $model->price; ?></li>
+                                                        <li class="pull-right"><a href="#">(<?= $percentage ?>%OFF)</a></li>
+                                                    <?php } else {
+                                                        ?>
+                                                        <li class="center">AED <?= $model->price; ?></li>
+        <?php } ?>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+    <?php }
+    ?>
+
+
+
                         </div>
 
-                        <!--========= 4th slide =========-->
-                        <div class="item">
-                            <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl; ?>product-detail">
-                                            <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/4.png" alt="4" />
-                                        </a>
-                                    </div>
-                                    <ul class="text-center">
-                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                    </ul>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#">Waves</a></li>
-                                            <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <li>AED 200.00</li>
-                                            <li>AED 400.00</li>
-                                            <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--======= Navigation Buttons =========-->
 
-                    </div>
+                        <!--======= Left Button =========-->
+                        <a class="left carousel-control gp_products_carousel_control_left" href="#adv_gp_products_1_columns_carousel" role="button" data-slide="prev">
+                            <span class="fa fa-angle-left gp_products_carousel_control_icons" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
 
-                    <!--======= Navigation Buttons =========-->
+                        <!--======= Right Button =========-->
+                        <a class="right carousel-control gp_products_carousel_control_right" href="#adv_gp_products_1_columns_carousel" role="button" data-slide="next">
+                            <span class="fa fa-angle-right gp_products_carousel_control_icons" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
 
-                    <!--======= Left Button =========-->
-                    <a class="left carousel-control gp_products_carousel_control_left" href="#adv_gp_products_1_columns_carousel" role="button" data-slide="prev">
-                        <span class="fa fa-angle-left gp_products_carousel_control_icons" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-
-                    <!--======= Right Button =========-->
-                    <a class="right carousel-control gp_products_carousel_control_right" href="#adv_gp_products_1_columns_carousel" role="button" data-slide="next">
-                        <span class="fa fa-angle-right gp_products_carousel_control_icons" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-
-                </div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
+                    </div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
+                </div>
             </div>
-        </div>
+            <?php
+        }
+        ?>
         <div class="pad-30"></div>
         <div class="international-brands">
-            <h1>Recently viewed</h1>
+            <h1>Related Products</h1>
             <div class="product-slider">
                 <div id="adv_gp_products_8_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
                     <!--========= Wrapper for slides =========-->

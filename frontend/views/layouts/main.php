@@ -27,6 +27,9 @@ and open the template in the editor.
         <title><?= Html::encode($this->title) ?></title>
         <script src="<?= yii::$app->homeUrl; ?>js/jquery-1.11.1.min.js"></script>
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+        <script>
+            var homeUrl = '<?= yii::$app->homeUrl; ?>';
+        </script>
         <?php $this->head() ?>
     </head>
     <body>

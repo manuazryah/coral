@@ -409,6 +409,7 @@
 .gp_products_item_caption{
     border-top: 1px solid #d1d2d0;
     padding: 10px 5px;
+    padding-bottom: 5px;
 }
 .gp_products_inner:hover > .gp_products_item_image>a>img{
     opacity: 0.6
@@ -436,10 +437,15 @@
 .gp_products_item_caption>.gp_products_caption_rating>li:first-child{
     color: #515452;
     font-weight: 700;
+    float: left;
 }
 .gp_products_item_caption>ul{
     position: relative;
     padding-top: 10px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0 5px;
+    margin: 0px;
 }
 .gp_products_item_caption>.gp_products_caption_rating>li:nth-child(2){
     text-decoration: line-through #8c8c8c;
@@ -448,9 +454,9 @@
     float: none;
     margin: 0 auto;
     display: inline-block;
-    position: absolute;
-    top: 2px;
-    left: 36%;
+    position: relative;
+    /*    top: 2px;
+        left: 36%;*/
 }
 
 

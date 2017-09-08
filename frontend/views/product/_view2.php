@@ -1,11 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-?> 
+?>
 <!--<div class="row">
 <img src="<? Yii::$app->homeUrl . '../uploads/product/'  ?>" width="50px" height="30px"><br>
-<?$model->product_name;?> 
-<?$model->price;?> 
+<?$model->product_name;?>
+<?$model->price;?>
 <?$model->offer_price;?>
 </div>-->
 <!--========= 1st slide =========-->
@@ -14,31 +14,41 @@ use yii\helpers\Html;
         <div class="gp_products_inner">
             <div class="gp_products_item_image">
                 <a href="<?= Yii::$app->homeUrl . 'product/product_detail/' . $model->canonical_name ?>">
-                    <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile ?>" height="100%" alt="1" />
+                    <?php
+                    $product_image = Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile;
+                    if (file_exists($product_image)) {
+                        ?>
+                        <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile ?>" height="100%" alt="1" />
+                        <?php
+                    } else {
+                        ?>
+                        <img src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_perfume.png' ?>" height="100%" alt="1" />
+                    <?php }
+                    ?>
                 </a>
             </div>
-            <ul class="text-center">
-                <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-            </ul>
+            <!--            <ul class="text-center">
+                            <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                            <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                            <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                        </ul>-->
             <div class="gp_products_item_caption">
                 <ul class="gp_products_caption_name">
                     <li><a href="#"><?= $model->product_name ?></a></li>
-                    <li><a href="#"><?= $model->product_type?></a></li>
+                    <li><a href="#"><?= $model->product_type ?></a></li>
                 </ul>
                 <ul class="gp_products_caption_rating">
                     <?php
                     if ($model->offer_price != "0") {
                         $percentage = round(100 - (($model->offer_price / $model->price) * 100));
                         ?>
-                        <li>AED <?= $model->offer_price;?></li>
-                        <li class="center">AED <?= $model->price;?></li>
+                        <li>AED <?= $model->offer_price; ?></li>
+                        <li class="center">AED <?= $model->price; ?></li>
                         <li class="pull-right"><a href="#">(<?= $percentage ?>%OFF)</a></li>
-                    <?php }else{
-                    ?>
-                        <li class="center">AED <?= $model->price;?></li>
-                    <?php }?>
+                    <?php } else {
+                        ?>
+                        <li class="center">AED <?= $model->price; ?></li>
+                        <?php } ?>
                 </ul>
             </div>
         </div>
