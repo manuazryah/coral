@@ -51,18 +51,18 @@ class Product extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit', 'tax', 'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status'], 'integer'],
+            [['category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit',  'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status'], 'integer'],
             [['category', 'subcategory', 'product_name', 'canonical_name', 'item_ean', 'brand', 'price', 'currency', 'stock', 'stock_unit', 'product_type', 'product_detail'], 'required'],
 //             [['profile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => 'create'],
             [['price', 'offer_price'], 'number'],
             [['main_description', 'product_detail'], 'string'],
             [['DOC', 'DOU'], 'safe'],
             [['product_name', 'canonical_name'], 'string', 'max' => 100],
-            [['item_ean',  'product_type'], 'string', 'max' => 255],
+            [['item_ean'], 'string', 'max' => 255],
             [['canonical_name'], 'unique'],
             [['item_ean'], 'unique'],
-            [['profile'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 3],
-            [['other_image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['other_image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 3],
+            [['profile'], 'file', 'extensions' => 'png, jpg, jpeg'],
         ];
     }
 
@@ -91,7 +91,7 @@ class Product extends \yii\db\ActiveRecord {
             'stock_availability' => 'Stock Availability',
             'tax' => 'Tax',
             'free_shipping' => 'Free Shipping',
-            'product_type' => 'Product Type',
+            'product_type' => 'Fregrance Type',
             'size' => 'Size',
             'size_unit' => 'Size Unit',
             'main_description' => 'Main Description',
@@ -112,10 +112,10 @@ class Product extends \yii\db\ActiveRecord {
 
     public function upload($file, $model) {
         if (\yii::$app->basePath . '/../uploads') {
-            $path = yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $file->extension;
+            $path = yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '_big.' . $file->extension;
 
             Image::frame($path)
-                    ->thumbnail(new Box(455, 315))
+                    ->thumbnail(new Box(250, 250))
                     ->save(\yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $file->extension, ['quality' => 50]);
 
             Image::frame($path)

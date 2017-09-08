@@ -112,6 +112,9 @@ AppAsset::register($this);
                                         <li>
                                             <?= Html::a('Brand', ['/brand/index'], ['class' => 'title']) ?>
                                         </li>
+                                        <li>
+                                            <?= Html::a('Fregrance', ['/fregrance/index'], ['class' => 'title']) ?>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>

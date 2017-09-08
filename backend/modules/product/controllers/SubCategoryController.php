@@ -13,8 +13,8 @@ use yii\filters\VerbFilter;
  * SubCategoryController implements the CRUD actions for SubCategory model.
  */
 class SubCategoryController extends Controller {
-    
-     public function beforeAction($action) {
+
+    public function beforeAction($action) {
         if (!parent::beforeAction($action)) {
             return false;
         }
@@ -43,7 +43,7 @@ class SubCategoryController extends Controller {
      * Lists all SubCategory models.
      * @return mixed
      */
-    public function actionIndex($id=NULL) {
+    public function actionIndex($id = NULL) {
         if (!empty($id)) {
             $model = $this->findModel($id);
         } else {
@@ -126,10 +126,15 @@ class SubCategoryController extends Controller {
 //        return $this->redirect(['index']);
 //    }
     public function actionDel($id) {
-        if($this->findModel($id)->delete()){
-            Yii::$app->getSession()->setFlash('success', 'succuessfully deleted');
+        $product_details = \common\models\Product::find()->where(['subcategory' => $id])->all();
+        if (empty($product_details)) {
+            if ($this->findModel($id)->delete()) {
+                Yii::$app->getSession()->setFlash('success', 'succuessfully deleted');
+            } else {
+                Yii::$app->getSession()->setFlash('error', "Can't delete the Item");
+            }
         }else{
-            Yii::$app->getSession()->setFlash('error', "Can't delete the Item");
+            Yii::$app->getSession()->setFlash('error', "Can't delete the Item, Error Code : PRO1");
         }
 
         return $this->redirect(['index']);
@@ -149,7 +154,7 @@ class SubCategoryController extends Controller {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
+
     public function actionAjaxaddsubcat() {
         $category = $_POST['cat'];
         $subcategory = $_POST['subcat'];

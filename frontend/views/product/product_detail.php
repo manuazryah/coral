@@ -30,8 +30,8 @@ $this->title = $product_details->canonical_name;
                     $product_image = Yii::$app->basePath . '/../uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile;
                     if (file_exists($product_image)) {
                         ?>
-                        <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile ?>">
-                            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile ?>?scale.height='400'" alt=""/>
+                        <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>">
+                            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>?scale.height='400'" alt=""/>
                         </a>
                         <?php
                     } else {
@@ -95,7 +95,8 @@ $this->title = $product_details->canonical_name;
                     </h5>
                     <br/>
                     <h5 class="type">Fragrance Type:
-                        <span class="not-available active-box" data-toggle="tooltip" title=""><?= $product_details->product_type ?></span>
+                        <?php $fregrance= \common\models\Fregrance::findOne($product_details->product_type);?>
+                        <span class="not-available active-box" data-toggle="tooltip" title=""><?= $fregrance->name; ?></span>
                         <!--<span class="not-available" data-toggle="tooltip" title="Not In store">Arabic Parfum</span>-->
                     </h5>
                 </div>

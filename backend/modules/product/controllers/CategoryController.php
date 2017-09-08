@@ -122,8 +122,13 @@ class CategoryController extends Controller {
     public function actionDel($id) {
         $item_details = \common\models\SubCategory::findAll(['category_id' => $id]);
         if (empty($item_details)) {
+            $product_details = \common\models\Product::find()->where(['category' => $id])->all();
+            if(empty($product_details)){
             $this->findModel($id)->delete();
             Yii::$app->getSession()->setFlash('success', 'succuessfully deleted');
+            }else{
+                 Yii::$app->getSession()->setFlash('error', "Can't delete the Item, Error Code : PRO1");
+            }
         } else {
             Yii::$app->getSession()->setFlash('error', "Can't delete the Item");
         }

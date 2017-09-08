@@ -116,6 +116,7 @@ class ProductController extends Controller {
                             echo 'Image Upload Failed:';
                         }
                     }
+                    Yii::$app->getSession()->setFlash('success', "Created Successfully");
                     return $this->redirect(['create']);
                 } else {
 
@@ -125,8 +126,8 @@ class ProductController extends Controller {
                 }
             } else {
                 return $this->render('create', [
-                        'model' => $model,
-            ]);
+                            'model' => $model,
+                ]);
             }
         } else {
             return $this->render('create', [
@@ -144,7 +145,7 @@ class ProductController extends Controller {
             mkdir(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/');
             chmod(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/', 0777);
         }
-        $file->saveAs(Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $file->extension);
+        $file->saveAs(Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '_big.' . $file->extension);
         return TRUE;
     }
 
@@ -166,16 +167,16 @@ class ProductController extends Controller {
             $file12 = UploadedFile::getInstances($model, 'other_image');
 //            $model->item_ean = date(Ymdhis);
             if ($file11) {
-                    $model->profile = $file11[0]->extension;
-                }
+                $model->profile = $file11[0]->extension;
+            }
             $tag = $_POST['Product']['search_tag'];
-                if ($tag) {
-                    $model->search_tag = implode(',', $tag);
-                }
-                $tag1 = $_POST['Product']['related_product'];
-                if ($tag1) {
-                    $model->related_product = implode(',', $tag1);
-                }
+            if ($tag) {
+                $model->search_tag = implode(',', $tag);
+            }
+            $tag1 = $_POST['Product']['related_product'];
+            if ($tag1) {
+                $model->related_product = implode(',', $tag1);
+            }
             $model->meta_description = $_POST['Product']['meta_description'];
             $model->meta_keywords = $_POST['Product']['meta_keywords'];
             $model->profile_alt = $_POST['Product']['profile_alt'];
@@ -193,7 +194,8 @@ class ProductController extends Controller {
                         echo 'Image Upload Failed:';
                     }
                 }
-                return $this->redirect(['index']);
+                Yii::$app->getSession()->setFlash('success', "Updated Successfully");
+                return $this->redirect(['create']);
             } else {
                 var_dump($model->getErrors());
             }
@@ -242,7 +244,7 @@ class ProductController extends Controller {
                     $model->profile = $file11[0]->extension;
                 }
 //            $model->item_ean = date(Ymdhis);
-                
+
                 $tag = $_POST['Product']['search_tag'];
                 if ($tag) {
                     $model->search_tag = implode(',', $tag);

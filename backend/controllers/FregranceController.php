@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Brand;
-use common\models\BrandSearch;
+use common\models\Fregrance;
+use common\models\FregranceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BrandController implements the CRUD actions for Brand model.
+ * FregranceController implements the CRUD actions for Fregrance model.
  */
-class BrandController extends Controller {
+class FregranceController extends Controller {
 
     /**
      * @inheritdoc
@@ -29,11 +29,11 @@ class BrandController extends Controller {
     }
 
     /**
-     * Lists all Brand models.
+     * Lists all Fregrance models.
      * @return mixed
      */
     public function actionIndex() {
-        $searchModel = new BrandSearch();
+        $searchModel = new FregranceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +43,7 @@ class BrandController extends Controller {
     }
 
     /**
-     * Displays a single Brand model.
+     * Displays a single Fregrance model.
      * @param integer $id
      * @return mixed
      */
@@ -54,12 +54,12 @@ class BrandController extends Controller {
     }
 
     /**
-     * Creates a new Brand model.
+     * Creates a new Fregrance model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate() {
-        $model = new Brand();
+        $model = new Fregrance();
 
         if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
             return $this->redirect(['index']);
@@ -71,7 +71,7 @@ class BrandController extends Controller {
     }
 
     /**
-     * Updates an existing Brand model.
+     * Updates an existing Fregrance model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -89,49 +89,31 @@ class BrandController extends Controller {
     }
 
     /**
-     * Deletes an existing Brand model.
+     * Deletes an existing Fregrance model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id) {
-        $model1 = \common\models\Product::find()->where(['brand' => $id])->all();
+        $model1 = \common\models\Product::find()->where(['product_type' => $id])->all();
         if (empty($model1)) {
             $this->findModel($id)->delete();
         } else {
             Yii::$app->getSession()->setFlash('error', "Can't delete the Item, Error Code : PRO1");
         }
+
         return $this->redirect(['index']);
     }
 
-    /*     * *********** */
-
-    public function actionAjaxaddbrand() {
-        $brand = $_POST['brand'];
-        $model = new Brand();
-        $model->brand = $brand;
-        $model->status = '1';
-        if (Yii::$app->SetValues->Attributes($model)) {
-            if ($model->save()) {
-                echo json_encode(array("con" => "1", 'id' => $model->id, 'brand' => $brand)); //Success
-                exit;
-//            array('id' => $model->id, 'category' => $category);
-            } else {
-                echo json_encode(array("con" => "0", 'error' => 'Cannot added')); //Error
-                exit;
-            }
-        }
-    }
-
     /**
-     * Finds the Brand model based on its primary key value.
+     * Finds the Fregrance model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Brand the loaded model
+     * @return Fregrance the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id) {
-        if (($model = Brand::findOne($id)) !== null) {
+        if (($model = Fregrance::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

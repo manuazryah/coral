@@ -5,24 +5,24 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "brand".
+ * This is the model class for table "fregrance".
  *
  * @property integer $id
- * @property string $brand
+ * @property string $name
  * @property integer $CB
  * @property integer $UB
  * @property string $DOC
  * @property string $DOU
  * @property integer $status
  */
-class Brand extends \yii\db\ActiveRecord
+class Fregrance extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'brand';
+        return 'fregrance';
     }
 
     /**
@@ -31,11 +31,10 @@ class Brand extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['brand'], 'required'],
-            [['brand'], 'unique'],
+            [['name', 'CB', 'UB', 'DOC'], 'required'],
             [['CB', 'UB', 'status'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
-            [['brand'], 'string', 'max' => 200],
+            [['name'], 'string', 'max' => 200],
         ];
     }
 
@@ -46,7 +45,7 @@ class Brand extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'brand' => 'Brand',
+            'name' => 'Name',
             'CB' => 'Cb',
             'UB' => 'Ub',
             'DOC' => 'Doc',

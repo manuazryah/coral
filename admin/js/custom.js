@@ -20,6 +20,7 @@ $(document).on('submit', '#add_category', function (event) {
                 var $data = JSON.parse(data);
                 if ($data.con === "1") {
                     $('#' + form).append($('<option value="' + $data.id + '" selected="selected">' + $data.category + '</option>'));
+                    $('#product-prcat').append($('<option value="' + $data.id + '" selected="selected">' + $data.category + '</option>'));
 //                    $('#'+form).val('');
 //                    $('#subcategory-category_id').append($('<option value="' + $data.id + '" selected="selected">' + $data.category + '</option>'));
 //                    $('#subcategory-category').val('');
@@ -100,7 +101,7 @@ $(document).on('submit', '#add_searchtag', function (event) {
         success: function (data) {
             var $data = JSON.parse(data);
             if ($data.con === "1") {
-                $('#' + form).append($('<option value="' + $data.id + '" >' + $data.tag + '</option>'));
+                $('#' + form).append($('<option value="' + $data.id + '" selected="selected" >' + $data.tag + '</option>'));
 //                    $('#'+form).val('');
 //                    $('#subcategory-category_id').append($('<option value="' + $data.id + '" selected="selected">' + $data.category + '</option>'));
 //                    $('#subcategory-category').val('');
@@ -116,6 +117,33 @@ $(document).on('submit', '#add_searchtag', function (event) {
 
 
 //$("#add_category").on(submit(function () {
+
+});
+/****      Add brand    *****/
+$(document).on('submit', '#add_brand', function (event) {
+    event.preventDefault();
+    var brand = $('#brand-name').val();
+    var form = $('.modal-title5').attr('field_id');
+    $.ajax({
+        url: homeUrl + 'brand/ajaxaddbrand',
+        type: "post",
+        data: {brand: brand},
+        success: function (data) {
+            var $data = JSON.parse(data);
+            if ($data.con === "1") {
+                $('#' + form).append($('<option value="' + $data.id + '" selected="selected">' + $data.brand + '</option>'));
+                $('#brand-name').val('');
+                $('#modal-5').modal('toggle');
+            } else if ($data.con === "0") {
+                alert($data.error);
+            }
+
+        }, error: function () {
+
+        }
+    });
+
+
 
 });
 
