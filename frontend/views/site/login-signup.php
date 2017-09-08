@@ -94,20 +94,17 @@ use yii\widgets\ActiveForm;
                 <div class="form-group col-md-12 form-group1">
                     <?= $form->field($model, 'username')->textInput() ?>
                 </div>
-                <div class="form-group col-md-12">
-                    <span>Your password should contain 6-20 case sensitive characters, at least one numeral, at least one alphabet, special characters allowed.</span>
-                </div>
                 <div class="form-group col-md-12 form-group1">
                     <?= $form->field($model, 'password')->passwordInput()->label('Password*') ?>
                 </div>
                 <div class="form-group col-md-12 form-group1">
                     <?= $form->field($model, 'password_repeat')->passwordInput()->label('Confirm Password*') ?>
                 </div>
-                <div class="form-group login-group-checkbox col-md-12">
-                    <label><input type="checkbox" id="lg_remember" name="lg_remember">By checking this box and clicking "Register" below, I acknowledge that I have read and agree to the Terms & Conditions and Privacy Policy</label>
+                <div class="form-group login-group-checkbox col-md-12 form-group1">
+                    <?= $form->field($model, 'rules')->checkbox() ?>
                 </div>
-                <div class="form-group login-group-checkbox col-md-12">
-                    <label><input type="checkbox" id="lg_remember" name="lg_remember">Yes, sign me up! I want to receive news, style tips and more, including by email, phone and mail, from Coral Perfumes.</label>
+                <div class="form-group login-group-checkbox col-md-12 form-group1">
+                    <?= $form->field($model, 'notification')->checkbox() ?>
                 </div>
                 <?= Html::submitButton('submit', ['class' => 'green2']) ?>
                 <?php ActiveForm::end(); ?>

@@ -13,6 +13,11 @@ use yii\helpers\Url;
 $this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .summary{
+        display: none;
+    }
+</style>
 <div class="pad-20 hide-xs"></div>
 
 <div class="container">
@@ -55,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             }
                                             ?>
                                             <?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $category->category_code], ['class' => $active_class]) ?>
-                                                <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
+                                                            <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
                                         <?php }
                                         ?>
 <!--                                        <a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>
