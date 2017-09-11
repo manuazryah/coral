@@ -52,7 +52,7 @@ function getcartdata() {
         url: homeUrl + 'cart/selectcart',
         data: {}
     }).done(function (data) {
-        $(".shoper-content").html(data);
+        $(".shopping-cart-items").html(data);
         //$(".cart_box").show('fast');
         hideLoader();
     });
@@ -67,7 +67,7 @@ function getcartcount() {
         url: homeUrl + 'cart/getcartcount',
         data: {}
     }).done(function (data) {
-        $(".cart_items").html(data + ' Items');
+        $(".cart_count").html('('+data+')');
         hideLoader();
     });
 }
@@ -130,16 +130,10 @@ function addtocart(canname, qty, option_color, option_size, master_option) {
             $('.option_errors').html('<p>Invalid Product.Please try again</p>').show();
         } else {
             getcartcount();
-            $('.option_errors').html("").hide();
-            $(".shoper-cart").html(data);
-            $(".successcart_maylike_msg").addClass('hide');
-            $(".successcart_msg").removeClass('hide');
-            $('#successcart').modal('show');
-            $(".img-wrapper").each(function () {
-                var imageUrl = $(this).find('img').attr("src");
-                $(this).find('img').css("visibility", "hidden");
-//                    $(this).css('background-image', 'url(' + imageUrl + ')').css("background-repeat", "no-repeat").css("background-size", "cover").css("background-position", "50% 50%");
-            });
+            getcarttotal();
+//            $('.option_errors').html("").hide();
+            $(".shopping-cart").fadeToggle("fast");
+            $(".shopping-cart-items").html(data);
         }
         hideLoader();
     });

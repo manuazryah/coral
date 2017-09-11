@@ -1,13 +1,3 @@
-<!--<style>
-    .form-inline .form-group{
-        /*position: relative;*/
-    }
-    .extra_btn{
-        position: absolute;
-        bottom: 5px;
-        right: 17px;
-    }
-</style>-->
 <?php
 
 use yii\helpers\Html;
@@ -19,6 +9,8 @@ use common\models\Unit;
 use common\models\Currency;
 use common\models\MasterSearchTag;
 use common\models\Product;
+use common\models\Brand;
+use common\models\Fregrance;
 use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
@@ -29,7 +21,7 @@ use dosamigos\ckeditor\CKEditor;
 <div class="product-form form-inline">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    <?= $form->errorSummary($model); ?>
     <ul class="nav nav-tabs">
         <li class="active">
             <a href="#general" data-toggle="tab">
@@ -49,6 +41,10 @@ use dosamigos\ckeditor\CKEditor;
                 <span class="hidden-xs">Image</span>
             </a>
         </li>
+        <li style="float: right;">
+            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
+
+        </li>
     </ul>
 
 
@@ -60,14 +56,15 @@ use dosamigos\ckeditor\CKEditor;
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?php
-                    $subcat = SubCategory::find()->where(['category_id' => $model->category, 'status' => '1'])->all();
                 
+                    $subcat = SubCategory::find()->where(['category_id' => $model->category, 'status' => '1'])->all();
+               
                 echo $form->field($model, 'subcategory')->dropDownList(ArrayHelper::map($subcat, 'id', 'sub_category'), ['prompt' => 'Select']);
                 ?>
                 <label onclick="jQuery('#modal-2').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_subcat">Add Subcategory</label>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'product_name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'product_name')->textInput(['maxlength' => true, 'autocomplete' => 'off']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'canonical_name')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
@@ -76,29 +73,30 @@ use dosamigos\ckeditor\CKEditor;
                 <?= $form->field($model, 'item_ean')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'brand')->dropDownList(ArrayHelper::map(Brand::find()->all(), 'id', 'brand'), ['prompt' => 'select']) ?>
+                <label onclick="jQuery('#modal-5').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_brand">Add Brand</label>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'gender_type')->dropDownList(['0' => 'Men', '1' => 'Women', '2' => 'Unisex'], ['prompt' => 'Select']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'price')->textInput(['type' => 'number', 'min' => '0']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'offer_price')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'offer_price')->textInput(['type' => 'number', 'min' => '0']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::find()->all(), 'id', 'currency_name')) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'stock')->textInput() ?>
+                <?= $form->field($model, 'stock')->textInput(['type' => 'number', 'min' => '0']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'stock_unit')->dropDownList(ArrayHelper::map(Unit::find()->all(), 'id', 'unit_name')) ?>
                 <label onclick="jQuery('#modal-3').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_unit" attr_id="product-stock_unit">Add Unit</label>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'stock_availability')->dropDownList(['1' => 'Available', '0' => 'Not Available'], ['prompt' => 'Select']) ?>
+                <?= $form->field($model, 'stock_availability')->dropDownList(['1' => 'Available', '0' => 'Not Available']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'tax')->textInput() ?>
@@ -107,7 +105,7 @@ use dosamigos\ckeditor\CKEditor;
                 <?= $form->field($model, 'free_shipping')->dropDownList(['1' => 'Yes', '0' => 'No'], ['prompt' => 'Select']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'product_type')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'product_type')->dropDownList(ArrayHelper::map(Fregrance::find()->all(), 'id', 'name'), ['prompt' => 'select']) ?>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'size')->textInput() ?>
@@ -128,7 +126,7 @@ use dosamigos\ckeditor\CKEditor;
                 }
                 ?>
                 <?= $form->field($model, 'related_product')->dropDownList(ArrayHelper::map(Product::find()->where(['status' => '1'])->all(), 'id', 'product_name'), ['class' => 'form-control', 'id' => 'product-related_product', 'multiple' => 'multiple']) ?>
-                
+
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                 <?=
@@ -147,64 +145,103 @@ use dosamigos\ckeditor\CKEditor;
                 ])
                 ?>
             </div>
+
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable'], ['prompt' => 'Select']) ?>
+                <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
             </div>
         </div>
         <div class="tab-pane" id="meta">
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?php
+                if (!$model->isNewRecord) {
                     if (isset($model->search_tag)) {
-                    $model->search_tag= explode(',', $model->search_tag);    
+                        $model->search_tag = explode(',', $model->search_tag);
                     }
+                }
                 ?>
-<?= $form->field($model, 'search_tag')->dropDownList(ArrayHelper::map(MasterSearchTag::find()->where(['status' => '1'])->all(), 'id', 'tag_name'), ['class' => 'form-control', 'id' => 'product-search_tag', 'multiple' => 'multiple']) ?>
+                <?= $form->field($model, 'search_tag')->dropDownList(ArrayHelper::map(MasterSearchTag::find()->where(['status' => '1'])->all(), 'id', 'tag_name'), ['class' => 'form-control', 'id' => 'product-search_tag', 'multiple' => 'multiple']) ?>
                 <label onclick="jQuery('#modal-4').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_tag">Add Search Tag</label>
             </div>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
-                <?php // $form->field($model, 'product_detail')->textarea(['rows' => 6])  ?>
-                <?=
-                $form->field($model, 'meta_description')->widget(CKEditor::className(), [
-                    'options' => ['rows' => 6],
-                    'preset' => 'basic'
-                ])
-                ?>
+                <?= $form->field($model, 'meta_description')->textArea(['maxlength' => true]) ?>
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
-                <?php // $form->field($model, 'product_detail')->textarea(['rows' => 6])  ?>
-                <?=
-                $form->field($model, 'meta_keywords')->widget(CKEditor::className(), [
-                    'options' => ['rows' => 6],
-                    'preset' => 'basic'
-                ])
-                ?>
+                <?= $form->field($model, 'meta_keywords')->textArea(['maxlength' => true]) ?>
+
             </div>
         </div>
         <div class="tab-pane" id="image">
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-<?= $form->field($model, 'profile_alt')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'profile_alt')->textInput(['maxlength' => true]) ?>
             </div>
 
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'gallery_alt')->textInput(['maxlength' => true]) ?>
             </div>
             <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
-                <?= $form->field($model, 'profile')->fileInput() ?>
+                <?= $form->field($model, 'profile')->fileInput()->label('profile Picture<i> (455*315)</i>') ?>
+                <?php
+                if (!$model->isNewRecord) {
+                    echo "<hr class='appoint_history'/> <h4 class='sub-heading'>Profile Image</h4>";
+                    ?>
+
+                    <div class = "col-md-2 img-box">
+                        <a href="<?= Yii::$app->homeUrl . '../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile ?>" target="_blank">
+                            <img src="<?= Yii::$app->homeUrl . '../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '_thumb.' . $model->profile ?>" width="60px" height="60px"></a>
+
+                    </div>
+<?php } ?>
             </div>
             <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
-<?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
-                   
-            </div>
-            <div class="form-group" style="float: right;">
-<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Create', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+                <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*'])->label('Gallery Images<i> (455*315)</i>') ?>
+<?php if (!$model->isNewRecord) { ?>
+                                                                                                                                                                                                            <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
+                    <div class="row">
+                        <?php
+                        $path = Yii::getAlias('@paths') . '/product/' . $model->id . '/gallery_thumb';
+                        if (count(glob("{$path}/*")) > 0) {
+                            echo "<hr class='appoint_history'/> <h4 class='sub-heading'>Uploaded Files</h4>";
 
+                            $k = 0;
+                            foreach (glob("{$path}/*") as $file) {
+                                $k++;
+                                $arry = explode('/', $file);
+                                $img_nmee = end($arry);
+
+                                $img_nmees = explode('.', $img_nmee);
+                                if ($img_nmees['1'] != '') {
+                                    ?>
+
+                                    <div class = "col-md-2 img-box" id="<?= $k; ?>">
+                                        <a href="<?= Yii::$app->homeUrl . '../uploads/product/' . $model->id . '/gallery_thumb/' . end($arry) ?>" target="_blank">
+                                            <img src="<?= Yii::$app->homeUrl . '../uploads/product/' . $model->id . '/gallery_thumb/' . end($arry) ?>" width="50px" height="50px"></a>
+                                        <a  title="Delete" class="img-remove product_image" id="<?= $model->id . "@" . $img_nmee . '@' . $k; ?>" style="cursor:pointer"><i class="fa fa-remove" style="position: absolute;left: 75px;top: 3px;"></i></a>
+                                    </div>
+
+
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                    <!--</div>-->
+                    <?php
+                    //  \yii\helpers\FileHelper::findFiles('uploads/product/'.$model->id.'/',['only'=>['*.jpg','*.png']]);
+                }
+                ?>
             </div>
+
 
         </div>
     </div>
+    <li style="float: right;">
+<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
+
+    </li>
 
 
 
@@ -222,24 +259,18 @@ use dosamigos\ckeditor\CKEditor;
 
             <div class="modal-body">
 <?php $form = ActiveForm::begin(['id' => 'add_category']); ?>
-                <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
-                        <label class="control-label" for="subcategory-category">Category</label>
-                        <input type="text" id="subcategory-category" class="form-control" >
-                    </div>
-                </div>
-                <div class='col-md-12 col-sm-6 col-xs-12' style="float:right;">
-                    <div class="form-group" style="float: right;">
+                <label  for="subcategory-category">Category</label>
+                <input type="text" id="subcategory-category" autocomplete="off" class="form-control" >
+                <label class="control-label" for="subcategory-category">Category code</label>
+                <input type="text" id="subcategory-categorycode" readonly="readonly" class="form-control" >
+                <div class="form-group" style="float: right;">
 <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
-                    </div>
                 </div>
 
 <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">
-                <!--                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-info">Save changes</button>-->
             </div>
         </div>
     </div>
@@ -254,28 +285,18 @@ use dosamigos\ckeditor\CKEditor;
             </div>
 
             <div class="modal-body">
-                        <?php $form = ActiveForm::begin(['id' => 'add_subcategory']); ?>
-                <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
+                <?php $form = ActiveForm::begin(['id' => 'add_subcategory']); ?>
 <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'category'), ['prompt' => 'select', 'id' => 'product-prcat']) ?>
-                    </div>
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
-                        <label class="control-label">Sub Category</label>
-                        <input type="text" id="product_subcat" class="form-control" >
-                    </div>
-                </div>
-                <div class='col-md-12 col-sm-6 col-xs-12' style="float:right;">
-                    <div class="form-group" style="float: right;">
+                <label class="control-label">Sub Category</label>
+                <input type="text" id="product_subcat" autocomplete="off" class="form-control" >
+                <div class="form-group" style="float: right;">
 <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
-                    </div>
                 </div>
 
 <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">
-                <!--                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-info">Save changes</button>-->
             </div>
         </div>
     </div>
@@ -291,24 +312,16 @@ use dosamigos\ckeditor\CKEditor;
 
             <div class="modal-body">
 <?php $form = ActiveForm::begin(['id' => 'add_unit']); ?>
-                <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
-                        <label class="control-label">Unit</label>
-                        <input type="text" id="product_unit" class="form-control" >
-                    </div>
+                <label class="control-label">Unit</label>
+                <input type="text" id="product_unit" autocomplete="off" class="form-control" >
+                <div class="form-group" style="float: right;">
+                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
                 </div>
-                <div class='col-md-12 col-sm-6 col-xs-12' style="float:right;">
-                    <div class="form-group" style="float: right;">
-<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
-                    </div>
-                </div>
-
 <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">
-                <!--                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-info">Save changes</button>-->
+
             </div>
         </div>
     </div>
@@ -324,24 +337,41 @@ use dosamigos\ckeditor\CKEditor;
 
             <div class="modal-body">
 <?php $form = ActiveForm::begin(['id' => 'add_searchtag']); ?>
-                <div class="rows">
-                    <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
-                        <label class="control-label" for="Search-tag">Tag name</label>
-                        <input type="text" id="search-tag" class="form-control" >
-                    </div>
-                </div>
-                <div class='col-md-12 col-sm-6 col-xs-12' style="float:right;">
-                    <div class="form-group" style="float: right;">
+                <label class="control-label" for="Search-tag">Tag name</label>
+                <input type="text" id="search-tag" autocomplete="off" class="form-control" >
+                <div class="form-group" style="float: right;">
 <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
-                    </div>
                 </div>
 
 <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">
-                <!--                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-info">Save changes</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-5">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title5"  field_id="product-brand">Add Brand</h4>
+            </div>
+
+            <div class="modal-body">
+<?php $form = ActiveForm::begin(['id' => 'add_brand']); ?>
+                <label class="control-label" for="Brand">Brand name</label>
+                <input type="text" id="brand-name" autocomplete="off" class="form-control" >
+                <div class="form-group" style="float: right;">
+<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+                </div>
+
+<?php ActiveForm::end(); ?>
+            </div>
+
+            <div class="modal-footer">
             </div>
         </div>
     </div>
@@ -355,7 +385,39 @@ use dosamigos\ckeditor\CKEditor;
 //            $('#product-canonical_name').val(canonical);
             $('#product-canonical_name').val(slug($(this).val()));
         });
-        
+        $('#subcategory-category').keyup(function () {
+            var name = slug($(this).val());
+            $('#subcategory-categorycode').val(slug($(this).val()));
+        });
+//        $('#product-size').keyup(function () {
+//            var name= slug($('#product-product_name').val());
+//            var size= slug($('#product-size').val());
+//            if(size=='0'){
+//                size='';
+//            }
+//            var canonical= name+-+size;
+//            $('#product-canonical_name').val(canonical);
+////            $('#product-canonical_name').val(slug($(this).val()));
+//        });
+        $('.product_image').click(function () {
+            var id = this.id;
+            $.ajax({
+//            url: $base_url + 'event_item/select_event',
+                url: 'ajax_imgdelete',
+                type: "post",
+                data: {image: id},
+                success: function (data) {
+                    var $data = JSON.parse(data);
+                    if ($data.msg == "success") {
+                        $('#' + $data.id).hide();
+                    } else {
+                        alert($data.title);
+                    }
+                }, error: function () {
+                    alert('Image Cannot be delete');
+                }
+            });
+        });
 
     });
 
