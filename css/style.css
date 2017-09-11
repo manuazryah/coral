@@ -2486,6 +2486,7 @@ input[type=number]::-webkit-outer-spin-button {
     clear: both;
     margin-bottom: 5px;
     text-transform: capitalize;
+    cursor: pointer;
 }
 #checkout .heading.active p{
     color: white;
@@ -2493,7 +2494,7 @@ input[type=number]::-webkit-outer-spin-button {
 #checkout .heading p{
     margin: 0px;
     color: #515452;
-    font-weight: 600;
+    /*font-weight: 600;*/
     letter-spacing: 1.1px;
 }
 #checkout .content{
@@ -2507,8 +2508,9 @@ input[type="checkbox"]:before{
     content: '';
     position: absolute;
     background: #edf7f5;
-    border: 1px solid #8c8c8c;
+    border: 1px solid #ddd;
     border-radius: 0px;
+    cursor: pointer;
 }
 input[type="checkbox"]:checked:before {
     content: "";
@@ -2561,6 +2563,8 @@ input[type="checkbox"]:checked:before {
     border: 1px solid #ddd;
     -webkit-box-shadow: 0 1px 1px #ddd;
     box-shadow: 0 1px 1px #ddd;
+    float: right;
+    padding-top: 30px;
 }
 #checkout .summery-box .thumbnail{
     position: relative;
@@ -2612,17 +2616,17 @@ input[type="checkbox"]:checked:before {
     float: left;
     text-align: left;
     color: #8c8c8c;
-    padding: 5px 0;
+    padding: 6px 0;
 }
 #checkout .summery-box .sub-total .price{
     line-height: 10px;
     font-size: 13px;
     margin: 0px;
-    font-family: roboto-light;
+    font-family: roboto;
     float: right;
     text-align: right;
     color: #8c8c8c;
-    padding: 5px 0;
+    padding: 6px 0;
 }
 #checkout .summery-box .total .label{
     line-height: 10px;
@@ -2643,6 +2647,30 @@ input[type="checkbox"]:checked:before {
     text-align: right;
     color: #515452;
     padding: 5px 0;
+}
+#checkout .product-summery{
+    position: relative;
+    vertical-align: middle;
+    margin: 0 auto;
+    text-align: center;
+    padding-right: 0px;
+    margin-top: 10px;
+}
+#checkout .product-summery .heading{
+    position: absolute;
+    top: -10px;
+    text-align: center;
+    left: 50%;
+    padding-left: 10px;
+    padding: 2px 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+#checkout .product-summery .heading p{
+    color: white;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-family: roboto-light;
 }
 
 /*******************************************************CHECK-OUT-end****************************************/

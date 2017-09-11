@@ -152,7 +152,9 @@ AppAsset::register($this);
                                 <li>
                                     <?= Html::a('Users', ['/user/user/index'], ['class' => 'title']) ?>
                                 </li>
-
+                                <li>
+                                    <?= Html::a('Reviews', ['/user/customer-reviews/index'], ['class' => 'title']) ?>
+                                </li>
                             </ul>
                         </li>
 

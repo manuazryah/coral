@@ -20,7 +20,7 @@ $this->title = $product_details->canonical_name;
 <div id="product-page">
     <div class="container">
         <div class="row">
-
+            <input type="hidden" name="product_id" id="product-id" value="<?= $product_details->id ?>"/>
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 product-img-view-box">
 
 
@@ -75,13 +75,13 @@ $this->title = $product_details->canonical_name;
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 details">
                 <h3 class="product-title"><?= $product_details->product_name ?></h3>
-                <div class="rating">
-                    <div class="stars">
-                        <div class="lead">
-                            <div id="stars-existing" class="starrr" data-rating='4'></div>
-                        </div>
-                    </div>
-                </div>
+                <!--                <div class="rating">
+                                    <div class="stars">
+                                        <div class="lead">
+                                            <div id="stars-existing" class="starrr" data-rating='4'></div>
+                                        </div>
+                                    </div>
+                                </div>-->
                 <?php if ($product_details->offer_price != "0") { ?>
                     <p class="price"><?= $product_details->offer_price ?> AED  <span><?= $product_details->price ?> AED</span> </p>
                 <?php } else { ?>
@@ -95,7 +95,7 @@ $this->title = $product_details->canonical_name;
                     </h5>
                     <br/>
                     <h5 class="type">Fragrance Type:
-                        <?php $fregrance= \common\models\Fregrance::findOne($product_details->product_type);?>
+                        <?php $fregrance = \common\models\Fregrance::findOne($product_details->product_type); ?>
                         <span class="not-available active-box" data-toggle="tooltip" title=""><?= $fregrance->name; ?></span>
                         <!--<span class="not-available" data-toggle="tooltip" title="Not In store">Arabic Parfum</span>-->
                     </h5>
@@ -169,6 +169,11 @@ $this->title = $product_details->canonical_name;
         </div>
     </div>
     <div class="pad-30 hidden-sm hidden-md"></div>
+    <div class="modal fade" id="modal-6">
+        <div class="modal-dialog" id="modal-pop-up">
+
+        </div>
+    </div>
     <div class="container">
         <div class="product-info-tab">
             <ul class="nav nav-tabs">
@@ -186,23 +191,26 @@ $this->title = $product_details->canonical_name;
                         <div class="rating">
                             <div class="stars">
                                 <div class="lead">
-                                    <div id="stars-existing" class="starrr" data-rating='2'><p class="review-base">Based on 2 Reviews</p> <a class="add-review" href="#">add review</a></div>
+                                    <!--<div id="stars-existing" class="starrr" data-rating='2'><p class="review-base">Based on 2 Reviews</p> <a class="add-review" href="#">add review</a></div>-->
+                                    <div id="stars-existing" class="" data-rating='2'><p class="review-base"></p> <a id="" class="add-review" href="#">add review</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="customer-reviews">
-                        <p class="subject"> Sooo Good</p>
-                        <i>vishal on Jul 30, 2017</i>
-                        <p class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat...</p>
-                        <div class="report-span"><a href="#">Report as Inappropriate</div>
-                    </div>
-                    <div class="customer-reviews">
-                        <p class="subject"> Sooo Good</p>
-                        <i>vishal on Jul 30, 2017</i>
-                        <p class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat...</p>
-                        <div class="report-span"><a href="#">Report as Inappropriate</div>
-                    </div>
+                    <?php
+                    if (!empty($product_reveiws)) {
+                        foreach ($product_reveiws as $reveiws) {
+                            ?>
+                            <div class="customer-reviews">
+                                <p class="subject"> <?= $reveiws->tittle ?></p>
+                                <i><?= \common\models\User::findOne($reveiws->user_id)->first_name ?> on <?= date("M d , Y", strtotime($reveiws->review_date)) ?></i>
+                                <p class="message"><?= $reveiws->description ?></p>
+                                <div class="report-span"><a href="#">Report as Inappropriate</div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -226,11 +234,12 @@ $this->title = $product_details->canonical_name;
                             foreach ($recently_viewed as $recent) {
                                 $j++;
                                 $model = \common\models\Product::findOne($recent->product_id);
-//                                echo $j;
                                 ?>
-                                <div class="item <?php if ($j == 1) {
-                            echo ' active';
-                        } ?>">
+                                <div class="item <?php
+                                if ($j == 1) {
+                                    echo ' active';
+                                }
+                                ?>">
                                     <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
                                         <div class="gp_products_inner">
                                             <div class="gp_products_item_image">
@@ -244,15 +253,10 @@ $this->title = $product_details->canonical_name;
                                                     } else {
                                                         ?>
                                                         <img src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_perfume.png' ?>" height="100%" alt="1" />
-        <?php }
-        ?>
+                                                    <?php }
+                                                    ?>
                                                 </a>
                                             </div>
-                                            <!--                                            <ul class="text-center">
-                                                                                            <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                                                                            <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                                                                            <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                                                                        </ul>-->
                                             <div class="gp_products_item_caption">
                                                 <ul class="gp_products_caption_name">
                                                     <li><a href="#"><?= $model->product_name ?></a></li>
@@ -269,14 +273,14 @@ $this->title = $product_details->canonical_name;
                                                     <?php } else {
                                                         ?>
                                                         <li class="center">AED <?= $model->price; ?></li>
-        <?php } ?>
+                                                    <?php } ?>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-    <?php }
-    ?>
+                            <?php }
+                            ?>
 
 
 
@@ -304,146 +308,89 @@ $this->title = $product_details->canonical_name;
         ?>
         <div class="pad-30"></div>
         <div class="international-brands">
-            <h1>Related Products</h1>
-            <div class="product-slider">
-                <div id="adv_gp_products_8_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
-                    <!--========= Wrapper for slides =========-->
-                    <div class="carousel-inner" role="listbox">
-
-                        <!--========= 1st slide =========-->
-                        <div class="item active">
-                            <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl; ?>product-detail">
-                                            <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/1.png" alt="1" />
-                                        </a>
-                                    </div>
-                                    <ul class="text-center">
-                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                    </ul>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#">Waves</a></li>
-                                            <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <li>AED 200.00</li>
-                                            <li class="center">AED 400.00</li>
-                                            <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--========= 2nd slide =========-->
-                        <div class="item">
-                            <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl; ?>product-detail">
-                                            <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/2.png" alt="2" />
-                                        </a>
-                                    </div>
-                                    <ul class="text-center">
-                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                    </ul>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#">Waves</a></li>
-                                            <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <li>AED 200.00</li>
-                                            <li>AED 400.00</li>
-                                            <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                        </ul>
+            <?php
+            if (!empty($related_product)) {
+                ?>
+                <h1>Related Products</h1>
+                <div class="product-slider">
+                    <div id="adv_gp_products_8_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
+                        <!--========= Wrapper for slides =========-->
+                        <div class="carousel-inner" role="listbox">
+                            <!--========= 1st slide =========-->
+                            <?php
+                            $k = 0;
+                            foreach ($related_product as $val) {
+                                $k++;
+                                ?>
+                                <div class="item <?php
+                                if ($k == 1) {
+                                    echo ' active';
+                                }
+                                ?>">
+                                    <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
+                                        <div class="gp_products_inner">
+                                            <div class="gp_products_item_image">
+                                                <a href="<?= Yii::$app->homeUrl . 'product/product_detail/' . $val->canonical_name ?>">
+                                                    <?php
+                                                    $product_image = Yii::$app->basePath . '/../uploads/product/' . $val->id . '/profile/' . $val->canonical_name . '.' . $val->profile;
+                                                    if (file_exists($product_image)) {
+                                                        ?>
+                                                        <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $val->id . '/profile/' . $val->canonical_name . '.' . $val->profile ?>" height="100%" alt="1" />
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <img src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_perfume.png' ?>" height="100%" alt="1" />
+                                                    <?php }
+                                                    ?>
+                                                </a>
+                                            </div>
+                                            <div class="gp_products_item_caption">
+                                                <ul class="gp_products_caption_name">
+                                                    <li><a href="#"><?= $val->product_name ?></a></li>
+                                                    <li><a href="#"><?= $val->product_type ?></a></li>
+                                                </ul>
+                                                <ul class="gp_products_caption_rating">
+                                                    <?php
+                                                    if ($val->offer_price != "0") {
+                                                        $percentage = round(100 - (($val->offer_price / $val->price) * 100));
+                                                        ?>
+                                                        <li>AED <?= $val->offer_price; ?></li>
+                                                        <li class="center">AED <?= $val->price; ?></li>
+                                                        <li class="pull-right"><a href="#">(<?= $percentage ?>%OFF)</a></li>
+                                                    <?php } else {
+                                                        ?>
+                                                        <li class="center">AED <?= $val->price; ?></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <?php
+                            }
+                            ?>
+
                         </div>
 
-                        <!--========= 3rd slide =========-->
-                        <div class="item">
-                            <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl; ?>product-detail">
-                                            <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/3.png" alt="3" />
-                                        </a>
-                                    </div>
-                                    <ul class="text-center">
-                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                    </ul>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#">Waves</a></li>
-                                            <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <li>AED 200.00</li>
-                                            <li>AED 400.00</li>
-                                            <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--======= Navigation Buttons =========-->
 
-                        <!--========= 4th slide =========-->
-                        <div class="item">
-                            <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl; ?>product-detail">
-                                            <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/4.png" alt="4" />
-                                        </a>
-                                    </div>
-                                    <ul class="text-center">
-                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                    </ul>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#">Waves</a></li>
-                                            <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <li>AED 200.00</li>
-                                            <li>AED 400.00</li>
-                                            <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--======= Left Button =========-->
+                        <a class="left carousel-control gp_products_carousel_control_left" href="#adv_gp_products_8_columns_carousel" role="button" data-slide="prev">
+                            <span class="fa fa-angle-left gp_products_carousel_control_icons" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
 
-                    </div>
+                        <!--======= Right Button =========-->
+                        <a class="right carousel-control gp_products_carousel_control_right" href="#adv_gp_products_8_columns_carousel" role="button" data-slide="next">
+                            <span class="fa fa-angle-right gp_products_carousel_control_icons" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
 
-                    <!--======= Navigation Buttons =========-->
-
-                    <!--======= Left Button =========-->
-                    <a class="left carousel-control gp_products_carousel_control_left" href="#adv_gp_products_8_columns_carousel" role="button" data-slide="prev">
-                        <span class="fa fa-angle-left gp_products_carousel_control_icons" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-
-                    <!--======= Right Button =========-->
-                    <a class="right carousel-control gp_products_carousel_control_right" href="#adv_gp_products_8_columns_carousel" role="button" data-slide="next">
-                        <span class="fa fa-angle-right gp_products_carousel_control_icons" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-
-                </div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
-            </div>
+                    </div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
+                </div>
+                <?php
+            }
+            ?>
         </div>
 
     </div>
@@ -453,3 +400,76 @@ $this->title = $product_details->canonical_name;
 
 </div>
 <div class="pad-20"></div>
+<script>
+    $(document).ready(function () {
+
+        /*
+         * on click of the Add new partner link
+         * return pop up form for add new bussinesss partner
+         */
+
+        $(document).on('click', '.add-review', function (e) {
+            var product = $("#product-id").val();
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {product_id: product},
+                url: '<?= Yii::$app->homeUrl; ?>product/add-review',
+                success: function (data) {
+                    $("#modal-pop-up").html(data);
+                    $('#modal-6').modal('show', {backdrop: 'static'});
+                    e.preventDefault();
+                }
+            });
+        });
+        /*
+         * on submit of the form add new Principals
+         * return new principal added into Debtor
+         */
+
+        $(document).on('submit', '#submit-reviews', function (e) {
+            if (validateReview() == 0) {
+                var str = $(this).serialize();
+                $.ajax({
+                    url: '<?= Yii::$app->homeUrl; ?>product/save-review',
+                    type: "POST",
+                    data: str,
+                    success: function (data) {
+                        $('#modal-6').modal('hide');
+                    }
+                });
+                return false;
+            } else {
+                e.preventDefault();
+            }
+        });
+    });
+
+    function validateReview() {
+
+        if (!$('#customerreviews-tittle').val()) {
+            if ($("#customerreviews-tittle").parent().next(".validation").length == 0) // only add if not added
+            {
+                $("#customerreviews-tittle").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;position: absolute;top: 68px;'>Tittle cannot be blank.</div>");
+            }
+            $('#customerreviews-tittle').focus();
+            var valid = 1;
+        } else {
+            $("#customerreviews-tittle").parent().next(".validation").remove(); // remove it
+            var valid = 0;
+        }
+        if (!$('#customerreviews-description').val()) {
+            if ($("#customerreviews-description").parent().next(".validation").length == 0) // only add if not added
+            {
+                $("#customerreviews-description").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;position: absolute;top: 68px;'>Description cannot be blank.</div>");
+            }
+            $('#customerreviews-description').focus();
+            var valid = 1;
+        } else {
+            $("#customerreviews-description").parent().next(".validation").remove(); // remove it
+            var valid = 0;
+        }
+        return valid;
+    }
+</script>

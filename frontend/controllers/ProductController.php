@@ -9,6 +9,7 @@ use common\models\Product;
 use common\models\ProductSearch;
 use common\models\Category;
 use common\models\RecentlyViewed;
+use yii\db\Expression;
 
 class ProductController extends \yii\web\Controller {
 
@@ -52,9 +53,13 @@ class ProductController extends \yii\web\Controller {
         $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
         $this->RecentlyViewed($product_details);
         $recently_viewed = RecentlyViewed::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+        $related_product = Product::find()->where(new Expression('FIND_IN_SET(:id, id)'))->addParams([':id' => $product_details->related_product])->andWhere(['status' => 1])->orderBy(['id' => SORT_DESC])->all();
+        $product_reveiws = \common\models\CustomerReviews::find()->where(['product_id' => $product_details->id, 'status' => '1'])->all();
         return $this->render('product_detail', [
                     'product_details' => $product_details,
                     'recently_viewed' => $recently_viewed,
+                    'related_product' => $related_product,
+                    'product_reveiws' => $product_reveiws,
         ]);
     }
 
@@ -113,6 +118,31 @@ class ProductController extends \yii\web\Controller {
                     }
                 }
                 unset(Yii::$app->session['temp_user_product']);
+            }
+        }
+    }
+
+    public function actionAddReview() {
+        if (Yii::$app->request->isAjax) {
+            $product_id = $_POST['product_id'];
+            $model_review = new \common\models\CustomerReviews();
+            $data = $this->renderPartial('add_reviews', [
+                'model_review' => $model_review,
+                'product_id' => $product_id,
+            ]);
+            echo $data;
+        }
+    }
+
+    public function actionSaveReview() {
+        if (Yii::$app->request->isAjax) {
+            $model_review = new \common\models\CustomerReviews();
+            if ($model_review->load(Yii::$app->request->post())) {
+                $model_review->user_id = Yii::$app->user->identity->id;
+                $model_review->review_date = date('Y-m-d');
+                $model_review->save();
+                echo 1;
+                exit;
             }
         }
     }

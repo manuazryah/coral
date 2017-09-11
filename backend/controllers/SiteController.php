@@ -120,9 +120,9 @@ class SiteController extends Controller {
 
     public function actionForgot() {
         $this->layout = 'adminlogin';
-        $model = new AdminUser();
+        $model = new AdminUsers();
         if ($model->load(Yii::$app->request->post())) {
-            $check_exists = AdminUser::find()->where("user_name = '" . $model->user_name . "' OR email = '" . $model->user_name . "'")->one();
+            $check_exists = AdminUsers::find()->where("user_name = '" . $model->user_name . "' OR email = '" . $model->user_name . "'")->one();
 
             if (!empty($check_exists)) {
                 $token_value = $this->tokenGenerator();
@@ -164,7 +164,7 @@ class SiteController extends Controller {
         $subject = 'Change password';
 
 // message
-        echo
+//        echo
         $message = '
 <html>
 <head>
@@ -175,14 +175,14 @@ class SiteController extends Controller {
   <table>
 
      <tr>
-      <td><a href="' . Yii::$app->homeUrl . 'site/new-password?token=' . $val . '">Click here change password</a></td>
+      <td><a href="' . Yii::$app->getRequest()->serverName . Yii::$app->homeUrl . 'site/new-password?token=' . $val . '">Click here change password</a></td>
     </tr>
 
   </table>
 </body>
 </html>
 ';
-        exit;
+//        exit;
 // To send HTML mail, the Content-type header must be set
         $headers = 'MIME-Version: 1.0' . "\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n" .
@@ -196,12 +196,11 @@ class SiteController extends Controller {
         $values = explode('_', $data);
         $token_exist = ForgotPasswordTokens::find()->where("user_id = " . $values[0] . " AND token = " . $values[1])->one();
         if (!empty($token_exist)) {
-            $model = AdminUser::find()->where("id = " . $token_exist->user_id)->one();
+            $model = AdminUsers::find()->where("id = " . $token_exist->user_id)->one();
             if (Yii::$app->request->post()) {
                 if (Yii::$app->request->post('new-password') == Yii::$app->request->post('confirm-password')) {
                     Yii::$app->getSession()->setFlash('success', 'password changed successfully');
-                    $model->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->request->post('confirm-password'));
-//                   echo $model->password_hash;exit;
+                    $model->password = Yii::$app->security->generatePasswordHash(Yii::$app->request->post('confirm-password'));
                     $model->update();
                     $token_exist->delete();
                     $this->redirect('index');
