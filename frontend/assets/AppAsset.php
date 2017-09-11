@@ -40,6 +40,7 @@ class AppAsset extends AssetBundle {
 //        'js/setup.js',
         'js/xzoom.min.js',
         'js/custom.js',
+        'js/left-accordation-toggle.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

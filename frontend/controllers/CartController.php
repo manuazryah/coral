@@ -168,7 +168,7 @@ class CartController extends \yii\web\Controller {
                     echo $carttotal;
                 } else {
                     echo '0';
-//                           
+//
                 }
             } else {
                 echo '0';
@@ -211,11 +211,8 @@ class CartController extends \yii\web\Controller {
             $model1 = new User();
             $model = new User();
 
-//$current_coupon = explodeYii::$app->session['couponid'];
-//            $coupen_details = CouponHistory::model()->findByAttributes(array('user_id' => Yii::$app->session['user']['id']));
             $user_id = Yii::$app->user->identity->id;
             Cart::deleteAll('date <= :date AND user_id != :user_id', ['date' => $date, ':user_id' => $user_id]);
-//            Cart::model()->deleteAllByAttributes(array(), array('condition' => 'date < subdate(now(), 1) and user_id != ' . Yii::$app->session['user']['id']));
         } else {
             if (!isset(Yii::$app->session['temp_user'])) {
                 Yii::$app->session['temp_user'] = microtime(true);
@@ -385,7 +382,7 @@ class CartController extends \yii\web\Controller {
             $check = OrderDetails::find()->where(['order_id' => $orderid, 'product_id' => $cart->product_id])->one();
 
             if (!empty($check)) {
-                
+
             } else {
                 $model_prod = new OrderDetails;
                 $model_prod->order_id = $orderid;
@@ -399,7 +396,7 @@ class CartController extends \yii\web\Controller {
                 $model_prod->amount = $price;
                 $model_prod->rate = ($cart->quantity) * ($price);
                 if ($model_prod->save()) {
-                    
+
                 } else {
                     var_dump($model_prod->getErrors());
                 }

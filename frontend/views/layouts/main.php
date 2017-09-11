@@ -295,6 +295,20 @@ and open the template in the editor.
 <?php $this->endPage() ?>
 <!--======= pro-slider-end =========-->
 <script>
+//    (function () {
+//
+//        $("#cart").hover(function () {
+//            $(".shopping-cart").fadeToggle("slow");
+//            return false;
+//        });
+//    })();
+//
+//    ('#cart').hover(function () {
+//        $(".shopping-cart").show();
+//    }, function () {
+//        $(".shopping-cart").hide();
+//    }
+//    );
 
     $('ul.nav li.dropdown').hover(function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
@@ -310,22 +324,36 @@ and open the template in the editor.
         });
 
     })();
+
+//    jQuery('#cart').on('mouseover', function () {
+//        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeToggle("fast");
+//    });
+//    jQuery('#cart').on("mouseout", function () {
+//        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeOut("fast");
+//    });
     $(document).ready(function () {
 
         $("#addSchool").click(function () {
             $("#schoolContainer").append('<option value="' + $("#newSchool").val() + '">' + $("#newSchool").val() + '</option>');
         });
-        $("example2").dateDropdowns({
-            submitFormat: "dd/mm/yyyy"
-        });
-        $('#zoom_01').elevateZoom({
-            zoomType: "inner",
-            cursor: "crosshair",
-            zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 750
-        });
+//        $("example2").dateDropdowns({
+//            submitFormat: "dd/mm/yyyy"
+//        });
+//        $('#zoom_01').elevateZoom({
+//            zoomType: "inner",
+//            cursor: "crosshair",
+//            zoomWindowFadeIn: 500,
+//            zoomWindowFadeOut: 750
+//        });
 
     });
+</script>
+<script>
+//$(window).load(function () {
+//    $('#inwave-map').html('<div class="map-frame"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1553532.2927783665!2d54.475375168816676!3d25.259041996119326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c4a00eebfbb%3A0xa181e9f8ed00124e!2sActive+Mopp+Cleaning+Services+L.L.C!5e0!3m2!1sen!2sin!4v1493452043945" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe></div>');
+//    $('#youtube-vid').html(' <iframe width="100%" height="315" src="https://www.youtube.com/embed/4NcWzI4nKIs" frameborder="0" allowfullscreen></iframe>');
+//});
+
 </script>
 <script type="text/javascript">
     $('#radioBtn a').on('click', function () {
@@ -337,7 +365,7 @@ and open the template in the editor.
         $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
     });
 
-    $('#useraddress-mobile_number').keyup(function (e) {
+    $('#phone').keyup(function (e) {
         if ((e.keyCode > 47 && e.keyCode < 58) || (e.keyCode < 106 && e.keyCode > 95)) {
             this.value = this.value.replace(/(\d{3})\-?/g, '$1-');
             return true;
@@ -347,20 +375,62 @@ and open the template in the editor.
         this.value = this.value.replace(/[^\-0-9]/g, '');
     });
 
+//    $(function () {
+//        $('input[name="rad"]').click(function () {
+//            var $radio = $(this);
+//
+//            // if this was previously checked
+//
+//            {
+//                $radio.prop('checked', false);
+//                $radio.data('waschecked', false);
+//            }
+//                    $radio.data('waschecked', true);
+//
+//            // remove was checked from other radios
+//            $radio.siblings('input[name="rad"]').data('waschecked', false);
+//        });
+//    });
+
+
     $(function () {
-        $('input[name="default-address"]').click(function () {
-            var $radio = $(this);
+        var action;
+        $(".number-spinner button").mousedown(function () {
+            btn = $(this);
+            input = btn.closest('.number-spinner').find('input');
+            btn.closest('.number-spinner').find('button').prop("disabled", false);
 
-            // if this was previously checked
-
-            {
-                $radio.prop('checked', false);
-                $radio.data('waschecked', false);
+            if (btn.attr('data-dir') == 'up') {
+                action = setInterval(function () {
+                    if (input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max'))) {
+                        input.val(parseInt(input.val()) + 1);
+                    } else {
+                        btn.prop("disabled", true);
+                        clearInterval(action);
+                    }
+                }, 50);
+            } else {
+                action = setInterval(function () {
+                    if (input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min'))) {
+                        input.val(parseInt(input.val()) - 1);
+                    } else {
+                        btn.prop("disabled", true);
+                        clearInterval(action);
+                    }
+                }, 50);
             }
-            $radio.data('waschecked', true);
-
-            // remove was checked from other radios
-            $radio.siblings('input[name="rad"]').data('waschecked', false);
+        }).mouseup(function () {
+            clearInterval(action);
         });
     });
 </script>
+<!--<script>
+    $(document).scroll(function () {
+        var y = $(this).scrollTop();
+        if (y > 200) {
+            $('.mob-checkout-buttons').fadeIn();
+        } else {
+            $('.mob-checkout-buttons').fadeOut();
+        }
+    });
+</script>-->
