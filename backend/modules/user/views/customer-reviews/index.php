@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use common\models\User;
 use yii\helpers\ArrayHelper;
 use common\models\Product;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\CustomerReviewsSearch */
@@ -13,6 +14,14 @@ use common\models\Product;
 $this->title = 'Customer Reviews';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .fa-check{
+        color: green;
+    }
+    .fa-ban{
+        color:red;
+    }
+</style>
 <div class="customer-reviews-index">
 
     <div class="row">
@@ -31,12 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                    <?= Html::a('<i class="fa-th-list"></i><span> Create Customer Reviews</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                    <button class="btn btn-white" id="search-option" style="float: right;">
-                        <i class="linecons-search"></i>
-                        <span>Search</span>
-                    </button>
                     <div class="table-responsive" style="border: none">
+                        <button class="btn btn-white" id="search-option" style="float: right;">
+                            <i class="linecons-search"></i>
+                            <span>Search</span>
+                        </button>
                         <?=
                         GridView::widget([
                             'dataProvider' => $dataProvider,
@@ -74,7 +82,62 @@ $this->params['breadcrumbs'][] = $this->title;
 //                                'description:ntext',
                                 // 'review_date',
                                 // 'status',
-                                ['class' => 'yii\grid\ActionColumn'],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'contentOptions' => [],
+                                    'header' => 'Actions',
+                                    'template' => '{edit}{delete}{approve}{disable}',
+                                    'buttons' => [
+                                        //view button
+                                        'edit' => function ($url, $model) {
+                                            return Html::a('<span class="fa fa-pencil" style="padding-top: 0px;"></span>', $url, [
+                                                        'title' => Yii::t('app', 'Edit'),
+                                                        'class' => 'actions',
+                                            ]);
+                                        },
+                                        'delete' => function ($url, $model) {
+                                            return Html::a('<i class="fa fa-trash" aria-hidden="true"></i>', $url, [
+                                                        'title' => Yii::t('app', 'Delete'),
+                                                        'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                                        'class' => 'actions',
+                                            ]);
+                                        },
+                                        'approve' => function ($url, $model) {
+                                            if ($model->status == 0) {
+                                                return Html::a('<i class="fa fa-check" aria-hidden="true"></i>', $url, [
+                                                            'title' => Yii::t('app', 'Approve'),
+                                                            'class' => 'actions',
+                                                ]);
+                                            }
+                                        },
+                                        'disable' => function ($url, $model) {
+                                            if ($model->status == 1) {
+                                                return Html::a('<i class="fa fa-ban" aria-hidden="true"></i>', $url, [
+                                                            'title' => Yii::t('app', 'Disable'),
+                                                            'class' => 'actions',
+                                                ]);
+                                            }
+                                        },
+                                    ],
+                                    'urlCreator' => function ($action, $model) {
+                                        if ($action === 'edit') {
+                                            $url = Url::to(['update', 'id' => $model->id]);
+                                            return $url;
+                                        }
+                                        if ($action === 'delete') {
+                                            $url = Url::to(['del', 'id' => $model->id]);
+                                            return $url;
+                                        }
+                                        if ($action === 'approve') {
+                                            $url = Url::to(['approve', 'id' => $model->id]);
+                                            return $url;
+                                        }
+                                        if ($action === 'disable') {
+                                            $url = Url::to(['disable', 'id' => $model->id]);
+                                            return $url;
+                                        }
+                                    }
+                                ],
                             ],
                         ]);
                         ?>

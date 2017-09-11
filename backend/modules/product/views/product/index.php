@@ -114,40 +114,36 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // 'DOC',
                                 // 'DOU',
                                 // 'status',
-                                ['class' => 'yii\grid\ActionColumn',
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
                                     'header' => 'Action',
-                                    'template' => '{update}{delete}'],
-//                                             [
-//          'class' => 'yii\grid\ActionColumn',
-//          'header' => 'Action',
-////          'headerOptions' => ['style' => 'color:#337ab7'],
-//          'template' => '{update}{delete}{copy}',
-//          'buttons' => [
-//            'copy' => function ($url, $model) {
-//                return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
-//                            'title' => Yii::t('app', 'lead-view'),
-//                ]);
-//            },
-////
-//          ],
-//          'urlCreator' => function ($action, $model, $key, $index) {
-//            if ($action === 'copy') {
-//                $url ='copy?id='.$model->id;
-//                return $url;
-//            }
-////
-//            if ($action === 'update') {
-//                $url ='update?id='.$model->id;
-//                return $url;
-//            }
-//            if ($action === 'delete') {
-//                $url ='delete?id='.$model->id;
-//                return $url;
-//            }
-////
-//          }
-//          
-//          ],
+//          'headerOptions' => ['style' => 'color:#337ab7'],
+                                    'template' => '{update}{delete}{preview}',
+                                    'buttons' => [
+                                        'preview' => function ($url, $model) {
+                                            return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
+                                                        'title' => Yii::t('app', 'Preview'),
+                                            ]);
+                                        },
+//
+                                    ],
+                                    'urlCreator' => function ($action, $model, $key, $index) {
+                                        if ($action === 'preview') {
+                                            $url = Yii::$app->homeUrl . '../product/product_detail?product=' . $model->canonical_name;
+                                            return $url;
+                                        }
+//
+                                        if ($action === 'update') {
+                                            $url = 'update?id=' . $model->id;
+                                            return $url;
+                                        }
+                                        if ($action === 'delete') {
+                                            $url = 'delete?id=' . $model->id;
+                                            return $url;
+                                        }
+//
+                                    }
+                                ],
                             ],
                         ]);
                         ?>
@@ -175,20 +171,20 @@ $this->params['breadcrumbs'][] = $this->title;
             $.ajax({
                 url: homeUrl + 'product/product/ajaxchange_product',
                 type: "post",
-                data: {price: price, offerprice: offerprice, stock: stock, availablity: availablity,id:id},
-            success: function (data) {
-                var $data = JSON.parse(data);
-                if ($data.msg === "success") {
-                    alert($data.title);
+                data: {price: price, offerprice: offerprice, stock: stock, availablity: availablity, id: id},
+                success: function (data) {
+                    var $data = JSON.parse(data);
+                    if ($data.msg === "success") {
+                        alert($data.title);
 //                    $('#' + form).append($('<option value="' + $data.id + '" >' + $data.tag + '</option>'));
 //                    $('#modal-4').modal('toggle');
-                } else {
-                    alert($data.title);
+                    } else {
+                        alert($data.title);
+                    }
+//
+                }, error: function () {
+//
                 }
-//
-            }, error: function () {
-//
-            }
             });
         });
     });

@@ -123,6 +123,9 @@ class ProductController extends \yii\web\Controller {
     }
 
     public function actionAddReview() {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(array('site/login-signup'));
+        }
         if (Yii::$app->request->isAjax) {
             $product_id = $_POST['product_id'];
             $model_review = new \common\models\CustomerReviews();

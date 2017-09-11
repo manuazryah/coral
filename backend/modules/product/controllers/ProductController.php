@@ -459,4 +459,13 @@ class ProductController extends Controller {
         }
     }
 
+    /**
+     * Show preview of the given product
+     * @param integer $id
+     */
+    protected function actionPreview($id) {
+        echo 'hai';
+        exit;
+    }
+
 }
