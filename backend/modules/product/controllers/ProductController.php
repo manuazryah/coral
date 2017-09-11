@@ -79,10 +79,10 @@ class ProductController extends Controller {
 
         $ean = Product::find()->max('id');
         if (empty($ean)) {
-            $model->item_ean = date(Ymd);
+            $model->item_ean = date('Ymd');
         } else {
             $ean = $ean + 1;
-            $model->item_ean = date(Ymd) . $ean;
+            $model->item_ean = date('Ymd') . $ean;
         }
 
         if ($model->load(Yii::$app->request->post())) {

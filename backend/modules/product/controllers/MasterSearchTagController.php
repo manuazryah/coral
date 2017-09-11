@@ -117,25 +117,25 @@ class MasterSearchTagController extends Controller {
     public function actionAjaxaddtag() {
         $tag_name = $_POST['tag'];
         $tag = MasterSearchTag::find()->where(['tag_name' => $tag_name])->one();
-        if ($tag->tag_name == "") {
-            $model = new MasterSearchTag();
-            $model->tag_name = $tag_name;
-            $model->status = '1';
-            if (Yii::$app->SetValues->Attributes($model)) {
-                if ($model->save()) {
-                    echo json_encode(array("con" => "1", 'id' => $model->id, 'tag' => $tag_name)); //Success
-                    exit;
+            if ($tag->tag_name == "") {
+                $model = new MasterSearchTag();
+                $model->tag_name = $tag_name;
+                $model->status = '1';
+                if (Yii::$app->SetValues->Attributes($model)) {
+                    if ($model->save()) {
+                        echo json_encode(array("con" => "1", 'id' => $model->id, 'tag' => $tag_name)); //Success
+                        exit;
 //            array('id' => $model->id, 'category' => $category);
-                } else {
+                    } else {
 //                    var_dump($model->getErrors());
-                    echo '2';
-                    exit;
+                        echo '2';
+                        exit;
+                    }
                 }
+            } else {
+                echo json_encode(array("con" => "2", 'error' => 'Already Available')); //Success
+                exit;
             }
-        } else {
-            echo json_encode(array("con" => "2",'error'=>'Already Available')); //Success
-            exit;
-        }
     }
 
     /**
