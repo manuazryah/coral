@@ -75,10 +75,11 @@ class ProductController extends \yii\web\Controller {
      */
     public function RecentlyViewed($product) {
         $user_id = '';
+        $sessonid = '';
         if (isset(Yii::$app->user->identity->id)) {
             $user_id = Yii::$app->user->identity->id;
         } else {
-            if (!isset(Yii::$app->session['temp_user_product'])) {
+            if (!isset(Yii::$app->session['temp_user_product']) || Yii::$app->session['temp_user_product'] == '') {
                 $milliseconds = round(microtime(true) * 1000);
                 Yii::$app->session['temp_user_product'] = $milliseconds;
             }

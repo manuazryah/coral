@@ -34,9 +34,7 @@ class UserController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
-        return $this->render('index', [
-                    'model' => $model,
-        ]);
+        return $this->render('index');
     }
 
     public function actionMyOrders() {
@@ -95,7 +93,7 @@ class UserController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
+
         }
         return $this->render('contact_info', [
                     'model' => $model,
