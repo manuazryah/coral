@@ -50,9 +50,14 @@ class ProductController extends \yii\web\Controller {
      * @return mixed
      */
     public function actionProduct_detail($product) {
+        if (isset(Yii::$app->user->identity->id)) {
+            $user_id = Yii::$app->user->identity->id;
+        } else {
+            $user_id = '';
+        }
         $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
         $this->RecentlyViewed($product_details);
-        $recently_viewed = RecentlyViewed::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+        $recently_viewed = RecentlyViewed::find()->where(['user_id' => $user_id])->all();
         $related_product = Product::find()->where(new Expression('FIND_IN_SET(:id, id)'))->addParams([':id' => $product_details->related_product])->andWhere(['status' => 1])->orderBy(['id' => SORT_DESC])->all();
         $product_reveiws = \common\models\CustomerReviews::find()->where(['product_id' => $product_details->id, 'status' => '1'])->all();
         return $this->render('product_detail', [
@@ -69,7 +74,8 @@ class ProductController extends \yii\web\Controller {
      * if user logged in set user id otherwise set temporary session id
      */
     public function RecentlyViewed($product) {
-        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+        $user_id = '';
+        if (isset(Yii::$app->user->identity->id)) {
             $user_id = Yii::$app->user->identity->id;
         } else {
             if (!isset(Yii::$app->session['temp_user_product'])) {

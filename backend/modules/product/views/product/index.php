@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'template' => '{update}{delete}{preview}',
                                     'buttons' => [
                                         'preview' => function ($url, $model) {
-                                            return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
+                                            return Html::a('<span class="fa fa-share"></span>', $url, [
                                                         'title' => Yii::t('app', 'Preview'),
                                             ]);
                                         },

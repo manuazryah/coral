@@ -36,8 +36,8 @@ $this->title = $product_details->canonical_name;
                         <?php
                     } else {
                         ?>
-                        <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>">
-                            <img src="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>?scale.height='400'" alt=""/>
+                        <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.png' ?>">
+                            <img src="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.png' ?>?scale.height='400'" alt=""/>
                         </a>
                     <?php }
                     ?>
