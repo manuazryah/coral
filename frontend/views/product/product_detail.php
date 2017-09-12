@@ -30,8 +30,8 @@ $this->title = $product_details->canonical_name;
                     $product_image = Yii::$app->basePath . '/../uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '.' . $product_details->profile;
                     if (file_exists($product_image)) {
                         ?>
-                        <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>">
-                            <img src="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>?scale.height='400'" alt=""/>
+                        <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>">
+                            <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>?scale.height='400'" alt=""/>
                         </a>
                         <?php
                     } else {
@@ -55,8 +55,8 @@ $this->title = $product_details->canonical_name;
                                 $img_nmees = explode('.', $img_nmee);
                                 if ($img_nmees['1'] != '') {
                                     ?>
-                                    <a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>">
-                                        <img srcset="<?= Yii::$app->homeUrl . '/uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>" width="94px" height="93px"/>
+                                    <a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>">
+                                        <img srcset="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>" width="94px" height="93px"/>
                                     </a>
                                     <?php
                                 }
@@ -123,7 +123,7 @@ $this->title = $product_details->canonical_name;
                                         <!--<input type="number" min="0" max="5" id="number_passengers" value="1">-->
 
                         <div class="action">
-                            <?= Html::a('add to cart', '#', ['class' => 'start-shopping add_to_cart', 'id' => $product_details->id]) ?>
+                            <?= Html::a('add to cart', 'javascript:void(0)', ['class' => 'start-shopping add_to_cart', 'id' => $product_details->id]) ?>
                             <?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping']) ?>
                         </div>
                     <?php } ?>

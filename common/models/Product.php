@@ -91,7 +91,7 @@ class Product extends \yii\db\ActiveRecord {
             'stock_availability' => 'Stock Availability',
             'tax' => 'Tax',
             'free_shipping' => 'Free Shipping',
-            'product_type' => 'Fregrance Type',
+            'product_type' => 'Fragrance Type',
             'size' => 'Size',
             'size_unit' => 'Size Unit',
             'main_description' => 'Main Description',
