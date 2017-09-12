@@ -77,10 +77,11 @@ class ProductController extends Controller {
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post())) {
+            $serial_no = \common\models\Settings::findOne(3)->value;
+            $model->item_ean = $this->generateProductEan($serial_no);
             if ($model->validate()) {
                 $file11 = UploadedFile::getInstances($model, 'profile');
                 $file12 = UploadedFile::getInstances($model, 'other_image');
-//            $model->item_ean = date(Ymdhis);
                 $model->profile = $file11[0]->extension;
                 $tag = $_POST['Product']['search_tag'];
                 if ($tag) {
@@ -154,6 +155,7 @@ class ProductController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $profile = $model->profile;
         if ($model->load(Yii::$app->request->post())) {
             $ai = '';
             $file11 = UploadedFile::getInstances($model, 'profile');
@@ -161,7 +163,10 @@ class ProductController extends Controller {
 //            $model->item_ean = date(Ymdhis);
             if ($file11) {
                 $model->profile = $file11[0]->extension;
+            } else {
+                $model->profile = $profile;
             }
+
             $tag = $_POST['Product']['search_tag'];
             if ($tag) {
                 $model->search_tag = implode(',', $tag);
@@ -190,7 +195,7 @@ class ProductController extends Controller {
                 Yii::$app->getSession()->setFlash('success', "Updated Successfully");
                 return $this->redirect(['create']);
             } else {
-                var_dump($model->getErrors());
+                throw new UserException('Error Code 1001');
             }
         } else {
             return $this->render('update', [
