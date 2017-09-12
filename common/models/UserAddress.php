@@ -39,7 +39,7 @@ class UserAddress extends \yii\db\ActiveRecord {
             [['name', 'address', 'landmark', 'location', 'emirate', 'post_code', 'mobile_number'], 'required'],
             [['user_id', 'emirate', 'post_code', 'status', 'CB', 'UB'], 'integer'],
             [['address'], 'string'],
-            [['DOC', 'DOU'], 'safe'],
+            [['DOC', 'DOU', 'country_code'], 'safe'],
             [['name', 'location', 'mobile_number'], 'string', 'max' => 100],
             [['landmark'], 'string', 'max' => 250],
         ];

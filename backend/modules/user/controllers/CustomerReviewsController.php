@@ -12,12 +12,13 @@ use yii\filters\VerbFilter;
 /**
  * CustomerReviewsController implements the CRUD actions for CustomerReviews model.
  */
-class CustomerReviewsController extends Controller {
-
+class CustomerReviewsController extends Controller
+{
     /**
      * @inheritdoc
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -32,13 +33,14 @@ class CustomerReviewsController extends Controller {
      * Lists all CustomerReviews models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $searchModel = new CustomerReviewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -47,9 +49,10 @@ class CustomerReviewsController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         return $this->render('view', [
-                    'model' => $this->findModel($id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -58,14 +61,15 @@ class CustomerReviewsController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new CustomerReviews();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
@@ -76,42 +80,17 @@ class CustomerReviewsController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            var_dump($model);
-            exit;
-            return $this->redirect(['update', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
-    }
-
-    /**
-     * Approve User review
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionApprove($id) {
-        $model = $this->findModel($id);
-        $model->status = 1;
-        $model->save();
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Disable User review.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDisable($id) {
-        $model = $this->findModel($id);
-        $model->status = 0;
-        $model->save();
-        return $this->redirect(['index']);
     }
 
     /**
@@ -120,7 +99,8 @@ class CustomerReviewsController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionDel($id) {
+    public function actionDelete($id)
+    {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -133,12 +113,12 @@ class CustomerReviewsController extends Controller {
      * @return CustomerReviews the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
+    protected function findModel($id)
+    {
         if (($model = CustomerReviews::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 }

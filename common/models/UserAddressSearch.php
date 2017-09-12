@@ -10,24 +10,22 @@ use common\models\UserAddress;
 /**
  * UserAddressSearch represents the model behind the search form about `common\models\UserAddress`.
  */
-class UserAddressSearch extends UserAddress
-{
+class UserAddressSearch extends UserAddress {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'user_id', 'emirate', 'post_code', 'status', 'CB', 'UB'], 'integer'],
-            [['name', 'address', 'landmark', 'location', 'mobile_number', 'DOC', 'DOU'], 'safe'],
+            [['name', 'address', 'landmark', 'location', 'mobile_number', 'DOC', 'DOU', 'country_code'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class UserAddressSearch extends UserAddress
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = UserAddress::find();
 
         // add conditions that should always apply here
@@ -71,11 +68,12 @@ class UserAddressSearch extends UserAddress
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'landmark', $this->landmark])
-            ->andFilterWhere(['like', 'location', $this->location])
-            ->andFilterWhere(['like', 'mobile_number', $this->mobile_number]);
+                ->andFilterWhere(['like', 'address', $this->address])
+                ->andFilterWhere(['like', 'landmark', $this->landmark])
+                ->andFilterWhere(['like', 'location', $this->location])
+                ->andFilterWhere(['like', 'mobile_number', $this->mobile_number]);
 
         return $dataProvider;
     }
+
 }

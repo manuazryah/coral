@@ -19,8 +19,8 @@ use yii\widgets\ActiveForm;
     <div class="breadcrumb">
         <span class="current-page">personal information</span>
         <ol class="path">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="my-account.php">My account</a></li>
+            <li><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
+            <li><?= Html::a('<span>My account</span>', ['/myaccounts/user/index'], ['class' => '']) ?></li>
             <li class="active">personal information</li>
         </ol>
     </div>

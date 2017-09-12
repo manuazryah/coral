@@ -4,7 +4,7 @@
     <div class="breadcrumb">
         <span class="current-page">My account</span>
         <ol class="path">
-            <li><a href="index.php">Home</a></li>
+            <li><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
             <li class="active">My account</li>
         </ol>
     </div>

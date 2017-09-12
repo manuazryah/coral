@@ -80,6 +80,8 @@ hr{
 .pad-0{
     padding: 0px;
 }
+.pad-lft0{    padding-left: 0px !important;
+}
 .page-heading{
     margin-bottom: 60px;
 }
@@ -2018,6 +2020,15 @@ a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
     font-size: 13px;
     font-weight: 600;
     margin-bottom: 20px;
+}
+.my-account .contact-information{
+    color: #515452;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+.my-account .contact-info-sub{
+    margin-bottom: 25px;
 }
 .my-account .my-account-cntnt p{
     font-size: 14px;
