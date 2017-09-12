@@ -6,10 +6,49 @@
         width: 65.333333%;
         min-height: 519px;
     }
+    #checkout .address-field{
+        padding-right: 25px; 
+    }
+    #checkout .location-field{
+        padding-right: 15px; 
+    }
+    #checkout .emirate-field{
+        padding-left: 10px; 
+    }
+    #checkout .post-code-field{
+        padding-right: 20px; 
+        margin-bottom: 0px
+    }
+    #checkout .number-field{
+        padding-left: 5px; 
+        margin-bottom: 0px
+    }
+    #checkout .delivery-details .first-name{
+        padding-right: 10px !important;
+    }
+    #checkout .delivery-details .last-name{
+        padding-left: 15px !important;
+    }
+    #checkout .delivery-details .email-field{
+        padding-right: 10px;
+    }
+    #checkout .delivery-details .number-field{
+        padding-left: 15px;
+    }
+    #checkout .delivery-details .altr-number-field{
+        padding-left: 5px;
+        margin-bottom: 0px;
+    }
+    #contact-page .contact-info-box .head-office-address{
+        max-height: 355px;
+    }
 }
 @media(max-width:1400px){
     .private-label .private-bg{
         background-size: contain;
+    }
+    #about-page .chairmans-msg-bg{
+        background-size: cover;
     }
 }
 @media(max-width:1200px) and (min-width:992px){
@@ -46,6 +85,90 @@
     .my-account .settings .right-box{
         width: 65%;
         min-height: 519px;
+    }
+    #checkout .product-summery .heading{
+        left: 40%;
+    }
+    #checkout .address-field{
+        padding-right: 25px; 
+    }
+    #checkout .location-field{
+        padding-right: 15px; 
+    }
+    #checkout .emirate-field{
+        padding-left: 10px; 
+    }
+    #checkout .post-code-field{
+        padding-right: 20px; 
+        margin-bottom: 0px
+    }
+    #checkout .number-field{
+        padding-left: 5px; 
+        margin-bottom: 0px
+    }
+    #checkout .delivery-details .first-name{
+        padding-right: 10px !important;
+    }
+    #checkout .delivery-details .last-name{
+        padding-left: 15px !important;
+    }
+    #checkout .delivery-details .email-field{
+        padding-right: 10px;
+    }
+    #checkout .delivery-details .number-field{
+        padding-left: 15px;
+    }
+    #checkout .delivery-details .altr-number-field{
+        padding-left: 5px;
+        margin-bottom: 0px;
+    }
+    #checkout .delivery-details .shipping{
+        width: 80%;
+    }
+    #checkout .delivery-details .shipping-cost{
+        width: 20%;
+    }
+    #checkout .delivery-details .total{
+        width: 80%;
+    }
+    #checkout .delivery-details .total-cost{
+        width: 20%;
+    }
+    #checkout .delivery-details .total{
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+    #about-page .chairmans-msg:after{
+        content: "\f10e";
+        font-family: FontAwesome;
+        font-size: 26px;
+        position: relative;
+        color: #8fc741;
+        margin-left: 5px;
+        left: 0px;
+        bottom: 0px;
+        top: 10px;
+    }
+    /*    #about-page .chairmans-img img{
+        left: 45%;
+    }*/
+    #about-page .chairmans-name{
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 60px;
+        position: initial;
+    }
+    #about-page .chairmans-name p{
+        text-align: center;
+    }
+    #about-page .chairmans-msg{
+        margin-top: 40px;
+        padding: 0px;
+        text-align: left;
+        padding-left: 117px;
+    }
+    #contact-page .contact-info-box .head-office-address{
+        max-height: 355px;
     }
 }
 @media (max-width: 992px) and (min-width:768px){
@@ -204,6 +327,108 @@
     }
     .user-adddress{
         margin: 0px;
+    }
+    #checkout .product-summery .heading{
+        left: 45%;
+    }
+    #checkout .form-group .first-name {
+        padding-right: 0px;
+        margin-bottom: 30px;
+    }
+    #checkout .form-group .last-name {
+        padding-left: 0px;
+    }
+    #checkout .product-summery{
+        padding: 0px;
+        margin: 0 auto;
+        text-align: center;
+        float: none;
+        left: 0px;
+        right: 0px;
+        display: grid;
+        margin-top: 50px;
+        top: 40px;
+        margin-bottom: 40px;
+    }
+    #checkout .address-field{
+        padding-right: 25px; 
+    }
+    #checkout .location-field{
+        padding-right: 15px; 
+    }
+    #checkout .emirate-field{
+        padding-left: 10px; 
+    }
+    #checkout .post-code-field{
+        padding-right: 20px; 
+        margin-bottom: 0px
+    }
+    #checkout .number-field{
+        padding-left: 5px; 
+        margin-bottom: 0px
+    }
+    #checkout .delivery-details .first-name{
+        padding-right: 10px !important;
+    }
+    #checkout .delivery-details .last-name{
+        padding-left: 15px !important;
+    }
+    #checkout .delivery-details .email-field{
+        padding-right: 10px;
+    }
+    #checkout .delivery-details .number-field{
+        padding-left: 15px;
+    }
+    #checkout .delivery-details .altr-number-field{
+        padding-left: 5px;
+        margin-bottom: 0px;
+    }
+    #checkout .delivery-details .shipping{
+        width: 80%;
+    }
+    #checkout .delivery-details .shipping-cost{
+        width: 20%;
+    }
+    #checkout .delivery-details .total{
+        width: 80%;
+    }
+    #checkout .delivery-details .total-cost{
+        width: 20%;
+    }
+    /*    #about-page .chairmans-img img{
+            left: 45%;
+        }*/
+    #about-page .chairmans-name{
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 60px;
+        position: initial;
+    }
+    #about-page .chairmans-msg{
+        margin-top: 40px;
+        padding: 0px;
+        text-align: left;
+        padding-left: 117px;
+    }
+    #about-page .chairmans-msg:after{
+        content: "\f10e";
+        font-family: FontAwesome;
+        font-size: 26px;
+        position: relative;
+        color: #8fc741;
+        margin-left: 5px;
+        left: 0px;
+        bottom: 0px;
+        top: 10px;
+    }
+    #about-page .chairmans-img img{
+        left: 45%;
+    }
+    #about-page .chairmans-name p {
+        text-align: center;
+    }
+    #contact-page .contact-info-box .head-office-address{
+        max-height: 355px;
     }
 }
 @media (max-width: 768px) and (min-width:458px){
@@ -389,9 +614,9 @@
     #product-page .share{
         float: none;
     }
-    .gp_products_item_caption>.gp_products_caption_rating>li:nth-child(2){
-        left: 44%;
-    }
+    /*    .gp_products_item_caption>.gp_products_caption_rating>li:nth-child(2){
+            left: 44%;
+        }*/
     .my-account .my-account-cntnt .price{
         padding-left: 0px;
     }
@@ -443,6 +668,87 @@
     .user-adddress{
         margin: 0px;
     }
+    .mob-checkout-buttons .start-shopping{
+        float: left;
+    }
+    .mob-checkout-buttons .green2{
+        float: right;
+    }
+    .mob-car-list .thumbnail{
+        top: 20px
+    }
+    #checkout .form-group .first-name {
+        padding-right: 0px;
+        margin-bottom: 30px;
+    }
+    #checkout .form-group .last-name {
+        padding-left: 0px;
+    }
+    #checkout .product-summery .heading{
+        left: 45%;
+    }
+    #checkout .product-summery{
+        padding: 0px;
+        margin: 0 auto;
+        text-align: center;
+        float: none;
+        left: 0px;
+        right: 0px;
+        display: grid;
+        margin-top: 50px;
+    }
+    #checkout .number-field{
+        margin-bottom: 0px
+    }
+    #checkout .delivery-details .number-field{
+        margin-bottom: 30px;
+    }
+    #checkout .delivery-details .altr-number-field{
+        margin-bottom: 0px;
+    }
+    #checkout .delivery-details .total{
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+    /*    #about-page .chairmans-img img{
+    left: 45%;
+}*/
+    #about-page .chairmans-name{
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 60px;
+        position: initial;
+    }
+    #about-page .chairmans-msg{
+        margin-top: 40px;
+        padding: 0px;
+        text-align: left;
+        padding-left: 117px;
+    }
+    #about-page .chairmans-msg:after{
+        content: "\f10e";
+        font-family: FontAwesome;
+        font-size: 26px;
+        position: relative;
+        color: #8fc741;
+        margin-left: 5px;
+        left: 0px;
+        bottom: 0px;
+        top: 10px;
+    }
+    #about-page .chairmans-img img{
+        left: 43%;
+    }
+    #about-page .chairmans-name p{
+        text-align: center;
+    }
+    #contact-page .contact-info-box .head-office-address {
+        padding: 63px 40px;
+    }
+    #contact-page .contact-info-box .head-office-address{
+        max-height: 355px;
+    }
+
 }
 @media(max-width:458px){
     .top-nav ul li:first-child a{
@@ -739,5 +1045,143 @@
     }
     .user-adddress{
         margin: 0px;
+    }
+    #cart-page .input-group span.input-group-btn,#cart-page .input-group input,#cart-page .input-group button{
+        display: block;
+        width: 100%;
+        border-radius: 0;
+        margin: 0;
+    }
+    #cart-page .input-group {
+        position: relative;   
+    }
+    #cart-page .input-group span.data-up{
+        position: absolute;
+        top: 0;
+    }
+    #cart-page .input-group span.data-dwn{
+        position: absolute;
+        bottom: 0;
+    }
+    #cart-page .form-control.text-center {
+        margin: 34px 0;
+    }
+    #cart-page .input-group-btn:last-child>.btn, #cart-page .input-group-btn:last-child>.btn-group{
+        margin-left:0;
+    }
+    #cart-page .form-control {
+        height: 40px;
+        width: 40px;
+    }
+    #cart-page button.green2{
+        width: 100%;
+    }
+    #cart-page .start-shopping{
+        width: 100%;
+    }
+    .mob-car-list .thumbnail{
+        top: 20px
+    }
+    #checkout .form-group .first-name {
+        padding-right: 0px;
+        margin-bottom: 30px;
+    }
+    #checkout .form-group .last-name {
+        padding-left: 0px;
+    }
+    .continue-shopping{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #checkout .green2{
+        width: 100%;
+    }
+    #checkout .product-summery{
+        padding: 0px;
+        margin: 0 auto;
+        text-align: center;
+        float: none;
+        left: 0px;
+        right: 0px;
+        display: grid;
+        margin-top: 50px;
+    }
+    #checkout .product-summery .heading{
+        left: 40%;
+    }
+    #checkout .number-field{
+        margin-bottom: 0px
+    }
+    #checkout .delivery-details .number-field{
+        margin-bottom: 30px;
+    }
+    #checkout .delivery-details .altr-number-field{
+        margin-bottom: 0px;
+    }
+    #checkout .delivery-details .shipping{
+        width: 81%;
+    }
+    #checkout .delivery-details .shipping-cost{
+        width: 19%;
+    }
+    #checkout .delivery-details .total{
+        width: 81%;
+    }
+    #checkout .delivery-details .total-cost{
+        width: 19%;
+    }
+    #checkout .delivery-details .total{
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+    .col-xs-pad40-0{
+        padding: 40px 0px !important;
+    }
+    .colxs-widthfull{
+        width: 100%;
+    }
+    .xs-pad-0{
+        padding: 0px;
+    }
+    #about-page .chairmans-img img{
+        left: 40%;
+    }
+    #about-page .chairmans-name{
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 60px;
+        position: initial;
+    }
+    #about-page .chairmans-name p{
+        text-align: center;
+    }
+    #about-page .chairmans-msg{
+        margin-top: 40px;
+        padding: 0px;
+        text-align: left;
+        padding-left: 117px;
+    }
+    #about-page .chairmans-msg:after{
+        content: "\f10e";
+        font-family: FontAwesome;
+        font-size: 26px;
+        position: relative;
+        color: #8fc741;
+        margin-left: 5px;
+        left: 0px;
+        bottom: 0px;
+        top: 10px;
+    }
+    #about-page .chairmans-msg-bg{
+        height: 350px;
+    }
+    #about-page .chairmans-name p{
+        text-align: center;
+    }
+    #contact-page .contact-info-box .head-office-address {
+        padding: 63px 40px;
+    } 
+    #contact-page .contact-form-box {
+        display: flow-root;
     }
 }
