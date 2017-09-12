@@ -29,7 +29,7 @@ class Settings extends \yii\db\ActiveRecord
     {
         return [
             [['label', 'value'], 'required'],
-            [['value'], 'number'],
+            [['value'], 'integer'],
             [['DOU'], 'safe'],
             [['label'], 'string', 'max' => 200],
         ];

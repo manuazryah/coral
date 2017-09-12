@@ -10,25 +10,22 @@ use common\models\Settings;
 /**
  * SettingsSearch represents the model behind the search form about `common\models\Settings`.
  */
-class SettingsSearch extends Settings
-{
+class SettingsSearch extends Settings {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id'], 'integer'],
-            [['label', 'DOU'], 'safe'],
-            [['value'], 'number'],
+            [['label', 'DOU', 'value'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -40,8 +37,7 @@ class SettingsSearch extends Settings
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Settings::find();
 
         // add conditions that should always apply here
@@ -69,4 +65,5 @@ class SettingsSearch extends Settings
 
         return $dataProvider;
     }
+
 }

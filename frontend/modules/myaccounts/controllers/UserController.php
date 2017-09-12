@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use common\models\UserAddress;
 use common\models\CustomerReviews;
 use common\models\CustomerReviewsSearch;
+use common\models\OrderDetails;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -40,6 +41,14 @@ class UserController extends Controller {
     }
 
     public function actionMyOrders() {
+        $searchModel = new CustomerReviewsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['user_id' => Yii::$app->user->identity->id]);
+        $dataProvider->pagination->pageSize = 4;
+        return $this->render('reviews-ratings', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
         return $this->render('my-orders');
     }
 

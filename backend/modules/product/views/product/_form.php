@@ -71,6 +71,12 @@ use dosamigos\ckeditor\CKEditor;
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'canonical_name')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
             </div>
+            <?php
+            if ($model->isNewRecord) {
+                $serial_no = \common\models\Settings::findOne(3)->value;
+                $model->item_ean = $this->context->generateProductEan($serial_no);
+            }
+            ?>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'item_ean')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
             </div>
@@ -132,7 +138,7 @@ use dosamigos\ckeditor\CKEditor;
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'main_description')->textArea(['maxlength' => '453']); ?>
-                
+
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                 <?php // $form->field($model, 'product_detail')->textarea(['rows' => 6]) ?>
@@ -191,12 +197,12 @@ use dosamigos\ckeditor\CKEditor;
                             <img src="<?= Yii::$app->homeUrl . '../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '_thumb.' . $model->profile ?>" width="60px" height="60px"></a>
 
                     </div>
-<?php } ?>
+                <?php } ?>
             </div>
             <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*'])->label('Gallery Images<i> (455*315)</i>') ?>
-<?php if (!$model->isNewRecord) { ?>
-                                                                                                                                                                                                            <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
+                <?php if (!$model->isNewRecord) { ?>
+                                                                                                                                                                                                                                                            <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
                     <div class="row">
                         <?php
                         $path = Yii::getAlias('@paths') . '/product/' . $model->id . '/gallery_thumb';
@@ -237,13 +243,13 @@ use dosamigos\ckeditor\CKEditor;
         </div>
     </div>
     <li style="float: right;">
-<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
 
     </li>
 
 
 
-<?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 
 </div>
 <div class="modal fade" id="modal-1">
@@ -256,16 +262,16 @@ use dosamigos\ckeditor\CKEditor;
             </div>
 
             <div class="modal-body">
-<?php $form = ActiveForm::begin(['id' => 'add_category']); ?>
+                <?php $form = ActiveForm::begin(['id' => 'add_category']); ?>
                 <label  for="subcategory-category">Category</label>
                 <input type="text" id="subcategory-category" autocomplete="off" class="form-control" >
                 <label class="control-label" for="subcategory-category">Category code</label>
                 <input type="text" id="subcategory-categorycode" readonly="readonly" class="form-control" >
                 <div class="form-group" style="float: right;">
-<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
                 </div>
 
-<?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">
@@ -284,14 +290,14 @@ use dosamigos\ckeditor\CKEditor;
 
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['id' => 'add_subcategory']); ?>
-<?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'category'), ['prompt' => 'select', 'id' => 'product-prcat']) ?>
+                <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'category'), ['prompt' => 'select', 'id' => 'product-prcat']) ?>
                 <label class="control-label">Sub Category</label>
                 <input type="text" id="product_subcat" autocomplete="off" class="form-control" >
                 <div class="form-group" style="float: right;">
-<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
                 </div>
 
-<?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">
@@ -309,13 +315,13 @@ use dosamigos\ckeditor\CKEditor;
             </div>
 
             <div class="modal-body">
-<?php $form = ActiveForm::begin(['id' => 'add_unit']); ?>
+                <?php $form = ActiveForm::begin(['id' => 'add_unit']); ?>
                 <label class="control-label">Unit</label>
                 <input type="text" id="product_unit" autocomplete="off" class="form-control" >
                 <div class="form-group" style="float: right;">
-                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
                 </div>
-<?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">
@@ -334,14 +340,14 @@ use dosamigos\ckeditor\CKEditor;
             </div>
 
             <div class="modal-body">
-<?php $form = ActiveForm::begin(['id' => 'add_searchtag']); ?>
+                <?php $form = ActiveForm::begin(['id' => 'add_searchtag']); ?>
                 <label class="control-label" for="Search-tag">Tag name</label>
                 <input type="text" id="search-tag" autocomplete="off" class="form-control" >
                 <div class="form-group" style="float: right;">
-<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
                 </div>
 
-<?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">
@@ -359,14 +365,14 @@ use dosamigos\ckeditor\CKEditor;
             </div>
 
             <div class="modal-body">
-<?php $form = ActiveForm::begin(['id' => 'add_brand']); ?>
+                <?php $form = ActiveForm::begin(['id' => 'add_brand']); ?>
                 <label class="control-label" for="Brand">Brand name</label>
                 <input type="text" id="brand-name" autocomplete="off" class="form-control" >
                 <div class="form-group" style="float: right;">
-<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
                 </div>
 
-<?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
             </div>
 
             <div class="modal-footer">

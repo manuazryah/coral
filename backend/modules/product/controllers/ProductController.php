@@ -75,15 +75,6 @@ class ProductController extends Controller {
      */
     public function actionCreate() {
         $model = new Product();
-//        $model->scenario = 'create';
-
-        $ean = Product::find()->max('id');
-        if (empty($ean)) {
-            $model->item_ean = date('Ymd');
-        } else {
-            $ean = $ean + 1;
-            $model->item_ean = date('Ymd') . $ean;
-        }
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -103,10 +94,7 @@ class ProductController extends Controller {
                 $model->meta_keywords = $_POST['Product']['meta_keywords'];
                 $model->profile_alt = $_POST['Product']['profile_alt'];
                 $model->gallery_alt = $_POST['Product']['gallery_alt'];
-                $model->other_image= '';
-                $query = $model->save();
-                $command = Yii::$app->db->createCommand($query);
-                echo $command->getQuery();exit;
+                $model->other_image = '';
                 if ($model->save()) {
                     if ($file11) {
                         if ($this->upload($model, $file11[0])) {
@@ -120,6 +108,7 @@ class ProductController extends Controller {
                             echo 'Image Upload Failed:';
                         }
                     }
+                    $this->UpdateProductEan($model->item_ean);
                     Yii::$app->getSession()->setFlash('success', "Created Successfully");
                     return $this->redirect(['create']);
                 } else {
@@ -224,24 +213,17 @@ class ProductController extends Controller {
         $model->price = '';
         $model->offer_price = '';
         $model->stock = '';
-        if (empty($ean)) {
-            $model->item_ean = date(Ymd);
-        } else {
-            $ean = $ean + 1;
-            $model->item_ean = date(Ymd) . $ean;
-        }
+        $serial_no = \common\models\Settings::findOne(3)->value;
+        $model->item_ean = $this->generateProductEan($serial_no);
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
-//                $model = new Product();
-//        $model->scenario = 'create';
-
                 $ean = Product::find()->max('id');
-                if (empty($ean)) {
-                    $model->item_ean = date(Ymd);
-                } else {
-                    $ean = $ean + 1;
-                    $model->item_ean = date(Ymd) . $ean;
-                }
+//                if (empty($ean)) {
+//                    $model->item_ean = date(Ymd);
+//                } else {
+//                    $ean = $ean + 1;
+//                    $model->item_ean = date(Ymd) . $ean;
+//                }
                 $file11 = UploadedFile::getInstances($model, 'profile');
                 $file12 = UploadedFile::getInstances($model, 'other_image');
                 if ($file11) {
@@ -262,6 +244,7 @@ class ProductController extends Controller {
                 $model->profile_alt = $_POST['Product']['profile_alt'];
                 $model->gallery_alt = $_POST['Product']['gallery_alt'];
                 if ($model->save()) {
+                    $this->UpdateProductEan($model->item_ean);
                     if ($file11) {
                         if ($this->upload($model, $file11[0])) {
                             $model->upload($file11[0], $model);
@@ -464,12 +447,28 @@ class ProductController extends Controller {
     }
 
     /**
-     * Show preview of the given product
-     * @param integer $id
+     * generate product EAN from settings
+     * return Product Ean
      */
-    protected function actionPreview($id) {
-        echo 'hai';
-        exit;
+    public function generateProductEan($id) {
+        $serial_no = $id;
+        $file_exist = Product::find()->where(['item_ean' => $serial_no])->one();
+        if (!empty($file_exist)) {
+            return $this->generateProductEan($serial_no + 1);
+        } else {
+            return $serial_no;
+        }
+    }
+
+    /**
+     * Update product EAN in settings
+     * @param Product EAN
+     */
+    public function UpdateProductEan($id) {
+        $productean = \common\models\Settings::findOne(3);
+        $productean->value = $id;
+        $productean->save();
+        return;
     }
 
 }
