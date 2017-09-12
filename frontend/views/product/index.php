@@ -63,11 +63,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
                                         <?php }
                                         ?>
-<!--                                        <a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>
-                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>international brands</span></a>
-                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>new arrivals</span></a>
-                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>trending</span></a>
-                                        <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>something special</span></a>-->
                                     </div>
                                 </div>
                             </div>

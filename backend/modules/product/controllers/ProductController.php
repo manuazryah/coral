@@ -103,6 +103,10 @@ class ProductController extends Controller {
                 $model->meta_keywords = $_POST['Product']['meta_keywords'];
                 $model->profile_alt = $_POST['Product']['profile_alt'];
                 $model->gallery_alt = $_POST['Product']['gallery_alt'];
+                $model->other_image= '';
+                $query = $model->save();
+                $command = Yii::$app->db->createCommand($query);
+                echo $command->getQuery();exit;
                 if ($model->save()) {
                     if ($file11) {
                         if ($this->upload($model, $file11[0])) {

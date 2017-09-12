@@ -131,12 +131,8 @@ use dosamigos\ckeditor\CKEditor;
 
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
-                <?=
-                $form->field($model, 'main_description')->widget(CKEditor::className(), [
-                    'options' => ['rows' => 6],
-                    'preset' => 'basic'
-                ])
-                ?>
+                <?= $form->field($model, 'main_description')->textArea(['maxlength' => '453']); ?>
+                
             </div>
             <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
                 <?php // $form->field($model, 'product_detail')->textarea(['rows' => 6]) ?>

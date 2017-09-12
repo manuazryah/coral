@@ -117,7 +117,7 @@ class MasterSearchTagController extends Controller {
     public function actionAjaxaddtag() {
         $tag_name = $_POST['tag'];
         $tag = MasterSearchTag::find()->where(['tag_name' => $tag_name])->one();
-            if ($tag->tag_name == "") {
+        if (empty($tag)) {
                 $model = new MasterSearchTag();
                 $model->tag_name = $tag_name;
                 $model->status = '1';
