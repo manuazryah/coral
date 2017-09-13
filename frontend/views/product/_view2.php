@@ -14,7 +14,7 @@ use common\models\Fregrance;
     <div class="col-xs-12 col-sm-6 col-md-4 gp_products_item">
         <div class="gp_products_inner">
             <div class="gp_products_item_image">
-                <a href="<?= Yii::$app->homeUrl . 'product/product_detail/' . $model->canonical_name ?>">
+                <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $model->canonical_name ?>">
                     <?php
                     $product_image = Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile;
                     if (file_exists($product_image)) {
@@ -29,7 +29,7 @@ use common\models\Fregrance;
                 </a>
             </div>
             <ul class="text-center">
-                <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', 'javascript:void(0)', ['class' => '', 'id' => $model->id]) ?>
+                <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', 'javascript:void(0)', ['class' => 'add_to_cart', 'id' => $model->id]) ?>
                 <?= Html::a('<li><i class="fa fa-heart"></i></li>', ['id' => $product_details->id]) ?>
                 <?= Html::a('<li><i class="fa fa-info" style="padding-left: 5px;"></i></li>', ['/product/product_detail', 'product' => $model->canonical_name], ['class' => '']) ?>
             </ul>

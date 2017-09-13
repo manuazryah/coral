@@ -57,14 +57,13 @@ class ProductController extends \yii\web\Controller {
         }
         $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
         $this->RecentlyViewed($product_details);
-        $recently_viewed = RecentlyViewed::find()->where(['user_id' => $user_id])->all();
-        $related_product = Product::find()->where(new Expression('FIND_IN_SET(:id, id)'))->addParams([':id' => $product_details->related_product])->andWhere(['status' => 1])->orderBy(['id' => SORT_DESC])->all();
+//        $related_product = Product::find()->where(new Expression('FIND_IN_SET(:id, id)'))->addParams([':id' => $product_details->related_product])->andWhere(['status' => 1])->orderBy(['id' => SORT_DESC])->all();
         $product_reveiws = \common\models\CustomerReviews::find()->where(['product_id' => $product_details->id, 'status' => '1'])->all();
         return $this->render('product_detail', [
                     'product_details' => $product_details,
-                    'recently_viewed' => $recently_viewed,
-                    'related_product' => $related_product,
+//                    'related_product' => $related_product,
                     'product_reveiws' => $product_reveiws,
+                    'user_id' => $user_id,
         ]);
     }
 
@@ -85,7 +84,7 @@ class ProductController extends \yii\web\Controller {
             }
             $sessonid = Yii::$app->session['temp_user_product'];
         }
-        $model = RecentlyViewed::find()->where(['product_id' => $product->id, 'session_id' => Yii::$app->session['temp_user_product']])->one();
+        $model = RecentlyViewed::find()->where(['product_id' => $product->id])->one();
         if (empty($model)) {
             $model = new RecentlyViewed();
             $model->user_id = $user_id;
@@ -93,7 +92,6 @@ class ProductController extends \yii\web\Controller {
             $model->product_id = $product->id;
             $model->date = date('Y-m-d');
         } else {
-            $model->session_id = $sessonid;
             $model->date = date('Y-m-d');
         }
         $model->save();
