@@ -34,7 +34,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php $this->beginBody() ?>
-        <?php $action = Yii::$app->controller->action->id; // controller action id ?>
+        <?php $action = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id; // controller action id ?>
         <div id<div id="top-header">
                 <div class="container">
                     <div class="row">
@@ -104,7 +104,7 @@ and open the template in the editor.
                                         <?php if (Yii::$app->user->isGuest) { ?>
                                             <li><?= Html::a('<span>Login / Signup</span>', ['site/login-signup'], ['class' => '']) ?></li>
                                         <?php } else { ?>
-                                            <li><?= Html::a('<span>My Account</span>', ['/myaccounts/user'], ['class' => '']) ?></li>
+                                            <li><?= Html::a('<span>My Account</span>', ['/myaccounts/user/index'], ['class' => '']) ?></li>
                                             <?php
                                             echo '<li>' . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['style' => 'background: white;border: none;']) . Html::endForm() . '</li>';
                                         }
@@ -169,9 +169,9 @@ and open the template in the editor.
                                 $catag = common\models\Category::find()->one();
                                 ?>
                                 <ul class="nav navbar-nav">
-                                    <li class="<?= $action == 'index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
+                                    <li class="<?= $action == 'site/index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>About Us</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class="<?= $action == 'product' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
+                                    <li class="<?= $action == 'product/index' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>international products</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>private label</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>showrooms</span>', ['/site/index'], ['class' => '']) ?></li>
