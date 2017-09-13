@@ -106,7 +106,12 @@ class SiteController extends Controller {
         $model_login = new LoginForm();
         $model = new SignupForm();
         if ($model_login->load(Yii::$app->request->post()) && $model_login->login()) {
-            return $this->goBack();
+            if (yii::$app->session['after_login'] != '') {
+                $this->redirect(array(yii::$app->session['after_login']));
+            } else {
+                return $this->goBack();
+            }
+//            return $this->goBack();
         } else {
             return $this->render('login-signup', [
                         'model_login' => $model_login,
