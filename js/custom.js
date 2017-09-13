@@ -23,6 +23,9 @@ $(document).ready(function () {
         var id = $(this).attr('id');
         var canname = $("#cano_name_" + id).val();
         var qty = $('.q_ty').val();
+        if(qty == '' || qty=='0'){
+            qty = '1';
+        }
         var option_color = 0;
         var option_size = 0;
         var master_option = 0;

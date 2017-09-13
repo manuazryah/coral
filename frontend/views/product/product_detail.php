@@ -218,6 +218,17 @@ $this->title = $product_details->canonical_name;
     <div class="clearfix"></div>
     <div class="pad-30"></div>
     <div class="container">
+        <div class="product-slider"> 
+            <div class="gp_products_item display-none">
+                <div class="gp_products_item_image">
+                </div>
+                <ul class="text-center">
+                    <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                    <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                    <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                </ul>
+            </div>
+        </div>
         <?php
         if (!empty($recently_viewed)) {
             ?>
