@@ -35,6 +35,7 @@ $(document).ready(function () {
         var quantity = $('#quantity_' + id).val();
         var total = (parseInt(price) * parseInt(quantity));
         updatecart(id, quantity, total);
+        $("#quantity2_" + id).val(parseInt(quantity));
 
     });
     $('.quantity').on('change keyup', function () {

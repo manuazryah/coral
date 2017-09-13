@@ -162,7 +162,7 @@ $this->title = 'Shopping Cart';
 
             <div class="lit-blue mob-checkout-buttons sub-total hidden-lg hidden-md hidden-sm">
                 <div class="col-md-12">
-                    <a  href="our-products.php"><button class="start-shopping">Continue shopping</button></a>
+                    <?= Html::a('<button class="green2">Continue shopping</button>', ['site/index'], ['class' => 'button']) ?>
                     <?= Html::a('<button class="green2">check out</button>', ['cart/proceed'], ['class' => 'button']) ?>
                     <!--<a  href="checkout.php"> <button class="green2">check out</button></a>-->
                 </div>

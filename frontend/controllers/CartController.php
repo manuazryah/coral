@@ -29,7 +29,7 @@ class CartController extends \yii\web\Controller {
         $qty = Yii::$app->request->post()['qty'];
         $id = Product::findOne(['canonical_name' => $canonical_name])->id;
         $date = $this->date();
-        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+        if (isset(Yii::$app->user->identity->id)) {
             $user_id = Yii::$app->user->identity->id;
             $condition = ['user_id' => $user_id];
             Cart::deleteAll('date <= :date AND user_id != :user_id', ['date' => $date, ':user_id' => Yii::$app->user->identity->id]);
@@ -42,6 +42,7 @@ class CartController extends \yii\web\Controller {
 
             $sessonid = Yii::$app->session['temp_user'];
             $condition = ['session_id' => $sessonid];
+            $user_id = '';
         }
         $cart = Cart::find()->where(['product_id' => $id])->andWhere($condition)->one();
         if (!empty($cart)) {
@@ -145,7 +146,7 @@ class CartController extends \yii\web\Controller {
 
     public function actionSelectcart() {
 
-        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+        if (isset(Yii::$app->user->identity->id)) {
             $user_id = Yii::$app->user->identity->id;
             $cart_contents = Cart::find()->where(['user_id' => $user_id])->all();
             if (!empty($cart_contents)) {
@@ -173,9 +174,9 @@ class CartController extends \yii\web\Controller {
     public function actionMycart() {
         $date = $this->date();
         $shipping_limit = Settings::findOne('1');
-        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
-            $model1 = new User();
-            $model = new User();
+        if (isset(Yii::$app->user->identity->id)) {
+//            $model1 = new User();
+//            $model = new User();
 
             $user_id = Yii::$app->user->identity->id;
             Cart::deleteAll('date <= :date AND user_id != :user_id', ['date' => $date, ':user_id' => $user_id]);
@@ -193,7 +194,7 @@ class CartController extends \yii\web\Controller {
             $subtotal = $this->total($cart_items);
 
 
-            return $this->render('buynow', ['carts' => $cart_items, 'subtotal' => $subtotal, 'regform' => $model, 'loginform' => $model1, 'shipping_limit' => $shipping_limit->value]);
+            return $this->render('buynow', ['carts' => $cart_items, 'subtotal' => $subtotal, 'shipping_limit' => $shipping_limit->value]);
         } else {
             return $this->render('emptycart');
         }
@@ -234,7 +235,7 @@ class CartController extends \yii\web\Controller {
     }
 
     public function actionProceed() {
-        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+        if (isset(Yii::$app->user->identity->id)) {
             if (Yii::$app->session['orderid'] == '') {
 
                 $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
@@ -268,7 +269,7 @@ class CartController extends \yii\web\Controller {
 
     public function addOrder($cart) {
         $model1 = new OrderMaster;
-        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+        if (isset(Yii::$app->user->identity->id)) {
             $model1->user_id = Yii::$app->user->identity->id;
 
             $total_amt = $this->total($cart);
@@ -335,6 +336,7 @@ class CartController extends \yii\web\Controller {
     }
 
     public function total($cart) {
+        $subtotal = '0';
         foreach ($cart as $cart_item) {
             $product = Product::findOne($cart_item->product_id);
             if ($product->offer_price != '') {
