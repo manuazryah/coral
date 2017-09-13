@@ -26,7 +26,7 @@ if (!empty($related_product)) {
                             <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
                                 <div class="gp_products_inner">
                                     <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl . 'product/product_detail/' . $val->canonical_name ?>">
+                                        <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $val->canonical_name ?>">
                                             <?php
                                             $product_image = Yii::$app->basePath . '/../uploads/product/' . $val->id . '/profile/' . $val->canonical_name . '.' . $val->profile;
                                             if (file_exists($product_image)) {
