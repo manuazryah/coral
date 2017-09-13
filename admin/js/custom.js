@@ -102,7 +102,8 @@ $(document).on('submit', '#add_searchtag', function (event) {
             var $data = JSON.parse(data);
             if ($data.con === "1") {
                 $('#' + form).append($('<option value="' + $data.id + '" selected="selected" >' + $data.tag + '</option>'));
-                $("#product-search_tag").select2('data', {id: $data.id, text: $data.tag});
+                
+                $('select2-choices').append('<li class="select2-search-choice"> <div>kk</div> <a href="#" class="select2-search-choice-close" tabindex="-1"></a></li>');
 //                    $('#'+form).val('');
 //                    $('#subcategory-category_id').append($('<option value="' + $data.id + '" selected="selected">' + $data.category + '</option>'));
 //                    $('#subcategory-category').val('');

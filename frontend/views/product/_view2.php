@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use common\models\Fregrance;
 ?>
 <!--<div class="row">
-<img src="<? Yii::$app->homeUrl . '../uploads/product/'  ?>" width="50px" height="30px"><br>
-<?$model->product_name;?>
-<?$model->price;?>
-<?$model->offer_price;?>
+<img src="<? Yii::$app->homeUrl . '../uploads/product/' ?>" width="50px" height="30px"><br>
+<? $model->product_name; ?>
+<? $model->price; ?>
+<? $model->offer_price; ?>
 </div>-->
 <!--========= 1st slide =========-->
 <div class="item active">
@@ -29,8 +29,9 @@ use common\models\Fregrance;
                 </a>
             </div>
             <ul class="text-center">
-                <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', ['id' => $product_details->id]) ?>
-                <!--<a href="#"><li><i class="fa fa-heart"></i></li></a>-->
+                <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', 'javascript:void(0)', ['class' => '', 'id' => $model->id]) ?>
+                <?= Html::a('<li><i class="fa fa-heart"></i></li>', ['id' => $product_details->id]) ?>
+                <?= Html::a('<li><i class="fa fa-info" style="padding-left: 5px;"></i></li>', ['/product/product_detail', 'product' => $model->canonical_name], ['class' => '']) ?>
             </ul>
             <div class="gp_products_item_caption">
                 <ul class="gp_products_caption_name">
