@@ -25,15 +25,13 @@ class CartController extends \yii\web\Controller {
     }
 
     public function actionBuynow() {
-        $canonical_name = $_REQUEST['cano_name'];
-        $qty = $_REQUEST['qty'];
-        $option_size = $_REQUEST['option_size'];
-        $option_color = $_REQUEST['option_color'];
-        $master_option_id = $_REQUEST['master_option'];
+        $canonical_name = Yii::$app->request->post()['cano_name'];
+        $qty = Yii::$app->request->post()['qty'];
         $id = Product::findOne(['canonical_name' => $canonical_name])->id;
         $date = $this->date();
         if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
             $user_id = Yii::$app->user->identity->id;
+            $condition = ['user_id' => $user_id];
             Cart::deleteAll('date <= :date AND user_id != :user_id', ['date' => $date, ':user_id' => Yii::$app->user->identity->id]);
         } else {
             if (!isset(Yii::$app->session['temp_user'])) {
@@ -43,45 +41,30 @@ class CartController extends \yii\web\Controller {
             Cart::deleteAll('date <= :date AND session_id != :session_id', ['date' => $date, ':session_id' => Yii::$app->session['temp_user']]);
 
             $sessonid = Yii::$app->session['temp_user'];
-        }
-        if (isset($user_id)) {
-            $condition = ['user_id' => $user_id];
-        } else if (isset($sessonid)) {
             $condition = ['session_id' => $sessonid];
         }
         $cart = Cart::find()->where(['product_id' => $id])->andWhere($condition)->one();
         if (!empty($cart)) {
             $cart->quantity = $qty;
             $cart->save();
-            $cart_contents = Cart::findAll($condition);
-            if (!empty($cart_contents)) {
-                $this->cart_content($cart_contents);
-            } else {
-                echo 'Cart box is Empty';
-            }
+            $this->cart_content($condition);
         } else {
             $model = new cart;
             $model->user_id = $user_id;
             $model->session_id = Yii::$app->session['temp_user'];
             $model->product_id = $id;
             $model->quantity = $qty;
-//                        $model->options = $product_option;
             date_default_timezone_set('Asia/Kolkata');
             $model->date = date('Y-m-d H:i:s');
             if ($model->save()) {
-                $cart_contents = Cart::findAll($condition);
-
-                if (!empty($cart_contents)) {
-
-                    $this->cart_content($cart_contents);
-                } else {
-                    echo 'Cart box is Empty';
-                }
+                $this->cart_content($condition);
             }
         }
     }
 
-    function cart_content($cart_contents) {
+    function cart_content($condition) {
+        $cart_contents = Cart::findAll($condition);
+        if (!empty($cart_contents)) {
         foreach ($cart_contents as $cart_content) {
             $prod_details = Product::findOne($cart_content->product_id);
             if ($prod_details->offer_price == '0') {
@@ -95,6 +78,9 @@ class CartController extends \yii\web\Controller {
                        <span class="item-price">' . $price . '</span>
                        <span class="item-quantity">Quantity: ' . $cart_content->quantity . '</span>
                        </li>';
+        }
+        }else{
+            echo 'Cart box is Empty';
         }
     }
 
