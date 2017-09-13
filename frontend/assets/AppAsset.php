@@ -15,6 +15,7 @@ class AppAsset extends AssetBundle {
         'https://fonts.googleapis.com/css?family=Roboto',
         'css/bootstrap.min.css',
         'css/font-awesome.min.css',
+        'css/xenon-forms.css',
         'css/responsive_bootstrap_carousel_mega_min.css',
         'css/theme.css',
         'css/intlTelInput.css',

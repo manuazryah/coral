@@ -25,6 +25,9 @@ return [
         'myaccounts' => [
             'class' => 'frontend\modules\myaccounts\Module',
         ],
+        'create_your_own' => [
+            'class' => 'frontend\modules\create_your_own\Module',
+        ],
     ],
     'components' => [
         'request' => [

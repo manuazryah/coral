@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\CountryCodeSearch */
+/* @var $model common\models\WishListSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="country-code-search">
+<div class="wish-list-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,19 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'country_name') ?>
+    <?= $form->field($model, 'user_id') ?>
 
-    <?= $form->field($model, 'country_code') ?>
+    <?= $form->field($model, 'session_id') ?>
 
-    <?= $form->field($model, 'status') ?>
+    <?= $form->field($model, 'product') ?>
 
-    <?= $form->field($model, 'CB') ?>
-
-    <?php // echo $form->field($model, 'UB') ?>
-
-    <?php // echo $form->field($model, 'DOC') ?>
-
-    <?php // echo $form->field($model, 'DOU') ?>
+    <?= $form->field($model, 'date') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

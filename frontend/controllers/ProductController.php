@@ -9,6 +9,7 @@ use common\models\Product;
 use common\models\ProductSearch;
 use common\models\Category;
 use common\models\RecentlyViewed;
+use common\models\WishList;
 use yii\db\Expression;
 
 class ProductController extends \yii\web\Controller {
@@ -106,7 +107,6 @@ class ProductController extends \yii\web\Controller {
     public function actionGetrecentproduct() {
         if (isset(Yii::$app->user->identity->id)) {
             if (isset(Yii::$app->session['temp_user_product'])) {
-                echo Yii::$app->session['temp_user_product'];
                 $models = RecentlyViewed::find()->where(['session_id' => Yii::$app->session['temp_user_product']])->all();
 
                 foreach ($models as $msd) {
@@ -123,6 +123,69 @@ class ProductController extends \yii\web\Controller {
                     }
                 }
                 unset(Yii::$app->session['temp_user_product']);
+            }
+        }
+    }
+
+    /**
+     * Save product to wish list.
+     * @param product id
+     * if user logged in set user id otherwise set temporary session id
+     */
+    public function actionSavewishlist() {
+        $product_id = $_POST['product_id'];
+        if ($product_id != '') {
+            $user_id = '';
+            $sessonid = '';
+            if (isset(Yii::$app->user->identity->id)) {
+                $user_id = Yii::$app->user->identity->id;
+            } else {
+                if (!isset(Yii::$app->session['temp_wish_list']) || Yii::$app->session['temp_wish_list'] == '') {
+                    $milliseconds = round(microtime(true) * 1000);
+                    Yii::$app->session['temp_wish_list'] = $milliseconds;
+                }
+                $sessonid = Yii::$app->session['temp_wish_list'];
+            }
+
+            $model = WishList::find()->where(['product' => $product_id])->one();
+            if (empty($model)) {
+                $model = new WishList();
+                $model->user_id = $user_id;
+                $model->session_id = $sessonid;
+                $model->product = $product_id;
+                $model->date = date('Y-m-d');
+            } else {
+                $model->date = date('Y-m-d');
+            }
+            $model->save();
+        }
+        return;
+    }
+
+    /**
+     * Update recently viewed product.
+     * @param tmperory session for recently viewed product
+     * update session id to corresponding user user id
+     */
+    public function actionGetwishlistproduct() {
+        if (isset(Yii::$app->user->identity->id)) {
+            if (isset(Yii::$app->session['temp_wish_list'])) {
+                $models = WishList::find()->where(['session_id' => Yii::$app->session['temp_wish_list']])->all();
+
+                foreach ($models as $msd) {
+                    $data = WishList::find()->where(['product' => $msd->product, 'user_id' => Yii::$app->user->identity->id])->one();
+                    if (empty($data)) {
+                        $msd->user_id = Yii::$app->user->identity->id;
+                        $msd->session_id = '';
+                        $msd->save();
+                    } else {
+                        $data->date = $msd->date;
+                        if ($data->save()) {
+                            $msd->delete();
+                        }
+                    }
+                }
+                unset(Yii::$app->session['temp_wish_list']);
             }
         }
     }

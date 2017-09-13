@@ -39,7 +39,8 @@ and open the template in the editor.
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3  col-sm-3 col-xs-3 left">
-                            <button class="top-green">Create Your Own</button>
+                            <?= Html::a('Create Your Own', ['/create_your_own/create-your-own/index'], ['class' => 'top-green']) ?>
+                            <!--<button class="top-green">Create Your Own</button>-->
                             <marquee class="GeneratedMarquee" direction="left" scrollamount="5" behavior="scroll">Start Creating Your Fragrance in Seconds</marquee>
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-9 right">
@@ -102,7 +103,7 @@ and open the template in the editor.
 
                                     <ul class="navbar-right">
                                         <?php if (Yii::$app->user->isGuest) { ?>
-                                            <li><?= Html::a('<span>Login / Signup</span>', ['site/login-signup'], ['class' => '']) ?></li>
+                                            <li><?= Html::a('<span>Login / Signup</span>', ['/site/login-signup'], ['class' => '']) ?></li>
                                         <?php } else { ?>
                                             <li><?= Html::a('<span>My Account</span>', ['/myaccounts/user/index'], ['class' => '']) ?></li>
                                             <?php
