@@ -28,15 +28,14 @@ use common\models\Fregrance;
                     ?>
                 </a>
             </div>
-            <!--            <ul class="text-center">
-                            <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                            <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                            <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                        </ul>-->
+            <ul class="text-center">
+                <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', ['id' => $product_details->id]) ?>
+                <!--<a href="#"><li><i class="fa fa-heart"></i></li></a>-->
+            </ul>
             <div class="gp_products_item_caption">
                 <ul class="gp_products_caption_name">
                     <li><a href="#"><?= $model->product_name ?></a></li>
-                    <?php $product_type= Fregrance::findOne($model->product_type);?>
+                    <?php $product_type = Fregrance::findOne($model->product_type); ?>
                     <li><a href="#"><?= $product_type->name; ?></a></li>
                 </ul>
                 <ul class="gp_products_caption_rating">

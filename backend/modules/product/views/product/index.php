@@ -123,6 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'preview' => function ($url, $model) {
                                             return Html::a('<span class="fa fa-share"></span>', $url, [
                                                         'title' => Yii::t('app', 'Preview'),
+                                                        'target' => '_blank',
                                             ]);
                                         },
 //

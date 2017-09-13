@@ -170,12 +170,12 @@ and open the template in the editor.
                                 ?>
                                 <ul class="nav navbar-nav">
                                     <li class="<?= $action == 'index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>About Us</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class="<?= $action == 'product' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>international products</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>private label</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>showrooms</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>Contact</span>', ['/site/contact'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>contact us</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <!--                                    <li class="dropdown">
                                                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                                                                             <ul class="dropdown-menu">
@@ -240,7 +240,7 @@ and open the template in the editor.
                         <div style="padding-left: 35px;" class="col-md-3 col-sm-4 col-xs-3 xs-50">
                             <h4 class="foot-hdng">coral perfume</h4>
                             <ul class="foot-site-link">
-                                <li><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
+                                <li><a href="#">About Us</a></li>
                                 <li><a href="#">Terms and Conditions</a></li>
                                 <li><a href="#">Privacy Policies</a></li>
                                 <li><a href="#">Return Policy</a></li>
@@ -257,7 +257,7 @@ and open the template in the editor.
                                         <li><a href="#">Our Products</a></li>
                                         <li><a href="#">Showrooms</a></li>
                                         <li><a href="#">International Products</a></li>
-                                        <li><?= Html::a('<span>Contact</span>', ['/site/contact'], ['class' => '']) ?></li>
+                                        <li><a href="#">Contact</a></li>
 
                                     </ul>
                                 </div>

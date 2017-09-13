@@ -57,16 +57,15 @@ $this->title = 'Shopping Cart';
                                 <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align: center">
                                     <div class="input-group number-spinner">
                                         <span class="input-group-btn data-dwn">
-                                            <button class="btn btn-default btn-info cart_quantity" data-dir="dwn"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                            <button class="btn btn-default btn-info" data-dir="dwn"><i class="fa fa-minus" aria-hidden="true"></i></button>
                                         </span>
-                                        <input type='number' readonly="true" name='cart_quantity' class="form-control text-center quantity" id="quantity_<?php echo $cart->id; ?>" value="<?= $cart->quantity ?>" min="1" max='<?= $product->stock ?>'>
+                                        <input type='text' name='cart_quantity' class="cart_quantity form-control text-center" id="quantity_<?php echo $cart->id; ?>" value="<?= $cart->quantity ?>" min="1" max='<?= $product->stock ?>'>
                                         <span class="input-group-btn data-up">
-                                            <button class="btn btn-default btn-info cart_quantity" data-dir="up"><i class="fa fa-plus" aria-hidden="true"></i>
+                                            <button class="btn btn-default btn-info" data-dir="up"><i class="fa fa-plus" aria-hidden="true"></i>
                                         </span>
                                     </div>
                                 </td>
-                                <?php $total = $price * $cart->quantity; ?>
-                                <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center price">AED <?= $total ?></td>
+                                <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center price">AED 200</td>
                                 <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
                                     <button type="button" class="btn-remove">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -80,7 +79,7 @@ $this->title = 'Shopping Cart';
                 </table>
                 <div class="clearfix"></div>
                 <div class="lit-blue sub-total">
-                    <div class="col-md-12"><h4>Subtotal:<span class="price">AED <?= $subtotal ?></span></h4></div>
+                    <div class="col-md-12"><h4>Subtotal:<span class="price">AED 200</span></h4></div>
                     <div class="col-md-12"><span class="message">Shipping, taxes, and discounts will be calculated at checkout.</span></div>
                     <br/>
                     <div class="col-md-12">
@@ -221,47 +220,3 @@ $this->title = 'Shopping Cart';
 </div>
 
 <div class="pad-30 hidden-xs"></div>
-<script>
-    $('.cart_quantity').on('click', function () {
-        var id = $('.quantity').attr("id");
-        var ids = id.split('_');
-        var cartid = ids['1'];
-        var quantity = $('#' + id).val();
-
-        $.ajax({
-            type: "POST",
-            url: homeUrl + 'cart/updatecart',
-            data: {cartid: cartid, quantity: quantity},
-            success: function (data) {
-                var $data = JSON.parse(data);
-                if ($data.msg === "success") {
-                    window.location.reload();
-                }
-//        $(".cart_items").html(data + ' Items');
-//        hideLoader();
-            }
-        });
-    });
-//    $('.remove_this').click(function () {
-//        var id = $(this).attr('cartid');
-//        var ids = id.split('_');
-//        var cartid = ids['0'];
-//        $.ajax({
-//            type: "POST",
-//            url: homeUrl + 'cart/cart_remove',
-//            data: {cartid: cartid},
-//            success: function (data) {
-//                var $data = JSON.parse(data);
-//                if ($data.msg === "success") {
-//                    $('#' + ids['1']).remove();
-//                    window.location.reload();
-//                }
-////        $(".cart_items").html(data + ' Items');
-////        hideLoader();
-//            }
-//        });
-//    });
-//    function getmycart(){
-//        
-//    }
-</script>

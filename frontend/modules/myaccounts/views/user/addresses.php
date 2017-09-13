@@ -49,11 +49,22 @@ use yii\widgets\ActiveForm;
                         <div class="form-group col-md-6">
                             <?= $form->field($model, 'emirate')->dropDownList(['1' => 'emirate1', '2' => 'emirate2']) ?>
                         </div>
+
                         <div class="form-group col-md-4">
                             <?= $form->field($model, 'post_code')->textInput() ?>
                         </div>
                         <div class="form-group col-md-8">
-                            <?= $form->field($model, 'mobile_number')->textInput(['maxlength' => true, 'data-format' => "+1 (ddd) ddd-dddd"]) ?>
+                            <label for="pwd">Mobile Number</label>
+                            <div class="date-dropdowns" style="padding-right: 15px;">
+                                <select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" id="user-country_code" name="UserAddress[country_code]">
+                                <!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
+                                    <?php foreach ($country_codes as $country_code) { ?>
+                                        <option value="<?= $country_code ?>" <?= $country_code == $model->country_code ? ' selected' : '' ?>><?= $country_code ?></option>
+                                    <?php }
+                                    ?>
+                                </select>
+                                <input style="padding-left: 70px;" type="phone" id="user-mobile_number" class="form-control" name="UserAddress[mobile_number]" value="<?= $model->mobile_number ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">
+                            </div>
                         </div>
                         <?= Html::submitButton('save changes', ['class' => 'green2']) ?>
                         <?php ActiveForm::end(); ?>

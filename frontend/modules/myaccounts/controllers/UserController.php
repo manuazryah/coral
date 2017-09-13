@@ -12,6 +12,7 @@ use common\models\UserAddress;
 use common\models\CustomerReviews;
 use common\models\CustomerReviewsSearch;
 use common\models\OrderDetails;
+use yii\helpers\ArrayHelper;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -109,12 +110,13 @@ class UserController extends Controller {
     public function actionUpdateContactInfo() {
         $id = Yii::$app->user->identity->id;
         $model = $this->findModel($id);
-
+        $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'id', 'country_code');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
+            return $this->redirect(Yii::$app->request->referrer);
         }
         return $this->render('contact_info', [
                     'model' => $model,
+                    'country_codes' => $country_codes,
         ]);
     }
 
@@ -194,19 +196,21 @@ class UserController extends Controller {
     public function actionUserAddress() {
         $model = new UserAddress();
         $user_address = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+        $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'id', 'country_code');
         if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model)) {
             if (empty($user_address)) {
                 $model->status = 1;
             }
             $model->user_id = Yii::$app->user->identity->id;
             $model->save();
-            return $this->redirect(['/user/addresses']);
-        } else {
-            return $this->render('addresses', [
-                        'model' => $model,
-                        'user_address' => $user_address,
-            ]);
+            $model = new UserAddress();
+            return $this->redirect(Yii::$app->request->referrer);
         }
+        return $this->render('addresses', [
+                    'model' => $model,
+                    'user_address' => $user_address,
+                    'country_codes' => $country_codes,
+        ]);
     }
 
     /**

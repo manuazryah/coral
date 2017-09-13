@@ -33,9 +33,22 @@ use yii\widgets\ActiveForm;
                             <div class="col-md-8 pad-0">
                                 <?= $form->field($model, 'email')->textInput(['maxlength' => true])->label('Email') ?>
                             </div>
-                            <div class="col-md-8 pad-0">
-                                <?= $form->field($model, 'mobile_no')->textInput(['maxlength' => true])->label('Mobile No') ?>
+                            <div class="form-group col-md-8">
+                                <label for="pwd">Mobile Number</label>
+                                <div class="date-dropdowns">
+                                    <select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" id="user-country_code" name="User[country_code]">
+                                    <!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
+                                        <?php foreach ($country_codes as $country_code) { ?>
+                                            <option value="<?= $country_code ?>" <?= $country_code == $model->country_code ? ' selected' : '' ?>><?= $country_code ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+                                    <input style="padding-left: 70px;" type="phone" id="user-mobile_no" class="form-control" name="User[mobile_no]" value="<?= $model->mobile_no ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">
+                                </div>
                             </div>
+                            <!--                            <div class="col-md-8 pad-0">
+                            <?php // $form->field($model, 'mobile_no')->textInput(['maxlength' => true])->label('Mobile No')    ?>
+                                                        </div>-->
                             <div class="col-md-8">
                                 <?= Html::submitButton('save changes', ['class' => 'green2']) ?>
                             </div>

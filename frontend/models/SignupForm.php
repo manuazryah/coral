@@ -17,6 +17,7 @@ class SignupForm extends Model {
     public $last_name;
     public $dob;
     public $mobile_no;
+    public $country_code;
     public $country;
     public $gender;
     public $password_repeat;
@@ -43,7 +44,7 @@ class SignupForm extends Model {
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
             [['country', 'gender'], 'integer'],
-            [['dob', 'mobile_no', 'day', 'month', 'year', 'password_repeat', 'notification'], 'safe'],
+            [['dob', 'mobile_no', 'day', 'month', 'year', 'password_repeat', 'notification', 'country_code'], 'safe'],
             [['first_name', 'last_name'], 'string', 'max' => 50],
             [['first_name', 'last_name'], 'required'],
             ['rules', 'required', 'requiredValue' => 1, 'message' => 'Please agree the terms and conditions'],
@@ -78,6 +79,7 @@ class SignupForm extends Model {
         $user->country = $this->country;
         $user->dob = $this->year . '-' . $this->month . '-' . $this->day;
         $user->gender = $this->gender;
+        $user->country_code = $this->country_code;
         $user->mobile_no = $this->mobile_no;
         $user->email = $this->email;
         $user->notification = $this->notification;
