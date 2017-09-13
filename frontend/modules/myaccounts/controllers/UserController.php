@@ -11,6 +11,8 @@ use yii\filters\VerbFilter;
 use common\models\UserAddress;
 use common\models\CustomerReviews;
 use common\models\CustomerReviewsSearch;
+use common\models\WishList;
+use common\models\WishListSearch;
 use common\models\OrderDetails;
 use yii\helpers\ArrayHelper;
 
@@ -57,7 +59,14 @@ class UserController extends Controller {
     }
 
     public function actionWishList() {
-        return $this->render('wish-list');
+        $searchModel = new WishListSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['user_id' => Yii::$app->user->identity->id]);
+        $dataProvider->pagination->pageSize = 2;
+        return $this->render('wish-list', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionChangePassword() {

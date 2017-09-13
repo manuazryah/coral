@@ -58,11 +58,9 @@ class ProductController extends \yii\web\Controller {
         }
         $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
         $this->RecentlyViewed($product_details);
-//        $related_product = Product::find()->where(new Expression('FIND_IN_SET(:id, id)'))->addParams([':id' => $product_details->related_product])->andWhere(['status' => 1])->orderBy(['id' => SORT_DESC])->all();
         $product_reveiws = \common\models\CustomerReviews::find()->where(['product_id' => $product_details->id, 'status' => '1'])->all();
         return $this->render('product_detail', [
                     'product_details' => $product_details,
-//                    'related_product' => $related_product,
                     'product_reveiws' => $product_reveiws,
                     'user_id' => $user_id,
         ]);
