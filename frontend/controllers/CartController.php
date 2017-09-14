@@ -235,16 +235,19 @@ class CartController extends \yii\web\Controller {
     }
 
     public function actionProceed() {
+//        Yii::$app->session['orderid']='';exit;
         if (isset(Yii::$app->user->identity->id)) {
             $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
             if (!empty($cart)) {
                 if (Yii::$app->session['orderid'] == '') {
                     $orders = $this->addOrder($cart);
-                    Yii::$app->session['orderid'] = $orders['order_id'];
                     $this->orderProducts($orders, $cart);
+                    Yii::$app->session['orderid'] = $orders['order_id'];
                     $this->redirect(array('checkout/checkout'));
                 } else {
                     $orders = $this->addOrder1($cart);
+                    $this->orderProducts($orders, $cart);
+                    $this->redirect(array('checkout/checkout'));
                 }
             } else {
                 $this->redirect(array('cart/mycart'));
@@ -264,7 +267,7 @@ class CartController extends \yii\web\Controller {
             $model1->status = 0;
 //            date_default_timezone_set('Asia/Kolkata');
             $model1->order_date = date('Y-m-d H:i:s');
-            $model1->DOC = date('Y-m-d');
+            $model1->doc = date('Y-m-d');
             if ($model1->save()) {
                 return ['master_id' => $model1->id, 'order_id' => $model1->order_id];
             }
@@ -327,11 +330,8 @@ class CartController extends \yii\web\Controller {
                 }
                 $model_prod->amount = $price;
                 $model_prod->rate = ($cart->quantity) * ($price);
-                if ($model_prod->save()) {
-                    return TRUE;
-                } else {
-                    var_dump($model_prod->getErrors());
-                }
+                $model_prod->save();
+                
             }
         }
     }
