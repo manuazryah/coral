@@ -1,16 +1,4 @@
-<?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\ContactForm */
-
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use yii\captcha\Captcha;
-
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
-?>
 <div class="pad-20 hide-xs"></div>
 
 <div class="container">
@@ -119,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <option value="usa">Help</option>
                             </select>
                         </div>
-                        <div class="g-recaptcha capcha-main" data-sitekey="6LcLezAUAAAAAF-THwti6d_kxxPQ0nGBbqv2tA-a"></div>
+                        <div class="g-recaptcha capcha-main" data-sitekey="6Lc48i8UAAAAAIp362-zRIeqjmEZAGHNwiJslcfB"></div>
                         <div style="text-align: center;float: none;margin: 0 auto;left: 0px;right: 0px;" class="col-lg-3"><button class="green2">submit</button></div>
                     </form>
                 </div>
@@ -127,3 +115,5 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="pad-20"></div>
+
+   

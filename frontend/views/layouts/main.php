@@ -295,7 +295,9 @@ and open the template in the editor.
 </html>
 <?php $this->endPage() ?>
 <!--======= pro-slider-end =========-->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
+    $('#contact').on('submit', function (e) {                    if (grecaptcha.getResponse() == "") {                        e.preventDefault(); $(".rc-anchor-light.rc-anchor-normal").css("border", "1px solid #d35656 !important"); if ($(".capcha-main").next(".validation").length == 0) // only add if not added                        {                            $(".capcha-main").after("<div class='validation' style='color:#c54040;margin-left: 15px;font-size: 13px;'>Please verify that you are not a robot</div>");                        }                    }                });
 //    (function () {
 //
 //        $("#cart").hover(function () {
