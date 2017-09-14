@@ -176,7 +176,7 @@ and open the template in the editor.
                                     <li class=""><?= Html::a('<span>international products</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>private label</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>showrooms</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>contact us</span>', ['/site/index'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>contact us</span>', ['/site/contact'], ['class' => '']) ?></li>
                                     <!--                                    <li class="dropdown">
                                                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                                                                             <ul class="dropdown-menu">
@@ -258,7 +258,7 @@ and open the template in the editor.
                                         <li><a href="#">Our Products</a></li>
                                         <li><a href="#">Showrooms</a></li>
                                         <li><a href="#">International Products</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                        <li><?= Html::a('<span>contact us</span>', ['/site/contact'], ['class' => '']) ?></li>
 
                                     </ul>
                                 </div>
