@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "order_master".
  *
  * @property integer $id
+ * @property string $order_id
  * @property integer $user_id
  * @property string $total_amount
  * @property string $order_date
@@ -21,6 +22,7 @@ use Yii;
  * @property integer $admin_status
  * @property string $doc
  * @property integer $shipping_method
+ * @property integer $status
  */
 class OrderMaster extends \yii\db\ActiveRecord
 {
@@ -38,11 +40,12 @@ class OrderMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'total_amount', 'order_date'], 'required'],
-            [['user_id', 'ship_address_id', 'bill_address_id', 'currency_id', 'payment_mode', 'admin_comment', 'payment_status', 'admin_status', 'shipping_method'], 'integer'],
+            [['order_id', 'user_id', 'total_amount', 'order_date'], 'required'],
+            [['user_id', 'ship_address_id', 'bill_address_id', 'currency_id', 'payment_mode', 'admin_comment', 'payment_status', 'admin_status', 'shipping_method', 'status'], 'integer'],
             [['total_amount'], 'number'],
             [['order_date', 'doc'], 'safe'],
             [['user_comment'], 'string'],
+//            [['order_id'], 'string', 'max' => 200],
         ];
     }
 
@@ -53,6 +56,7 @@ class OrderMaster extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'order_id' => 'Order ID',
             'user_id' => 'User ID',
             'total_amount' => 'Total Amount',
             'order_date' => 'Order Date',
@@ -66,6 +70,7 @@ class OrderMaster extends \yii\db\ActiveRecord
             'admin_status' => 'Admin Status',
             'doc' => 'Doc',
             'shipping_method' => 'Shipping Method',
+            'status' => 'Status',
         ];
     }
 }

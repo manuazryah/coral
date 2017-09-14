@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "order_details".
  *
  * @property integer $id
+ * @property integer $master_id
  * @property integer $order_id
  * @property integer $product_id
  * @property integer $quantity
@@ -32,8 +33,8 @@ class OrderDetails extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'product_id', 'quantity', 'amount', 'rate'], 'required'],
-            [['order_id', 'product_id', 'quantity', 'status'], 'integer'],
+            [['master_id', 'order_id', 'product_id', 'quantity', 'amount', 'rate'], 'required'],
+            [['master_id',  'product_id', 'quantity', 'status'], 'integer'],
             [['amount', 'rate'], 'number'],
             [['doc'], 'safe'],
         ];
@@ -46,6 +47,7 @@ class OrderDetails extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'master_id' => 'Master ID',
             'order_id' => 'Order ID',
             'product_id' => 'Product ID',
             'quantity' => 'Quantity',

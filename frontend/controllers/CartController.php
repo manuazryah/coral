@@ -42,6 +42,7 @@ class CartController extends \yii\web\Controller {
 
             $sessonid = Yii::$app->session['temp_user'];
             $condition = ['session_id' => $sessonid];
+            $user_id = '';
         }
         $cart = Cart::find()->where(['product_id' => $id])->andWhere($condition)->one();
         if (!empty($cart)) {
@@ -235,51 +236,18 @@ class CartController extends \yii\web\Controller {
 
     public function actionProceed() {
         if (isset(Yii::$app->user->identity->id)) {
-            if (Yii::$app->session['orderid'] == '') {
-
-                $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
-
-                if (!empty($cart)) {
-                    $order_id = $this->addOrder($cart);
-                    Yii::$app->session['orderid'] = $order_id;
-                    $this->orderProducts($order_id, $cart);
+            $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+            if (!empty($cart)) {
+                if (Yii::$app->session['orderid'] == '') {
+                    $orders = $this->addOrder($cart);
+                    Yii::$app->session['orderid'] = $orders['order_id'];
+                    $this->orderProducts($orders, $cart);
                     $this->redirect(array('checkout/checkout'));
                 } else {
-                    $this->redirect(array('Cart/Mycart'));
+                    $orders = $this->addOrder1($cart);
                 }
             } else {
-                $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
-
-                if (!empty($cart)) {
-
-                    $order_id = $this->addOrder($cart);
-                    Yii::$app->session['orderid'] = $order_id;
-                    $this->orderProducts($order_id, $cart);
-                    $this->redirect(array('checkout/checkout'));
-                } else {
-                    $this->redirect(array('Cart/Mycart'));
-                }
-            }
-        } else if (Yii::$app->session['temp_user']) {
-            yii::$app->session['after_login'] = 'cart/proceed';
-            $this->redirect(array('site/login'));
-        }
-    }
-
-    public function addOrder($cart) {
-        $model1 = new OrderMaster;
-        if (isset(Yii::$app->user->identity->id)) {
-            $model1->user_id = Yii::$app->user->identity->id;
-
-            $total_amt = $this->total($cart);
-            $model1->total_amount = $total_amt;
-            $model1->status = 0;
-            date_default_timezone_set('Asia/Kolkata');
-            $model1->order_date = date('Y-m-d H:i:s');
-            $model1->doc = date('Y-m-d');
-
-            if ($model1->save()) {
-                return $model1->id;
+                $this->redirect(array('cart/mycart'));
             }
         } else if (Yii::$app->session['temp_user']) {
             yii::$app->session['after_login'] = 'cart/proceed';
@@ -288,34 +256,68 @@ class CartController extends \yii\web\Controller {
     }
 
     public function addOrder1($cart) {
-        $model1 = Order::model()->findByPk(Yii::app()->session['orderid']);
+        $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
         if (!empty($model1)) {
+            $model1->user_id = Yii::$app->user->identity->id;
+            $total_amt = $this->total($cart);
+            $model1->total_amount = $total_amt;
+            $model1->status = 0;
+//            date_default_timezone_set('Asia/Kolkata');
+            $model1->order_date = date('Y-m-d H:i:s');
+            $model1->DOC = date('Y-m-d');
+            if ($model1->save()) {
+                return ['master_id' => $model1->id, 'order_id' => $model1->order_id];
+            }
+        } else {
+            $this->redirect(array('cart/mycart'));
+        }
+    }
+
+    public function addOrder($cart) {
+        $model1 = new OrderMaster;
+        if (isset(Yii::$app->user->identity->id)) {
+            $serial_no = \common\models\Settings::findOne(4)->value;
+            $model1->order_id = $this->generateProductEan($serial_no);
             $model1->user_id = Yii::$app->user->identity->id;
 
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
             $model1->status = 0;
-            date_default_timezone_set('Asia/Kolkata');
+//            date_default_timezone_set('Asia/Kolkata');
             $model1->order_date = date('Y-m-d H:i:s');
-            $model1->DOC = date('Y-m-d');
+            $model1->doc = date('Y-m-d');
+
             if ($model1->save()) {
-                return $model1->id;
+                $this->Updateorderid($model1->order_id);
+                return ['master_id' => $model1->id, 'order_id' => $model1->order_id];
+            } else {
+                var_dump($model1->getErrors());
+                exit;
             }
-        } else {
-            $this->redirect(array('Cart/Mycart'));
+        } else if (Yii::$app->session['temp_user']) {
+            yii::$app->session['after_login'] = 'cart/proceed';
+            $this->redirect(array('site/login'));
         }
     }
 
-    public function orderProducts($orderid, $carts) {
+    public function orderProducts($orders, $carts) {
         foreach ($carts as $cart) {
             $prod_details = Product::findOne($cart->product_id);
-            $check = OrderDetails::find()->where(['order_id' => $orderid, 'product_id' => $cart->product_id])->one();
-
+            $check = OrderDetails::find()->where(['order_id' => $orders['order_id'], 'product_id' => $cart->product_id])->one();
             if (!empty($check)) {
-
+                $check->quantity = $cart->quantity;
+                if ($prod_details->offer_price != '') {
+                    $price = $prod_details->offer_price;
+                } else {
+                    $price = $prod_details->price;
+                }
+                $check->amount = $price;
+                $check->rate = ($cart->quantity) * ($price);
+                $check->save();
             } else {
                 $model_prod = new OrderDetails;
-                $model_prod->order_id = $orderid;
+                $model_prod->master_id = $orders['master_id'];
+                $model_prod->order_id = $orders['order_id'];
                 $model_prod->product_id = $cart->product_id;
                 $model_prod->quantity = $cart->quantity;
                 if ($prod_details->offer_price != '') {
@@ -326,7 +328,7 @@ class CartController extends \yii\web\Controller {
                 $model_prod->amount = $price;
                 $model_prod->rate = ($cart->quantity) * ($price);
                 if ($model_prod->save()) {
-
+                    return TRUE;
                 } else {
                     var_dump($model_prod->getErrors());
                 }
@@ -346,6 +348,22 @@ class CartController extends \yii\web\Controller {
             $subtotal += ($price * $cart_item->quantity);
         }
         return $subtotal;
+    }
+
+    public function generateProductEan($serial_no) {
+        $orderid_exist = OrderMaster::find()->where(['order_id' => $serial_no])->one();
+        if (!empty($orderid_exist)) {
+            return $this->generateProductEan($serial_no + 1);
+        } else {
+            return $serial_no;
+        }
+    }
+
+    public function Updateorderid($id) {
+        $orderid = \common\models\Settings::findOne(4);
+        $orderid->value = $id;
+        $orderid->save();
+        return;
     }
 
     function date() {
