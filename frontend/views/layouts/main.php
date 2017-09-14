@@ -139,7 +139,7 @@ and open the template in the editor.
                                     <ul class="shopping-cart-items">
 
                                     </ul>
-                                    <?= Html::a('Checkout', ['cart/mycart'], ['class' => 'button']) ?>
+                                    <?= Html::a('Checkout', ['/cart/mycart'], ['class' => 'button']) ?>
                                     <!--<a href="#" class="button">Checkout</a>-->
                                 </div>
                             </div>
@@ -171,7 +171,7 @@ and open the template in the editor.
                                 ?>
                                 <ul class="nav navbar-nav">
                                     <li class="<?= $action == 'site/index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>About Us</span>', ['/site/index'], ['class' => '']) ?></li>
+                                    <li class=""><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
                                     <li class="<?= $action == 'product/index' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>international products</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>private label</span>', ['/site/index'], ['class' => '']) ?></li>
@@ -241,7 +241,7 @@ and open the template in the editor.
                         <div style="padding-left: 35px;" class="col-md-3 col-sm-4 col-xs-3 xs-50">
                             <h4 class="foot-hdng">coral perfume</h4>
                             <ul class="foot-site-link">
-                                <li><a href="#">About Us</a></li>
+                                <li><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
                                 <li><a href="#">Terms and Conditions</a></li>
                                 <li><a href="#">Privacy Policies</a></li>
                                 <li><a href="#">Return Policy</a></li>
