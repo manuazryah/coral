@@ -26,7 +26,7 @@ use yii\helpers\Html;
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
                 <p class="product-name"> <?= $product->product_name ?></p>
                 <?php
-                if ($product->offer_price != "0") {
+                if ($product->offer_price > "0") {
                     $percentage = round(100 - (($product->offer_price / $product->price) * 100));
                     ?>
                     <p class="dashed-price"> AED <?= $product->offer_price; ?></p><span class="offer"><?= $percentage ?>%OFF</span>
