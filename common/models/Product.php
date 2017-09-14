@@ -51,14 +51,14 @@ class Product extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit',  'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status'], 'integer'],
+            [['category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit', 'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status'], 'integer'],
             [['category', 'subcategory', 'product_name', 'canonical_name', 'item_ean', 'brand', 'price', 'currency', 'stock', 'stock_unit', 'product_type', 'product_detail'], 'required'],
 //             [['profile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => 'create'],
             [['price', 'offer_price'], 'number'],
             [['main_description', 'product_detail'], 'string'],
             [['DOC', 'DOU'], 'safe'],
             [['product_name', 'canonical_name'], 'string', 'max' => 100],
-            [['item_ean'], 'string', 'max' => 255],
+//            [['item_ean'], 'string', 'max' => 255],
             [['canonical_name'], 'unique'],
             [['item_ean'], 'unique'],
             [['other_image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 3],
@@ -121,7 +121,7 @@ class Product extends \yii\db\ActiveRecord {
             Image::frame($path)
                     ->thumbnail(new Box(70, 70))
                     ->save(\yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '_thumb.' . $file->extension, ['quality' => 50]);
-//            
+//
             return true;
         }
     }

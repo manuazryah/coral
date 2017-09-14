@@ -29,8 +29,7 @@ use common\models\Fregrance;
                 </a>
             </div>
             <ul class="text-center">
-                <input type="hidden" value="1" class="q_ty">
-                <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', 'javascript:void(0)', ['class' => 'add_to_cart', 'id' => $model->canonical_name]) ?>
+                <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', 'javascript:void(0)', ['class' => 'add_to_cart', 'id' => $model->id]) ?>
                 <?= Html::a('<li><i class="fa fa-heart"></i></li>', 'javascript:void(0)', ['class' => 'add_to_wish_list', 'id' => $model->id]) ?>
                 <?= Html::a('<li><i class="fa fa-eye"></i></li>', ['/product/product_detail', 'product' => $model->canonical_name], ['class' => '']) ?>
             </ul>

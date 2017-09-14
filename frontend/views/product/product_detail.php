@@ -110,6 +110,7 @@ $this->title = $product_details->canonical_name;
                         <span style="color: red">Not in stock</span>
                     <?php } ?>
                 </h5>
+                <input type = "hidden" value = "<?= $product_details->canonical_name; ?>" id="cano_name_<?= $product_details->id; ?>" name="cano_name">
                 <div class="col-lg-12 col-md-12 hidden-sm hidden-xs pad-0">
                     <?php if ($product_details->stock != '0') { ?>
                         <select class="q_ty" id="number_passengers"  name="quantity" id="quantity">
@@ -124,7 +125,7 @@ $this->title = $product_details->canonical_name;
                                         <!--<input type="number" min="0" max="5" id="number_passengers" value="1">-->
 
                         <div class="action">
-                            <?= Html::a('add to cart', 'javascript:void(0)', ['class' => 'start-shopping add_to_cart', 'id' => $product_details->canonical_name]) ?>
+                            <?= Html::a('add to cart', 'javascript:void(0)', ['class' => 'start-shopping add_to_cart', 'id' => $product_details->id]) ?>
                             <?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping']) ?>
                         </div>
                     <?php } ?>

@@ -132,7 +132,7 @@ and open the template in the editor.
                                         <i class="fa fa-shopping-basket" aria-hidden="true"></i><span class="badge cart_count">(0)</span>
                                         <div class="shopping-cart-total">
                                             <span class="lighter-text">Total:</span>
-                                            <span class="main-color-text cart_amount">0</span>
+                                            <span class="main-color-text amount">0</span>
                                         </div>
                                     </div>
 
