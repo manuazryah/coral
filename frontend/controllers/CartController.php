@@ -175,9 +175,6 @@ class CartController extends \yii\web\Controller {
         $date = $this->date();
         $shipping_limit = Settings::findOne('1');
         if (isset(Yii::$app->user->identity->id)) {
-//            $model1 = new User();
-//            $model = new User();
-
             $user_id = Yii::$app->user->identity->id;
             Cart::deleteAll('date <= :date AND user_id != :user_id', ['date' => $date, ':user_id' => $user_id]);
             $cart_items = Cart::find()->where(['user_id' => $user_id])->all();

@@ -14,7 +14,7 @@ class CheckoutController extends \yii\web\Controller {
 
     public function actionCheckout() {
 
-        if (Yii::$app->user->identity->id != '' && Yii::$app->user->identity->id != NULL) {
+       if (isset(Yii::$app->user->identity->id)) {
             if (Yii::$app->session['orderid']) {
                 $address = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
                 $model = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => '1'])->one();
