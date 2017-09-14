@@ -25,6 +25,37 @@ $(document).ready(function () {
         addtocart(canname, qty);
     });
 
+    $(".add-cart").click(function () {
+        var canname = $(this).attr('id');
+        var list_id = $(this).attr('data-val');
+        var qty = $('.q_ty').val();
+        $.ajax({
+            type: "POST",
+            url: homeUrl + 'cart/buynow',
+            data: {cano_name: canname, qty: qty}
+        }).done(function (data) {
+            if (data == 9) {
+
+                $('.option_errors').html('<p>Invalid Product.Please try again</p>').show();
+            } else {
+                removewishlist(list_id, canname);
+                getcartcount();
+                getcarttotal();
+                $(".shopping-cart").fadeToggle("fast");
+                $(".shopping-cart-items").html(data);
+            }
+            hideLoader();
+        });
+    });
+
+    $(".remove-wish-list").click(function () {
+        var canname = $(this).attr('id');
+        var list_id = $(this).attr('data-val');
+        alert(canname);
+        alert(list_id);
+        removewishlist(list_id, canname);
+    });
+
     $(".add_to_wish_list").click(function () {
         var id = $(this).attr('id');
         addwishlist(id);
@@ -54,13 +85,23 @@ $(document).ready(function () {
             } else {
                 $('#quantity_' + id).val(max);
             }
-        }else if(quantity != ''){
+        } else if (quantity != '') {
             $('#quantity_' + id).val('1');
         }
     });
 
 });
 /******/
+function removewishlist(list_id, canname) {
+    $.ajax({
+        url: homeUrl + 'cart/remove-wishlist',
+        type: "POST",
+        data: {wish_list_id: list_id},
+        success: function (data) {
+            $('#' + canname).remove();
+        }
+    });
+}
 function updatecart(id, quantity, total) {
     $.ajax({
         type: "POST",
@@ -72,7 +113,7 @@ function updatecart(id, quantity, total) {
                 $('.subtotal').html('AED ' + $data.subtotal);
                 $('.total_' + id).html('AED ' + total);
             }
-//      
+//
         }
     });
 }

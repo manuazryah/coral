@@ -312,7 +312,7 @@ class CartController extends \yii\web\Controller {
             $check = OrderDetails::find()->where(['order_id' => $orderid, 'product_id' => $cart->product_id])->one();
 
             if (!empty($check)) {
-                
+
             } else {
                 $model_prod = new OrderDetails;
                 $model_prod->order_id = $orderid;
@@ -326,7 +326,7 @@ class CartController extends \yii\web\Controller {
                 $model_prod->amount = $price;
                 $model_prod->rate = ($cart->quantity) * ($price);
                 if ($model_prod->save()) {
-                    
+
                 } else {
                     var_dump($model_prod->getErrors());
                 }
@@ -352,6 +352,14 @@ class CartController extends \yii\web\Controller {
 //        $date = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s')));
         $date = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' - 8 days'));
         return $date;
+    }
+
+    public function actionRemoveWishlist() {
+        $id = Yii::$app->request->post()['wish_list_id'];
+        $model = \common\models\WishList::findOne($id);
+        $model->delete();
+        echo 1;
+        exit;
     }
 
 }

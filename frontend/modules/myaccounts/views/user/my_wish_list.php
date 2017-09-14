@@ -1,17 +1,18 @@
 <?php
 
 use yii\helpers\Html;
+
+$product = \common\models\Product::findOne($model->product);
 ?>
-<div class="orders-box wish-list">
+<div class="orders-box wish-list" id="<?= $product->canonical_name ?>">
     <div class="track">
-        <button title="Remove From Cart" class="remove-cart"><i class="fa fa-times" aria-hidden="true"></i></button>
-        <button class="add-cart green2">add to cart</button>
+        <?= Html::a('<i class="fa fa-times" aria-hidden="true"></i>', 'javascript:void(0)', ['class' => 'remove-cart remove-wish-list', 'id' => $product->canonical_name, 'data-val' => $model->id, 'title' => 'Remove From Wish List']) ?>
+        <?= Html::a('add to cart', 'javascript:void(0)', ['class' => 'add-cart green2', 'id' => $product->canonical_name, 'data-val' => $model->id]) ?>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ordered-pro-dtls">
         <div class="customer-reviews active">
             <div class="pro-img-box col-lg-3 col-md-3 col-sm-3 col-xs-4">
                 <?php
-                $product = \common\models\Product::findOne($model->product);
                 $product_image = Yii::$app->basePath . '/../uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '_thumb.' . $product->profile;
                 if (file_exists($product_image)) {
                     ?>
