@@ -14,14 +14,20 @@ class CheckoutController extends \yii\web\Controller {
 
     public function actionCheckout() {
 
-       if (isset(Yii::$app->user->identity->id)) {
-            if (Yii::$app->session['orderid']) {
-                $address = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
-                $model = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => '1'])->one();
-                return $this->render('billing', ['model' => $model, 'addresses' => $address]);
-            } else {
-                $this->redirect(array('cart/mycart'));
+        if (isset(Yii::$app->user->identity->id)) {
+//            if (Yii::$app->session['orderid']) {
+            $address = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+            $model = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => '1'])->one();
+            if ($model->load(Yii::$app->request->post())) {
+                $ship_address = Yii::$app->request->post()[UserAddress][billing];
+                $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']]);
+                $model1->ship_address_id = $ship_address;
+                $model1->save();
             }
+            return $this->render('billing', ['model' => $model, 'addresses' => $address]);
+//            } else {
+//                $this->redirect(array('cart/mycart'));
+//            }
 //            $this->redirect(array('checkout/billing'));
         } else {
             $this->redirect(array('site/login'));

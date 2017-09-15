@@ -90,7 +90,7 @@ $this->title = 'Shopping Cart';
                     <br/>
                     <div class="col-md-12">
                         <a  href="our-products.php"><button class="start-shopping">Continue shopping</button></a>
-                        <?= Html::a('<button class="green2">check out</button>', ['cart/proceed'], ['class' => 'button']) ?>
+                        <?= Html::a('<button class="green2">check out</button>', ['cart/checkout'], ['class' => 'button']) ?>
                         <!--<a  href="checkout.php"> <button class="green2">check out</button></a>-->
                     </div>
                 </div>
