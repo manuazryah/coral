@@ -62,7 +62,7 @@ use common\components\CartSummaryWidget;
                         <?= $form->field($model, 'mobile_number')->textInput(['class' => 'form-control', 'readOnly' => true])->label(FALSE) ?>
                     </div>
                     <div class="form-group login-group-checkbox margin-auto col-md-12">
-                        <label> <input type="checkbox" id="lg_remember" name="lg_remember">My delivery and billing addresses are the same.</label>
+                        <label> <input type="checkbox" value='1' id="lg_remember" name="UserAddress[check]">My delivery and billing addresses are the same.</label>
                     </div>
                 </div>
             </div>

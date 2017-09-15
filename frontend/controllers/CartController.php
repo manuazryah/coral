@@ -233,35 +233,36 @@ class CartController extends \yii\web\Controller {
     }
 
     public function actionCheckout() {
-        if (!isset(Yii::$app->user->identity->id)) {
-            yii::$app->session['after_login'] = 'cart/proceed';
-            $model = new CartsignupForm();
-            if ($model->load(Yii::$app->request->post())) {
-                $user = new User();
-                $user->username = '--guest--';
-                $user->first_name = $model->first_name;
-                $user->last_name = $model->last_name;
-                $user->country = '1';
-                $user->dob = '00-00-0000';
-                $user->gender = '0';
-                $user->country_code = $model->country_code;
-                $user->mobile_no = $model->mobile_no;
-                $user->email = $model->email;
-                $user->password = '';
-                if ($user->save()) {
-                    Yii::$app->user->identity->id = $user->id;
-                    $this->redirect(['cart/proceed']);
-                }else{
-                    var_dump($user->getErrors());
-                exit;
-                    return $this->render('checkout', ['model' => $model]);
-                }
-            }
-//            var_dump($model);exit;
-            return $this->render('checkout', ['model' => $model]);
-        } else {
-            $this->redirect(['cart/proceed']);
-        }
+        $this->redirect(['cart/proceed']);
+//        if (!isset(Yii::$app->user->identity->id)) {
+//            yii::$app->session['after_login'] = 'cart/proceed';
+//            $model = new CartsignupForm();
+//            if ($model->load(Yii::$app->request->post())) {
+//                $user = new User();
+//                $user->username = '--guest--';
+//                $user->first_name = $model->first_name;
+//                $user->last_name = $model->last_name;
+//                $user->country = '1';
+//                $user->dob = '00-00-0000';
+//                $user->gender = '0';
+//                $user->country_code = $model->country_code;
+//                $user->mobile_no = $model->mobile_no;
+//                $user->email = $model->email;
+//                $user->password = '';
+//                if ($user->save()) {
+//                    Yii::$app->user->identity->id = $user->id;
+//                    $this->redirect(['cart/proceed']);
+//                }else{
+//                    var_dump($user->getErrors());
+//                exit;
+//                    return $this->render('checkout', ['model' => $model]);
+//                }
+//            }
+////            var_dump($model);exit;
+//            return $this->render('checkout', ['model' => $model]);
+//        } else {
+//            $this->redirect(['cart/proceed']);
+//        }
     }
 
     public function actionProceed() {

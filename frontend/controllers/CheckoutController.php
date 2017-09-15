@@ -19,10 +19,17 @@ class CheckoutController extends \yii\web\Controller {
             $address = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
             $model = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => '1'])->one();
             if ($model->load(Yii::$app->request->post())) {
-                $ship_address = Yii::$app->request->post()[UserAddress][billing];
+                $bill_address = Yii::$app->request->post()[UserAddress][billing];
                 $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']]);
-                $model1->ship_address_id = $ship_address;
+                $model1->bill_address_id = $bill_address;
                 $model1->save();
+                if (Yii::$app->request->post()[UserAddress][check] == '1') {
+                    $model1->ship_address_id = $bill_address;
+                    $model1->save();
+//                    $this->redirect(array('checkout/confirm'));
+                }else{
+//                    $this->redirect(array('checkout/delivery'));
+                }
             }
             return $this->render('billing', ['model' => $model, 'addresses' => $address]);
 //            } else {

@@ -41,9 +41,7 @@ class BottleController extends Controller {
             $model->setScenario('create');
         }
         if ($model->load(Yii::$app->request->post())) {
-            $filee = UploadedFile::getInstance($model, 'desigin_img');
-            var_dump($filee);
-            exit;
+            $filee = UploadedFile::getInstances($model, 'desigin_img');
 //        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->SetExtension($model) && $model->validate() && $model->save() && $this->UploadSingle($model) && $this->UploadMultiple($model)) {
             if (!empty($id)) {
                 Yii::$app->getSession()->setFlash('success', 'Updated Successfully');
