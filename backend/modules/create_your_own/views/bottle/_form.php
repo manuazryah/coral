@@ -36,7 +36,7 @@ use yii\widgets\ActiveForm;
 
     </div>
     <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-        <?= $form->field($model, 'desigin_img')->fileInput(['multiple' => true]) ?>
+        <?= $form->field($model, 'desigin_img[]')->fileInput(['multiple' => true]) ?>
 
     </div>
 
