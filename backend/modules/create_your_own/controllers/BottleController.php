@@ -40,9 +40,7 @@ class BottleController extends Controller {
             $model = new Bottle();
             $model->setScenario('create');
         }
-        if ($model->load(Yii::$app->request->post())) {
-            $filee = UploadedFile::getInstances($model, 'desigin_img');
-//        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->SetExtension($model) && $model->validate() && $model->save() && $this->UploadSingle($model) && $this->UploadMultiple($model)) {
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->SetExtension($model) && $model->validate() && $model->save() && $this->UploadSingle($model) && $this->UploadMultiple($model)) {
             if (!empty($id)) {
                 Yii::$app->getSession()->setFlash('success', 'Updated Successfully');
             } else {
@@ -116,31 +114,25 @@ class BottleController extends Controller {
      * @return mixed
      */
     public function UploadMultiple($model) {
-        $model->desigin_img = UploadedFile::getInstance($model, 'desigin_img');
-        var_dump($model->desigin_img);
-        exit;
-        if (isset($model->bottle_img)) {
-            if ($model->bottle_img->saveAs(Yii::$app->basePath . '/../uploads/create_your_own/scent/' . $model->id . '.' . $model->img->extension)) {
-                if ($model->isNewRecord) {
-                    $update = Scent::findOne($model->id);
-                    $update->bottle_img = $model->bottle_img->extension;
-                    $update->update();
-                } else {
-                    $model->bottle_img = $model->bottle_img->extension;
-                    $model->save();
+        $model->desigin_img = UploadedFile::getInstances($model, 'desigin_img');
+        if (isset($model->desigin_img)) {
+            $filename = Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $model->id . '/';
+            $filename1 = Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $model->id . '/design/';
+            if (!file_exists($filename)) {
+                mkdir(Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $model->id, 0777);
+                if (!file_exists($filename1)) {
+                    mkdir(Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $model->id . '/design', 0777);
                 }
-                return true;
             } else {
-                return false;
+                if (!file_exists($filename1)) {
+                    mkdir(Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $model->id . '/design', 0777);
+                }
             }
-        } else {
-            if (!$model->isNewRecord) {
-                $update = Scent::findOne($model->id);
-                $model->bottle_img = $update->bottle_img;
-                $model->save();
+            foreach ($model->desigin_img as $file) {
+                $file->saveAs($filename1 . $file->baseName . '.' . $file->extension);
             }
-            return true;
         }
+        return true;
     }
 
     /**
