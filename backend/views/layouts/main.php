@@ -161,6 +161,29 @@ AppAsset::register($this);
                             </ul>
                         </li>
 
+                        <li>
+                            <a href="">
+                                <i class="fa fa-plus"></i>
+                                <span class="title">Create Your Own</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?= Html::a('Gender', ['/create_your_own/gender/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Character', ['/create_your_own/characters/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Scent', ['/create_your_own/scent/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Notes', ['/create_your_own/notes/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Bottle', ['/create_your_own/bottle/index'], ['class' => 'title']) ?>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
 
                 </div>

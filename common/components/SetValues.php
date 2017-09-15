@@ -20,7 +20,6 @@ use yii\base\Component;
 class SetValues extends Component {
 
     public function Attributes($model) {
-
         if (isset($model) && !Yii::$app->user->isGuest) {
             if ($model->isNewRecord) {
                 $model->UB = Yii::$app->user->identity->id;

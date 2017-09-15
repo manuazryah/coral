@@ -200,6 +200,9 @@ table.table tr td:last-child a {
 .alert-padng{
     padding: 5px 5px 5px 5px !important;
 }
+.alert {
+    padding: 5px;
+}
 .limit-text{
     display: block;
     /*	width: 100px;*/

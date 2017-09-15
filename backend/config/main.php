@@ -31,6 +31,9 @@ return [
         'user' => [
             'class' => 'backend\modules\user\Module',
         ],
+        'create_your_own' => [
+            'class' => 'backend\modules\create_your_own\Module',
+        ],
     ],
     'components' => [
         'request' => [
