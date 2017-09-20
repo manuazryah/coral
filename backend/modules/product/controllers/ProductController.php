@@ -82,18 +82,19 @@ class ProductController extends Controller {
                 $file12 = UploadedFile::getInstances($model, 'other_image');
 //            $model->item_ean = date(Ymdhis);
                 $model->profile = $file11[0]->extension;
-                $tag = $_POST['Product']['search_tag'];
+                $tag = Yii::$app->request->post()['Product']['search_tag'];
                 if ($tag) {
                     $model->search_tag = implode(',', $tag);
                 }
-                $tag1 = $_POST['Product']['related_product'];
+                $tag1 = Yii::$app->request->post()['Product']['related_product'];
                 if ($tag1) {
                     $model->related_product = implode(',', $tag1);
                 }
-                $model->meta_description = $_POST['Product']['meta_description'];
-                $model->meta_keywords = $_POST['Product']['meta_keywords'];
-                $model->profile_alt = $_POST['Product']['profile_alt'];
-                $model->gallery_alt = $_POST['Product']['gallery_alt'];
+                $model->meta_description = Yii::$app->request->post()['Product']['meta_description'];
+                $model->meta_keywords = Yii::$app->request->post()['Product']['meta_keywords'];
+                $model->meta_title = Yii::$app->request->post()['Product']['meta_title'];
+                $model->profile_alt = Yii::$app->request->post()['Product']['profile_alt'];
+                $model->gallery_alt = Yii::$app->request->post()['Product']['gallery_alt'];
                 $model->other_image = '';
                 if ($model->save()) {
                     if ($file11) {
@@ -162,18 +163,20 @@ class ProductController extends Controller {
             if ($file11) {
                 $model->profile = $file11[0]->extension;
             }
-            $tag = $_POST['Product']['search_tag'];
+            $tag = Yii::$app->request->post()['Product']['search_tag'];
             if ($tag) {
                 $model->search_tag = implode(',', $tag);
             }
-            $tag1 = $_POST['Product']['related_product'];
+            $tag1 = Yii::$app->request->post()['Product']['related_product'];
             if ($tag1) {
                 $model->related_product = implode(',', $tag1);
             }
-            $model->meta_description = $_POST['Product']['meta_description'];
-            $model->meta_keywords = $_POST['Product']['meta_keywords'];
-            $model->profile_alt = $_POST['Product']['profile_alt'];
-            $model->gallery_alt = $_POST['Product']['gallery_alt'];
+            $model->meta_description = Yii::$app->request->post()['Product']['meta_description'];
+            $model->meta_keywords = Yii::$app->request->post()['Product']['meta_keywords'];
+            $model->meta_title = Yii::$app->request->post()['Product']['meta_title'];
+            $model->profile_alt = Yii::$app->request->post()['Product']['profile_alt'];
+            $model->gallery_alt = Yii::$app->request->post()['Product']['gallery_alt'];
+            $model->other_image = '';
             if ($model->save()) {
                 if ($file11) {
                     if ($this->upload($model, $file11[0])) {
@@ -207,6 +210,7 @@ class ProductController extends Controller {
         $model->search_tag = $model1->search_tag;
         $model->meta_description = $model1->meta_description;
         $model->meta_keywords = $model1->meta_keywords;
+        $model->meta_title = $model1->meta_title;
         $ean = Product::find()->max('id');
         $model->product_name = '';
         $model->canonical_name = '';
@@ -231,18 +235,20 @@ class ProductController extends Controller {
                 }
 //            $model->item_ean = date(Ymdhis);
 
-                $tag = $_POST['Product']['search_tag'];
+                $tag = Yii::$app->request->post()['Product']['search_tag'];
                 if ($tag) {
                     $model->search_tag = implode(',', $tag);
                 }
-                $tag1 = $_POST['Product']['related_product'];
+                $tag1 = Yii::$app->request->post()['Product']['related_product'];
                 if ($tag1) {
                     $model->related_product = implode(',', $tag1);
                 }
-                $model->meta_description = $_POST['Product']['meta_description'];
-                $model->meta_keywords = $_POST['Product']['meta_keywords'];
-                $model->profile_alt = $_POST['Product']['profile_alt'];
-                $model->gallery_alt = $_POST['Product']['gallery_alt'];
+                $model->meta_description = Yii::$app->request->post()['Product']['meta_description'];
+                $model->meta_keywords = Yii::$app->request->post()['Product']['meta_keywords'];
+                $model->meta_title = Yii::$app->request->post()['Product']['meta_title'];
+                $model->profile_alt = Yii::$app->request->post()['Product']['profile_alt'];
+                $model->gallery_alt = Yii::$app->request->post()['Product']['gallery_alt'];
+                $model->other_image = '';
                 if ($model->save()) {
                     $this->UpdateProductEan($model->item_ean);
                     if ($file11) {
@@ -373,61 +379,66 @@ class ProductController extends Controller {
     }
 
     public function actionAjax_imgdelete() {
-        $image = $_POST['image'];
+        if (yii::$app->request->isAjax) {
+            $image = Yii::$app->request->post()['image'];
 //        echo yii::$app->homeUrl;exit;
-        if ($image) {
-            $img = explode('@', $image);
-            unlink(yii::$app->basepath . '/../uploads/product/' . $img['0'] . '/gallery/' . $img['1']);
-            unlink(yii::$app->basepath . '/../uploads/product/' . $img['0'] . '/gallery_thumb/' . $img['1']);
-            echo json_encode(array('msg' => 'success', 'id' => $img['2']));
-        } else {
-            echo json_encode(array('msg' => 'error', 'title' => 'Image Not Found'));
+            if ($image) {
+                $img = explode('@', $image);
+                unlink(yii::$app->basepath . '/../uploads/product/' . $img['0'] . '/gallery/' . $img['1']);
+                unlink(yii::$app->basepath . '/../uploads/product/' . $img['0'] . '/gallery_thumb/' . $img['1']);
+                echo json_encode(array('msg' => 'success', 'id' => $img['2']));
+            } else {
+                echo json_encode(array('msg' => 'error', 'title' => 'Image Not Found'));
+            }
         }
     }
 
     public function actionAjaxchange_product() {
-//        price: price, offerprice: offerprice, stock: stock, availablity: availablity
-        $price = $_POST['price'];
-        $offerprice = $_POST['offerprice'];
-        $stock = $_POST['stock'];
-        $availablity = $_POST['availablity'];
-        $id = $_POST['id'];
+        if (yii::$app->request->isAjax) {
+            $price = Yii::$app->request->post()['price'];
+            $offerprice = Yii::$app->request->post()['offerprice'];
+            $stock = Yii::$app->request->post()['stock'];
+            $availablity = Yii::$app->request->post()['availablity'];
+            $id = Yii::$app->request->post()['id'];
 //        echo yii::$app->homeUrl;exit;
-        if ($id) {
-            $model = $this->findModel($id);
-            $model->price = $price;
-            $model->offer_price = $offerprice;
-            $model->stock = $stock;
-            $model->stock_availability = $availablity;
-            if ($model->save()) {
-                echo json_encode(array('msg' => 'success', 'title' => 'succesfully changed'));
+            if ($id) {
+                $model = $this->findModel($id);
+                $model->price = $price;
+                $model->offer_price = $offerprice;
+                $model->stock = $stock;
+                $model->stock_availability = $availablity;
+                if ($model->save()) {
+                    echo json_encode(array('msg' => 'success', 'title' => 'succesfully changed'));
+                } else {
+                    echo json_encode(array('msg' => 'error', 'title' => 'Internal error '));
+                }
             } else {
-                echo json_encode(array('msg' => 'error', 'title' => 'Internal error '));
+                echo json_encode(array('msg' => 'error', 'title' => 'Product cannot be find'));
             }
-        } else {
-            echo json_encode(array('msg' => 'error', 'title' => 'Product cannot be find'));
         }
     }
 
     public function actionSubcategory() {
-        $category = $_POST['category'];
-        if (isset($category)) {
-            $subcat = SubCategory::find()->where(['category_id' => $category])->all();
+        if (yii::$app->request->isAjax) {
+            $category = Yii::$app->request->post()['category'];
+            if (isset($category)) {
+                $subcat = SubCategory::find()->where(['category_id' => $category])->all();
 
-            $val = "<option value=''>Select</option>";
-            if ($subcat) {
-                for ($i = 0; $i < sizeof($subcat); $i++) {
-                    $val .= "<option value='" . $subcat[$i]->id . "'>" . $subcat[$i]->sub_category . "</option>";
+                $val = "<option value=''>Select</option>";
+                if ($subcat) {
+                    for ($i = 0; $i < sizeof($subcat); $i++) {
+                        $val .= "<option value='" . $subcat[$i]->id . "'>" . $subcat[$i]->sub_category . "</option>";
+                    }
+                    echo $val;
+                    exit;
+                } else {
+                    echo $val; //No return
+                    exit;
                 }
-                echo $val;
-                exit;
             } else {
-                echo $val; //No return
+                echo 1; //Value Not Setted
                 exit;
             }
-        } else {
-            echo 1; //Value Not Setted
-            exit;
         }
     }
 

@@ -10,16 +10,15 @@ use common\models\Product;
 /**
  * ProductSearch represents the model behind the search form about `common\models\Product`.
  */
-class ProductSearch extends Product
-{
+class ProductSearch extends Product {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit', 'tax', 'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status'], 'integer'],
-            [['product_name', 'canonical_name', 'item_ean', 'brand', 'product_type', 'main_description', 'product_detail', 'DOC', 'DOU','profile','stock_availability','related_product'], 'safe'],
+            [['product_name', 'canonical_name', 'item_ean', 'brand', 'product_type', 'main_description', 'product_detail', 'DOC', 'DOU', 'profile', 'stock_availability', 'related_product'], 'safe'],
             [['price', 'offer_price'], 'number'],
         ];
     }
@@ -27,8 +26,7 @@ class ProductSearch extends Product
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -40,14 +38,14 @@ class ProductSearch extends Product
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Product::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
 
         $this->load($params);
@@ -87,17 +85,18 @@ class ProductSearch extends Product
         ]);
 
         $query->andFilterWhere(['like', 'product_name', $this->product_name])
-            ->andFilterWhere(['like', 'canonical_name', $this->canonical_name])
-            ->andFilterWhere(['like', 'meta_title', $this->meta_title])
-            ->andFilterWhere(['like', 'meta_description', $this->meta_description])
-            ->andFilterWhere(['like', 'meta_keywords', $this->meta_keywords])
-            ->andFilterWhere(['like', 'search_tag', $this->search_tag])
-            ->andFilterWhere(['like', 'item_ean', $this->item_ean])
-            ->andFilterWhere(['like', 'brand', $this->brand])
-            ->andFilterWhere(['like', 'product_type', $this->product_type])
-            ->andFilterWhere(['like', 'main_description', $this->main_description])
-            ->andFilterWhere(['like', 'product_detail', $this->product_detail]);
+                ->andFilterWhere(['like', 'canonical_name', $this->canonical_name])
+                ->andFilterWhere(['like', 'meta_title', $this->meta_title])
+                ->andFilterWhere(['like', 'meta_description', $this->meta_description])
+                ->andFilterWhere(['like', 'meta_keywords', $this->meta_keywords])
+                ->andFilterWhere(['like', 'search_tag', $this->search_tag])
+                ->andFilterWhere(['like', 'item_ean', $this->item_ean])
+                ->andFilterWhere(['like', 'brand', $this->brand])
+                ->andFilterWhere(['like', 'product_type', $this->product_type])
+                ->andFilterWhere(['like', 'main_description', $this->main_description])
+                ->andFilterWhere(['like', 'product_detail', $this->product_detail]);
 
         return $dataProvider;
     }
+
 }

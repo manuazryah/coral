@@ -234,7 +234,7 @@ class SiteController extends Controller {
 //        $this->layout = 'adminlogin';
         $model = new User();
         if ($model->load(Yii::$app->request->post())) {
-            $check_exists = User::find()->where("username = '" . $model->username . "' OR email = '" . $model->email . "'")->one();
+            $check_exists = User::find()->where("username = '" . $model->username . "' OR email = '" . $model->username . "'")->one();
             if (!empty($check_exists)) {
                 $token_value = $this->tokenGenerator();
                 $token = $check_exists->id . '_' . $token_value;
@@ -328,26 +328,26 @@ class SiteController extends Controller {
         }
     }
 
-    public function actionChangepassword() {
-        $model = User::findOne(Yii::$app->user->identity->id);
-        if (Yii::$app->request->post()) {
-            if (Yii::$app->getSecurity()->validatePassword(Yii::$app->request->post('old-password'), $model->password_hash)) {
-                if (Yii::$app->request->post('new-password') == Yii::$app->request->post('confirm-password')) {
-                    $model->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->request->post('confirm-password'));
-//                   echo $model->password_hash;exit;
-                    $model->update();
-                    Yii::$app->getSession()->setFlash('success', 'password changed successfully');
-                    $this->redirect('index');
-                } else {
-                    Yii::$app->getSession()->setFlash('error', 'password mismatch  ');
-                }
-            } else {
-                Yii::$app->getSession()->setFlash('error', 'Incorrect Password ');
-            }
-        }
-        return $this->render('resetPassword', [
-                    'model' => $model
-        ]);
-    }
+//    public function actionChangepassword() {
+//        $model = User::findOne(Yii::$app->user->identity->id);
+//        if (Yii::$app->request->post()) {
+//            if (Yii::$app->getSecurity()->validatePassword(Yii::$app->request->post('old-password'), $model->password_hash)) {
+//                if (Yii::$app->request->post('new-password') == Yii::$app->request->post('confirm-password')) {
+//                    $model->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->request->post('confirm-password'));
+////                   echo $model->password_hash;exit;
+//                    $model->update();
+//                    Yii::$app->getSession()->setFlash('success', 'password changed successfully');
+//                    $this->redirect('index');
+//                } else {
+//                    Yii::$app->getSession()->setFlash('error', 'password mismatch  ');
+//                }
+//            } else {
+//                Yii::$app->getSession()->setFlash('error', 'Incorrect Password ');
+//            }
+//        }
+//        return $this->render('resetPassword', [
+//                    'model' => $model
+//        ]);
+//    }
 
 }

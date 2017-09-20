@@ -13,8 +13,8 @@ use yii\filters\VerbFilter;
  * UnitController implements the CRUD actions for Unit model.
  */
 class UnitController extends Controller {
-    
-     public function beforeAction($action) {
+
+    public function beforeAction($action) {
         if (!parent::beforeAction($action)) {
             return false;
         }
@@ -148,22 +148,25 @@ class UnitController extends Controller {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
-    /**************/
+
+    /*     * *********** */
+
     public function actionAjaxaddunit() {
-        $unit = $_POST['unit'];
-        $model = new Unit();
-        $model->unit_name = $unit;
-        $model->status = '1';
-        if (Yii::$app->SetValues->Attributes($model)) {
-            if ($model->save()) {
-                echo json_encode(array("con" => "1", 'id' => $model->id, 'unit' => $unit)); //Success
-                exit;
+        if (yii::$app->request->isAjax) {
+            $unit = Yii::$app->request->post()['unit'];
+            $model = new Unit();
+            $model->unit_name = $unit;
+            $model->status = '1';
+            if (Yii::$app->SetValues->Attributes($model)) {
+                if ($model->save()) {
+                    echo json_encode(array("con" => "1", 'id' => $model->id, 'unit' => $unit)); //Success
+                    exit;
 //            array('id' => $model->id, 'category' => $category);
-            } else {
-                var_dump($model->getErrors());
+                } else {
+                    var_dump($model->getErrors());
 //            echo '0';
-                exit;
+                    exit;
+                }
             }
         }
     }

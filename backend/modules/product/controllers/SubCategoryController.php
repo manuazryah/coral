@@ -133,7 +133,7 @@ class SubCategoryController extends Controller {
             } else {
                 Yii::$app->getSession()->setFlash('error', "Can't delete the Item");
             }
-        }else{
+        } else {
             Yii::$app->getSession()->setFlash('error', "Can't delete the Item, Error Code : PRO1");
         }
 
@@ -156,21 +156,23 @@ class SubCategoryController extends Controller {
     }
 
     public function actionAjaxaddsubcat() {
-        $category = $_POST['cat'];
-        $subcategory = $_POST['subcat'];
-        $model = new SubCategory();
-        $model->category_id = $category;
-        $model->sub_category = $subcategory;
-        $model->status = '1';
-        if (Yii::$app->SetValues->Attributes($model)) {
-            if ($model->save()) {
-                echo json_encode(array("con" => "1", 'id' => $model->id, 'subcategory' => $subcategory)); //Success
-                exit;
+        if (yii::$app->request->isAjax) {
+            $category = Yii::$app->request->post()['cat'];
+            $subcategory = Yii::$app->request->post()['subcat'];
+            $model = new SubCategory();
+            $model->category_id = $category;
+            $model->sub_category = $subcategory;
+            $model->status = '1';
+            if (Yii::$app->SetValues->Attributes($model)) {
+                if ($model->save()) {
+                    echo json_encode(array("con" => "1", 'id' => $model->id, 'subcategory' => $subcategory)); //Success
+                    exit;
 //            array('id' => $model->id, 'category' => $category);
-            } else {
-                var_dump($model->getErrors());
+                } else {
+                    var_dump($model->getErrors());
 //            echo '0';
-                exit;
+                    exit;
+                }
             }
         }
     }

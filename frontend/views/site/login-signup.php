@@ -36,7 +36,7 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
                     <?= $form->field($model_login, 'rememberMe')->checkbox() ?>
                 </div>
                 <div class="form-group col-md-6">
-                    <a href="<?= Yii::$app->homeUrl; ?>site/forgot" style="color: #4694d2;">Forgot your password ?</a>
+                    <?= Html::a('Forgot your password ?', ['/forgot-password'], ['style' => 'color: #4694d2']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

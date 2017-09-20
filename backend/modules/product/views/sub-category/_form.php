@@ -24,7 +24,7 @@ use common\models\Category;
         <?= $form->field($model, 'sub_category')->textInput(['maxlength' => true]) ?>
     </div>
     <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
-        <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable'], ['prompt' => 'Select']) ?>
+        <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
     </div>
     <div class='col-md-12 col-sm-6 col-xs-12' style="float:right;">
         <div class="form-group" style="float: right;">

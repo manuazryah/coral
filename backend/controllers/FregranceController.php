@@ -105,6 +105,25 @@ class FregranceController extends Controller {
         return $this->redirect(['index']);
     }
 
+    public function actionAjaxaddfragrance() {
+        if (yii::$app->request->isAjax) {
+            $fragrance = Yii::$app->request->post()['fragrance'];
+            $model = new Fregrance();
+            $model->name = $fragrance;
+            $model->status = '1';
+            if (Yii::$app->SetValues->Attributes($model)) {
+                if ($model->save()) {
+                    echo json_encode(array("con" => "1", 'id' => $model->id, 'fragrance' => $fragrance)); //Success
+                    exit;
+//            array('id' => $model->id, 'category' => $category);
+                } else {
+                    echo json_encode(array("con" => "0", 'error' => 'Cannot added')); //Error
+                    exit;
+                }
+            }
+        }
+    }
+
     /**
      * Finds the Fregrance model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

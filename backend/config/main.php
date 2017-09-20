@@ -34,6 +34,9 @@ return [
         'create_your_own' => [
             'class' => 'backend\modules\create_your_own\Module',
         ],
+        'order' => [
+            'class' => 'backend\modules\order\Module',
+        ],
     ],
     'components' => [
         'request' => [

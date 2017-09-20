@@ -107,18 +107,20 @@ class BrandController extends Controller {
     /*     * *********** */
 
     public function actionAjaxaddbrand() {
-        $brand = $_POST['brand'];
-        $model = new Brand();
-        $model->brand = $brand;
-        $model->status = '1';
-        if (Yii::$app->SetValues->Attributes($model)) {
-            if ($model->save()) {
-                echo json_encode(array("con" => "1", 'id' => $model->id, 'brand' => $brand)); //Success
-                exit;
+        if (yii::$app->request->isAjax) {
+            $brand = Yii::$app->request->post()['brand'];
+            $model = new Brand();
+            $model->brand = $brand;
+            $model->status = '1';
+            if (Yii::$app->SetValues->Attributes($model)) {
+                if ($model->save()) {
+                    echo json_encode(array("con" => "1", 'id' => $model->id, 'brand' => $brand)); //Success
+                    exit;
 //            array('id' => $model->id, 'category' => $category);
-            } else {
-                echo json_encode(array("con" => "0", 'error' => 'Cannot added')); //Error
-                exit;
+                } else {
+                    echo json_encode(array("con" => "0", 'error' => 'Cannot added')); //Error
+                    exit;
+                }
             }
         }
     }

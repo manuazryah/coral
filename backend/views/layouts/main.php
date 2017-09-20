@@ -113,7 +113,7 @@ AppAsset::register($this);
                                             <?= Html::a('Brand', ['/brand/index'], ['class' => 'title']) ?>
                                         </li>
                                         <li>
-                                            <?= Html::a('Fregrance', ['/fregrance/index'], ['class' => 'title']) ?>
+                                            <?= Html::a('Fragrance', ['/fregrance/index'], ['class' => 'title']) ?>
                                         </li>
                                     </ul>
                                 </li>
@@ -183,6 +183,10 @@ AppAsset::register($this);
                                     <?= Html::a('Bottle', ['/create_your_own/bottle/index'], ['class' => 'title']) ?>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <?= Html::a('<i class="fa fa-apple"></i><span class="title">Orders</span>', ['/order/order-master/index'], ['class' => '']) ?>
+                           
                         </li>
                     </ul>
 

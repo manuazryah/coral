@@ -125,7 +125,7 @@ $this->title = $product_details->canonical_name;
 
                         <div class="action">
                             <?= Html::a('add to cart', 'javascript:void(0)', ['class' => 'start-shopping add_to_cart', 'id' => $product_details->canonical_name]) ?>
-                            <?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping']) ?>
+                            <?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping buy_now', 'id' => $product_details->canonical_name]) ?>
                         </div>
                     <?php } ?>
                     <div class="share">
@@ -151,7 +151,7 @@ $this->title = $product_details->canonical_name;
 
                     <div class="action">
                         <?= Html::a('add to cart', 'javascript:void(0)', ['class' => 'start-shopping add_to_cart', 'id' => $product_details->canonical_name]) ?>
-                        <?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping']) ?>
+                        <?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping buy_now', 'id' => $product_details->canonical_name]) ?>
                     </div>
                 <?php } ?>
                 <div class="share">

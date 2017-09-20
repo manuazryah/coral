@@ -115,9 +115,10 @@ class MasterSearchTagController extends Controller {
     }
 
     public function actionAjaxaddtag() {
-        $tag_name = $_POST['tag'];
-        $tag = MasterSearchTag::find()->where(['tag_name' => $tag_name])->one();
-        if (empty($tag)) {
+        if (yii::$app->request->isAjax) {
+            $tag_name =Yii::$app->request->post()['tag'];
+            $tag = MasterSearchTag::find()->where(['tag_name' => $tag_name])->one();
+            if (empty($tag)) {
                 $model = new MasterSearchTag();
                 $model->tag_name = $tag_name;
                 $model->status = '1';
@@ -136,6 +137,7 @@ class MasterSearchTagController extends Controller {
                 echo json_encode(array("con" => "2", 'error' => 'Already Available')); //Success
                 exit;
             }
+        }
     }
 
     /**

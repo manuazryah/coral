@@ -13,8 +13,8 @@ use yii\filters\VerbFilter;
  * CategoryController implements the CRUD actions for Category model.
  */
 class CategoryController extends Controller {
-    
-     public function beforeAction($action) {
+
+    public function beforeAction($action) {
         if (!parent::beforeAction($action)) {
             return false;
         }
@@ -123,11 +123,11 @@ class CategoryController extends Controller {
         $item_details = \common\models\SubCategory::findAll(['category_id' => $id]);
         if (empty($item_details)) {
             $product_details = \common\models\Product::find()->where(['category' => $id])->all();
-            if(empty($product_details)){
-            $this->findModel($id)->delete();
-            Yii::$app->getSession()->setFlash('success', 'succuessfully deleted');
-            }else{
-                 Yii::$app->getSession()->setFlash('error', "Can't delete the Item, Error Code : PRO1");
+            if (empty($product_details)) {
+                $this->findModel($id)->delete();
+                Yii::$app->getSession()->setFlash('success', 'succuessfully deleted');
+            } else {
+                Yii::$app->getSession()->setFlash('error', "Can't delete the Item, Error Code : PRO1");
             }
         } else {
             Yii::$app->getSession()->setFlash('error', "Can't delete the Item");
@@ -168,21 +168,23 @@ class CategoryController extends Controller {
 
     //*******//
     public function actionAjaxaddcategory() {
-        $category = $_POST['cat'];
-        $code = $_POST['code'];
-        $model = new Category();
-        $model->category = $category;
-        $model->category_code = $code;
-        $model->status = '1';
-        if (Yii::$app->SetValues->Attributes($model)) {
-            if ($model->save()) {
-                echo json_encode(array("con" => "1", 'id' => $model->id, 'category' => $category)); //Success
-                exit;
+        if (yii::$app->request->isAjax) {
+            $category = Yii::$app->request->post()['cat'];
+            $code = Yii::$app->request->post()['code'];
+            $model = new Category();
+            $model->category = $category;
+            $model->category_code = $code;
+            $model->status = '1';
+            if (Yii::$app->SetValues->Attributes($model)) {
+                if ($model->save()) {
+                    echo json_encode(array("con" => "1", 'id' => $model->id, 'category' => $category)); //Success
+                    exit;
 //            array('id' => $model->id, 'category' => $category);
-            } else {
-                var_dump($model->getErrors());
+                } else {
+                    var_dump($model->getErrors());
 //            echo '0';
-                exit;
+                    exit;
+                }
             }
         }
     }

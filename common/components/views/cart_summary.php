@@ -6,7 +6,7 @@ use common\models\Brand;
 ?>
 <div class="summery-box lit-blue">
     <div class="heading active">
-        <p>SUMMERY</p>
+        <p>SUMMARY</p>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: left;"><p><?= count($cart_items); ?> Items</p></div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

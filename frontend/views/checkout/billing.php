@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\components\CartSummaryWidget;
+
+$this->title = 'Checkout';
 ?>
 <div class="pad-20 hide-xs"></div>
 
@@ -10,7 +12,7 @@ use common\components\CartSummaryWidget;
     <div class="breadcrumb">
         <span class="current-page">My account</span>
         <ol class="path">
-            <li><a href="index.php">Home</a></li>
+            <li><?= Html::a('<span>Home</span>', ['index'], ['class' => '']) ?></li>
             <li class="active">My account</li>
         </ol>
     </div>
@@ -30,7 +32,7 @@ use common\components\CartSummaryWidget;
                     <?php $form = ActiveForm::begin(); ?>
 
                     <div class="form-group col-lg-12 col-md-8 col-sm-8 col-xs-12 address-field">
-                        <label for="usr">Billing Address*</label>
+                        <label for="usr">Delivery Address*</label>
                         <select class="form-control" id="billing" name="UserAddress[billing]">
                             <?php foreach ($addresses as $address) { ?>
                                 <option value="<?= $address->id ?>" <?php if ($address->status == '1') { ?>selected="selected"<?php } ?>><?= $address->address . ', ' . $address->landmark . ', ' . $address->location ?></option>
@@ -58,8 +60,18 @@ use common\components\CartSummaryWidget;
                         <?= $form->field($model, 'post_code')->textInput(['class' => 'form-control', 'readOnly' => true])->label(FALSE) ?>
                     </div>
                     <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12 number-field">
-                        <label for="pwd">Alternate Mobile Number</label>
-                        <?= $form->field($model, 'mobile_number')->textInput(['class' => 'form-control', 'readOnly' => true])->label(FALSE) ?>
+                        <label for="pwd">Mobile Number</label>
+                        <div class="date-dropdowns" style="padding-right: 15px;">
+                            <select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" id="useraddress-country_code" name="UserAddress[country_code]">
+                            <!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
+                                <?php foreach ($country_codes as $country_code) { ?>
+                                    <option value="<?= $country_code ?>" <?= $country_code == $model->country_code ? ' selected' : '' ?>><?= $country_code ?></option>
+                                <?php }
+                                ?>
+                            </select>
+                            <?= $form->field($model, 'mobile_number')->textInput(['class' => 'form-control', 'style' => 'padding-left: 70px', 'readOnly' => true])->label(FALSE) ?>
+                            <!--<input style="padding-left: 70px;" type="phone" id="user-mobile_number" class="form-control" name="UserAddress[mobile_number]" value="<?= $model->mobile_number ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">-->
+                        </div>
                     </div>
                     <div class="form-group login-group-checkbox margin-auto col-md-12">
                         <label> <input type="checkbox" value='1' id="lg_remember" name="UserAddress[check]">My delivery and billing addresses are the same.</label>
@@ -90,30 +102,28 @@ use common\components\CartSummaryWidget;
 <script>
     $('#billing').on('change', function () {
         var id = $(this).val();
-       var $data = changeaddress('useraddress',id);
+        changeaddress('useraddress', id);
     });
-    $('#delivery').on('change', function () {
-        var id = $(this).val();
-       var $data = changeaddress('delivery',id);
-    });
-    function changeaddress(formclass,id) {
+   
+    function changeaddress(formclass, id) {
         $.ajax({
             type: "POST",
             cache: 'false',
             async: false,
             url: homeUrl + 'checkout/getadress',
-            data: {id:id}
+            data: {id: id}
         }).done(function (data) {
             var $data = JSON.parse(data);
-                if ($data.rslt === "success") {
-                    $('#'+formclass+'-address').val($data.address);
-                    $('#'+formclass+'-landmark').val($data.landmark);
-                    $('#'+formclass+'-location').val($data.location);
-                    $('#'+formclass+'-emirate').val($data.emirate);
-                    $('#'+formclass+'-post_code').val($data.post_code);
-                    $('#'+formclass+'-mobile_number').val($data.mobile_number);
-            
-                }
+            if ($data.rslt === "success") {
+                $('#' + formclass + '-address').val($data.address);
+                $('#' + formclass + '-landmark').val($data.landmark);
+                $('#' + formclass + '-location').val($data.location);
+                $('#' + formclass + '-emirate').val($data.emirate);
+                $('#' + formclass + '-post_code').val($data.post_code);
+                $('#' + formclass + '-mobile_number').val($data.mobile_number);
+                $('#' + formclass + '-country_code').val($data.country_code);
+
+            }
         });
     }
 </script>

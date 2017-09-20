@@ -27,8 +27,7 @@ $this->title = 'Shopping Cart';
     <div class="breadcrumb">
         <span class="current-page">Shopping cart</span>
         <ol class="path">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="product-detail.php">Product Details</a></li>
+            <li><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
             <li class="active">Cart</li>
         </ol>
     </div>
