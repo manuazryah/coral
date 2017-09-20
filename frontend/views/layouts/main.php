@@ -132,7 +132,7 @@ and open the template in the editor.
                                         <i class="fa fa-shopping-basket" aria-hidden="true"></i><span class="badge cart_count">(0)</span>
                                         <div class="shopping-cart-total">
                                             <span class="lighter-text">Total:</span>
-                                            <span class="main-color-text cart_amount">0</span>
+                                            <span class="main-color-text amount">0</span>
                                         </div>
                                     </div>
 
@@ -171,12 +171,12 @@ and open the template in the editor.
                                 ?>
                                 <ul class="nav navbar-nav">
                                     <li class="<?= $action == 'site/index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
+                                    <li class="<?= $action == 'site/about' ? 'active' : '' ?>"><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
                                     <li class="<?= $action == 'product/index' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
                                     <li class=""><?= Html::a('<span>international products</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>private label</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>showrooms</span>', ['/site/index'], ['class' => '']) ?></li>
-                                    <li class=""><?= Html::a('<span>contact us</span>', ['/site/contact'], ['class' => '']) ?></li>
+                                    <li class="<?= $action == 'site/private-label' ? 'active' : '' ?>"><?= Html::a('<span>private label</span>', ['/site/private-label'], ['class' => '']) ?></li>
+                                    <li class="<?= $action == 'site/showrooms' ? 'active' : '' ?>"><?= Html::a('<span>showrooms</span>', ['/site/showrooms'], ['class' => '']) ?></li>
+                                    <li class="<?= $action == 'site/contact' ? 'active' : '' ?>"><?= Html::a('<span>contact us</span>', ['/site/contact'], ['class' => '']) ?></li>
                                     <!--                                    <li class="dropdown">
                                                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                                                                             <ul class="dropdown-menu">
@@ -242,10 +242,10 @@ and open the template in the editor.
                             <h4 class="foot-hdng">coral perfume</h4>
                             <ul class="foot-site-link">
                                 <li><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
-                                <li><a href="#">Terms and Conditions</a></li>
-                                <li><a href="#">Privacy Policies</a></li>
-                                <li><a href="#">Return Policy</a></li>
-                                <li><a href="#">FAQs</a></li>
+                                <li><?= Html::a('<span>Terms and Conditions</span>', ['/site/terms-condition'], ['class' => '']) ?></li>
+                                <li><?= Html::a('<span>Privacy Policies</span>', ['/site/privacy-policy'], ['class' => '']) ?></li>
+                                <li><?= Html::a('<span>Return Policy</span>', ['/site/return-policy'], ['class' => '']) ?></li>
+                                <li><?= Html::a('<span>FAQs</span>', ['/site/faq'], ['class' => '']) ?></li>
                             </ul>
                         </div>
                         <div style="padding-left: 0px;" class="col-md-4 col-sm-4 col-xs-4 xs-50 br-left">
@@ -254,11 +254,11 @@ and open the template in the editor.
                                 <div class="col-md-12 my-account-link">
                                     <ul>
                                         <li><a href="#">My Account</a></li>
-                                        <li><a href="#">Private Label</a></li>
+                                        <li><?= Html::a('Private Label', ['/site/private-label'], ['class' => '']) ?></li>
                                         <li><a href="#">Our Products</a></li>
-                                        <li><a href="#">Showrooms</a></li>
+                                        <li><?= Html::a('Showrooms', ['/site/showrooms'], ['class' => '']) ?></li>
                                         <li><a href="#">International Products</a></li>
-                                        <li><?= Html::a('<span>contact us</span>', ['/site/contact'], ['class' => '']) ?></li>
+                                        <li><?= Html::a('contact us', ['/site/contact'], ['class' => '']) ?></li>
 
                                     </ul>
                                 </div>
@@ -297,7 +297,7 @@ and open the template in the editor.
 <!--======= pro-slider-end =========-->
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
-    $('#contact').on('submit', function (e) {                    if (grecaptcha.getResponse() == "") {                        e.preventDefault(); $(".rc-anchor-light.rc-anchor-normal").css("border", "1px solid #d35656 !important"); if ($(".capcha-main").next(".validation").length == 0) // only add if not added                        {                            $(".capcha-main").after("<div class='validation' style='color:#c54040;margin-left: 15px;font-size: 13px;'>Please verify that you are not a robot</div>");                        }                    }                });
+            $('#contact').on('submit', function (e) {                    if (grecaptcha.getResponse() == "") {                        e.preventDefault(); $(".rc-anchor-light.rc-anchor-normal").css("border", "1px solid #d35656 !important"); if ($(".capcha-main").next(".validation").length == 0) // only add if not added                        {                            $(".capcha-main").after("<div class='validation' style='color:#c54040;margin-left: 15px;font-size: 13px;'>Please verify that you are not a robot</div>");                        }                    }                });
 //    (function () {
 //
 //        $("#cart").hover(function () {
@@ -313,32 +313,29 @@ and open the template in the editor.
 //    }
 //    );
 
-    $('ul.nav li.dropdown').hover(function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-    }, function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-    });
-</script>
+                    $('ul.nav li.dropdown').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });</script>
 <script>
-    (function () {
+            (function () {
 
-        $("#cart").on("click", function () {
+            $("#cart").on("click", function () {
             $(".shopping-cart").fadeToggle("fast");
-        });
-
-    })();
-
+            });
+            })();
 //    jQuery('#cart').on('mouseover', function () {
 //        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeToggle("fast");
 //    });
 //    jQuery('#cart').on("mouseout", function () {
 //        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeOut("fast");
 //    });
-    $(document).ready(function () {
+            $(document).ready(function () {
 
-        $("#addSchool").click(function () {
-            $("#schoolContainer").append('<option value="' + $("#newSchool").val() + '">' + $("#newSchool").val() + '</option>');
-        });
+    $("#addSchool").click(function () {
+    $("#schoolContainer").append('<option value="' + $("#newSchool").val() + '">' + $("#newSchool").val() + '</option>');
+    });
 //        $("example2").dateDropdowns({
 //            submitFormat: "dd/mm/yyyy"
 //        });
@@ -349,8 +346,7 @@ and open the template in the editor.
 //            zoomWindowFadeOut: 750
 //        });
 
-    });
-</script>
+    });</script>
 <script>
 //$(window).load(function () {
 //    $('#inwave-map').html('<div class="map-frame"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1553532.2927783665!2d54.475375168816676!3d25.259041996119326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c4a00eebfbb%3A0xa181e9f8ed00124e!2sActive+Mopp+Cleaning+Services+L.L.C!5e0!3m2!1sen!2sin!4v1493452043945" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe></div>');
@@ -359,25 +355,22 @@ and open the template in the editor.
 
 </script>
 <script type="text/javascript">
-    $('#radioBtn a').on('click', function () {
-        var sel = $(this).data('title');
-        var tog = $(this).data('toggle');
-        $('#' + tog).prop('value', sel);
-
-        $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
-        $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+            $('#radioBtn a').on('click', function () {
+    var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
     });
-
-    $('#phone').keyup(function (e) {
-        if ((e.keyCode > 47 && e.keyCode < 58) || (e.keyCode < 106 && e.keyCode > 95)) {
-            this.value = this.value.replace(/(\d{3})\-?/g, '$1-');
+            $('#phone').keyup(function (e) {
+    if ((e.keyCode > 47 && e.keyCode < 58) || (e.keyCode < 106 && e.keyCode > 95)) {
+    this.value = this.value.replace(/(\d{3})\-?/g, '$1-');
             return true;
-        }
+    }
 
-        //remove all chars, except dash and digits
-        this.value = this.value.replace(/[^\-0-9]/g, '');
+    //remove all chars, except dash and digits
+    this.value = this.value.replace(/[^\-0-9]/g, '');
     });
-
 //    $(function () {
 //        $('input[name="rad"]').click(function () {
 //            var $radio = $(this);
@@ -396,36 +389,35 @@ and open the template in the editor.
 //    });
 
 
-    $(function () {
-        var action;
-        $(".number-spinner button").mousedown(function () {
+            $(function () {
+            var action;
+                    $(".number-spinner button").mousedown(function () {
             btn = $(this);
-            input = btn.closest('.number-spinner').find('input');
-            btn.closest('.number-spinner').find('button').prop("disabled", false);
-
-            if (btn.attr('data-dir') == 'up') {
-                action = setInterval(function () {
-                    if (input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max'))) {
-                        input.val(parseInt(input.val()) + 1);
-                    } else {
-                        btn.prop("disabled", true);
-                        clearInterval(action);
-                    }
-                }, 50);
+                    input = btn.closest('.number-spinner').find('input');
+                    btn.closest('.number-spinner').find('button').prop("disabled", false);
+                    if (btn.attr('data-dir') == 'up') {
+            action = setInterval(function () {
+            if (input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max'))) {
+            input.val(parseInt(input.val()) + 1);
             } else {
-                action = setInterval(function () {
-                    if (input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min'))) {
-                        input.val(parseInt(input.val()) - 1);
-                    } else {
-                        btn.prop("disabled", true);
-                        clearInterval(action);
-                    }
-                }, 50);
+            btn.prop("disabled", true);
+                    clearInterval(action);
             }
-        }).mouseup(function () {
+            }, 50);
+            } else {
+            action = setInterval(function () {
+            if (input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min'))) {
+            input.val(parseInt(input.val()) - 1);
+            } else {
+            btn.prop("disabled", true);
+                    clearInterval(action);
+            }
+            }, 50);
+            }
+            }).mouseup(function () {
             clearInterval(action);
-        });
-    });
+            });
+            });
 </script>
 <!--<script>
     $(document).scroll(function () {

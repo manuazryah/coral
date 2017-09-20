@@ -1,0 +1,103 @@
+#privatelabel .main-gallery {
+    background: rgba(237, 247, 245, 0.87);
+    /*box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);*/
+    border: 2px solid #ddc065;
+    min-height: 300px;
+    top: 30px;
+
+}
+
+#privatelabel .gallery-cell {
+    width: 100%;
+}
+#privatelabel #testimonial .Quote{
+    font-family: roboto-bold;
+    font-size: 70px;
+    line-height: 20px;
+    color: #ddc065;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    z-index: 2;
+    top: 40px;
+}
+
+#privatelabel .testimonial {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+#privatelabel .testimonial-avatar {
+    width: 80px;
+    border-radius: 50%;
+}
+
+#privatelabel .testimonial-quote {
+    font-family: roboto-light;
+    font-style: italic;
+    display: block;
+    font-size: 14px;
+    padding: 10px 35px;
+}
+
+#privatelabel .testimonial-author {
+    display: block;
+    font-weight: 600;
+    color: #515452;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#privatelabel .flickity-page-dots {
+    bottom: 25px;
+    visibility: hidden;
+}
+
+#privatelabel .flickity-page-dots .dot.is-selected {
+    background: #7AA641;
+}
+#privatelabel #testimonial{
+    background-image: url(../images/testimonial-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 460px;
+}
+#privatelabel #testimonial h5{
+    font-family: Bauhaus;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+#privatelabel #testimonial .sub-heading{
+    font-family: roboto-light;
+    font-size: 15px;
+    color: white;
+    text-align: center;
+}
+#privatelabel #testimonial .flickity-prev-next-button.previous {
+    left: -10px;
+}
+#privatelabel #testimonial .flickity-prev-next-button {
+    position: absolute;
+    top: 50%;
+    width: 24px;
+    height: 44px;
+    border: none;
+    border-radius: 0px;
+    color: #fff;
+    background: #ddc065;
+    cursor: pointer;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+#privatelabel #testimonial .flickity-prev-next-button.next {
+    right: -10px;
+}
+#privatelabel #testimonial .flickity-prev-next-button .arrow {
+    fill: #fff;
+}

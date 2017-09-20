@@ -34,8 +34,11 @@ return [
         'create_your_own' => [
             'class' => 'backend\modules\create_your_own\Module',
         ],
-        'order' => [
-            'class' => 'backend\modules\order\Module',
+        'cms' => [
+            'class' => 'backend\modules\cms\Module',
+        ],
+        'contacts' => [
+            'class' => 'backend\modules\contacts\Module',
         ],
     ],
     'components' => [

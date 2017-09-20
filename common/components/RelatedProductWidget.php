@@ -34,9 +34,13 @@ class RelatedProductWidget extends Widget {
     }
 
     public function run() {
-        $related_product = Product::find()->where(new Expression('FIND_IN_SET(:id, id)'))->addParams([':id' => $this->id])->andWhere(['status' => 1])->orderBy(['id' => SORT_DESC])->all();
-        return $this->render('related_product', ['related_product' => $related_product]);
-        //return Html::encode($this->message);
+        if (!empty($this->id)) {
+            $related_vals = explode(',', $this->id);
+            $related_product = Product::find()->where(['IN', 'id', $related_vals])->andWhere(['status' => 1])->orderBy(['id' => SORT_DESC])->all();
+            return $this->render('related_product', ['related_product' => $related_product]);
+        } else {
+            return;
+        }
     }
 
 }

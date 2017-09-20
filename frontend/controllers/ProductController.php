@@ -19,17 +19,26 @@ class ProductController extends \yii\web\Controller {
      * @param category_code $id
      * @return mixed
      */
-    public function actionIndex($id) {
+    public function actionIndex($id = null) {
+//        echo $id;
+//        exit;
         $catag = Category::find()->where(['category_code' => $id])->one();
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere(['category' => $catag->id]);
+        if (!empty($id)) {
+            $dataProvider->query->andWhere(['category' => $catag->id]);
+        }
+        if (isset(Yii::$app->session['gender_search'])) {
+            $dataProvider->query->andWhere(['gender_type' => Yii::$app->session['gender_search']]);
+        }
         $categories = Category::find()->where(['status' => 1])->all();
+
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'categories' => $categories,
                     'catag' => $catag,
+                    'id' => $id,
         ]);
     }
 
@@ -59,6 +68,8 @@ class ProductController extends \yii\web\Controller {
         $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
         $this->RecentlyViewed($product_details);
         $product_reveiws = \common\models\CustomerReviews::find()->where(['product_id' => $product_details->id, 'status' => '1'])->all();
+        \Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $product_details->meta_keywords]);
+        \Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $product_details->meta_description]);
         return $this->render('product_detail', [
                     'product_details' => $product_details,
                     'product_reveiws' => $product_reveiws,
@@ -188,6 +199,9 @@ class ProductController extends \yii\web\Controller {
         }
     }
 
+    /**
+     * This function will display new modal for add new customer reviews
+     */
     public function actionAddReview() {
         if (Yii::$app->user->isGuest) {
             return $this->redirect(array('site/login-signup'));
@@ -203,6 +217,9 @@ class ProductController extends \yii\web\Controller {
         }
     }
 
+    /**
+     * This function will save new customer reviews
+     */
     public function actionSaveReview() {
         if (Yii::$app->request->isAjax) {
             $model_review = new \common\models\CustomerReviews();
@@ -213,6 +230,14 @@ class ProductController extends \yii\web\Controller {
                 echo 1;
                 exit;
             }
+        }
+    }
+
+    public function actionGenderSearch() {
+        if (Yii::$app->request->isAjax) {
+            $gender = $_POST['gender'];
+            $product_category = $_POST['pro_cat'];
+            Yii::$app->session['gender_search'] = $gender;
         }
     }
 

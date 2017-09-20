@@ -36,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="input-group gender-selection">
             <div id="radioBtn" class="btn-group">
                 <span>Type:</span>
-                <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y">Women</a>
-                <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="N">Men</a>
+                <a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="Y" id="0" pro_cat="<?= $id ?>">Women</a>
+                <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="1" pro_cat="<?= $id ?>">Men</a>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             }
                                             ?>
                                             <?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $category->category_code], ['class' => $active_class]) ?>
-                                                            <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
+                                                                                            <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
                                         <?php }
                                         ?>
                                     </div>

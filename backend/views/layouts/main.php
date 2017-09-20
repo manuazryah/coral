@@ -113,7 +113,7 @@ AppAsset::register($this);
                                             <?= Html::a('Brand', ['/brand/index'], ['class' => 'title']) ?>
                                         </li>
                                         <li>
-                                            <?= Html::a('Fragrance', ['/fregrance/index'], ['class' => 'title']) ?>
+                                            <?= Html::a('Fregrance', ['/fregrance/index'], ['class' => 'title']) ?>
                                         </li>
                                     </ul>
                                 </li>
@@ -184,9 +184,60 @@ AppAsset::register($this);
                                 </li>
                             </ul>
                         </li>
+
                         <li>
-                            <?= Html::a('<i class="fa fa-apple"></i><span class="title">Orders</span>', ['/order/order-master/index'], ['class' => '']) ?>
-                           
+                            <a href="">
+                                <i class="fa-pie-chart"></i>
+                                <span class="title">CMS</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?= Html::a('Slider', ['/cms/slider/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('About Page', ['/cms/about/update?id=1'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Contact Page', ['/cms/contact-page/update?id=1'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Private Label Page', ['/cms/private-label-gallery/update?id=1'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <span class="title">Principals</span>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <?= Html::a('Terms & Conditions', ['/cms/principals/terms-conditions'], ['class' => 'title']) ?>
+                                        </li>
+                                        <li>
+                                            <?= Html::a('Privacy Policy', ['/cms/principals/privacy-policy'], ['class' => 'title']) ?>
+                                        </li>
+                                        <li>
+                                            <?= Html::a('Return Policy', ['/cms/principals/return-policy'], ['class' => 'title']) ?>
+                                        </li>
+                                        <li>
+                                            <?= Html::a('FAQ', ['/cms/principals/faq'], ['class' => 'title']) ?>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <i class="fa fa-envelope"></i>
+                                <span class="title">Contact Us</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?= Html::a('Subscribe', ['/contacts/subscribe/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Contact Us', ['/contacts/contact-us/index'], ['class' => 'title']) ?>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
 

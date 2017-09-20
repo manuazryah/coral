@@ -1,67 +1,52 @@
+<?php
 
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+?>
 <section id="main-slider">
     <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000" >
 
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
-            <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
-            <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+            <?php
+            $j = 0;
+            foreach ($slider as $value) {
+                ?>
+                <li data-target="#bootstrap-touch-slider" data-slide-to="<?= $j ?>" class="<?= $j == 0 ? 'active' : '' ?>"></li>
+                <?php
+                $j++;
+            }
+            ?>
         </ol>
 
         <!-- Wrapper For Slides -->
         <div class="carousel-inner" role="listbox">
 
-            <!-- Third Slide -->
-            <div class="item active">
+            <?php
+            $k = 0;
+            foreach ($slider as $value) {
+                ?>
+                <div class="item <?= $k == 0 ? 'active' : '' ?>">
 
-                <!-- Slide Background -->
-                <img src="<?= Yii::$app->homeUrl; ?>images/banner/slider-1.jpg" alt="Bootstrap Touch Slider"  class="slide-image"/>
-                <!--<div class="bs-slider-overlay"></div>-->
+                    <!-- Slide Background -->
+                    <img src="<?= Yii::$app->homeUrl; ?>uploads/cms/slider/<?= $value->id ?>/large.<?= $value->img ?>" alt="Bootstrap Touch Slider"  class="slide-image"/>
+                    <!--<div class="bs-slider-overlay"></div>-->
 
-                <div class="container">
-                    <div class="row">
-                        <!-- Slide Text Layer -->
-                        <div class="slide-text slide_style_right">
-                            <p data-animation="animated fadeInLeft">THE BEGINNING OF SOMETHING MAGICAL</p>
-                            <h3 data-animation="animated zoomInRight">CORAL PERFUMES</h3>
-                            <a href="#" target="_blank" class="start-shopping" data-animation="animated fadeInLeft">start shopping</a>
+                    <div class="container">
+                        <div class="row">
+                            <!-- Slide Text Layer -->
+                            <div class="slide-text slide_style_right">
+                                <p data-animation="animated fadeInLeft">THE BEGINNING OF SOMETHING MAGICAL</p>
+                                <h3 data-animation="animated zoomInRight">CORAL PERFUMES</h3>
+                                <a href="#" target="_blank" class="start-shopping" data-animation="animated fadeInLeft">start shopping</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- End of Slide -->
-
-            <!-- Second Slide -->
-            <div class="item">
-
-                <!-- Slide Background -->
-                <img src="<?= Yii::$app->homeUrl; ?>images/banner/slider-1.jpg" alt="Bootstrap Touch Slider"  class="slide-image"/>
-                <!--<div class="bs-slider-overlay"></div>-->
-                <!-- Slide Text Layer -->
-                <div class="slide-text slide_style_right">
-                    <p data-animation="animated fadeInLeft">THE BEGINNING OF SOMETHING MAGICAL</p>
-                    <h3 data-animation="animated zoomInRight">CORAL PERFUMES</h3>
-                    <a href="#" target="_blank" class="start-shopping" data-animation="animated fadeInLeft">start shopping</a>
-                </div>
-            </div>
-            <!-- End of Slide -->
-
-            <!-- Third Slide -->
-            <div class="item">
-
-                <!-- Slide Background -->
-                <img src="<?= Yii::$app->homeUrl; ?>images/banner/slider-1.jpg" alt="Bootstrap Touch Slider"  class="slide-image"/>
-                <!--<div class="bs-slider-overlay"></div>-->
-                <!-- Slide Text Layer -->
-                <div class="slide-text slide_style_right">
-                    <p data-animation="animated fadeInLeft">THE BEGINNING OF SOMETHING MAGICAL</p>
-                    <h3 data-animation="animated zoomInRight">CORAL PERFUMES</h3>
-                    <a href="#" target="_blank" class="start-shopping" data-animation="animated fadeInLeft">start shopping</a>
-                </div>
-            </div>
-            <!-- End of Slide -->
-
+                <?php
+                $k++;
+            }
+            ?>
 
         </div><!-- End of Wrapper For Slides -->
 
@@ -605,14 +590,14 @@
                     <h4>our newsletter</h4>
                     <p>Subscribe to our newsletter and stay updated on the <br/>exclusive deals  and special offers!</p>
                     <div class="col-md-12 col-sm-12 col-xs-12 search">
+                        <?php $form = ActiveForm::begin(); ?>
                         <div class="input-group">
-                            <input type="text" class="form-control SearchBar" placeholder="Email Address....">
+                            <?= $form->field($model, 'email')->textInput(['placeholder' => 'Email Address....', 'class' => 'form-control SearchBar'])->label(FALSE) ?>
                             <span class="input-group-btn">
-                                <button class="btn btn-defaul SearchButton" type="button">
-                                    <span class="SearchIcon">Subscribe</span>
-                                </button>
+                                <?= Html::submitButton('<span class="SearchIcon">Subscribe</span>', ['class' => 'btn btn-defaul SearchButton']) ?>
                             </span>
                         </div>
+                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
                 <div class="col-md-5 col-sm-5">

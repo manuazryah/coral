@@ -62,28 +62,15 @@
             <div class="row">
 
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label" for="full_name">Full Name</label>
-                        <input class="form-control" name="full_name" id="full_name" data-validate="required" placeholder="Your full name" />
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label" for="birthdate">Date of Birth</label>
-                        <input class="form-control"  name="birthdate" id="birthdate" data-validate="required" data-mask="date" placeholder="Pre-formatted birth date" />
-                    </div>
+                    <input class="gender" name="gender" id="gender" type="radio" value="2" />Women
                 </div>
 
             </div>
 
             <div class="row">
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="control-label" for="about">Write Something About You</label>
-                        <textarea class="form-control autogrow" name="about" id="about" data-validate="minlength[10]" rows="5" placeholder="Could be used also as Motivation Letter"></textarea>
-                    </div>
+                <div class="col-md-6">
+                    <input class="gender" name="gender" id="gender" type="radio" value="1" />Men
                 </div>
 
             </div>

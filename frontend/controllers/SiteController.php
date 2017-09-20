@@ -15,6 +15,18 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\LoginForm;
+use common\models\Slider;
+use common\models\Subscribe;
+use common\models\ContactUs;
+use yii\helpers\ArrayHelper;
+use common\models\Principals;
+use common\models\About;
+use common\models\ContactPage;
+use common\models\PrivateLabelGallery;
+use common\models\PrivateLabelHowItWorks;
+use common\models\PrivateLabelBenefits;
+use common\models\PrivateLabelOurProcess;
+use common\models\Testimonials;
 
 /**
  * Site controller
@@ -74,7 +86,19 @@ class SiteController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
-        return $this->render('index');
+        $about = About::find()->where(['id' => 1])->one();
+        $model = new Subscribe();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->date = date('Y-m-d');
+            $model->save();
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        $slider = Slider::find()->where(['status' => 1])->orderBy(['id' => SORT_DESC])->all();
+        return $this->render('index', [
+                    'slider' => $slider,
+                    'model' => $model,
+                    'about' => $about
+        ]);
     }
 
     public function actionProductDetail() {
@@ -90,6 +114,34 @@ class SiteController extends Controller {
         $model = new SignupForm();
         return $this->render('login-signup', [
                     'model_login' => $model_login,
+                    'model' => $model,
+        ]);
+    }
+
+    public function actionTermsCondition() {
+        $model = Principals::findOne(1);
+        return $this->render('terms_condition', [
+                    'model' => $model,
+        ]);
+    }
+
+    public function actionPrivacyPolicy() {
+        $model = Principals::findOne(1);
+        return $this->render('privacy_policy', [
+                    'model' => $model,
+        ]);
+    }
+
+    public function actionReturnPolicy() {
+        $model = Principals::findOne(1);
+        return $this->render('return_policy', [
+                    'model' => $model,
+        ]);
+    }
+
+    public function actionFaq() {
+        $model = Principals::findOne(1);
+        return $this->render('faq', [
                     'model' => $model,
         ]);
     }
@@ -158,20 +210,81 @@ class SiteController extends Controller {
      * @return mixed
      */
     public function actionContact() {
-        $model = new ContactForm();
+        $model = new ContactUs();
+        $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'id', 'country_code');
+        $contact_data = ContactPage::find()->where(['id' => 1])->one();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+            $model->date = date('Y-m-d');
+            if ($model->save()) {
+                $this->sendContactMail($model);
             }
-
             return $this->refresh();
         } else {
             return $this->render('contact', [
                         'model' => $model,
+                        'country_codes' => $country_codes,
+                        'contact_data' => $contact_data,
             ]);
         }
+    }
+
+    /**
+     * This function send contact message to admin.
+     */
+    public function sendContactMail($model) {
+
+        $subject = "Enquiry From Coral Perfume";
+        $to = "manu@azryah.com";
+
+        $message = "<html>
+    }
+<head>
+
+</head>
+<body>
+<p><b>Enquiry Received From Website</b></p>
+<table>
+<tr>
+<th>Name</th>
+<th>:-</th>
+
+<td>" . $model->first_name . ' ' . $model->last_name . "</td>
+</tr>
+
+<tr>
+<tr>
+<th>Contact Number</th>
+<th>:-</th>
+
+<td>" . $model->country_code . $model->mobile_no . "</td>
+</tr>
+
+<tr>
+
+<th>Email Id</th>
+<th>:-</th>
+<td>" . $model->email . "</td>
+</tr>
+<tr>
+
+<th>Reason for Contact</th>
+<th>:-</th>
+<td>" . $model->reason . "</td>
+</tr>
+<tr>
+
+
+<tr>
+
+
+</table>
+</body>
+</html>
+";
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n" .
+                "From: info@travinno.com";
+        mail($to, $subject, $message, $headers);
     }
 
     /**
@@ -180,7 +293,42 @@ class SiteController extends Controller {
      * @return mixed
      */
     public function actionAbout() {
-        return $this->render('about');
+        $about = About::find()->where(['id' => 1])->one();
+        return $this->render('about', [
+                    'about' => $about
+        ]);
+    }
+
+    /**
+     * Displays private label page.
+     *
+     * @return mixed
+     */
+    public function actionPrivateLabel() {
+        $gallery = PrivateLabelGallery::find()->where(['id' => 1])->one();
+        $how_it_works = PrivateLabelHowItWorks::find()->where(['status' => 1])->all();
+        $benefits = PrivateLabelBenefits::find()->where(['status' => 1])->all();
+        $process = PrivateLabelOurProcess::find()->where(['status' => 1])->all();
+        $testimonials = Testimonials::find()->where(['status' => 1])->all();
+        $contact = ContactPage::find()->where(['id' => 1])->one();
+
+        return $this->render('privatelabel', [
+                    'gallery' => $gallery,
+                    'how_it_works' => $how_it_works,
+                    'benefits' => $benefits,
+                    'process' => $process,
+                    'testimonials' => $testimonials,
+                    'contact' => $contact,
+        ]);
+    }
+
+    /**
+     * Displays showrooms page.
+     *
+     * @return mixed
+     */
+    public function actionShowrooms() {
+        return $this->render('showrooms');
     }
 
     /**
@@ -234,7 +382,7 @@ class SiteController extends Controller {
 //        $this->layout = 'adminlogin';
         $model = new User();
         if ($model->load(Yii::$app->request->post())) {
-            $check_exists = User::find()->where("username = '" . $model->username . "' OR email = '" . $model->username . "'")->one();
+            $check_exists = User::find()->where("username = '" . $model->username . "' OR email = '" . $model->email . "'")->one();
             if (!empty($check_exists)) {
                 $token_value = $this->tokenGenerator();
                 $token = $check_exists->id . '_' . $token_value;
@@ -328,26 +476,26 @@ class SiteController extends Controller {
         }
     }
 
-//    public function actionChangepassword() {
-//        $model = User::findOne(Yii::$app->user->identity->id);
-//        if (Yii::$app->request->post()) {
-//            if (Yii::$app->getSecurity()->validatePassword(Yii::$app->request->post('old-password'), $model->password_hash)) {
-//                if (Yii::$app->request->post('new-password') == Yii::$app->request->post('confirm-password')) {
-//                    $model->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->request->post('confirm-password'));
-////                   echo $model->password_hash;exit;
-//                    $model->update();
-//                    Yii::$app->getSession()->setFlash('success', 'password changed successfully');
-//                    $this->redirect('index');
-//                } else {
-//                    Yii::$app->getSession()->setFlash('error', 'password mismatch  ');
-//                }
-//            } else {
-//                Yii::$app->getSession()->setFlash('error', 'Incorrect Password ');
-//            }
-//        }
-//        return $this->render('resetPassword', [
-//                    'model' => $model
-//        ]);
-//    }
+    public function actionChangepassword() {
+        $model = User::findOne(Yii::$app->user->identity->id);
+        if (Yii::$app->request->post()) {
+            if (Yii::$app->getSecurity()->validatePassword(Yii::$app->request->post('old-password'), $model->password_hash)) {
+                if (Yii::$app->request->post('new-password') == Yii::$app->request->post('confirm-password')) {
+                    $model->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->request->post('confirm-password'));
+//                   echo $model->password_hash;exit;
+                    $model->update();
+                    Yii::$app->getSession()->setFlash('success', 'password changed successfully');
+                    $this->redirect('index');
+                } else {
+                    Yii::$app->getSession()->setFlash('error', 'password mismatch  ');
+                }
+            } else {
+                Yii::$app->getSession()->setFlash('error', 'Incorrect Password ');
+            }
+        }
+        return $this->render('resetPassword', [
+                    'model' => $model
+        ]);
+    }
 
 }

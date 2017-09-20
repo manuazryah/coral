@@ -6,7 +6,10 @@ use common\models\Unit;
 use common\components\RecentlyViewedWidget;
 use common\components\RelatedProductWidget;
 
-$this->title = $product_details->canonical_name;
+if (isset($product_details->meta_title) && $product_details->meta_title != '')
+    $this->title = $product_details->meta_title;
+else
+    $this->title = $product_details->canonical_name;
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pad-20"></div>

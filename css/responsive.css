@@ -1,26 +1,44 @@
+@media(max-width:1400px) and (min-width:1200px){
+    #privatelabel .inner-banner .banner-button{
+        left: 0px;
+        right: 0px;
+        top: 150px;
+    }
+    #privatelabel .inner-banner .green2 {
+        margin-left: 145px;
+        margin-top: 0px;
+    }
+    #create-your-own #jssor_1{
+        width: 100% !important;
+    }
+    #create-your-own #jssor_1 div{
+        width: 150% !important;
+        cursor: move;
+    }
+}
 @media(min-width:1200px){
     .country-select{
         width: 94% !important;
-    }
+    } 
     .my-account .settings .right-box{
         width: 65.333333%;
         min-height: 519px;
     }
     #checkout .address-field{
-        padding-right: 25px;
+        padding-right: 25px; 
     }
     #checkout .location-field{
-        padding-right: 15px;
+        padding-right: 15px; 
     }
     #checkout .emirate-field{
-        padding-left: 10px;
+        padding-left: 10px; 
     }
     #checkout .post-code-field{
-        padding-right: 20px;
+        padding-right: 20px; 
         margin-bottom: 0px
     }
     #checkout .number-field{
-        padding-left: 5px;
+        padding-left: 5px; 
         margin-bottom: 0px
     }
     #checkout .delivery-details .first-name{
@@ -38,6 +56,16 @@
     #checkout .delivery-details .altr-number-field{
         padding-left: 5px;
         margin-bottom: 0px;
+    }
+    #contact-page .contact-info-box .head-office-address{
+        max-height: 355px;
+    }
+    #create-your-own #jssor_1{
+        width: 100% !important;
+    }
+    #create-your-own #jssor_1 div{
+        width: 110% !important;
+        cursor: move;
     }
 }
 @media(max-width:1400px){
@@ -57,11 +85,11 @@
         padding: 80px 15px;;
     }
     .app-figure a[data-zoom-id]:first-child {
-        margin-left: 10px;
+        margin-left: 0px;
     }
     figure.mz-figure {
-        width: auto;
-        height: auto;
+        width: auto; 
+        height: auto; 
     }
     #product-page .share{
         display: grid;
@@ -87,20 +115,20 @@
         left: 40%;
     }
     #checkout .address-field{
-        padding-right: 25px;
+        padding-right: 25px; 
     }
     #checkout .location-field{
-        padding-right: 15px;
+        padding-right: 15px; 
     }
     #checkout .emirate-field{
-        padding-left: 10px;
+        padding-left: 10px; 
     }
     #checkout .post-code-field{
-        padding-right: 20px;
+        padding-right: 20px; 
         margin-bottom: 0px
     }
     #checkout .number-field{
-        padding-left: 5px;
+        padding-left: 5px; 
         margin-bottom: 0px
     }
     #checkout .delivery-details .first-name{
@@ -164,6 +192,28 @@
         text-align: left;
         padding-left: 117px;
     }
+    #contact-page .contact-info-box .head-office-address{
+        max-height: 355px;
+    }
+    .md-text-center{
+        text-align: center !important;
+    }
+    .md-text-justify{
+        text-align: justify !important;
+    }
+    #create-your-own #jssor_1{
+        width: 100% !important;
+    }
+    #create-your-own #jssor_1 div{
+        width: 110% !important;
+        cursor: move;
+    }
+    a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
+        margin-bottom: 15px;
+    }
+    .app-figure a[data-zoom-id]:nth-child(3){
+        margin-right: 0px;
+    }
 }
 @media (max-width: 992px) and (min-width:768px){
     .private-label .private-cntnt {
@@ -205,8 +255,8 @@
         padding-top: 5px;
     }
     figure.mz-figure {
-        width: auto;
-        height: auto;
+        width: auto; 
+        height: auto; 
     }
     #product-page .share{
         display: grid;
@@ -345,20 +395,20 @@
         margin-bottom: 40px;
     }
     #checkout .address-field{
-        padding-right: 25px;
+        padding-right: 25px; 
     }
     #checkout .location-field{
-        padding-right: 15px;
+        padding-right: 15px; 
     }
     #checkout .emirate-field{
-        padding-left: 10px;
+        padding-left: 10px; 
     }
     #checkout .post-code-field{
-        padding-right: 20px;
+        padding-right: 20px; 
         margin-bottom: 0px
     }
     #checkout .number-field{
-        padding-left: 5px;
+        padding-left: 5px; 
         margin-bottom: 0px
     }
     #checkout .delivery-details .first-name{
@@ -421,15 +471,43 @@
     #about-page .chairmans-name p {
         text-align: center;
     }
+    #contact-page .contact-info-box .head-office-address{
+        max-height: 355px;
+    }
+    .sm-text-center{
+        text-align: center !important;
+    }
+    .sm-text-justify{
+        text-align: justify !important;
+    }
+    #privatelabel .how-it-works{
+        background: none;
+    }
+    #create-your-own #jssor_1{
+        width: 100% !important;
+    }
+    #create-your-own #jssor_1 div{
+        width: 110% !important;
+        cursor: move;
+    }
+    #log-in .form-group .first-name{
+        padding-right: 0px;
+    }
+    #log-in .form-group .last-name{
+        padding-left: 0px;
+    }
+    a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
+        margin-bottom: 5px;
+    }
 }
 @media (max-width: 768px) and (min-width:458px){
     .private-label .private-cntnt {
         padding: 72px 15px;
-        width: auto;
+        width: auto; 
         padding: 145px 15px;
     }
     .top-nav ul li:first-child a{
-        padding: 5px 10px;
+        padding: 5px 10px;  
     }
     .top-nav ul li{
         padding: 0 10px;
@@ -557,7 +635,7 @@
         left: 0px;
         right: 0px;
         display: inline-block;
-    }
+    } 
     #footer .features{
         text-align: center;
         margin: 0 auto;
@@ -586,8 +664,8 @@
         margin-left:0px;
     }
     .product-img-view-box{
-        margin: 0 auto;
-        text-align: center;
+        margin: 0 auto; 
+        text-align: center; 
     }
     #product-page .details {
         margin-top: 50px;
@@ -733,11 +811,36 @@
     #about-page .chairmans-name p{
         text-align: center;
     }
-
+    #contact-page .contact-info-box .head-office-address {
+        padding: 63px 40px;
+    }
+    #contact-page .contact-info-box .head-office-address{
+        max-height: 355px;
+    }
+    #create-your-own #msform fieldset{
+        padding: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .xs-text-center{
+        text-align: center !important;
+    }
+    .xs-text-justify{
+        text-align: justify !important;
+    }
+    #privatelabel .how-it-works{
+        background: none;
+    }
+    #log-in .form-group .first-name{
+        padding-right: 0px;
+    }
+    #log-in .form-group .last-name{
+        padding-left: 0px;
+    }
 }
 @media(max-width:458px){
     .top-nav ul li:first-child a{
-        padding: 5px 10px;
+        padding: 5px 10px;  
     }
     .top-nav ul li{
         padding: 0 10px;
@@ -835,7 +938,7 @@
         background-size: cover;
     }
     .private-label .private-cntnt {
-        width: auto;
+        width: auto; 
         text-align: justify;
         padding: 145px 15px;
     }
@@ -878,7 +981,7 @@
         left: 0px;
         right: 0px;
         display: inline-block;
-    }
+    } 
     #footer .features{
         text-align: center;
         margin: 0 auto;
@@ -945,8 +1048,8 @@
         height: auto;
     }
     .product-img-view-box{
-        margin: 0 auto;
-        text-align: center;
+        margin: 0 auto; 
+        text-align: center; 
     }
     #product-page .details {
         margin-top: 50px;
@@ -965,7 +1068,7 @@
         display: none;
     }
     .gp_products_item_caption>.gp_products_caption_rating>li:nth-child(2){
-        left: 35%;
+        left: -2%;
     }
     #product-page .action {
         display: grid;
@@ -1038,7 +1141,7 @@
         margin: 0;
     }
     #cart-page .input-group {
-        position: relative;
+        position: relative;   
     }
     #cart-page .input-group span.data-up{
         position: absolute;
@@ -1122,6 +1225,12 @@
     .col-xs-pad40-0{
         padding: 40px 0px !important;
     }
+    .colxs-widthfull{
+        width: 100%;
+    }
+    .xs-pad-0{
+        padding: 0px;
+    }
     #about-page .chairmans-img img{
         left: 40%;
     }
@@ -1156,5 +1265,40 @@
     }
     #about-page .chairmans-name p{
         text-align: center;
+    }
+    #contact-page .contact-info-box .head-office-address {
+        padding: 63px 40px;
+    } 
+    #contact-page .contact-form-box {
+        display: flow-root;
+    }
+    #create-your-own #msform fieldset{
+        padding: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .xs-text-center{
+        text-align: center !important;
+    }
+    .xs-text-justify{
+        text-align: justify !important;
+    }
+    #privatelabel .how-it-works{
+        background: none;
+    }
+    #privatelabel #testimonial{
+        height: 580px; 
+    }
+    #log-in .form-group .first-name{
+        padding-right: 0px;
+    }
+    #log-in .form-group .last-name{
+        padding-left: 0px;
+    }
+    a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
+        margin-bottom: 5px;
+    }
+    .app-figure a[data-zoom-id]:nth-child(3){
+        margin-right: 0px;
     }
 }

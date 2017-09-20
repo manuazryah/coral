@@ -33,7 +33,12 @@ class RecentlyViewedWidget extends Widget {
     }
 
     public function run() {
-        $recently_viewed = RecentlyViewed::find()->where(['user_id' => $this->id])->all();
+        if (isset(Yii::$app->user->identity->id)) {
+            $recently_viewed = RecentlyViewed::find()->where(['user_id' => $this->id])->all();
+        } else if (isset(Yii::$app->session['temp_user_product']) || Yii::$app->session['temp_user_product'] != '') {
+            $recently_viewed = RecentlyViewed::find()->where(['session_id' => Yii::$app->session['temp_user_product']])->all();
+        }
+
         return $this->render('recently-viewed', ['recently_viewed' => $recently_viewed]);
         //return Html::encode($this->message);
     }

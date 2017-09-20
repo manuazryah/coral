@@ -9,6 +9,9 @@ return [
         'SetValues' => [
             'class' => 'common\components\SetValues',
         ],
+        'UploadFile' => [
+            'class' => 'common\components\UploadFile',
+        ],
         'thumbnail' => [
             'class' => 'sadovojav\image\Thumbnail',
         ],
