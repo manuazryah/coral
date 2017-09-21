@@ -35,6 +35,7 @@ class PrivateLabelLogosController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex($id = null) {
+
 		if (!empty($id)) {
 			$model = $this->findModel($id);
 			$message = 'Data Updated Successfully';
@@ -45,8 +46,11 @@ class PrivateLabelLogosController extends Controller {
 			$message = 'Data Added Successfully';
 			$image_ = '';
 		}
+
 		if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->SaveExtension($model, $image_)) {
+
 			if ($model->validate() && $model->save() && $this->SaveImage($model)) {
+				$model = new PrivateLabelLogos();
 				Yii::$app->getSession()->setFlash('success', "Updated Successfully");
 			}
 		}
@@ -75,7 +79,7 @@ class PrivateLabelLogosController extends Controller {
 		if (!empty($image)) {
 			$path = Yii::$app->basePath . '/../uploads/cms/logos/' . $model->id;
 			$size = [
-				['width' => 100, 'height' => 100, 'name' => small],
+				['width' => 100, 'height' => 100, 'name' => 'small'],
 			];
 			Yii::$app->UploadFile->UploadFile($model, $image, $path, $size);
 		}

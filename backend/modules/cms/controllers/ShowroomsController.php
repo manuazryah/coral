@@ -3,8 +3,8 @@
 namespace backend\modules\cms\controllers;
 
 use Yii;
-use common\models\Testimonials;
-use common\models\TestimonialsSearch;
+use common\models\Showrooms;
+use common\models\ShowroomsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 
 /**
- * TestimonialsController implements the CRUD actions for Testimonials model.
+ * ShowroomsController implements the CRUD actions for Showrooms model.
  */
-class TestimonialsController extends Controller {
+class ShowroomsController extends Controller {
 
 	/**
 	 * @inheritdoc
@@ -31,25 +31,30 @@ class TestimonialsController extends Controller {
 	}
 
 	/**
-	 * Lists all Testimonials models.
+	 * Lists all Showrooms models.
 	 * @return mixed
 	 */
 	public function actionIndex($id = null) {
+
 		if (!empty($id)) {
 			$model = $this->findModel($id);
 			$message = 'Data Updated Successfully';
 			$image_ = $model->image;
 		} else {
-			$model = new Testimonials();
+			$model = new Showrooms();
+			$model->setScenario('create');
 			$message = 'Data Added Successfully';
 			$image_ = '';
 		}
+
 		if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->SaveExtension($model, $image_)) {
-			if ($model->validate() && $model->save() && $this->SaveImage($model)) {
+return $this->redirect('index');
+		if ($model->validate() && $model->save() && $this->SaveImage($model)) {
+				$model = new Showrooms();
 				Yii::$app->getSession()->setFlash('success', "Updated Successfully");
 			}
 		}
-		$searchModel = new TestimonialsSearch();
+		$searchModel = new ShowroomsSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 		return $this->render('index', [
@@ -72,7 +77,7 @@ class TestimonialsController extends Controller {
 		$image = UploadedFile::getInstance($model, 'image');
 
 		if (!empty($image)) {
-			$path = Yii::$app->basePath . '/../uploads/cms/testimonials/' . $model->id;
+			$path = Yii::$app->basePath . '/../uploads/cms/showrooms/' . $model->id;
 			$size = [
 				['width' => 100, 'height' => 100, 'name' => 'small'],
 			];
@@ -83,7 +88,7 @@ class TestimonialsController extends Controller {
 	}
 
 	/**
-	 * Displays a single Testimonials model.
+	 * Displays a single Showrooms model.
 	 * @param integer $id
 	 * @return mixed
 	 */
@@ -94,12 +99,12 @@ class TestimonialsController extends Controller {
 	}
 
 	/**
-	 * Creates a new Testimonials model.
+	 * Creates a new Showrooms model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
 	public function actionCreate() {
-		$model = new Testimonials();
+		$model = new Showrooms();
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
@@ -111,7 +116,7 @@ class TestimonialsController extends Controller {
 	}
 
 	/**
-	 * Updates an existing Testimonials model.
+	 * Updates an existing Showrooms model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -129,14 +134,14 @@ class TestimonialsController extends Controller {
 	}
 
 	/**
-	 * Deletes an existing Testimonials model.
+	 * Deletes an existing Showrooms model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
 	 */
 	public function actionDel($id) {
 		$model = $this->findModel($id);
-		$path = Yii::$app->basePath . '/../uploads/cms/testimonials/' . $model->id;
+		$path = Yii::$app->basePath . '/../uploads/cms/showrooms/' . $model->id;
 		if (file_exists($path))
 			$this->recursiveRemoveDirectory($path);
 		if ($model->delete()) {
@@ -160,14 +165,14 @@ class TestimonialsController extends Controller {
 	}
 
 	/**
-	 * Finds the Testimonials model based on its primary key value.
+	 * Finds the Showrooms model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
-	 * @return Testimonials the loaded model
+	 * @return Showrooms the loaded model
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id) {
-		if (($model = Testimonials::findOne($id)) !== null) {
+		if (($model = Showrooms::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

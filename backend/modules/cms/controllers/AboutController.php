@@ -81,14 +81,14 @@ class AboutController extends Controller {
 				if (!empty($image)) {
 					$path = Yii::$app->basePath . '/../uploads/cms/about/' . $model->id;
 					$size = [
-						['width' => 100, 'height' => 100, 'name' => small],
+						['width' => 100, 'height' => 100, 'name' => 'small'],
 					];
 					Yii::$app->UploadFile->UploadFile($model, $image, $path, $size);
 				}
 				if (!empty($chairman_image)) {
 					$path = Yii::$app->basePath . '/../uploads/cms/about/' . $model->id . '/chairman';
 					$size = [
-						['width' => 100, 'height' => 100, 'name' => small],
+						['width' => 100, 'height' => 100, 'name' => 'small'],
 					];
 					Yii::$app->UploadFile->UploadFile($model, $chairman_image, $path, $size);
 				}
@@ -145,14 +145,14 @@ class AboutController extends Controller {
 		if (!empty($image)) {
 			$path = Yii::$app->basePath . '/../uploads/cms/about/' . $model->id;
 			$size = [
-				['width' => 100, 'height' => 100, 'name' => small],
+				['width' => 100, 'height' => 100, 'name' => 'small'],
 			];
 			Yii::$app->UploadFile->UploadFile($model, $image, $path, $size);
 		}
 		if (!empty($chairman_image)) {
 			$path = Yii::$app->basePath . '/../uploads/cms/about/' . $model->id . '/chairman';
 			$size = [
-				['width' => 100, 'height' => 100, 'name' => small],
+				['width' => 100, 'height' => 100, 'name' => 'small'],
 			];
 			Yii::$app->UploadFile->UploadFile($model, $chairman_image, $path, $size);
 		}
