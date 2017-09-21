@@ -22,18 +22,31 @@ class CheckoutController extends \yii\web\Controller {
             $address = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
             $model = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => '1'])->one();
             $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'id', 'country_code');
+            if (empty($model)) {
+                $model = new UserAddress();
+                if ($model->load(Yii::$app->request->post())) {
+                    Yii::$app->SetValues->Attributes($model);
+                    $model->user_id = Yii::$app->user->identity->id;
+                    if ($model->save()) {
+                        $this->orderbilling($model->id);
+                    }
+                }
+                return $this->render('new_billing_address', ['model' => $model, 'country_codes' => $country_codes,]);
+            }
             if ($model->load(Yii::$app->request->post())) {
                 $bill_address = Yii::$app->request->post()[UserAddress][billing];
-                $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
-                $model1->bill_address_id = $bill_address;
-                $model1->save();
-                if (Yii::$app->request->post()[UserAddress][check] == '1') {
-                    $model1->ship_address_id = $bill_address;
-                    $model1->save();
-                    $this->redirect(array('checkout/confirm'));
-                } else {
-                    $this->redirect(array('checkout/delivery'));
-                }
+                $this->orderbilling($bill_address);
+//                $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
+//                $model1->bill_address_id = $bill_address;
+//                $model1->save();
+//                if (Yii::$app->request->post()[UserAddress][check] == '1') {
+//                    $model1->ship_address_id = $bill_address;
+//                    $model1->status = 2;
+//                    $model1->save();
+//                    $this->redirect(array('checkout/confirm'));
+//                } else {
+//                    $this->redirect(array('checkout/delivery'));
+//                }
             }
             return $this->render('billing', ['model' => $model, 'addresses' => $address, 'country_codes' => $country_codes,]);
 //            } else {
@@ -42,6 +55,20 @@ class CheckoutController extends \yii\web\Controller {
 //            $this->redirect(array('checkout/billing'));
         } else {
             $this->redirect(array('site/login'));
+        }
+    }
+
+    function orderbilling($bill_address) {
+        $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
+        $model1->bill_address_id = $bill_address;
+        $model1->save();
+        if (Yii::$app->request->post()[UserAddress][check] == '1') {
+            $model1->ship_address_id = $bill_address;
+            $model1->status = 2;
+            $model1->save();
+            $this->redirect(array('checkout/confirm'));
+        } else {
+            $this->redirect(array('checkout/delivery'));
         }
     }
 
@@ -56,6 +83,7 @@ class CheckoutController extends \yii\web\Controller {
                         $bill_address = Yii::$app->request->post()[Deliveryaddress][billing];
                         $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
                         $model1->ship_address_id = $bill_address;
+                        $model1->status = 3;
                         if ($model1->save()) {
                             $this->redirect(array('checkout/confirm'));
                         }

@@ -282,7 +282,7 @@ class CartController extends \yii\web\Controller {
             $model1->user_id = Yii::$app->user->identity->id;
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
-            $model1->status = 0;
+            $model1->status = 1;
 //            date_default_timezone_set('Asia/Kolkata');
             $model1->order_date = date('Y-m-d H:i:s');
             $model1->doc = date('Y-m-d');
@@ -303,7 +303,7 @@ class CartController extends \yii\web\Controller {
 
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
-            $model1->status = 0;
+            $model1->status = 1;
 //            date_default_timezone_set('Asia/Kolkata');
             $model1->order_date = date('Y-m-d H:i:s');
             $model1->doc = date('Y-m-d');

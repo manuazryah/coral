@@ -90,7 +90,7 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         $about = About::find()->where(['id' => 1])->one();
-$featured_products = Product::find()->where(['status' => 1, 'featured_product' => 1])->all();
+        $featured_products = Product::find()->where(['status' => 1, 'featured_product' => 1])->all();
         $model = new Subscribe();
         if ($model->load(Yii::$app->request->post())) {
             $model->date = date('Y-m-d');
@@ -102,7 +102,7 @@ $featured_products = Product::find()->where(['status' => 1, 'featured_product' =
                     'slider' => $slider,
                     'model' => $model,
                     'about' => $about,
-'featured_products' => $featured_products
+                    'featured_products' => $featured_products
         ]);
     }
 
@@ -205,7 +205,7 @@ $featured_products = Product::find()->where(['status' => 1, 'featured_product' =
      */
     public function actionLogout() {
         Yii::$app->user->logout();
-
+        Yii::$app->session['orderid'] = '';
         return $this->goHome();
     }
 
@@ -316,7 +316,7 @@ $featured_products = Product::find()->where(['status' => 1, 'featured_product' =
         $process = PrivateLabelOurProcess::find()->where(['status' => 1])->all();
         $testimonials = Testimonials::find()->where(['status' => 1])->all();
         $contact = ContactPage::find()->where(['id' => 1])->one();
-$logos = PrivateLabelLogos::find()->where(['status' => 1])->all();
+        $logos = PrivateLabelLogos::find()->where(['status' => 1])->all();
 
         return $this->render('privatelabel', [
                     'gallery' => $gallery,
@@ -325,7 +325,7 @@ $logos = PrivateLabelLogos::find()->where(['status' => 1])->all();
                     'process' => $process,
                     'testimonials' => $testimonials,
                     'contact' => $contact,
- 'logos' => $logos,
+                    'logos' => $logos,
         ]);
     }
 
@@ -335,11 +335,11 @@ $logos = PrivateLabelLogos::find()->where(['status' => 1])->all();
      * @return mixed
      */
     public function actionShowrooms() {
-		$showrooms = Showrooms::find()->where(['status' => 1])->all();
-		return $this->render('showrooms', [
-			    'showrooms' => $showrooms
-		]);
-	}
+        $showrooms = Showrooms::find()->where(['status' => 1])->all();
+        return $this->render('showrooms', [
+                    'showrooms' => $showrooms
+        ]);
+    }
 
     /**
      * Requests password reset.
