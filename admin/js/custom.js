@@ -102,8 +102,11 @@ $(document).on('submit', '#add_searchtag', function (event) {
             var $data = JSON.parse(data);
             if ($data.con === "1") {
                 $('#' + form).append($('<option value="' + $data.id + '" selected="selected" >' + $data.tag + '</option>'));
-                $('#s2id_product-search_tag').select2('data', {id: $data.id, text: $data.tag});
-//               
+                
+                $('select2-choices').append('<li class="select2-search-choice"> <div>kk</div> <a href="#" class="select2-search-choice-close" tabindex="-1"></a></li>');
+//                    $('#'+form).val('');
+//                    $('#subcategory-category_id').append($('<option value="' + $data.id + '" selected="selected">' + $data.category + '</option>'));
+//                    $('#subcategory-category').val('');
                 $('#modal-4').modal('toggle');
             } else if ($data.con === "2") {
                 alert($data.error);
@@ -145,47 +148,7 @@ $(document).on('submit', '#add_brand', function (event) {
 
 
 });
-/****      Add Fragrance    *****/
-$(document).on('submit', '#add_fragrance', function (event) {
-    event.preventDefault();
-    var fragrance = $('#fragrance-name').val();
-    var form = $('.modal-title6').attr('field_id');
-    $.ajax({
-        url: homeUrl + 'fregrance/ajaxaddfragrance',
-        type: "post",
-        data: {fragrance: fragrance},
-        success: function (data) {
-            var $data = JSON.parse(data);
-            if ($data.con === "1") {
-                $('#' + form).append($('<option value="' + $data.id + '" selected="selected">' + $data.fragrance + '</option>'));
-                $('#fragrance-name').val('');
-                $('#modal-6').modal('toggle');
-            } else if ($data.con === "0") {
-                alert($data.error);
-            }
 
-        }, error: function () {
-
-        }
-    });
-
-
-
-});
-
-/****price>offerprice*****/
-$('#product-offer_price').keyup(function () {
-    $('#offer_price').addClass('hide');
-    var offer = parseInt($(this).val());
-    var price = parseInt($('#product-price').val());
-    if (price != '') {
-        if (offer >= price) {
-            $('#product-offer_price').val('0.00');
-            $('#offer_price').removeClass('hide');
-        }
-    }
-});
-/**/
 
 $('.add_unit').click(function () {
     var unit = $(this).attr('attr_id');
