@@ -8,6 +8,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use common\models\CmsOthers;
 
 AppAsset::register($this);
 ?>
@@ -25,7 +26,7 @@ and open the template in the editor.
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <?= Html::csrfMetaTags() ?>
                 <title><?= Html::encode($this->title) ?></title>
-                <script src="<?= yii::$app->homeUrl; ?>js/jquery-3.2.1.min.js"></script>
+                <script src="<?= yii::$app->homeUrl; ?>js/jquery-1.11.1.min.js"></script>
                 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
                 <script>
                         var homeUrl = '<?= yii::$app->homeUrl; ?>';
@@ -41,26 +42,34 @@ and open the template in the editor.
                                                 <div class="col-md-3  col-sm-3 col-xs-3 left">
                                                         <?= Html::a('Create Your Own', ['/create_your_own/create-your-own/index'], ['class' => 'top-green']) ?>
                                                         <!--<button class="top-green">Create Your Own</button>-->
-                                                        <marquee class="GeneratedMarquee" direction="left" scrollamount="5" behavior="scroll">Start Creating Your Fragrance in Seconds</marquee>
+                                                       <?php $your_own = CmsOthers::find()->where(['id' => 1])->one(); ?>
+							<marquee class="GeneratedMarquee" direction="left" scrollamount="5" behavior="scroll"><?= $your_own->content ?></marquee>
                                                 </div>
                                                 <div class="col-md-8 col-sm-8 col-xs-9 right">
                                                         <div class="top-nav">
                                                                 <ul>
+<?php $shipping = CmsOthers::find()->where(['id' => 2])->one(); ?>
+<?php $facebook = CmsOthers::find()->where(['id' => 3])->one(); ?>
+<?php $linkedin = CmsOthers::find()->where(['id' => 4])->one(); ?>
+									<?php $google = CmsOthers::find()->where(['id' => 5])->one(); ?>
+									<?php $twitter = CmsOthers::find()->where(['id' => 6])->one(); ?>
                                                                         <li class="dropdown hidden-xs"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="truck"></i>Free Shipping</a>
                                                                                 <ul class="dropdown-menu">
-                                                                                        <li>All orders over AED 100.00 are qualify for free shipping</li>
+                                                                                       <li><?= $shipping->content; ?></li>
                                                                                 </ul>
                                                                         </li>
                                                                         <li class="dropdown hidden-lg hidden-md hidden-sm"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="truck"></i></a>
                                                                                 <ul class="dropdown-menu">
-                                                                                        <li>All orders over AED 100.00 are qualify for free shipping</li>
+                                                                                       <li><?= $shipping->content; ?></li>
                                                                                 </ul>
                                                                         </li>
                                                                         <li><a href="#">Blog</a></li>
-                                                                        <li class="top-social"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                                                        <li class="top-social"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                                                        <li class="top-social"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                                                        <li class="top-social"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                                        <li class="top-social">
+										<a href="<?= $facebook->content; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+									</li>
+									<li class="top-social"><a href="<?= $linkedin->content; ?>" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									<li class="top-social"><a href="<?= $google->content; ?>" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+									<li class="top-social"><a href="<?= $twitter->content; ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                                                                 </ul>
                                                         </div>
                                                 </div>
@@ -85,28 +94,23 @@ and open the template in the editor.
                                                 </div>
                                                 <?= Html::endForm() ?>
                                                 <div class="col-md-2 col-sm-4 col-xs-4" id="logo">
-                                                        <a href=""><div class="logo"></div></a>
+                                                        <?= Html::a('<div class="logo"></div>', ['index'], ['class' => '']) ?>
                                                 </div>
                                                 <div class="col-md-5 col-sm-8 col-xs-8 right">
                                                         <nav>
                                                                 <div class="container">
-                                                                        <?= Html::beginForm(['/product/search'], 'post') ?>
                                                                         <div class="hidden-lg hidden-md col-sm-12 col-xs-12">
                                                                                 <div class="col-md-12 col-sm-12 col-xs-12 search">
                                                                                         <div class="input-group">
-                                                                                                <input type="text" class="form-control SearchBar search-keyword" placeholder="Enter your search keyword" name="search_keyword" autocomplete="off" required="">
-                                                                                                <div class="search-keyword-dropdown"></div>
+                                                                                                <input type="text" class="form-control SearchBar" placeholder="Enter your search keyword">
                                                                                                 <span class="input-group-btn">
-                                                                                                        <!--                                                                                                        <button class="btn btn-defaul SearchButton" type="button">
-                                                                                                                                                                                                        <span class="SearchIcon" ><i class="fa fa-search" aria-hidden="true"></i></span>
-                                                                                                                                                                                                        </button>-->
-                                                                                                        <?= Html::submitButton('<span class="SearchIcon" ><i class="fa fa-search" aria-hidden="true"></i></span>', ['class' => 'btn btn-defaul SearchButton', 'name' => 'search_keyword-send']) ?>
-
+                                                                                                        <button class="btn btn-defaul SearchButton" type="button">
+                                                                                                                <span class="SearchIcon" ><i class="fa fa-search" aria-hidden="true"></i></span>
+                                                                                                        </button>
                                                                                                 </span>
                                                                                         </div>
                                                                                 </div>
                                                                         </div>
-                                                                        <?= Html::endForm() ?>
 
                                                                         <ul class="navbar-right">
                                                                                 <?php if (Yii::$app->user->isGuest) { ?>
@@ -271,20 +275,20 @@ and open the template in the editor.
                                                                 </div>
                                                         </div>
                                                         <div class="col-md-12 col-sm-12 hidden-xs foot-social">
-                                                                <ul>
-                                                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                                                 <ul>
+                                                                        <li><a href="<?= $facebook->content; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="<?= $twitter->content; ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                                                 </ul>
                                                         </div>
                                                 </div>
                                                 <div style="text-align: center;" class="hidden-lg hidden-md hidden-sm col-xs-12 foot-social">
-                                                        <ul style="margin: 0 auto; display: inline-block;">
-                                                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                                         <ul style="margin: 0 auto; display: inline-block;">
+                                                                <li><a href="<?= $facebook->content; ?>"target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                                                <li><a href="<?= $twitter->content; ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                                <li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                                                <li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                                         </ul>
                                                 </div>
                                         </div>

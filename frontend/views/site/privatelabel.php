@@ -205,14 +205,13 @@ use yii\helpers\Html;
 
 	<div class="container">
 		<div class="customer-logos">
-			<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>images/partners-logo/1.png"></div>
-			<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>images/partners-logo/2.png"></div>
-			<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>images/partners-logo/3.png"></div>
-			<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>images/partners-logo/4.png"></div>
-			<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>images/partners-logo/5.png"></div>
-			<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>images/partners-logo/1.png"></div>
-			<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>images/partners-logo/2.png"></div>
-			<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>images/partners-logo/3.png"></div>
+			<?php foreach ($logos as $logo) {
+				?>
+				<div class="slide"><img src="<?= Yii::$app->homeUrl; ?>uploads/cms/logos/<?= $logo->id ?>/large.<?= $logo->image ?>"></div>
+				<?php
+			}
+			?>
+
 		</div>
 	</div>
 

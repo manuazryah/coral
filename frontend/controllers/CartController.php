@@ -71,6 +71,7 @@ class CartController extends \yii\web\Controller {
 
     public function actionGetcartcount() {
         if (yii::$app->request->isAjax) {
+
             $date = $this->date();
             Cart::deleteAll('date <= :date', ['date' => $date]);
             if (isset(Yii::$app->user->identity->id)) {

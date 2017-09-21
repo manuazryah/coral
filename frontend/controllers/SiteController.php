@@ -27,6 +27,9 @@ use common\models\PrivateLabelHowItWorks;
 use common\models\PrivateLabelBenefits;
 use common\models\PrivateLabelOurProcess;
 use common\models\Testimonials;
+use common\models\PrivateLabelLogos;
+use common\models\Showrooms;
+use common\models\Product;
 
 /**
  * Site controller
@@ -87,6 +90,7 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         $about = About::find()->where(['id' => 1])->one();
+$featured_products = Product::find()->where(['status' => 1, 'featured_product' => 1])->all();
         $model = new Subscribe();
         if ($model->load(Yii::$app->request->post())) {
             $model->date = date('Y-m-d');
@@ -97,7 +101,8 @@ class SiteController extends Controller {
         return $this->render('index', [
                     'slider' => $slider,
                     'model' => $model,
-                    'about' => $about
+                    'about' => $about,
+'featured_products' => $featured_products
         ]);
     }
 
@@ -311,6 +316,7 @@ class SiteController extends Controller {
         $process = PrivateLabelOurProcess::find()->where(['status' => 1])->all();
         $testimonials = Testimonials::find()->where(['status' => 1])->all();
         $contact = ContactPage::find()->where(['id' => 1])->one();
+$logos = PrivateLabelLogos::find()->where(['status' => 1])->all();
 
         return $this->render('privatelabel', [
                     'gallery' => $gallery,
@@ -319,6 +325,7 @@ class SiteController extends Controller {
                     'process' => $process,
                     'testimonials' => $testimonials,
                     'contact' => $contact,
+ 'logos' => $logos,
         ]);
     }
 
@@ -328,8 +335,11 @@ class SiteController extends Controller {
      * @return mixed
      */
     public function actionShowrooms() {
-        return $this->render('showrooms');
-    }
+		$showrooms = Showrooms::find()->where(['status' => 1])->all();
+		return $this->render('showrooms', [
+			    'showrooms' => $showrooms
+		]);
+	}
 
     /**
      * Requests password reset.
