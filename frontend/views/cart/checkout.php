@@ -53,10 +53,9 @@ $this->title = 'Checkout';
                             <select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" name="CartsignupForm[country_code]">
                             <!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
                                 <?php foreach ($country_codes as $country_code) { ?>
-                                <option value="<?= $country_code ?>"><?= $country_code ?></option>
-                                <?php 
-                                }
-                                $i++;?>
+                                    <option value="<?= $country_code ?>"><?= $country_code ?></option>
+                                    <?php }
+                                ?>
                             </select>
                             <input style="padding-left: 70px;" type="phone" id="signupform-mobile_no" class="form-control" name="CartsignupForm[mobile_no]" value="" data-format="+1 (ddd) ddd-dddd" placeholder="555 555 5555">
                         </div>
@@ -88,7 +87,7 @@ $this->title = 'Checkout';
         </div>
 
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 product-summery">
-            <?= CartSummaryWidget::widget(); ?>
+            <?php // CartSummaryWidget::widget(); ?>
         </div>
 
     </div>

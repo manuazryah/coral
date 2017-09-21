@@ -17,8 +17,12 @@ else
     <div class="breadcrumb">
         <span class="current-page">product</span>
         <ol class="path">
+            <?php
+            $catag = common\models\Category::find()->one();
+            ?>
             <li><?= Html::a('<span>Home</span>', ['index'], ['class' => '']) ?></li>
-            <li><?= Html::a('<span>product details</span>', ['site/product-detail'], ['class' => '']) ?></li>
+            <li><?= Html::a('<span>Our Products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
+            <li class="active">Product Detail</li>
         </ol>
     </div>
 </div>
@@ -37,12 +41,28 @@ else
                         ?>
                         <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>">
                             <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>?scale.height='400'" alt=""/>
+                            <?php
+                            if ($product_details->offer_price != "0") {
+                                $percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
+                                ?>
+                                <div class="offer-tag">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/off-tag-bg.png"/><span><?= $percentage ?>% OFF</span>
+                                </div>
+                            <?php } ?>
                         </a>
                         <?php
                     } else {
                         ?>
                         <a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.png' ?>">
                             <img src="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.png' ?>?scale.height='400'" alt=""/>
+                            <?php
+                            if ($product_details->offer_price != "0") {
+                                $percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
+                                ?>
+                                <div class="offer-tag">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/off-tag-bg.png"/><span><?= $percentage ?>% OFF</span>
+                                </div>
+                            <?php } ?>
                         </a>
                     <?php }
                     ?>

@@ -25,7 +25,7 @@ and open the template in the editor.
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <?= Html::csrfMetaTags() ?>
                 <title><?= Html::encode($this->title) ?></title>
-                <script src="<?= yii::$app->homeUrl; ?>js/jquery-1.11.1.min.js"></script>
+                <script src="<?= yii::$app->homeUrl; ?>js/jquery-3.2.1.min.js"></script>
                 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
                 <script>
                         var homeUrl = '<?= yii::$app->homeUrl; ?>';
@@ -139,7 +139,7 @@ and open the template in the editor.
                                                                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i><span class="badge cart_count">(0)</span>
                                                                                 <div class="shopping-cart-total">
                                                                                         <span class="lighter-text">Total:</span>
-                                                                                        <span class="main-color-text amount">0</span>
+                                                                                        <span class="main-color-text cart_amount">0</span>
                                                                                 </div>
                                                                         </div>
 

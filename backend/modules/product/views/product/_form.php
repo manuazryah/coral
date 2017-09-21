@@ -23,39 +23,43 @@ use dosamigos\ckeditor\CKEditor;
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->errorSummary($model); ?>
     <ul class="nav nav-tabs">
-        <li class="active">
-            <a href="#general" data-toggle="tab">
-                <span class="visible-xs"><i class="fa-home"></i></span>
-                <span class="hidden-xs">General</span>
-            </a>
-        </li>
-        <li>
-            <a href="#meta" data-toggle="tab">
-                <span class="visible-xs"><i class="fa-home"></i></span>
-                <span class="hidden-xs">Meta</span>
-            </a>
-        </li>
-        <li>
-            <a href="#image" data-toggle="tab">
-                <span class="visible-xs"><i class="fa-user"></i></span>
-                <span class="hidden-xs">Image</span>
-            </a>
-        </li>
-        <li style="float: right;">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
-
-        </li>
+        <!--        <li class="active">
+                    <a href="#general" data-toggle="tab">
+                        <span class="visible-xs"><i class="fa-home"></i></span>
+                        <span class="hidden-xs">General</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#meta" data-toggle="tab">
+                        <span class="visible-xs"><i class="fa-home"></i></span>
+                        <span class="hidden-xs">Meta</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#image" data-toggle="tab">
+                        <span class="visible-xs"><i class="fa-user"></i></span>
+                        <span class="hidden-xs">Image</span>
+                    </a>
+                </li>
+                <li style="float: right;">
+        <?php // echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
+        
+                </li>-->
     </ul>
 
 
     <div class="tab-content">
         <div class="tab-pane active" id="general">
-            <div class="row">
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <div class="row" style="margin: 0 auto; padding: 15px 15px;">
+                <div class='col-md-12 col-sm-6 col-xs-12 '>
+                    <?php if ($model->isNewRecord) $model->main_category = '1';?>
+                    <?= $form->field($model, 'main_category')->radioList(array('1' => 'Our Products', '2' => 'International Products')); ?>
+                </div>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'category'), ['prompt' => 'select']) ?>
                     <label onclick="jQuery('#modal-1').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_category">Add Category</label>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12'>
                     <?php
                     if (!$model->isNewRecord) {
                         $subcat = SubCategory::find()->where(['category_id' => $model->category, 'status' => '1'])->all();
@@ -66,10 +70,10 @@ use dosamigos\ckeditor\CKEditor;
                     ?>
                     <label onclick="jQuery('#modal-2').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_subcat">Add Subcategory</label>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12'>
                     <?= $form->field($model, 'product_name')->textInput(['maxlength' => true, 'autocomplete' => 'off']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12'>
                     <?= $form->field($model, 'canonical_name')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
                 </div>
                 <?php
@@ -78,57 +82,57 @@ use dosamigos\ckeditor\CKEditor;
                     $model->item_ean = $this->context->generateProductEan($serial_no);
                 }
                 ?>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12'>
                     <?= $form->field($model, 'item_ean')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'brand')->dropDownList(ArrayHelper::map(Brand::find()->all(), 'id', 'brand'), ['prompt' => 'select']) ?>
                     <label onclick="jQuery('#modal-5').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_brand">Add Brand</label>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-                    <?= $form->field($model, 'gender_type')->dropDownList(['0' => 'Men', '1' => 'Women', '2' => 'Unisex'], ['prompt' => 'Select']) ?>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
+                    <?= $form->field($model, 'gender_type')->dropDownList(['0' => 'Men', '1' => 'Women', '2' => 'Unisex']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'price')->textInput(['type' => 'number', 'min' => '0', 'autocomplete' => 'off']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'offer_price')->textInput(['type' => 'number', 'min' => '0', 'autocomplete' => 'off']) ?>
                     <label id="offer_price" style="color:#cc3f44"class="hide">Offer price must be less than price</label>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::find()->all(), 'id', 'currency_name')) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'stock')->textInput(['type' => 'number', 'min' => '0', 'autocomplete' => 'off']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'stock_unit')->dropDownList(ArrayHelper::map(Unit::find()->all(), 'id', 'unit_name')) ?>
                     <label onclick="jQuery('#modal-3').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_unit" attr_id="product-stock_unit">Add Unit</label>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'stock_availability')->dropDownList(['1' => 'Available', '0' => 'Not Available']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'tax')->textInput(['autocomplete' => 'off']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'free_shipping')->dropDownList(['1' => 'Yes', '0' => 'No'], ['prompt' => 'Select']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'product_type')->dropDownList(ArrayHelper::map(Fregrance::find()->all(), 'id', 'name'), ['prompt' => 'select']) ?>
                     <label onclick="jQuery('#modal-6').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_fragrance" attr_id="product-stock_unit">Add Fragrance</label>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'size')->textInput(['autocomplete' => 'off']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'size_unit')->dropDownList(ArrayHelper::map(Unit::find()->all(), 'id', 'unit_name')) ?>
                     <label onclick="jQuery('#modal-3').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_unit" attr_id="product-size_unit">Add Unit</label>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'condition')->dropDownList(['1' => 'New', '0' => 'Refurbished']) ?>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?php
                     if (!$model->isNewRecord) {
                         if (isset($model->related_product)) {
@@ -139,12 +143,11 @@ use dosamigos\ckeditor\CKEditor;
                     <?= $form->field($model, 'related_product')->dropDownList(ArrayHelper::map(Product::find()->where(['status' => '1'])->all(), 'id', 'product_name'), ['class' => 'form-control', 'id' => 'product-related_product', 'multiple' => 'multiple']) ?>
 
                 </div>
-                <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
-                    <?= $form->field($model, 'main_description')->textArea(['maxlength' => '453']); ?>
+                <div class='col-md-12 col-sm-6 col-xs-12 '>
+                    <?= $form->field($model, 'main_description')->textArea(['rows' => '6'], ['maxlength' => '453']); ?>
 
                 </div>
-                <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
-                    <?php // $form->field($model, 'product_detail')->textarea(['rows' => 6]) ?>
+                <div class='col-md-12 col-sm-6 col-xs-12 '>
                     <?=
                     $form->field($model, 'product_detail')->widget(CKEditor::className(), [
                         'options' => ['rows' => 6],
@@ -153,14 +156,14 @@ use dosamigos\ckeditor\CKEditor;
                     ?>
                 </div>
 
-                <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-12 col-sm-6 col-xs-12 '>
+                    <?= $form->field($model, 'featured_product')->dropDownList(['0' => 'No', '1' => 'Yes']) ?>
+                </div>
+                <div class='col-md-12 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
                 </div>
-            </div>
-        </div>
-        <div class="tab-pane" id="meta">
-            <div class="row">
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <!--Meta--->
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?php
                     if (!$model->isNewRecord) {
                         if (isset($model->search_tag)) {
@@ -171,28 +174,25 @@ use dosamigos\ckeditor\CKEditor;
                     <?= $form->field($model, 'search_tag')->dropDownList(ArrayHelper::map(MasterSearchTag::find()->where(['status' => '1'])->all(), 'id', 'tag_name'), ['class' => 'form-control', 'id' => 'product-search_tag', 'multiple' => 'multiple']) ?>
                     <label onclick="jQuery('#modal-4').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_tag">Add Search Tag</label>
                 </div>
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
                 </div>
-                <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
-                    <?= $form->field($model, 'meta_description')->textArea(['maxlength' => true]) ?>
+                <div class='col-md-12 col-sm-6 col-xs-12 '>
+                    <?= $form->field($model, 'meta_description')->textArea(['rows' => '6'], ['maxlength' => true]) ?>
                 </div>
-                <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
-                    <?= $form->field($model, 'meta_keywords')->textArea(['maxlength' => true]) ?>
+                <div class='col-md-12 col-sm-6 col-xs-12 '>
+                    <?= $form->field($model, 'meta_keywords')->textArea(['rows' => '6'], ['maxlength' => true]) ?>
 
                 </div>
-            </div>
-        </div>
-        <div class="tab-pane" id="image">
-            <div class="row">
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <!--Image-->
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'profile_alt')->textInput(['maxlength' => true]) ?>
                 </div>
 
-                <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'gallery_alt')->textInput(['maxlength' => true]) ?>
                 </div>
-                <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-6 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'profile')->fileInput()->label('profile Picture<i> (455*315)</i>') ?>
                     <?php
                     if (!$model->isNewRecord) {
@@ -206,10 +206,10 @@ use dosamigos\ckeditor\CKEditor;
                         </div>
                     <?php } ?>
                 </div>
-                <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+                <div class='col-md-6 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*'])->label('Gallery Images<i> (455*315)</i>') ?>
                     <?php if (!$model->isNewRecord) { ?>
-                                                                                                                                                                                                            <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
+                                                                                                                                                                                                                            <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
                         <div class="row">
                             <?php
                             $path = Yii::getAlias('@paths') . '/product/' . $model->id . '/gallery_thumb';
@@ -246,9 +246,9 @@ use dosamigos\ckeditor\CKEditor;
                     ?>
                 </div>
             </div>
-
-
         </div>
+
+
     </div>
     <li style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>

@@ -10,6 +10,7 @@ use Imagine\Image\Box;
  * This is the model class for table "product".
  *
  * @property integer $id
+ * @property integer $main_category
  * @property integer $category
  * @property integer $subcategory
  * @property string $product_name
@@ -35,6 +36,7 @@ use Imagine\Image\Box;
  * @property string $DOC
  * @property string $DOU
  * @property integer $status
+ * @property integer $featured_product
  * @property string $profile
  */
 class Product extends \yii\db\ActiveRecord {
@@ -51,8 +53,8 @@ class Product extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit', 'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status'], 'integer'],
-            [['category', 'subcategory', 'product_name', 'canonical_name', 'item_ean', 'brand', 'price', 'currency', 'stock', 'stock_unit', 'product_type', 'product_detail'], 'required'],
+            [['main_category', 'category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit', 'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status', 'featured_product'], 'integer'],
+            [['main_category','category', 'subcategory', 'product_name', 'canonical_name', 'item_ean', 'brand', 'price', 'currency', 'stock', 'stock_unit', 'product_type', 'product_detail'], 'required'],
 //             [['profile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => 'create'],
             [['price', 'offer_price'], 'number'],
             [['main_description', 'product_detail'], 'string'],
@@ -72,6 +74,7 @@ class Product extends \yii\db\ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
+            'main_category' => 'Main Category',
             'category' => 'Category',
             'subcategory' => 'Subcategory',
             'product_name' => 'Product Name',
@@ -107,6 +110,7 @@ class Product extends \yii\db\ActiveRecord {
             'profile_alt' => 'Profile Alt',
             'gallery_alt' => 'Gallery Alt',
             'related_product' => 'Related Products',
+            'featured_product' => 'Featured Product',
         ];
     }
 

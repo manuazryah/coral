@@ -56,13 +56,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return Category::findOne($data->category)->category;
                                     }
                                 ],
-                                [
-                                    'attribute' => 'subcategory',
-                                    'filter' => ArrayHelper::map(SubCategory::find()->all(), 'id', 'sub_category'),
-                                    'value' => function($data) {
-                                        return SubCategory::findOne($data->subcategory)->sub_category;
-                                    }
-                                ],
+//                                [
+//                                    'attribute' => 'subcategory',
+//                                    'filter' => ArrayHelper::map(SubCategory::find()->all(), 'id', 'sub_category'),
+//                                    'value' => function($data) {
+//                                        return SubCategory::findOne($data->subcategory)->sub_category;
+//                                    }
+//                                ],
 //            'subcategory',
                                 'product_name',
 //                                'canonical_name',
@@ -99,21 +99,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'format' => 'raw',
                                     'filter' => ['1' => 'Available', '0' => 'Not Available'],
                                     'value' => function ($data) {
-                                        return \yii\helpers\Html::dropDownList('stock_availability', null, ['1' => 'Available', '0' => 'Not Available'], ['class' => 'form-control product_form', 'id' => 'product_stockavailable_' . $data->id]);
+                                        return \yii\helpers\Html::dropDownList('stock_availability', null, ['1' => 'Available', '0' => 'Not Available'], ['options' => [$data->stock_availability => ['Selected' => 'selected']], 'class' => 'form-control product_form', 'id' => 'product_stockavailable_' . $data->id,]);
                                     },
                                 ],
-                                // 'tax',
-                                // 'free_shipping',
-                                // 'product_type',
-                                // 'size',
-                                // 'size_unit',                                // 'main_description:ntext',
-                                // 'product_detail:ntext',
-                                // 'condition',
-                                // 'CB',
-                                // 'UB',
-                                // 'DOC',
-                                // 'DOU',
-                                // 'status',
+                                [
+                                    'attribute' => 'featured_product',
+                                    'format' => 'raw',
+                                    'filter' => ['1' => 'Yes', '0' => 'No'],
+                                    'value' => function ($data) {
+                                        return \yii\helpers\Html::dropDownList('featured_product', null, ['1' => 'Yes', '0' => 'No'], ['options' => [$data->featured_product => ['Selected' => 'selected']], 'class' => 'form-control product_form', 'id' => 'product_featuredproduct_' . $data->id,]);
+                                    },
+                                ],
                                 [
                                     'class' => 'yii\grid\ActionColumn',
                                     'header' => 'Action',
@@ -168,11 +164,12 @@ $this->params['breadcrumbs'][] = $this->title;
             var offerprice = $('#product_offerprice_' + res['2']).val();
             var stock = $('#product_stock_' + res['2']).val();
             var availablity = $('#product_stockavailable_' + res['2']).val();
+            var featured = $('#product_featuredproduct_' + res['2']).val();
             var id = res['2'];
             $.ajax({
                 url: homeUrl + 'product/product/ajaxchange_product',
                 type: "post",
-                data: {price: price, offerprice: offerprice, stock: stock, availablity: availablity, id: id},
+                data: {price: price, offerprice: offerprice, stock: stock, availablity: availablity, id: id, featured: featured},
                 success: function (data) {
                     var $data = JSON.parse(data);
                     if ($data.msg === "success") {

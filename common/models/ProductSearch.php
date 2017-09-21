@@ -17,7 +17,7 @@ class ProductSearch extends Product {
      */
     public function rules() {
         return [
-            [['id', 'category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit', 'tax', 'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status'], 'integer'],
+            [['id', 'main_category', 'category', 'subcategory', 'gender_type', 'currency', 'stock', 'stock_unit', 'tax', 'free_shipping', 'size', 'size_unit', 'condition', 'CB', 'UB', 'status', 'featured_product'], 'integer'],
             [['product_name', 'canonical_name', 'item_ean', 'brand', 'product_type', 'main_description', 'product_detail', 'DOC', 'DOU', 'profile', 'stock_availability', 'related_product'], 'safe'],
             [['price', 'offer_price'], 'number'],
         ];
@@ -59,6 +59,7 @@ class ProductSearch extends Product {
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'main_category' => $this->main_category,
             'category' => $this->category,
             'subcategory' => $this->subcategory,
             'gender_type' => $this->gender_type,
@@ -82,6 +83,7 @@ class ProductSearch extends Product {
             'profile_alt' => $this->profile_alt,
             'gallery_alt' => $this->gallery_alt,
             'related_product' => $this->related_product,
+            'featured_product' => $this->featured_product,
         ]);
 
         $query->andFilterWhere(['like', 'product_name', $this->product_name])

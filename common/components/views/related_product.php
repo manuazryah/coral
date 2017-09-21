@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use common\models\Fregrance;
 ?>
 <?php
 if (!empty($related_product)) {
@@ -43,7 +44,8 @@ if (!empty($related_product)) {
                                     <div class="gp_products_item_caption">
                                         <ul class="gp_products_caption_name">
                                             <li><a href="#"><?= $val->product_name ?></a></li>
-                                            <li><a href="#"><?= $val->product_type ?></a></li>
+                                            <?php $product_type = Fregrance::findOne($val->product_type); ?>
+                                            <li><a href="#"><?= $product_type->name; ?></a></li>
                                         </ul>
                                         <ul class="gp_products_caption_rating">
                                             <?php

@@ -112,12 +112,13 @@ class ProductController extends Controller {
                     $this->UpdateProductEan($model->item_ean);
                     Yii::$app->getSession()->setFlash('success', "Created Successfully");
                     return $this->redirect(['create']);
-                } else {
-
-                    throw new UserException('Error Code 1001');
-//                var_dump($model->getErrors());
-//                exit;
                 }
+//                else {
+//
+//                    throw new UserException('Error Code 1001');
+////                var_dump($model->getErrors());
+////                exit;
+//                }
             } else {
                 return $this->render('create', [
                             'model' => $model,
@@ -192,9 +193,10 @@ class ProductController extends Controller {
                 }
                 Yii::$app->getSession()->setFlash('success', "Updated Successfully");
                 return $this->redirect(['create']);
-            } else {
-                var_dump($model->getErrors());
             }
+//            else {
+//                var_dump($model->getErrors());
+//            }
         } else {
             return $this->render('update', [
                         'model' => $model,
@@ -288,15 +290,19 @@ class ProductController extends Controller {
                         $this->rename($model->id, $model->canonical_name, 'gallery_thumb');
                     }
                     return $this->redirect(['index']);
-                } else {
-
-//                    throw new UserException('Error Code 1001');
-                    var_dump($model->getErrors());
-                    exit;
                 }
+//                else {
+//
+////                    throw new UserException('Error Code 1001');
+//                    var_dump($model->getErrors());
+//                    exit;
+//                }
             } else {
-                var_dump($model->getErrors());
-                exit;
+                return $this->render('copy', [
+                            'model' => $model,
+                ]);
+//                var_dump($model->getErrors());
+//                exit;
 //                echo validation_errors();
             }
         } else {
@@ -400,6 +406,7 @@ class ProductController extends Controller {
             $stock = Yii::$app->request->post()['stock'];
             $availablity = Yii::$app->request->post()['availablity'];
             $id = Yii::$app->request->post()['id'];
+            $featured = Yii::$app->request->post()['featured'];
 //        echo yii::$app->homeUrl;exit;
             if ($id) {
                 $model = $this->findModel($id);
@@ -407,6 +414,7 @@ class ProductController extends Controller {
                 $model->offer_price = $offerprice;
                 $model->stock = $stock;
                 $model->stock_availability = $availablity;
+                $model->featured_product = $featured;
                 if ($model->save()) {
                     echo json_encode(array('msg' => 'success', 'title' => 'succesfully changed'));
                 } else {
