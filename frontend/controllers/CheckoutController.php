@@ -7,6 +7,8 @@ use common\models\OrderMaster;
 use common\models\UserAddress;
 use common\models\OrderDetails;
 use common\models\Product;
+use common\models\Settings;
+use common\models\Cart;
 use yii\helpers\ArrayHelper;
 
 class CheckoutController extends \yii\web\Controller {
@@ -98,12 +100,37 @@ class CheckoutController extends \yii\web\Controller {
             if (Yii::$app->session['orderid']) {
                 $order_details = OrderDetails::find()->where(['order_id' => Yii::$app->session['orderid']])->all();
                 $total_amt = $this->total($order_details);
-                return $this->render('confirm', ['order_details' => $order_details, 'subtotal' => $total_amt]);
+                $shipping_limit = Settings::findOne('1')->value;
+                return $this->render('confirm', ['order_details' => $order_details, 'subtotal' => $total_amt, 'shipping_limit' => $shipping_limit]);
             } else {
                 $this->redirect(array('cart/mycart'));
             }
         } else {
             $this->redirect(array('site/login'));
+        }
+    }
+
+    public function actionConfirm_order() {
+        if (isset(Yii::$app->user->identity->id)) {
+            if (Yii::$app->session['orderid']) {
+                $model = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
+                $model->ship_address_id = $bill_address;
+                $model->status = 4;
+                if ($model->save()) {
+                    $model1= Cart::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
+                    $this->clearcart($model1);
+//                    $this->redirect(array('checkout/confirm'));
+                }
+            } else {
+                $this->redirect(array('cart/mycart'));
+            }
+        } else {
+            $this->redirect(array('site/login'));
+        }
+    }
+    function clearcart($models){
+        foreach ($models as $model){
+            $model->delete();
         }
     }
 

@@ -256,13 +256,17 @@ class CartController extends \yii\web\Controller {
                 $this->changecart(Yii::$app->session['temp_user']);
             }
             $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
+            $check = OrderMaster::find()->where('user_id = :user_id and status != :status', ['user_id'=>Yii::$app->user->identity->id, 'status'=>'4'])->one();
+           if(!empty($check)){Yii::$app->session['orderid'] = $check->order_id;}
             if (!empty($cart)) {
                 if (Yii::$app->session['orderid'] == '') {
+//                    exit('hallo');
                     $orders = $this->addOrder($cart);
                     $this->orderProducts($orders, $cart);
                     Yii::$app->session['orderid'] = $orders['order_id'];
                     $this->redirect(array('checkout/checkout'));
                 } else {
+//                    exit('hai');
                     $orders = $this->addOrder1($cart);
                     $this->orderProducts($orders, $cart);
                     $this->redirect(array('checkout/checkout'));
@@ -374,6 +378,7 @@ class CartController extends \yii\web\Controller {
                        <span class="item-name">' . $prod_details->product_name . '</span>
                        <span class="item-price">' . $price . '</span>
                        <span class="item-quantity">Quantity: ' . $cart_content->quantity . '</span>
+                       <button title="Remove From Cart" class="remove-cart"><i class="fa fa-times" aria-hidden="true"></i></button>
                        </li>';
             }
         } else {

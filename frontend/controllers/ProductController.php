@@ -10,6 +10,7 @@ use common\models\ProductSearch;
 use common\models\Category;
 use common\models\RecentlyViewed;
 use common\models\WishList;
+use common\models\Settings;
 use yii\db\Expression;
 
 class ProductController extends \yii\web\Controller {
@@ -70,6 +71,7 @@ class ProductController extends \yii\web\Controller {
         } else {
             $user_id = '';
         }
+        $shipping_limit = Settings::findOne('1')->value;
         $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
         $this->RecentlyViewed($product_details);
         $product_reveiws = \common\models\CustomerReviews::find()->where(['product_id' => $product_details->id, 'status' => '1'])->all();
@@ -79,6 +81,7 @@ class ProductController extends \yii\web\Controller {
                     'product_details' => $product_details,
                     'product_reveiws' => $product_reveiws,
                     'user_id' => $user_id,
+                    'shipping_limit' => $shipping_limit,
         ]);
     }
 

@@ -3,6 +3,7 @@
 
 use yii\helpers\Html;
 use common\models\Unit;
+use common\models\Settings;
 use common\components\RecentlyViewedWidget;
 use common\components\RelatedProductWidget;
 
@@ -112,7 +113,7 @@ else
                 <?php } else { ?>
                     <p class="price"><?= $product_details->price ?> AED  </p>
                 <?php } ?>
-                <p class="message">FREE Shipping on orders over 150.00 AED</p>
+                <p class="message">FREE Shipping on orders over <?= $shipping_limit?> AED</p>
                 <div class="hr-box">
                     <h5 class="sizes">sizes:
                         <?php $unit = Unit::findOne($product_details->size_unit); ?>

@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use common\models\Product;
 use common\models\Brand;
+use common\models\OrderMaster;
+use common\models\Settings;
 ?>
 <div class="summery-box lit-blue">
     <div class="heading active">
@@ -28,9 +30,11 @@ use common\models\Brand;
                     <h5 class="brand-name"><a href="#"><?= $brand->brand; ?></a></h5>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="top: 15px; text-align: right; padding-right: 0;">
-                    <?php $price = ($product->offer_price == '0' ? $product->price : $product->offer_price); 
-                     $total = $price * $cart->quantity;?>
-                    <p class="price">AED <?= $total;?></p>
+                    <?php
+                    $price = ($product->offer_price == '0' ? $product->price : $product->offer_price);
+                    $total = $price * $cart->quantity;
+                    ?>
+                    <p class="price">AED <?= $total; ?></p>
                 </div>
             </div>
         <?php } ?>
@@ -42,8 +46,12 @@ use common\models\Brand;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 label">Shipping</div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pad-0" style="padding: 15px 15px; border-top: 1px solid #ddd;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price"><?= $subtotal->total_amount?></div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price">0.00</div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price"><?= $subtotal->total_amount ?></div>
+            <?php
+            $shipextra = Settings::findOne('2')->value;
+            $ship_charge = $subtotal->total_amount <= $shipping_limit ? $shipextra : 0.00
+            ?>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price"><?= $ship_charge ?></div>
         </div>
     </div>
     <div class="total">
@@ -51,7 +59,8 @@ use common\models\Brand;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 label">Total  ( tax excl )</div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pad-0" style="padding: 15px 15px; border-top: 1px solid #ddd;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price">AED <?= $subtotal->total_amount?></div>
+            <?php $grand_total = $subtotal->total_amount + $ship_charge ?>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price">AED <?= $grand_total ?></div>
         </div>
     </div>
 </div>

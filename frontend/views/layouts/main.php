@@ -150,8 +150,10 @@ and open the template in the editor.
                                     <ul class="shopping-cart-items">
 
                                     </ul>
-                                    <?= Html::a('Checkout', ['/cart/mycart'], ['class' => 'button']) ?>
-                                    <!--<a href="#" class="button">Checkout</a>-->
+                                    <div class="col-md-12 checkout-btn-space">
+                                        <?= Html::a('<button class="green2">check out</button>', ['/cart/mycart'], ['class' => '']) ?>
+                                        <!--<button class="green2">check out</button>-->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -330,12 +332,7 @@ and open the template in the editor.
             $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });</script>
 <script>
-            (function () {
-
-            $("#cart").on("click", function () {
-            $(".shopping-cart").fadeToggle("fast");
-            });
-            })();
+           (function () {    $("#cart").on("click", function () {    $(".shopping-cart").fadeToggle("fast"); }); $("#cart").hover (function () {    $(".shopping-cart").show("fast"); }); $('.shopping-cart').hover(function() {    $('.shopping-cart').show(); }); $('.shopping-cart').mouseleave(function() {    $('.shopping-cart').hide(); }); $('#cart').hover(function () {    $('.shopping-cart').hover("fast"); }); })();
 //    jQuery('#cart').on('mouseover', function () {
 //        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeToggle("fast");
 //    });

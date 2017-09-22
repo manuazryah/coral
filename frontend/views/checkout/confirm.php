@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use common\components\CartSummaryWidget;
 use common\models\Product;
 use common\models\Fregrance;
+use common\models\Settings;
 
 $this->title = 'Checkout-Confirm';
 ?>
@@ -76,13 +77,18 @@ $this->title = 'Checkout-Confirm';
                             <h5 class="product-heading text-right">Shipping:</h5>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 shipping-cost">
-                            <p class="text-right price">0.00</p>
+                            <?php
+                            $shipextra = Settings::findOne('2')->value;
+                            $ship_charge = $subtotal <= $shipping_limit ? $shipextra : 0.00
+                            ?>
+                            <p class="text-right price"><?= $ship_charge ?></p>
                         </div>
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 total">
                             <h5 class="product-heading text-right">Total:</h5>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 total-cost">
-                            <p class="text-right price">AED <?= $subtotal?></p>
+                            <?php $grand_total = $subtotal + $ship_charge ?>
+                            <p class="text-right price">AED <?= $grand_total ?></p>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -90,7 +96,7 @@ $this->title = 'Checkout-Confirm';
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lit-blue" style="padding: 0 30px;padding-right: 55px; padding-bottom: 30px; margin-bottom: 5px;">
                 <!--<a href="cart.php"><button class="continue-shopping">Return to cart</button></a>-->
-                <a href="#"> <button class="green2">confirm order</button></a>
+                 <?= Html::a('<button class="green2">confirm order</button>', ['confirm_order'], ['class' => '']) ?>
             </div>
         </div>
 

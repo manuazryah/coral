@@ -21,6 +21,8 @@ use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use common\models\Cart;
 use common\models\OrderMaster;
+use common\models\OrderDetails;
+use common\models\Settings;
 
 //use common\models\RecentlyViewed;
 
@@ -37,10 +39,10 @@ class CartSummaryWidget extends Widget {
 
     public function run() {
         $user_id = Yii::$app->user->identity->id;
-        $order_id = Yii::$app->session['orderid'];
-        $cart_items = Cart::find()->where(['user_id' => $user_id])->all();
-        $subtotal = OrderMaster::find()->where(['user_id' => $user_id, 'order_id' => $order_id])->one();
-        return $this->render('cart_summary', ['cart_items' => $cart_items, 'subtotal' => $subtotal]);
+        $master = OrderMaster::find()->where('user_id = :user_id and status != :status', ['user_id' => $user_id, 'status' => '4'])->one();
+        $cart_items = OrderDetails::find()->where(['order_id' => $master->order_id])->all();
+        $shipping_limit = Settings::findOne('1')->value;
+        return $this->render('cart_summary', ['cart_items' => $cart_items, 'subtotal' => $master,'shipping_limit'=>$shipping_limit]);
         //return Html::encode($this->message);
     }
 
