@@ -109,12 +109,12 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
 				<div class="form-group col-md-6">
 					<label for="pwd">Mobile Number</label>
 					<div class="date-dropdowns">
-						<select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" name="SignupForm[country_code]">
+						<select class="day" id="cntry_code_id"style="position: absolute; border-right: 1px solid #d1d2d0" name="SignupForm[country_code]">
 						<!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
 							<?php
-							foreach ($countrie_code as $countrie_cod) {
+							foreach ($countrie_code as $key => $countrie_cod) {
 								?>
-								<option value="<?= $countrie_cod ?>"><?= $countrie_cod ?></option>
+								<option value="<?= $key ?>"><?= $countrie_cod ?></option>
 							<?php }
 							?>
 						</select>
@@ -144,72 +144,168 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
 </div>
 <div class="pad-20"></div>
 <script>
-	$("body").click(function (event) {
-		var clicked_id = event.target.id;
-		var arr = ["signupform-password_repeat", "last_name_id", "email_id", "signupform-country", "signupform-gender", "signupform-day", "signupform-month", "signupform-year", "signupform-mobile_no", "signupform-password", "username_id"];
-		if (jQuery.inArray(clicked_id, arr) !== -1) {
-			displayerrors(clicked_id);
-		}
+	$("document").ready(function () {
 
-		$('#signupform-password_repeat').on('keyup', function () {
-			CheckConfirmPasswordMatch();
+//		$("#email_id").blur(function () {
+//
+//			var email = $(this).val();
+//			emailunique(email);
+//			//showLoader();
+//
+//		});
+//		$("#username_id").blur(function () {
+//			var username = $(this).val();
+//			usernameunique(username);
+//		});
+		$("body").click(function (event) {
+			var clicked_id = event.target.id;
+			var arr = ["signupform-password_repeat", "last_name_id", "email_id", "signupform-country", "signupform-gender", "signupform-day", "signupform-month", "signupform-year", "signupform-mobile_no", "signupform-password", "username_id"];
+			if (jQuery.inArray(clicked_id, arr) !== -1) {
+				displayerrors(clicked_id);
+			}
+//			$("#email_id").blur(function () {
+//				var email = $(this).val();
+//				emailunique(email);
+//				//showLoader();
+//
+//			});
+//			$("#username_id").blur(function () {
+//				var username = $(this).val();
+//				usernameunique(username);
+//
+//
+//			});
+
+			$('#signupform-password_repeat').on('keyup', function () {
+				CheckConfirmPasswordMatch();
+			});
+			/*
+			 * Purpose   :- On change of country dropdown
+			 * parameter :- country_id
+			 * return   :- The list of states depends on the country_id
+			 */
+
+			$('#signupform-country').change(function () {
+				var country_id = $(this).val();
+				//showLoader();
+				$.ajax({
+					type: 'POST',
+					cache: false,
+					data: {country_id: country_id},
+					url: homeUrl + 'ajax/countrycode',
+					success: function (data) {
+
+						if (data == 0) {
+							alert('Failed to Load data, please try again error:1001');
+						} else {
+							$('#cntry_code_id').val(data).attr("selected", "selected");
+							//$(".state-change").html(data);
+						}
+						hideLoader();
+					}
+				});
+			});
+			function CheckConfirmPasswordMatch() {
+
+				if (($("#signupform-password_repeat ").val()) !== ($("#signupform-password ").val())) {
+					$(".field-signupform-password_repeat ").addClass('has-error');
+					if ($(".field-signupform-password_repeat div").text() === "") {
+						$(".field-signupform-password_repeat div").append("Password Mismatch");
+					}
+
+				} else {
+					$(".field-signupform-password_repeat ").removeClass('has-error');
+					$(".field-signupform-password_repeat ").addClass('has-success');
+				}
+
+
+
+			}
+			function displayerrors(clicked_id, arr) {
+
+				if (!$("#first_name_id").val()) {
+					$(".field-first_name_id ").addClass('has-error');
+					if ($(".help-block").text() === "") {
+						$(".field-first_name_id div").append("First Name cannot be blank");
+					}
+
+				}
+				if ((!$("#email_id").val()) && (clicked_id !== "last_name_id")) {
+
+					$(".field-email_id ").addClass('has-error');
+					if ($(".field-email_id div").text() === "") {
+						$(".field-email_id div").append("Email Id cannot be blank");
+					}
+
+				} else {
+					emailunique($("#email_id").val());
+				}
+				if (($("#signupform-day").val() === "") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && ($("#signupform-month").val() === "") && ($("#signupform-year").val() === "") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
+
+					$('#date_form_group_id').addClass("required has-error");
+					if ($("#dob_id div").text() === "") {
+						$('#dob_id').append($('<div class="help-block"> DOB cannot be blank </div>'));
+					}
+
+				} else {
+					$('#date_form_group_id').removeClass("required has-error");
+					$('#dob_id div').empty();
+				}
+				if ((!$("#username_id").val()) && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id") && (clicked_id !== "signupform-mobile_no")) {
+					$(".field-username_id ").addClass('has-error');
+					if ($(".field-username_id div").text() === "") {
+						$(".field-username_id div").append("Username cannot be blank");
+					}
+
+				}
+				if ((!$("#signupform-password").val()) && (clicked_id !== "username_id") && (clicked_id !== "signupform-password") && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
+					$(".field-signupform-password ").addClass('has-error');
+					if ($(".field-signupform-password div").text() === "") {
+						$(".field-signupform-password div").append("Passwordcannot be blank");
+					}
+
+				}
+			}
 		});
+//		function usernameunique(username) {
+//			//showLoader();
+//			$.ajax({
+//				type: 'POST',
+//				cache: false,
+//				data: {username: username},
+//				url: homeUrl + 'ajax/user-unique',
+//				success: function (data) {
+//					if (data == 0) {
+//
+//						$(".field-username_id").addClass('has-error');
+//						if ($(".field-username_id div").text() === "") {
+//							$(".field-username_id div").append("Username Already Exist");
+//						}
+//					}
+//					hideLoader();
+//				}
+//			});
+//		}
+//		function emailunique(email) {
+//			//showLoader();
+//			$.ajax({
+//				type: 'POST',
+//				cache: false,
+//				data: {email: email},
+//				url: homeUrl + 'ajax/email-unique',
+//				success: function (data) {
+//					if (data == 0) {
+//
+//						$(".field-email_id").addClass('has-error');
+//						if ($(".field-email_id div").text() === "") {
+//							$(".field-email_id div").append("Email Id Already Exist");
+//						}
+//					}
+//					hideLoader();
+//				}
+//			});
+//		}
 
-		function CheckConfirmPasswordMatch() {
-
-			if (($("#signupform-password_repeat ").val()) !== ($("#signupform-password ").val())) {
-				$(".field-signupform-password_repeat ").addClass('has-error');
-				if ($(".field-signupform-password_repeat div").text() === "") {
-					$(".field-signupform-password_repeat div").append("Password Mismatch");
-				}
-
-			} else {
-				$(".field-signupform-password_repeat ").removeClass('has-error');
-				$(".field-signupform-password_repeat ").addClass('has-success');
-			}
-
-
-
-		}
-		function displayerrors(clicked_id, arr) {
-
-			if (!$("#first_name_id").val()) {
-				$(".field-first_name_id ").addClass('has-error');
-				if ($(".help-block").text() === "") {
-					$(".field-first_name_id div").append("First Name cannot be blank");
-				}
-
-			}
-			if ((!$("#email_id").val()) && (clicked_id !== "last_name_id")) {
-				$(".field-email_id ").addClass('has-error');
-				if ($(".field-email_id div").text() === "") {
-					$(".field-email_id div").append("Email Id cannot be blank");
-				}
-
-			}
-			if (($("#signupform-day").val() === "") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && ($("#signupform-month").val() === "") && ($("#signupform-year").val() === "") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
-
-				$('#date_form_group_id').addClass("required has-error");
-				if ($("#dob_id div").text() === "") {
-					$('#dob_id').append($('<div class="help-block"> DOB cannot be blank </div>'));
-				}
-
-			}
-			if ((!$("#username_id").val()) && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id") && (clicked_id !== "signupform-mobile_no")) {
-				$(".field-username_id ").addClass('has-error');
-				if ($(".field-username_id div").text() === "") {
-					$(".field-username_id div").append("Username cannot be blank");
-				}
-
-			}
-			if ((!$("#signupform-password").val()) && (clicked_id !== "username_id") && (clicked_id !== "signupform-password") && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
-				$(".field-signupform-password ").addClass('has-error');
-				if ($(".field-signupform-password div").text() === "") {
-					$(".field-signupform-password div").append("Passwordcannot be blank");
-				}
-
-			}
-		}
 	});
 
 
