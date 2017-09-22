@@ -36,7 +36,7 @@ class CheckoutController extends \yii\web\Controller {
                 return $this->render('new_billing_address', ['model' => $model, 'country_codes' => $country_codes,]);
             }
             if ($model->load(Yii::$app->request->post())) {
-                $bill_address = Yii::$app->request->post()[UserAddress][billing];
+                $bill_address = Yii::$app->request->post()['UserAddress']['billing'];
                 $this->orderbilling($bill_address);
             }
             return $this->render('billing', ['model' => $model, 'addresses' => $address, 'country_codes' => $country_codes,]);
@@ -53,7 +53,7 @@ class CheckoutController extends \yii\web\Controller {
         $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
         $model1->bill_address_id = $bill_address;
         $model1->save();
-        if (Yii::$app->request->post()[UserAddress][check] == '1') {
+        if (Yii::$app->request->post()['UserAddress']['check']) {
             $model1->ship_address_id = $bill_address;
             $model1->status = 2;
             $model1->save();
@@ -70,8 +70,8 @@ class CheckoutController extends \yii\web\Controller {
                 $model = new UserAddress();
                 $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'id', 'country_code');
                 if ($model->load(Yii::$app->request->post())) {
-                    if (Yii::$app->request->post()[Deliveryaddress][billing] != '') {
-                        $bill_address = Yii::$app->request->post()[Deliveryaddress][billing];
+                    if (Yii::$app->request->post()['Deliveryaddress']['billing'] != '') {
+                        $bill_address = Yii::$app->request->post()['Deliveryaddress']['billing'];
                         $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
                         $model1->ship_address_id = $bill_address;
                         $model1->status = 3;
@@ -114,7 +114,6 @@ class CheckoutController extends \yii\web\Controller {
         if (isset(Yii::$app->user->identity->id)) {
             if (Yii::$app->session['orderid']) {
                 $model = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
-                $model->ship_address_id = $bill_address;
                 $model->status = 4;
                 if ($model->save()) {
                     $model1= Cart::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();

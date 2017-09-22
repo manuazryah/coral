@@ -4,8 +4,9 @@ use yii\helpers\Html;
 use common\components\CartSummaryWidget;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use common\models\CountryCode;
 
-$country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'id', 'country_code');
+//$country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'id', 'country_code');
 $this->title = 'Checkout';
 ?>
 <div class="pad-20 hide-xs"></div>
@@ -50,13 +51,8 @@ $this->title = 'Checkout';
                     <div class="form-group col-md-12 margin-auto">
                         <label for="pwd">Mobile Number*</label>
                         <div class="date-dropdowns">
-                            <select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" name="CartsignupForm[country_code]">
-                            <!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
-                                <?php foreach ($country_codes as $country_code) { ?>
-                                <option value="<?= $country_code ?>"><?= $country_code ?></option>
-                                <?php }
-                                ?>
-                            </select>
+                            <?= $form->field($model, 'country_code')->dropDownList(ArrayHelper::map(CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'country_code', 'country_code'),['style'=>'position: absolute; border-right: 1px solid #d1d2d0']); ?>
+                            
                             <input style="padding-left: 70px;" type="phone" id="signupform-mobile_no" class="form-control" name="CartsignupForm[mobile_no]" value="" data-format="+1 (ddd) ddd-dddd" placeholder="555 555 5555">
                         </div>
                                 <!--<input type="phone" class="form-control" data-format="+1 (ddd) ddd-dddd" name="phone" id="phone" />-->

@@ -227,7 +227,7 @@ class CartController extends \yii\web\Controller {
                 $user->country = '1';
                 $user->dob = '00-00-0000';
                 $user->gender = '0';
-                $user->country_code = Yii::$app->request->post()[CartsignupForm][country_code];
+                $user->country_code = Yii::$app->request->post()["CartsignupForm"]['country_code'];
                 $user->mobile_no = $model->mobile_no;
                 $user->email = $model->email;
                 $user->password = '***guestpassword***';
