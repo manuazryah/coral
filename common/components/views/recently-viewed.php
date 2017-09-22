@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use common\models\Fregrance;
 ?>
 <?php
 if (!empty($recently_viewed)) {
@@ -45,7 +46,8 @@ if (!empty($recently_viewed)) {
                                         <div class="gp_products_item_caption">
                                             <ul class="gp_products_caption_name">
                                                 <li><a href="#"><?= $model->product_name ?></a></li>
-                                                <li><a href="#"><?= $model->product_type ?></a></li>
+                                                <?php $product_type = Fregrance::findOne($model->product_type); ?>
+                                                <li><a href="#"><?= $product_type->name; ?></a></li>
                                             </ul>
                                             <ul class="gp_products_caption_rating">
                                                 <?php
