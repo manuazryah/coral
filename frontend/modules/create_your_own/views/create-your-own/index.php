@@ -42,12 +42,15 @@ use yii\helpers\Html;
                             </div>
                         </div>
                         <div class="tab-pane" id="tab3">
-                            <p class="tab-2">Which scent do you prefer?</p>
+                            <p class="tab-3">Which scent do you prefer?</p>
                             <div id="scent-div">
                             </div>
                         </div>
                         <div class="tab-pane" id="tab4">
-                            TAB 4
+                            <p class="tab-4">Choose up to 6 ingredients.</p>
+                            <div id="notes-div">
+
+                            </div>
                         </div>
                         <div class="tab-pane" id="tab5">
                             TAB 5
@@ -98,7 +101,6 @@ use yii\helpers\Html;
                 }
             }
         });
-
         $('.btnPrevious').click(function () {
             $('.nav-tabs > .active').prev('li').find('a').trigger('click');
         });
@@ -114,7 +116,6 @@ use yii\helpers\Html;
                 }
             });
         });
-
         $(document).on('change', 'input[type=radio][name=character]', function () {
             $.ajax({
                 type: 'POST',
@@ -127,41 +128,60 @@ use yii\helpers\Html;
                 }
             });
         });
-
+        $(document).on('change', 'input[type=radio][name=scent]', function () {
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/scent-session',
+                success: function (data) {
+                    $("#notes-div").html(data);
+                }
+            });
+        });
+        $(document).on('change', '.checkbox', function (e) {
+            var count = parseInt($("#note-count").val());
+            if (this.checked) {
+                if (count < 6) {
+                    count = parseInt(count) + 1;
+                    $("#note-count").val(parseInt(count));
+                } else {
+                    $(this).attr("checked", false);
+                }
+            } else {
+                count = parseInt(count) - 1;
+                $("#note-count").val(parseInt(count));
+            }
+        });
     });
     function validateDatas(id) {
         if ('tab-' + id == 'tab-1') {
-            var result = validateGender();
+            var result = validateCommon('.gender');
         }
         if ('tab-' + id == 'tab-2') {
-            var result = validateCharacter();
+            var result = validateCommon('.character');
         }
         if ('tab-' + id == 'tab-3') {
-            var result = validateScent();
+            var result = validateCommon('.scent');
+        }
+        if ('tab-' + id == 'tab-4') {
+            var result = validateNotes();
         }
         return result;
     }
-    function validateGender() {
+    function validateCommon(data) {
 
-        if ($('.gender').is(':checked')) {
+        if ($(data).is(':checked')) {
             var valid = 0;
         } else {
             var valid = 1;
         }
         return valid;
     }
-    function validateCharacter() {
-
-        if ($('.character').is(':checked')) {
-            var valid = 0;
-        } else {
-            var valid = 1;
-        }
-        return valid;
-    }
-    function validateScent() {
-
-        if ($('.scent').is(':checked')) {
+    function validateNotes() {
+        var count = parseInt($("#note-count").val());
+        if (count > 0) {
             var valid = 0;
         } else {
             var valid = 1;
