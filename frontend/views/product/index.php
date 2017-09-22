@@ -23,16 +23,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="container">
     <div class="breadcrumb">
         <span class="current-page"><?php
-                        if (isset($catag->category)) {
-                                echo $catag->category;
-                                $m_id = $catag->category_code;
-                                $m_link = $catag->category;
-                        } else {
-                                echo 'PRODUCTS';
-                                $m_id = '';
-                                $m_link = 'PRODUCTS';
-                        }
-                        ?></span>
+            if (isset($catag->category)) {
+                echo $catag->category;
+                $m_id = $catag->category_code;
+                $m_link = $catag->category;
+            } else {
+                echo 'PRODUCTS';
+                $m_id = '';
+                $m_link = 'PRODUCTS';
+            }
+            ?></span>
         <ol class="path">
             <li><?= Html::a('<span>Home</span>', ['index'], ['class' => '']) ?></li>
             <li><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $m_id], ['class' => '']) ?></li>
@@ -44,19 +44,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <div id="our-product">
     <div class="container">
         <div class="input-group gender-selection">
-             <div id="radioBtn" class="btn-group">
-                                <span>Type:</span>
-                                <a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="Y" id="0" pro_cat="<?php
-                                if (isset($id)) {
-                                        echo $id;
-                                }
-                                ?>">Women</a>
-                                <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="1" pro_cat="<?php
-                                if (isset($id)) {
-                                        echo $id;
-                                }
-                                ?>">Men</a>
-                        </div>
+            <div id="radioBtn" class="btn-group">
+                <span>Type:</span>
+                <a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="Y" id="0" pro_cat="<?php
+                if (isset($id)) {
+                    echo $id;
+                }
+                ?>">Women</a>
+                <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="1" pro_cat="<?php
+                if (isset($id)) {
+                    echo $id;
+                }
+                ?>">Men</a>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -72,17 +72,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php
                                         foreach ($categories as $category) {
                                             if (isset($catag->id)) {
-                                                                                                if ($category->id == $catag->id) {
-                                                                                                        $active_class = 'list-group-item active';
-                                                                                                } else {
-                                                                                                        $active_class = 'list-group-item';
-                                                                                                }
-                                                                                        } else {
-                                                                                                $active_class = 'list-group-item';
-                                                                                        }
+                                                if ($category->id == $catag->id) {
+                                                    $active_class = 'list-group-item active';
+                                                } else {
+                                                    $active_class = 'list-group-item';
+                                                }
+                                            } else {
+                                                $active_class = 'list-group-item';
+                                            }
                                             ?>
                                             <?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $category->category_code], ['class' => $active_class]) ?>
-                                                                                            <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
+                                                                                                                                                                                    <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
                                         <?php }
                                         ?>
                                     </div>

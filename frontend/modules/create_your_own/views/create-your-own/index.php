@@ -1,751 +1,171 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+use yii\helpers\Html;
 ?>
-<h1>create-your-own</h1>
+<div class="pad-20 hide-xs"></div>
 
-<form role="forl" id="rootwizard" class="form-wizard validate" novalidate>
-
-    <ul class="tabs">
-        <li class="active">
-            <a href="#fwv-1" data-toggle="tab">
-                GENDER
-                <span>1</span>
-            </a>
-        </li>
-        <li>
-            <a href="#fwv-2" data-toggle="tab">
-                CHARACTER
-                <span>2</span>
-            </a>
-        </li>
-        <li>
-            <a href="#fwv-3" data-toggle="tab">
-                SCENT
-                <span>3</span>
-            </a>
-        </li>
-        <li>
-            <a href="#fwv-4" data-toggle="tab">
-                NOTES
-                <span>4</span>
-            </a>
-        </li>
-        <li>
-            <a href="#fwv-5" data-toggle="tab">
-                BOTTLE
-                <span>5</span>
-            </a>
-        </li>
-        <li>
-            <a href="#fwv-5" data-toggle="tab">
-                LABEL
-                <span>6</span>
-            </a>
-        </li>
-        <li>
-            <a href="#fwv-5" data-toggle="tab">
-                DONE
-                <span>7</span>
-            </a>
-        </li>
-    </ul>
-
-    <div class="progress-indicator">
-        <span></span>
+<div class="container">
+    <div class="breadcrumb">
+        <span class="current-page">Create Your Own</span>
+        <ol class="path">
+            <li><?= Html::a('<span>Home</span>', ['index'], ['class' => '']) ?></li>
+            <li class="active">Create Your Own</li>
+        </ol>
     </div>
-
-    <div class="tab-content no-margin">
-
-        <!-- Tabs Content -->
-        <div class="tab-pane with-bg active" id="fwv-1">
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <input class="gender" name="gender" id="gender" type="radio" value="2" />Women
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <input class="gender" name="gender" id="gender" type="radio" value="1" />Men
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-2">
-
-            <div class="row">
-
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label class="control-label" for="street">Street</label>
-                        <input class="form-control" name="street" id="street" data-validate="required" placeholder="Enter your street address" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="door_no">Door no.</label>
-                        <input class="form-control" name="door_no" id="door_no" data-validate="number" placeholder="Numbers only" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="control-label" for="address_line_2">Address Line 2</label>
-                        <input class="form-control" name="address_line_2" id="address_line_2" placeholder="(Optional) Secondary Address" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label class="control-label" for="city">City</label>
-                        <input class="form-control" name="city" id="city" data-validate="required" placeholder="Current city" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="state">State</label>
-
-                        <select name="test" class="selectboxit">
-                            <optgroup label="United States">
-                                <option value="1">Alabama</option>
-                                <option value="2">Boston</option>
-                                <option value="3">Ohaio</option>
-                                <option value="4">New York</option>
-                                <option value="5">Washington</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="zip">Zip</label>
-                        <input class="form-control"  name="zip" id="zip" data-mask="** *** **" data-validate="required" placeholder="Zip Code" />
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-3">
-
-            <strong>Primary School</strong>
-            <br />
-            <br />
-
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="prim_subject">Subject</label>
-                        <input class="form-control" name="prim_subject" id="prim_subject" data-validate="require" placeholder="Graduation Degree" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="prim_school">School Name</label>
-                        <input class="form-control" name="prim_school" id="prim_school" placeholder="Which school did you attended" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="prim_date_start">Start Date</label>
-                        <input class="form-control datepicker" name="prim_date_start" id="prim_date_start" data-start-view="2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="prim_date_end">End Date</label>
-                        <input class="form-control datepicker" name="prim_date_end" id="prim_date_end" data-start-view="2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <br />
-
-            <strong>Secondary School</strong>
-            <br />
-            <br />
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="second_subject">Subject</label>
-                        <input class="form-control" name="second_subject" id="second_subject" data-validate="require" placeholder="High School" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="second_school">School Name</label>
-                        <input class="form-control" name="second_school" id="second_school" placeholder="Which school did you attended" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="second_date_start">Start Date</label>
-                        <input class="form-control datepicker" name="second_date_start" id="second_date_start" data-start-view="2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="second_date_end">End Date</label>
-                        <input class="form-control datepicker" name="second_date_end" id="second_date_end" data-start-view="2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <br />
-
-            <div class="row">
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="control-label" for="other_qualifications"><strong>Other Qualifications</strong></label>
-                        <textarea class="form-control autogrow" name="other_qualifications" id="other_qualifications" placeholder="List one subject per row"></textarea>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-4">
-
-            <strong>Current &amp; Past Jobs</strong>
-            <br />
-            <br />
-
-            <div class="row">
-
-                <div class="col-md-1">
-                    <label class="control-label">&nbsp;</label>
-                    <p class="text-right">
-                        <span class="label label-info">1</span>
-                    </p>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_1">Company Name</label>
-                        <input class="form-control" name="job_position_1" id="job_position_1" data-validate="require" placeholder="Your current job" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_1">Job Position</label>
-                        <input class="form-control" name="job_position_1" id="job_position_1" data-validate="require" placeholder="Your current position" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_start_date_1">Start Date</label>
-                        <input class="form-control datepicker" name="job_position_start_date_1" id="job_position_start_date_1" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_end_date_1">End Date</label>
-                        <input class="form-control datepicker" name="job_position_end_date_1" id="job_position_end_date_1" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-1">
-                    <label class="control-label">&nbsp;</label>
-                    <p class="text-right">
-                        <span class="label label-info">2</span>
-                    </p>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_2">Company Name</label>
-                        <input class="form-control" name="job_position_2" id="job_position_2" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_2">Job Position</label>
-                        <input class="form-control" name="job_position_2" id="job_position_2" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_start_date_2">Start Date</label>
-                        <input class="form-control datepicker" name="job_position_start_date_2" id="job_position_start_date_2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_end_date_2">End Date</label>
-                        <input class="form-control datepicker" name="job_position_end_date_2" id="job_position_end_date_2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-1">
-                    <label class="control-label">&nbsp;</label>
-                    <p class="text-right">
-                        <span class="label label-info">3</span>
-                    </p>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_3">Company Name</label>
-                        <input class="form-control" name="job_position_3" id="job_position_3" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_3">Job Position</label>
-                        <input class="form-control" name="job_position_3" id="job_position_3" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_start_date_3">Start Date</label>
-                        <input class="form-control datepicker" name="job_position_start_date_3" id="job_position_start_date_3" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_end_date_3">End Date</label>
-                        <input class="form-control datepicker" name="job_position_end_date_3" id="job_position_end_date_3" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-1">
-                    <label class="control-label">&nbsp;</label>
-                    <p class="text-right">
-                        <span class="label label-info">4</span>
-                    </p>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_4">Company Name</label>
-                        <input class="form-control" name="job_position_4" id="job_position_4" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_4">Job Position</label>
-                        <input class="form-control" name="job_position_4" id="job_position_4" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_start_date_4">Start Date</label>
-                        <input class="form-control datepicker" name="job_position_start_date_4" id="job_position_start_date_4" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_end_date_4">End Date</label>
-                        <input class="form-control datepicker" name="job_position_end_date_4" id="job_position_end_date_4" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-5">
-
-            <div class="form-group">
-                <label class="control-label">Choose Username</label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="linecons-user"></i>
-                    </div>
-
-                    <input type="text" class="form-control" name="username" id="username" data-validate="required,minlength[5]" data-message-minlength="Username must have minimum of 5 chars." placeholder="Could also be your email" />
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Choose Password</label>
-
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="linecons-lock"></i>
+</div>
+
+<div id="about-page">
+    <div class="container">
+        <div class="row">
+            <div class="create-your-own-section">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ul class="nav nav-tabs">
+                        <li class="active" id="tab-1" class="tab-list"><a href="#tab1" data-toggle="tab">Gender</a></li>
+                        <li id="tab-2" class="tab-list"><a href="#tab2" data-toggle="tab">Character</a></li>
+                        <li id="tab-3" class="tab-list"><a href="#tab3" data-toggle="tab">Scent</a></li>
+                        <li id="tab-4" class="tab-list"><a href="#tab4" data-toggle="tab">Notes</a></li>
+                        <li id="tab-5" class="tab-list"><a href="#tab5" data-toggle="tab">Bottle</a></li>
+                        <li id="tab-6" class="tab-list"><a href="#tab6" data-toggle="tab">Label</a></li>
+                        <li id="tab-7" class="tab-list"><a href="#tab7" data-toggle="tab">Done</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <p>Is the recipient female or male?</p>
+                            <input class="gender" type="radio" name="gender" value="1"> Male<br>
+                            <input class="gender" type="radio" name="gender" value="2"> Female<br>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <p class="tab-2">What character should the fragrance have?</p>
+                            <div id="character-div">
                             </div>
-
-                            <input type="password" class="form-control" name="password" id="password" data-validate="required" placeholder="Enter strong password" />
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                            <p class="tab-2">Which scent do you prefer?</p>
+                            <div id="scent-div">
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab4">
+                            TAB 4
+                        </div>
+                        <div class="tab-pane" id="tab5">
+                            TAB 5
+                        </div>
+                        <div class="tab-pane" id="tab6">
+                            TAB 6
+                        </div>
+                        <div class="tab-pane" id="tab7">
+                            TAB 7
                         </div>
                     </div>
+                    <a class="btn btn-primary btnPrevious" >Previous</a>
+                    <a class="btn btn-primary btnNext" >Next</a>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Repeat Password</label>
-
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="linecons-lock"></i>
-                            </div>
-
-                            <input type="password" class="form-control" name="password" id="password" data-validate="required,equalTo[#password]" data-message-equal-to="Passwords doesn't match." placeholder="Confirm password" />
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Include Services</label>
-
-                        <select multiple="multiple" name="my-select[]" class="form-control multi-select">
-                            <option value="1">Web Builder</option>
-                            <option value="2" selected>Server Side Scripting</option>
-                            <option value="3">Secure Connection</option>
-                            <option value="4" selected>Database Access</option>
-                            <option value="5" selected>Email</option>
-                            <option value="6">eCommerce</option>
-                            <option value="7">Royalty Free Photos</option>
-                            <option value="8">WordPress Installation</option>
-                            <option value="9">Magento Installation</option>
-                            <option value="10">Reseller Account</option>
-                            <option value="11">WHM Client</option>
-                            <option value="12">Nginx</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Gender</label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-red" checked>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Subscribe for Newsletter</label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-purple" checked>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">
-                            Auto-renew Subscription
-                            <span class="label label-warning">Yearly</span>
-                        </label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-secondary" checked>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                <input type="checkbox" class="cbr" name="chk-rules" id="chk-rules" data-validate="required" data-message-message="You must accept rules in order to complete this registration.">
-                <label for="chk-rules">By registering I accept terms and conditions.</label>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Finish Registration</button>
-            </div>
-
         </div>
-
-        <div class="tab-pane with-bg" id="fwv-6">
-
-            <div class="form-group">
-                <label class="control-label">Choose Username</label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="linecons-user"></i>
-                    </div>
-
-                    <input type="text" class="form-control" name="username" id="username" data-validate="required,minlength[5]" data-message-minlength="Username must have minimum of 5 chars." placeholder="Could also be your email" />
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Choose Password</label>
-
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="linecons-lock"></i>
-                            </div>
-
-                            <input type="password" class="form-control" name="password" id="password" data-validate="required" placeholder="Enter strong password" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Repeat Password</label>
-
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="linecons-lock"></i>
-                            </div>
-
-                            <input type="password" class="form-control" name="password" id="password" data-validate="required,equalTo[#password]" data-message-equal-to="Passwords doesn't match." placeholder="Confirm password" />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Include Services</label>
-
-                        <select multiple="multiple" name="my-select[]" class="form-control multi-select">
-                            <option value="1">Web Builder</option>
-                            <option value="2" selected>Server Side Scripting</option>
-                            <option value="3">Secure Connection</option>
-                            <option value="4" selected>Database Access</option>
-                            <option value="5" selected>Email</option>
-                            <option value="6">eCommerce</option>
-                            <option value="7">Royalty Free Photos</option>
-                            <option value="8">WordPress Installation</option>
-                            <option value="9">Magento Installation</option>
-                            <option value="10">Reseller Account</option>
-                            <option value="11">WHM Client</option>
-                            <option value="12">Nginx</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Gender</label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-red" checked>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Subscribe for Newsletter</label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-purple" checked>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">
-                            Auto-renew Subscription
-                            <span class="label label-warning">Yearly</span>
-                        </label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-secondary" checked>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                <input type="checkbox" class="cbr" name="chk-rules" id="chk-rules" data-validate="required" data-message-message="You must accept rules in order to complete this registration.">
-                <label for="chk-rules">By registering I accept terms and conditions.</label>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Finish Registration</button>
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-7">
-
-            <div class="form-group">
-                <label class="control-label">Choose Username</label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="linecons-user"></i>
-                    </div>
-
-                    <input type="text" class="form-control" name="username" id="username" data-validate="required,minlength[5]" data-message-minlength="Username must have minimum of 5 chars." placeholder="Could also be your email" />
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Choose Password</label>
-
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="linecons-lock"></i>
-                            </div>
-
-                            <input type="password" class="form-control" name="password" id="password" data-validate="required" placeholder="Enter strong password" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Repeat Password</label>
-
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="linecons-lock"></i>
-                            </div>
-
-                            <input type="password" class="form-control" name="password" id="password" data-validate="required,equalTo[#password]" data-message-equal-to="Passwords doesn't match." placeholder="Confirm password" />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Include Services</label>
-
-                        <select multiple="multiple" name="my-select[]" class="form-control multi-select">
-                            <option value="1">Web Builder</option>
-                            <option value="2" selected>Server Side Scripting</option>
-                            <option value="3">Secure Connection</option>
-                            <option value="4" selected>Database Access</option>
-                            <option value="5" selected>Email</option>
-                            <option value="6">eCommerce</option>
-                            <option value="7">Royalty Free Photos</option>
-                            <option value="8">WordPress Installation</option>
-                            <option value="9">Magento Installation</option>
-                            <option value="10">Reseller Account</option>
-                            <option value="11">WHM Client</option>
-                            <option value="12">Nginx</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Gender</label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-red" checked>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Subscribe for Newsletter</label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-purple" checked>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">
-                            Auto-renew Subscription
-                            <span class="label label-warning">Yearly</span>
-                        </label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-secondary" checked>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                <input type="checkbox" class="cbr" name="chk-rules" id="chk-rules" data-validate="required" data-message-message="You must accept rules in order to complete this registration.">
-                <label for="chk-rules">By registering I accept terms and conditions.</label>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Finish Registration</button>
-            </div>
-
-        </div>
-
-
-        <!-- Tabs Pager -->
-
-        <ul class="pager wizard">
-            <li class="previous">
-                <a href="#"><i class="entypo-left-open"></i> Previous</a>
-            </li>
-
-            <li class="next">
-                <a href="#">Next <i class="entypo-right-open"></i></a>
-            </li>
-        </ul>
-
     </div>
+</div>
 
-</form>
+<div class="pad-20"></div>
+
+<script>
+    $(document).ready(function () {
+
+//        $('.tab-list').click(function (e) {
+//            var id = $(".nav-tabs li.active").attr('id').match(/\d+/);
+//            if (validateDatas(id) == 0) {
+//                alert('if');
+//                $('#tab' + id + ' .validation').remove();
+//                $('.nav-tabs > .active').next('li').find('a').trigger('click');
+//            } else {
+//                alert('else');
+//                if (!$('.validation').length) {
+//                    $('#tab' + id + ' p').after("<p class='validation' style='color: red;'>Please select an option!</p>");
+//                }
+//                e.preventDefault();
+//            }
+//        });
+
+        $('.btnNext').click(function () {
+            var id = $(".nav-tabs li.active").attr('id').match(/\d+/);
+            if (validateDatas(id) == 0) {
+                $('#tab' + id + ' .validation').remove();
+                $('.nav-tabs > .active').next('li').find('a').trigger('click');
+            } else {
+                if (!$('.validation').length) {
+                    $('#tab' + id + ' p').after("<p class='validation' style='color: red;'>Please select an option!</p>");
+                }
+            }
+        });
+
+        $('.btnPrevious').click(function () {
+            $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+        });
+        $(document).on('change', 'input[type=radio][name=gender]', function () {
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/gender-session',
+                success: function (data) {
+                    $("#character-div").html(data);
+                }
+            });
+        });
+
+        $(document).on('change', 'input[type=radio][name=character]', function () {
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/character-session',
+                success: function (data) {
+                    $("#scent-div").html(data);
+                }
+            });
+        });
+
+    });
+    function validateDatas(id) {
+        if ('tab-' + id == 'tab-1') {
+            var result = validateGender();
+        }
+        if ('tab-' + id == 'tab-2') {
+            var result = validateCharacter();
+        }
+        if ('tab-' + id == 'tab-3') {
+            var result = validateScent();
+        }
+        return result;
+    }
+    function validateGender() {
+
+        if ($('.gender').is(':checked')) {
+            var valid = 0;
+        } else {
+            var valid = 1;
+        }
+        return valid;
+    }
+    function validateCharacter() {
+
+        if ($('.character').is(':checked')) {
+            var valid = 0;
+        } else {
+            var valid = 1;
+        }
+        return valid;
+    }
+    function validateScent() {
+
+        if ($('.scent').is(':checked')) {
+            var valid = 0;
+        } else {
+            var valid = 1;
+        }
+        return valid;
+    }
+</script>

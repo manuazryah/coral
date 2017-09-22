@@ -1,3 +1,9 @@
+<?php
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+use yii\helpers\Html;
+?>
 <div class="pad-20 hide-xs"></div>
 
 <div class="container">

@@ -99,63 +99,82 @@ $(document).ready(function () {
         }
     });
 
+    $(".gender-select").click(function () {
 
-      /************ Serach ****************/
-        $('.search-keyword').on('keyup', function (e) {
-                if (e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 27) {
-                        $.ajax({
-                                url: homeUrl + 'product/search-keyword',
-                                type: "POST",
-                                data: {keyword: $(this).val()},
-                                success: function (data) {
-                                        $('.search-keyword-dropdown').html(data);
-                                }
-                        });
+        var type = $(this).attr('id');
+        var pro_cat = $(this).attr('pro_cat');
+        $.ajax({
+            type: 'POST',
+            cache: false,
+            async: false,
+            data: {gender: type},
+            url: homeUrl + 'product/gender-search',
+            success: function (data) {
+                if (data == 1) {
+                    window.location = homeUrl + 'product/index?id=' + pro_cat;
                 }
+            }
         });
 
-        /********* selected li value to textbox **********/
-        $(document).on('click', '.search-dropdown li', function () {
-                $('.search-dropdown').hide();
-                $('.search-keyword').val($(this).attr('id'));
-        });
+    });
 
-        /********************li navigation keys ***************/
-        $('.search-keyword').on('keydown', function (e) {
 
-                if (e.keyCode == 40) { //down
-
-                        var selected = $(".search-selected");
-                        $('.search-dropdown li').removeClass('search-selected');
-                        if (selected.next().length == 0) {
-                                selected.siblings().first().addClass('search-selected');
-                        } else {
-                                selected.next().addClass('search-selected');
-                        }
-                } else if (e.keyCode == 38) { //up
-
-                        var selected = $(".search-selected");
-                        $('.search-dropdown li').removeClass('search-selected');
-                        if (selected.prev().length == 0) {
-                                selected.siblings().last().addClass('search-selected');
-                        } else {
-                                selected.prev().addClass('search-selected');
-                        }
-                } else if (e.keyCode == 27) { //escape
-
-                        $('.search-dropdown').hide();
-                        $('.search-keyword').val('');
-
-                } else if (e.keyCode == 13) { //enter
-
-                        var value = $('.search-selected').attr('id');
-                        $('.search-dropdown').hide();
-                        $('.search-keyword').val(value);
-                        e.preventDefault();
+    /************ Serach ****************/
+    $('.search-keyword').on('keyup', function (e) {
+        if (e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 27) {
+            $.ajax({
+                url: homeUrl + 'product/search-keyword',
+                type: "POST",
+                data: {keyword: $(this).val()},
+                success: function (data) {
+                    $('.search-keyword-dropdown').html(data);
                 }
+            });
+        }
+    });
+
+    /********* selected li value to textbox **********/
+    $(document).on('click', '.search-dropdown li', function () {
+        $('.search-dropdown').hide();
+        $('.search-keyword').val($(this).attr('id'));
+    });
+
+    /********************li navigation keys ***************/
+    $('.search-keyword').on('keydown', function (e) {
+
+        if (e.keyCode == 40) { //down
+
+            var selected = $(".search-selected");
+            $('.search-dropdown li').removeClass('search-selected');
+            if (selected.next().length == 0) {
+                selected.siblings().first().addClass('search-selected');
+            } else {
+                selected.next().addClass('search-selected');
+            }
+        } else if (e.keyCode == 38) { //up
+
+            var selected = $(".search-selected");
+            $('.search-dropdown li').removeClass('search-selected');
+            if (selected.prev().length == 0) {
+                selected.siblings().last().addClass('search-selected');
+            } else {
+                selected.prev().addClass('search-selected');
+            }
+        } else if (e.keyCode == 27) { //escape
+
+            $('.search-dropdown').hide();
+            $('.search-keyword').val('');
+
+        } else if (e.keyCode == 13) { //enter
+
+            var value = $('.search-selected').attr('id');
+            $('.search-dropdown').hide();
+            $('.search-keyword').val(value);
+            e.preventDefault();
+        }
 
 
-        });
+    });
 
 
 
