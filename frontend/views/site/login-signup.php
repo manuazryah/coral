@@ -202,7 +202,7 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
 				}
 
 			}
-			if ((!$("#signupform-password").val()) && (clicked_id !== "signupform-password") && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
+			if ((!$("#signupform-password").val()) && (clicked_id !== "username_id") && (clicked_id !== "signupform-password") && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
 				$(".field-signupform-password ").addClass('has-error');
 				if ($(".field-signupform-password div").text() === "") {
 					$(".field-signupform-password div").append("Passwordcannot be blank");
