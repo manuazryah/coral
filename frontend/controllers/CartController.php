@@ -378,8 +378,8 @@ class CartController extends \yii\web\Controller {
                        <span class="item-name">' . $prod_details->product_name . '</span>
                        <span class="item-price">' . $price . '</span>
                        <span class="item-quantity">Quantity: ' . $cart_content->quantity . '</span>
-                       <button title="Remove From Cart" class="remove-cart"><i class="fa fa-times" aria-hidden="true"></i></button>
                        </li>';
+//                <button title="Remove From Cart" class="remove-cart"><i class="fa fa-times" aria-hidden="true"></i></button>
             }
         } else {
             echo 'Cart box is Empty';
