@@ -20,4 +20,6 @@ return [
     'wish-list' => 'myaccounts/user/wish-list',
     'personal-info' => 'myaccounts/user/personal-info',
     'contact-info' => 'myaccounts/user/update-contact-info',
+    'coral-perfumes-blog-detail/<id>' => 'site/blog-detail',
+    'coral-perfumes-blogs' => 'site/our-blog',
 ];

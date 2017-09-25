@@ -9,45 +9,45 @@ use common\models\Fregrance;
 
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                        <?php
-                        $j = 0;
-                        foreach ($slider as $value) {
-                                ?>
-                                <li data-target="#bootstrap-touch-slider" data-slide-to="<?= $j ?>" class="<?= $j == 0 ? 'active' : '' ?>"></li>
-                                <?php
-                                $j++;
-                        }
-                        ?>
+			<?php
+			$j = 0;
+			foreach ($slider as $value) {
+				?>
+				<li data-target="#bootstrap-touch-slider" data-slide-to="<?= $j ?>" class="<?= $j == 0 ? 'active' : '' ?>"></li>
+				<?php
+				$j++;
+			}
+			?>
                 </ol>
 
                 <!-- Wrapper For Slides -->
                 <div class="carousel-inner" role="listbox">
 
-                        <?php
-                        $k = 0;
-                        foreach ($slider as $value) {
-                                ?>
-                                <div class="item <?= $k == 0 ? 'active' : '' ?>">
+			<?php
+			$k = 0;
+			foreach ($slider as $value) {
+				?>
+				<div class="item <?= $k == 0 ? 'active' : '' ?>">
 
-                                        <!-- Slide Background -->
-                                        <img src="<?= Yii::$app->homeUrl; ?>uploads/cms/slider/<?= $value->id ?>/large.<?= $value->img ?>" alt="Bootstrap Touch Slider"  class="slide-image"/>
-                                        <!--<div class="bs-slider-overlay"></div>-->
+					<!-- Slide Background -->
+					<img src="<?= Yii::$app->homeUrl; ?>uploads/cms/slider/<?= $value->id ?>/large.<?= $value->img ?>" alt="Bootstrap Touch Slider"  class="slide-image"/>
+					<!--<div class="bs-slider-overlay"></div>-->
 
-                                        <div class="container">
-                                                <div class="row">
-                                                        <!-- Slide Text Layer -->
-                                                        <div class="slide-text slide_style_right">
-                                                                <p data-animation="animated fadeInLeft">THE BEGINNING OF SOMETHING MAGICAL</p>
-                                                                <h3 data-animation="animated zoomInRight">CORAL PERFUMES</h3>
-                                                                <a href="#" target="_blank" class="start-shopping" data-animation="animated fadeInLeft">start shopping</a>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                </div>
-                                <?php
-                                $k++;
-                        }
-                        ?>
+					<div class="container">
+						<div class="row">
+							<!-- Slide Text Layer -->
+							<div class="slide-text slide_style_right">
+								<p data-animation="animated fadeInLeft">THE BEGINNING OF SOMETHING MAGICAL</p>
+								<h3 data-animation="animated zoomInRight">CORAL PERFUMES</h3>
+								<a href="#" target="_blank" class="start-shopping" data-animation="animated fadeInLeft">start shopping</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php
+				$k++;
+			}
+			?>
 
                 </div><!-- End of Wrapper For Slides -->
 
@@ -81,26 +81,26 @@ use common\models\Fregrance;
 
         <div class="category-grid sec-pad">
                 <h1>shop by category</h1>
-                <?php
-                $shops = common\models\ShopByCategory::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all();
-                $s = 0;
-                $link = '';
-                foreach ($shops as $shops_by) {
-                        $s++;
-                        if ($shops_by->link == 0) {
-                                $link = 'product/index?type=0';
-                        } else if ($shops_by->link == 1) {
-                                $link = 'product/index?type=1';
-                        } else if ($shops_by->link == 2) {
-                                $link = 'product/index';
-                        }
-                        ?>
-                        <div style="<?= $s == 0 ? 'border-left: 0px;' : '' ?>" class=" <?= $s == 4 ? 'col-md-8' : 'col-md-4' ?>">
-                                <a href="<?= Yii::$app->homeUrl . $link ?>"><img class="img-responsive" src="<?= Yii::$app->homeUrl; ?>uploads/cms/shop-by-category/<?= $shops_by->id ?>/large.<?= $shops_by->image ?>"/></a>
-                        </div>
+		<?php
+		$shops = common\models\ShopByCategory::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all();
+		$s = 0;
+		$link = '';
+		foreach ($shops as $shops_by) {
+			$s++;
+			if ($shops_by->link == 0) {
+				$link = 'product/index?type=0';
+			} else if ($shops_by->link == 1) {
+				$link = 'product/index?type=1';
+			} else if ($shops_by->link == 2) {
+				$link = 'product/index';
+			}
+			?>
+			<div style="<?= $s == 0 ? 'border-left: 0px;' : '' ?>" class=" <?= $s == 4 ? 'col-md-8' : 'col-md-4' ?>">
+				<a href="<?= Yii::$app->homeUrl . $link ?>"><img class="img-responsive" src="<?= Yii::$app->homeUrl; ?>uploads/cms/shop-by-category/<?= $shops_by->id ?>/large.<?= $shops_by->image ?>"/></a>
+			</div>
 
-                <?php }
-                ?>
+		<?php }
+		?>
         </div>
         <div class="featured-pro sec-pad">
                 <h1>our featured products</h1>
@@ -256,13 +256,13 @@ use common\models\Fregrance;
                         </div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
                 </div>
 
-            
+
 
         </div>
 
         <div class="private-label sec-pad">
                 <h1>private label manu facturing</h1>
-                <div class="private-bg">
+                <div class="private-bg" style="background-image: url(images/index-private-label-bg.jpg);">
                         <div class="container">
                                 <div class="row">
                                         <div class="private-cntnt">
@@ -423,24 +423,25 @@ use common\models\Fregrance;
                 <h1>From our blog</h1>
                 <div class="container">
                         <div class="row">
-                                <?php
-                                $from_blogs = common\models\FromOurBlog::find()->where(['status' => 1])->all();
-                                foreach ($from_blogs as $from_blogs) {
-                                        ?>
-                                        <div class="blog-box col-md-4 col-sm-4  col-xs-12">
-                                                <div class="img-box">
-                                                        <img class="img-responsive" src="<?= Yii::$app->homeUrl ?>uploads/cms/from-blog/<?= $from_blogs->id ?>/large.<?= $from_blogs->image ?>"/>
-                                                </div>
-                                                <h5><?= $from_blogs->title; ?></h5>
-                                                <ul class="date">
-                                                        <li><i class="fa fa-calendar-check-o" aria-hidden="true"></i><?= date('M d Y', strtotime($from_blogs->blog_date)) ?></li>
-                                                </ul>
-                                                <p><?= substr($from_blogs->content, 0, 150); ?></p>
-                                                <a href="">know more</a>
-                                        </div>
-                                        <?php
-                                }
-                                ?>
+				<?php
+				$from_blogs = common\models\FromOurBlog::find()->where(['status' => 1])->all();
+				foreach ($from_blogs as $from_blogs) {
+					?>
+					<div class="blog-box col-md-4 col-sm-4  col-xs-12">
+						<div class="img-box">
+							<img class="img-responsive" src="<?= Yii::$app->homeUrl ?>uploads/cms/from-blog/<?= $from_blogs->id ?>/large.<?= $from_blogs->image ?>"/>
+						</div>
+						<h5><?= $from_blogs->title; ?></h5>
+						<ul class="date">
+							<li><i class="fa fa-calendar-check-o" aria-hidden="true"></i><?= date('M d Y', strtotime($from_blogs->blog_date)) ?></li>
+						</ul>
+						<p><?= substr($from_blogs->content, 0, 150); ?></p>
+						<?php // Html::a('know more', ['blog-detail?id=' . $from_blogs->id]) ?>
+						<?= Html::a('know more', ['blog-detail', 'id' => $from_blogs->id]) ?>
+					</div>
+					<?php
+				}
+				?>
 
                         </div>
                 </div>
@@ -454,14 +455,14 @@ use common\models\Fregrance;
                                         <h4>our newsletter</h4>
                                         <p>Subscribe to our newsletter and stay updated on the <br/>exclusive deals  and special offers!</p>
                                         <div class="col-md-12 col-sm-12 col-xs-12 search">
-                                                <?php $form = ActiveForm::begin(); ?>
+						<?php $form = ActiveForm::begin(); ?>
                                                 <div class="input-group">
-                                                        <?= $form->field($model, 'email')->textInput(['placeholder' => 'Email Address....', 'class' => 'form-control SearchBar'])->label(FALSE) ?>
+							<?= $form->field($model, 'email')->textInput(['placeholder' => 'Email Address....', 'class' => 'form-control SearchBar'])->label(FALSE) ?>
                                                         <span class="input-group-btn">
-                                                                <?= Html::submitButton('<span class="SearchIcon">Subscribe</span>', ['class' => 'btn btn-defaul SearchButton']) ?>
+								<?= Html::submitButton('<span class="SearchIcon">Subscribe</span>', ['class' => 'btn btn-defaul SearchButton']) ?>
                                                         </span>
                                                 </div>
-                                                <?php ActiveForm::end(); ?>
+						<?php ActiveForm::end(); ?>
                                         </div>
                                 </div>
                                 <div class="col-md-5 col-sm-5">

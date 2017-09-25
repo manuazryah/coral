@@ -163,18 +163,19 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
 			if (jQuery.inArray(clicked_id, arr) !== -1) {
 				displayerrors(clicked_id);
 			}
-//			$("#email_id").blur(function () {
-//				var email = $(this).val();
-//				emailunique(email);
-//				//showLoader();
-//
-//			});
-//			$("#username_id").blur(function () {
-//				var username = $(this).val();
-//				usernameunique(username);
-//
-//
-//			});
+			$("#email_id").blur(function () {
+
+				var email = $(this).val();
+				emailunique(email);
+				//showLoader();
+
+			});
+			$("#username_id").blur(function () {
+				var username = $(this).val();
+				usernameunique(username);
+
+
+			});
 
 			$('#signupform-password_repeat').on('keyup', function () {
 				CheckConfirmPasswordMatch();
@@ -286,25 +287,25 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
 //				}
 //			});
 //		}
-//		function emailunique(email) {
-//			//showLoader();
-//			$.ajax({
-//				type: 'POST',
-//				cache: false,
-//				data: {email: email},
-//				url: homeUrl + 'ajax/email-unique',
-//				success: function (data) {
-//					if (data == 0) {
-//
-//						$(".field-email_id").addClass('has-error');
-//						if ($(".field-email_id div").text() === "") {
-//							$(".field-email_id div").append("Email Id Already Exist");
-//						}
-//					}
-//					hideLoader();
-//				}
-//			});
-//		}
+		function emailunique(email) {
+			//showLoader();
+			$.ajax({
+				type: 'POST',
+				cache: false,
+				data: {email: email},
+				url: homeUrl + 'ajax/email-unique',
+				success: function (data) {
+					if (data == 0) {
+
+						$(".field-email_id").addClass('has-error');
+						if ($(".field-email_id div").text() === "") {
+							$(".field-email_id div").append("Email Id Already Exist");
+						}
+					}
+					hideLoader();
+				}
+			});
+		}
 
 	});
 
