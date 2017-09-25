@@ -12,6 +12,10 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="rows">
+        <div class='col-md-12 col-sm-6 col-xs-12 '>
+            <?php if ($model->isNewRecord) $model->main_category = '1'; ?>
+            <?= $form->field($model, 'main_category')->radioList(array('1' => 'Our Products', '2' => 'International Products')); ?>
+        </div>
         <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    
             <?= $form->field($model, 'category')->textInput(['maxlength' => true, 'autocomplete' => 'off']) ?>
         </div>

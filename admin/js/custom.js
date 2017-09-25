@@ -191,6 +191,9 @@ $('.add_unit').click(function () {
     var unit = $(this).attr('attr_id');
     $('.modal-title').attr('field_id', unit);
 });
+$('#product-main_category').change(function(){
+//   alert('daa'); 
+});
 
 $("#product-category").change(function () {
     $.ajax({
