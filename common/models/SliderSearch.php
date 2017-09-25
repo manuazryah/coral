@@ -10,24 +10,22 @@ use common\models\Slider;
 /**
  * SliderSearch represents the model behind the search form about `common\models\Slider`.
  */
-class SliderSearch extends Slider
-{
+class SliderSearch extends Slider {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'status', 'CB', 'UB'], 'integer'],
-            [['img', 'content', 'DOC', 'DOU'], 'safe'],
+            [['img', 'content', 'DOC', 'DOU', 'slider_first_tittle', 'slider_second_tittle', 'slider_link'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class SliderSearch extends Slider
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Slider::find();
 
         // add conditions that should always apply here
@@ -68,8 +65,9 @@ class SliderSearch extends Slider
         ]);
 
         $query->andFilterWhere(['like', 'img', $this->img])
-            ->andFilterWhere(['like', 'content', $this->content]);
+                ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }
+
 }

@@ -92,6 +92,7 @@ class SiteController extends Controller {
     public function actionIndex() {
         $about = About::find()->where(['id' => 1])->one();
         $featured_products = Product::find()->where(['status' => 1, 'featured_product' => 1])->all();
+        $catag = \common\models\Category::find()->one();
         $model = new Subscribe();
         if ($model->load(Yii::$app->request->post())) {
             $model->date = date('Y-m-d');
@@ -103,7 +104,8 @@ class SiteController extends Controller {
                     'slider' => $slider,
                     'model' => $model,
                     'about' => $about,
-                    'featured_products' => $featured_products
+                    'featured_products' => $featured_products,
+                    'catag' => $catag,
         ]);
     }
 

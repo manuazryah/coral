@@ -32,38 +32,84 @@ use yii\helpers\Html;
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab1">
-                            <p>Is the recipient female or male?</p>
-                            <input class="gender" type="radio" name="gender" value="1"> Male<br>
-                            <input class="gender" type="radio" name="gender" value="2"> Female<br>
+                            <div class="col-md-6">
+                                <p>Is the recipient female or male?</p>
+                                <?php foreach ($gender as $value) { ?>
+                                    <input class="gender" type="radio" name="gender" value="<?= $value->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/gender/<?= $value->id ?>.<?= $value->img ?>'> <?= $value->gender ?><br>
+                                <?php }
+                                ?>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="gender_image"/>
+                            </div>
+                            <div class="col-md-12">
+                                <a class="btn btn-primary btnNext" >Next</a>
+                            </div>
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <p class="tab-2">What character should the fragrance have?</p>
-                            <div id="character-div">
+                            <div class="col-md-6">
+                                <p class="tab-2">What character should the fragrance have?</p>
+                                <div id="character-div">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="character_image"/>
+                            </div>
+                            <div class="col-md-12">
+                                <a class="btn btn-primary btnPrevious" >Previous</a>
+                                <a class="btn btn-primary btnNext" >Next</a>
                             </div>
                         </div>
                         <div class="tab-pane" id="tab3">
-                            <p class="tab-3">Which scent do you prefer?</p>
-                            <div id="scent-div">
+                            <div class="col-md-6">
+                                <p class="tab-3">Which scent do you prefer?</p>
+                                <div id="scent-div">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="scent_image"/>
+                            </div>
+                            <div class="col-md-12">
+                                <a class="btn btn-primary btnPrevious" >Previous</a>
+                                <a class="btn btn-primary btnNext" >Next</a>
                             </div>
                         </div>
                         <div class="tab-pane" id="tab4">
-                            <p class="tab-4">Choose up to 6 ingredients.</p>
-                            <div id="notes-div">
+                            <div class="col-md-6">
+                                <p class="tab-4">Choose up to 6 ingredients.</p>
+                                <div id="notes-div">
 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive"/>
+                            </div>
+                            <div class="col-md-12">
+                                <a class="btn btn-primary btnPrevious" >Previous</a>
+                                <a class="btn btn-primary btnNext" >Next</a>
                             </div>
                         </div>
                         <div class="tab-pane" id="tab5">
                             TAB 5
+                            <div class="col-md-12">
+                                <a class="btn btn-primary btnPrevious" >Previous</a>
+                                <a class="btn btn-primary btnNext" >Next</a>
+                            </div>
                         </div>
                         <div class="tab-pane" id="tab6">
                             TAB 6
+                            <div class="col-md-12">
+                                <a class="btn btn-primary btnPrevious" >Previous</a>
+                                <a class="btn btn-primary btnNext" >Next</a>
+                            </div>
                         </div>
                         <div class="tab-pane" id="tab7">
                             TAB 7
+                            <div class="col-md-12">
+                                <a class="btn btn-primary btnPrevious" >Previous</a>
+                            </div>
                         </div>
                     </div>
-                    <a class="btn btn-primary btnPrevious" >Previous</a>
-                    <a class="btn btn-primary btnNext" >Next</a>
                 </div>
             </div>
         </div>
@@ -75,20 +121,19 @@ use yii\helpers\Html;
 <script>
     $(document).ready(function () {
 
-//        $('.tab-list').click(function (e) {
-//            var id = $(".nav-tabs li.active").attr('id').match(/\d+/);
-//            if (validateDatas(id) == 0) {
-//                alert('if');
-//                $('#tab' + id + ' .validation').remove();
-//                $('.nav-tabs > .active').next('li').find('a').trigger('click');
-//            } else {
-//                alert('else');
-//                if (!$('.validation').length) {
-//                    $('#tab' + id + ' p').after("<p class='validation' style='color: red;'>Please select an option!</p>");
-//                }
-//                e.preventDefault();
-//            }
-//        });
+        $('.gender').hover(
+                function () {
+                    var src_value = $(this).attr('data-val');
+                    $('#gender_image').attr('src', src_value);
+                }, function () {
+            var src_value = $('input[name=gender]:checked', '#tab1').attr('data-val');
+            if (src_value === undefined || src_value === null) {
+                $('#gender_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+            } else {
+                $('#gender_image').attr('src', src_value);
+            }
+        });
+
 
         $('.btnNext').click(function () {
             var id = $(".nav-tabs li.active").attr('id').match(/\d+/);
@@ -105,6 +150,12 @@ use yii\helpers\Html;
             $('.nav-tabs > .active').prev('li').find('a').trigger('click');
         });
         $(document).on('change', 'input[type=radio][name=gender]', function () {
+            var curr_val = this.value;
+            if (curr_val == 1) {
+                $('#gender_image').attr('src', '/coral/uploads/create_your_own/gender/1.png');
+            } else if (curr_val == 2) {
+                $('#gender_image').attr('src', '/coral/uploads/create_your_own/gender/2.png');
+            }
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -116,7 +167,24 @@ use yii\helpers\Html;
                 }
             });
         });
+
+        $(document).on('mouseenter', '.character', function () {
+            var src_value = $(this).attr('data-val');
+            $('#character_image').attr('src', src_value);
+        });
+
+        $(document).on("mouseleave", ".character", function () {
+            var src_value = $('input[name=character]:checked', '#tab2').attr('data-val');
+            if (src_value === undefined || src_value === null) {
+                $('#character_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+            } else {
+                $('#character_image').attr('src', src_value);
+            }
+        });
+
         $(document).on('change', 'input[type=radio][name=character]', function () {
+            var src_value = $(this).attr('data-val');
+            $('#character_image').attr('src', src_value);
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -128,7 +196,24 @@ use yii\helpers\Html;
                 }
             });
         });
+
+        $(document).on('mouseenter', '.scent', function () {
+            var src_value = $(this).attr('data-val');
+            $('#scent_image').attr('src', src_value);
+        });
+
+        $(document).on("mouseleave", ".scent", function () {
+            var src_value = $('input[name=scent]:checked', '#tab3').attr('data-val');
+            if (src_value === undefined || src_value === null) {
+                $('#scent_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+            } else {
+                $('#scent_image').attr('src', src_value);
+            }
+        });
+
         $(document).on('change', 'input[type=radio][name=scent]', function () {
+            var src_value = $(this).attr('data-val');
+            $('#scent_image').attr('src', src_value);
             $.ajax({
                 type: 'POST',
                 cache: false,

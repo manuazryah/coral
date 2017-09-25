@@ -2,11 +2,16 @@
 
 namespace frontend\modules\create_your_own\controllers;
 
-class CreateYourOwnController extends \yii\web\Controller
-{
-    public function actionIndex()
-    {
-        return $this->render('index');
+use Yii;
+use common\models\Gender;
+
+class CreateYourOwnController extends \yii\web\Controller {
+
+    public function actionIndex() {
+        $gender = Gender::find()->where(['status' => 1])->all();
+        return $this->render('index', [
+                    'gender' => $gender,
+        ]);
     }
 
 }

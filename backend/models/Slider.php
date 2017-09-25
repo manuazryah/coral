@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
 use Yii;
 
@@ -10,8 +10,8 @@ use Yii;
  * @property integer $id
  * @property string $img
  * @property string $content
- * @property string $slider_first_tittle
- * @property string $slider_second_tittle
+ * @property integer $slider_first_tittle
+ * @property integer $slider_second_tittle
  * @property string $slider_link
  * @property integer $status
  * @property integer $CB
@@ -19,36 +19,35 @@ use Yii;
  * @property string $DOC
  * @property string $DOU
  */
-class Slider extends \yii\db\ActiveRecord {
-
+class Slider extends \yii\db\ActiveRecord
+{
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'slider';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['content'], 'string'],
-            [['status', 'CB', 'UB'], 'integer'],
-            [['img'], 'required', 'on' => 'create'],
-            [['status', 'CB', 'UB'], 'integer'],
+            [['slider_first_tittle', 'slider_second_tittle', 'status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['img'], 'string', 'max' => 100],
-            [['slider_first_tittle', 'slider_second_tittle'], 'string', 'max' => 200],
             [['slider_link'], 'string', 'max' => 500],
-            [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'img' => 'Img',
@@ -63,5 +62,4 @@ class Slider extends \yii\db\ActiveRecord {
             'DOU' => 'Dou',
         ];
     }
-
 }

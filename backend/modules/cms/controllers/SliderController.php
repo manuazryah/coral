@@ -88,7 +88,7 @@ class SliderController extends Controller {
         $image = UploadedFile::getInstance($model, 'img');
         $path = Yii::$app->basePath . '/../uploads/cms/slider';
         $size = [
-            ['width' => 300, 'height' => 75, 'name' => small],
+            ['width' => 300, 'height' => 75, 'name' => 'small'],
         ];
 
         if (!empty($image)) {
