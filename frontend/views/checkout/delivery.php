@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\Emirates;
+use yii\helpers\ArrayHelper;
 use common\components\CartSummaryWidget;
 
 $this->title = 'Checkout-Delivery';
@@ -75,7 +77,7 @@ $this->title = 'Checkout-Delivery';
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 emirate-field">
                         <label for="pwd">Emirate</label>
-                        <?= $form->field($model, 'emirate')->textInput(['class' => 'form-control delivery'])->label(FALSE) ?>
+                        <?= $form->field($model, 'emirate')->dropDownList(ArrayHelper::map(Emirates::find()->all(), 'id', 'name'), ['prompt' => 'select'])->label(FALSE); ?>
                     </div>
                     <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12 post-code-field">
                         <label for="pwd">Post Code</label>

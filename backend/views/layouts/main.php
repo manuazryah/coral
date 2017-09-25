@@ -137,6 +137,9 @@ AppAsset::register($this);
                                 <li>
                                     <?= Html::a('Country Code', ['/user/country-code/index'], ['class' => 'title']) ?>
                                 </li>
+                                <li>
+                                    <?= Html::a('Emirates', ['/emirates'], ['class' => 'title']) ?>
+                                </li>
                             </ul>
                         </li>
                         <li>

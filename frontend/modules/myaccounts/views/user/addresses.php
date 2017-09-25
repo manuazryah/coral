@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\Emirates;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -47,7 +49,8 @@ use yii\widgets\ActiveForm;
                             <?= $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
                         </div>
                         <div class="form-group col-md-6">
-                            <?= $form->field($model, 'emirate')->dropDownList(['1' => 'emirate1', '2' => 'emirate2']) ?>
+                            <?= $form->field($model, 'emirate')->dropDownList(ArrayHelper::map(Emirates::find()->all(), 'id', 'name'), ['prompt' => 'select']); ?>
+                            
                         </div>
 
                         <div class="form-group col-md-4">
