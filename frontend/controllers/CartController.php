@@ -238,7 +238,7 @@ class CartController extends \yii\web\Controller {
                 } else {
 //                    var_dump($user->getErrors());
 //                    exit;
-                    return $this->render('checkout', ['model' => $model]);
+                    return $this->render('checkout', ['model' => $model, 'user' => $user]);
                 }
             }
 //            var_dump($model);exit;
@@ -256,8 +256,10 @@ class CartController extends \yii\web\Controller {
                 $this->changecart(Yii::$app->session['temp_user']);
             }
             $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
-            $check = OrderMaster::find()->where('user_id = :user_id and status != :status', ['user_id'=>Yii::$app->user->identity->id, 'status'=>'4'])->one();
-           if(!empty($check)){Yii::$app->session['orderid'] = $check->order_id;}
+            $check = OrderMaster::find()->where('user_id = :user_id and status != :status', ['user_id' => Yii::$app->user->identity->id, 'status' => '4'])->one();
+            if (!empty($check)) {
+                Yii::$app->session['orderid'] = $check->order_id;
+            }
             if (!empty($cart)) {
                 if (Yii::$app->session['orderid'] == '') {
 //                    exit('hallo');

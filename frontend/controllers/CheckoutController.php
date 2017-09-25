@@ -118,7 +118,7 @@ class CheckoutController extends \yii\web\Controller {
                 if ($model->save()) {
                     $model1= Cart::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
                     $this->clearcart($model1);
-//                    $this->redirect(array('checkout/confirm'));
+                    $this->redirect(array('site/index'));
                 }
             } else {
                 $this->redirect(array('cart/mycart'));

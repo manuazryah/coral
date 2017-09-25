@@ -69,22 +69,27 @@ else
                     ?>
 
                     <div class="selectors">
+                        <a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>">
+                            <img srcset="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>" width="94px" height="93px"/>
+                        </a>
                         <?php
                         $path = Yii::getAlias('@paths') . '/product/' . $product_details->id . '/gallery_thumb';
                         if (count(glob("{$path}/*")) > 0) {
 
                             $k = 0;
                             foreach (glob("{$path}/*") as $file) {
-                                $k++;
-                                $arry = explode('/', $file);
-                                $img_nmee = end($arry);
-                                $img_nmees = explode('.', $img_nmee);
-                                if ($img_nmees['1'] != '') {
-                                    ?>
-                                    <a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>">
-                                        <img srcset="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>" width="94px" height="93px"/>
-                                    </a>
-                                    <?php
+                                if ($k <= '2') {
+                                    $k++;
+                                    $arry = explode('/', $file);
+                                    $img_nmee = end($arry);
+                                    $img_nmees = explode('.', $img_nmee);
+                                    if ($img_nmees['1'] != '') {
+                                        ?>
+                                        <a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>">
+                                            <img srcset="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>" width="94px" height="93px"/>
+                                        </a>
+                                        <?php
+                                    }
                                 }
                             }
                         } else {
@@ -113,7 +118,7 @@ else
                 <?php } else { ?>
                     <p class="price"><?= $product_details->price ?> AED  </p>
                 <?php } ?>
-                <p class="message">FREE Shipping on orders over <?= $shipping_limit?> AED</p>
+                <p class="message">FREE Shipping on orders over <?= $shipping_limit ?> AED</p>
                 <div class="hr-box">
                     <h5 class="sizes">sizes:
                         <?php $unit = Unit::findOne($product_details->size_unit); ?>
