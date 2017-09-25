@@ -34,7 +34,7 @@ class AjaxController extends \yii\web\Controller {
             } else {
                 $options = '';
                 foreach ($characters as $character_data) {
-                    $options .= '<input class="character" type="radio" name="character" value="' . $character_data->id . '"> ' . $character_data->name . '<br>';
+                    $options .= '<input class="character" type="radio" name="character" value="' . $character_data->id . '" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/characters/' . $character_data->id . '.' . $character_data->img . '"> ' . $character_data->name . '<br>';
                 }
             }
             echo $options;
@@ -60,7 +60,7 @@ class AjaxController extends \yii\web\Controller {
             } else {
                 $options = '';
                 foreach ($Scents as $Scent_data) {
-                    $options .= '<input class="scent" type="radio" name="scent" value="' . $Scent_data->id . '"> ' . $Scent_data->scent . '<br>';
+                    $options .= '<input class="scent" type="radio" name="scent" value="' . $Scent_data->id . '" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/scent/' . $Scent_data->id . '.' . $Scent_data->img . '"> ' . $Scent_data->scent . '<br>';
                 }
             }
             echo $options;
