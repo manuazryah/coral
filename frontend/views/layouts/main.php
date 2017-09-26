@@ -22,6 +22,7 @@ and open the template in the editor.
 <html lang="<?= Yii::$app->language ?>">
 	<head>
 		<meta charset="<?= Yii::$app->charset ?>">
+		<link rel="shortcut icon" href="<?= yii::$app->homeUrl; ?>images/fav.png" type="image/png" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<?= Html::csrfMetaTags() ?>
