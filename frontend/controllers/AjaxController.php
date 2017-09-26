@@ -50,9 +50,9 @@ class AjaxController extends \yii\web\Controller {
     public function actionCharacterSession() {
         if (Yii::$app->request->isAjax) {
             $character = $_POST['data_val'];
-            Yii::$app->session['create-your-own'] = [
-                'character' => $character,
-            ];
+            $character_data = \common\models\Characters::find()->where(['id' => $character])->one();
+            $sess = Yii::$app->session['create-your-own'];
+            Yii::$app->session['create-your-own'] = array_merge($sess, ['character' => $character, 'character-price' => $character_data->price]);
             $Scents = \common\models\Scent::find()->where(new Expression('FIND_IN_SET(:charecter_id, charecter_id)'))->addParams([':charecter_id' => $character])->andWhere(['status' => 1])->all();
             if ($Scents == '') {
                 echo '0';
@@ -76,9 +76,9 @@ class AjaxController extends \yii\web\Controller {
     public function actionScentSession() {
         if (Yii::$app->request->isAjax) {
             $scent_id = $_POST['data_val'];
-            Yii::$app->session['create-your-own'] = [
-                'scent' => $scent_id,
-            ];
+            $scent_data = \common\models\Scent::find()->where(['id' => $scent_id])->one();
+            $sess = Yii::$app->session['create-your-own'];
+            Yii::$app->session['create-your-own'] = array_merge($sess, ['scent' => $scent_id, 'scent-price' => $scent_data->price]);
             $Notes = \common\models\Notes::find()->where(new Expression('FIND_IN_SET(:scent_id, scent_id)'))->addParams([':scent_id' => $scent_id])->andWhere(['status' => 1])->all();
             if ($Notes == '') {
                 echo '0';
