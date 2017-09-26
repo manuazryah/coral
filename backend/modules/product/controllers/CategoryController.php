@@ -169,9 +169,11 @@ class CategoryController extends Controller {
     //*******//
     public function actionAjaxaddcategory() {
         if (yii::$app->request->isAjax) {
+            $main_category = Yii::$app->request->post()['main_category'];
             $category = Yii::$app->request->post()['cat'];
             $code = Yii::$app->request->post()['code'];
             $model = new Category();
+            $model->main_category = $main_category;
             $model->category = $category;
             $model->category_code = $code;
             $model->status = '1';

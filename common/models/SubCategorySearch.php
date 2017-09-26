@@ -10,15 +10,14 @@ use common\models\SubCategory;
 /**
  * SubCategorySearch represents the model behind the search form about `common\models\SubCategory`.
  */
-class SubCategorySearch extends SubCategory
-{
+class SubCategorySearch extends SubCategory {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'category_id', 'CB', 'UB', 'status'], 'integer'],
+            [['id', 'main_category', 'category_id', 'CB', 'UB', 'status'], 'integer'],
             [['sub_category', 'DOC', 'DOU'], 'safe'],
         ];
     }
@@ -26,8 +25,7 @@ class SubCategorySearch extends SubCategory
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class SubCategorySearch extends SubCategory
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = SubCategory::find();
 
         // add conditions that should always apply here
@@ -60,6 +57,7 @@ class SubCategorySearch extends SubCategory
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'main_category' => $this->main_category,
             'category_id' => $this->category_id,
             'CB' => $this->CB,
             'UB' => $this->UB,
@@ -72,4 +70,5 @@ class SubCategorySearch extends SubCategory
 
         return $dataProvider;
     }
+
 }

@@ -157,9 +157,11 @@ class SubCategoryController extends Controller {
 
     public function actionAjaxaddsubcat() {
         if (yii::$app->request->isAjax) {
+            $main_category = Yii::$app->request->post()['main_category'];
             $category = Yii::$app->request->post()['cat'];
             $subcategory = Yii::$app->request->post()['subcat'];
             $model = new SubCategory();
+            $model->main_category = $main_category;
             $model->category_id = $category;
             $model->sub_category = $subcategory;
             $model->status = '1';

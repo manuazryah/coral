@@ -55,6 +55,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['class' => 'yii\grid\SerialColumn'],
 //                                'id',
                             [
+                                'attribute' => 'main_category',
+                                'filter' => ['1' => 'Our Products', '2' => 'International'],
+                                'value' => function($data) {
+                                    return $data->main_category == 1 ? 'Our Products' : 'International';
+                                }
+                            ],
+                            [
                                 'attribute' => 'category_id',
                                 'filter' => ArrayHelper::map(Category::find()->all(), 'id', 'category'),
                                 'value' => 'category.category'

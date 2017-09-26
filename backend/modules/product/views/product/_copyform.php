@@ -23,28 +23,28 @@ use dosamigos\ckeditor\CKEditor;
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->errorSummary($model); ?>
     <ul class="nav nav-tabs">
-<!--        <li class="active">
-            <a href="#general" data-toggle="tab">
-                <span class="visible-xs"><i class="fa-home"></i></span>
-                <span class="hidden-xs">General</span>
-            </a>
-        </li>
-        <li>
-            <a href="#meta" data-toggle="tab">
-                <span class="visible-xs"><i class="fa-home"></i></span>
-                <span class="hidden-xs">Meta</span>
-            </a>
-        </li>
-        <li>
-            <a href="#image" data-toggle="tab">
-                <span class="visible-xs"><i class="fa-user"></i></span>
-                <span class="hidden-xs">Image</span>
-            </a>
-        </li>
-        <li style="float: right;">
-            <? Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
-
-        </li>-->
+        <!--        <li class="active">
+                    <a href="#general" data-toggle="tab">
+                        <span class="visible-xs"><i class="fa-home"></i></span>
+                        <span class="hidden-xs">General</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#meta" data-toggle="tab">
+                        <span class="visible-xs"><i class="fa-home"></i></span>
+                        <span class="hidden-xs">Meta</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#image" data-toggle="tab">
+                        <span class="visible-xs"><i class="fa-user"></i></span>
+                        <span class="hidden-xs">Image</span>
+                    </a>
+                </li>
+                <li style="float: right;">
+                    <? Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
+        
+                </li>-->
     </ul>
 
 
@@ -52,11 +52,11 @@ use dosamigos\ckeditor\CKEditor;
         <div class="tab-pane active" id="general">
             <div class="row" style="margin: 0 auto; padding: 15px 15px;">
                 <div class='col-md-12 col-sm-6 col-xs-12 '>
-                     <?php if ($model->isNewRecord) $model->main_category = '1';?>
-                    <?= $form->field($model, 'main_category')->radioList(array('1' => 'Our Products', '2' => 'International Products')); ?>
+                   
+                    <?= $form->field($model, 'main_category')->radioList(['1' => 'Our Products', '2' => 'International Products'], ['class' => 'main_category']); ?>
                 </div>
                 <div class='col-md-4 col-sm-6 col-xs-12 '>
-                    <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'category'), ['prompt' => 'select']) ?>
+                    <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->where(['main_category' => $model->main_category])->all(), 'id', 'category'), ['prompt' => 'select']); ?>
                     <label onclick="jQuery('#modal-1').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_category">Add Category</label>
                 </div>
                 <div class='col-md-4 col-sm-6 col-xs-12 '>
@@ -135,7 +135,7 @@ use dosamigos\ckeditor\CKEditor;
 
                 </div>
                 <div class='col-md-12 col-sm-6 col-xs-12 '>
-                    <?= $form->field($model, 'main_description')->textArea(['rows' => '6'],['maxlength' => '453']); ?>
+                    <?= $form->field($model, 'main_description')->textArea(['rows' => '6'], ['maxlength' => '453']); ?>
 
                 </div>
                 <div class='col-md-12 col-sm-6 col-xs-12 '>
@@ -168,10 +168,10 @@ use dosamigos\ckeditor\CKEditor;
                     <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
                 </div>
                 <div class='col-md-12 col-sm-6 col-xs-12 '>
-                    <?= $form->field($model, 'meta_description')->textArea(['rows' => '6'],['maxlength' => true]) ?>
+                    <?= $form->field($model, 'meta_description')->textArea(['rows' => '6'], ['maxlength' => true]) ?>
                 </div>
                 <div class='col-md-12 col-sm-6 col-xs-12 '>
-                    <?= $form->field($model, 'meta_keywords')->textArea(['rows' => '6'],['maxlength' => true]) ?>
+                    <?= $form->field($model, 'meta_keywords')->textArea(['rows' => '6'], ['maxlength' => true]) ?>
 
                 </div>
                 <!--Image--->
@@ -199,7 +199,7 @@ use dosamigos\ckeditor\CKEditor;
                 <div class='col-md-6 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*'])->label('Gallery Images<i> (455*315)</i>') ?>
                     <?php if (!$model->isNewRecord) { ?>
-                                                                                                                                                                                                                <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
+                                                                                                                                                                                                                        <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
                         <div class="row">
                             <?php
                             $path = Yii::getAlias('@paths') . '/product/' . $model->id . '/gallery_thumb';
@@ -237,8 +237,8 @@ use dosamigos\ckeditor\CKEditor;
                 </div>
             </div>
         </div>
-        
-        
+
+
     </div>
     <li style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
@@ -288,7 +288,7 @@ use dosamigos\ckeditor\CKEditor;
 
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['id' => 'add_subcategory']); ?>
-                <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'category'), ['prompt' => 'select', 'id' => 'product-prcat']) ?>
+                <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->where(['main_category' => '1'])->all(), 'id', 'category'), ['prompt' => 'select', 'id' => 'product-prcat']) ?>
                 <label class="control-label">Sub Category</label>
                 <input type="text" id="product_subcat" autocomplete="off" class="form-control" >
                 <div class="form-group" style="float: right;">

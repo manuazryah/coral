@@ -6,6 +6,7 @@ use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
 use common\models\SubCategory;
+use common\models\Category;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -426,6 +427,29 @@ class ProductController extends Controller {
         }
     }
 
+    public function actionCategory() {
+        if (yii::$app->request->isAjax) {
+            $main_cat = Yii::$app->request->post()['main_cat'];
+            if (isset($main_cat)) {
+                $subcat = Category::find()->where(['main_category' => $main_cat])->all();
+
+                $val = "<option value=''>Select</option>";
+                if ($subcat) {
+                    for ($i = 0; $i < sizeof($subcat); $i++) {
+                        $val .= "<option value='" . $subcat[$i]->id . "'>" . $subcat[$i]->category . "</option>";
+                    }
+                    echo $val;
+                    exit;
+                } else {
+                    echo $val; //No return
+                    exit;
+                }
+            } else {
+                echo 1; //Value Not Setted
+                exit;
+            }
+        }
+    }
     public function actionSubcategory() {
         if (yii::$app->request->isAjax) {
             $category = Yii::$app->request->post()['category'];

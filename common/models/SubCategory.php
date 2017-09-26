@@ -18,24 +18,22 @@ use Yii;
  *
  * @property Category $category
  */
-class SubCategory extends \yii\db\ActiveRecord
-{
+class SubCategory extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'sub_category';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['category_id', 'sub_category'], 'required'],
-            [['category_id', 'CB', 'UB', 'status'], 'integer'],
+            [['main_category', 'category_id', 'sub_category'], 'required'],
+            [['main_category', 'category_id', 'CB', 'UB', 'status'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['sub_category'], 'string', 'max' => 200],
             [['sub_category'], 'unique'],
@@ -46,10 +44,10 @@ class SubCategory extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
+            'main_category' => 'Main Category',
             'category_id' => 'Category',
             'sub_category' => 'Sub Category',
             'CB' => 'Cb',
@@ -63,8 +61,8 @@ class SubCategory extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
-    {
+    public function getCategory() {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
+
 }
