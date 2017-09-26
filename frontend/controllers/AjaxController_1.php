@@ -22,7 +22,6 @@ class AjaxController extends \yii\web\Controller {
      */
 
     public function actionGenderSession() {
-
         if (Yii::$app->request->isAjax) {
             $gender_type = $_POST['data_val'];
             Yii::$app->session['create-your-own'] = [
@@ -35,7 +34,7 @@ class AjaxController extends \yii\web\Controller {
             } else {
                 $options = '';
                 foreach ($characters as $character_data) {
-                    $options .= '<label class = "image-toggler choose2 character-main" data-image-id = "#image1" id = " " data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/characters/' . $character_data->id . '.' . $character_data->img . '"><input class="character" type="radio" name="character" value="' . $character_data->id . '" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/characters/' . $character_data->id . '.' . $character_data->img . '"><span class="span2">' . $character_data->name . '</span></label>';
+                    $options .= '<input class="character" type="radio" name="character" value="' . $character_data->id . '" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/characters/' . $character_data->id . '.' . $character_data->img . '"> ' . $character_data->name . '<br>';
                 }
             }
             echo $options;
@@ -61,7 +60,7 @@ class AjaxController extends \yii\web\Controller {
             } else {
                 $options = '';
                 foreach ($Scents as $Scent_data) {
-                    $options .= '<label class = "image-toggler choose2 scent-main" data-image-id = "#image1" " data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/scent/' . $Scent_data->id . '.' . $Scent_data->img . '"><input class="scent" type="radio" name="scent" value="' . $Scent_data->id . '" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/characters/' . $Scent_data->id . '.' . $Scent_data->img . '"><span class="span2">' . $Scent_data->scent . '</span></label>';
+                    $options .= '<input class="scent" type="radio" name="scent" value="' . $Scent_data->id . '" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/scent/' . $Scent_data->id . '.' . $Scent_data->img . '"> ' . $Scent_data->scent . '<br>';
                 }
             }
             echo $options;
@@ -81,21 +80,16 @@ class AjaxController extends \yii\web\Controller {
             $sess = Yii::$app->session['create-your-own'];
             Yii::$app->session['create-your-own'] = array_merge($sess, ['scent' => $scent_id, 'scent-price' => $scent_data->price]);
             $Notes = \common\models\Notes::find()->where(new Expression('FIND_IN_SET(:scent_id, scent_id)'))->addParams([':scent_id' => $scent_id])->andWhere(['status' => 1])->all();
-            $all_notes = \common\models\Notes::find()->where(['status' => 1])->all();
-            if (!empty($Notes)) {
+            if ($Notes == '') {
+                echo '0';
+                exit;
+            } else {
                 $options = '<input type="hidden" name="note-count" id="note-count" value="0"/>';
                 foreach ($Notes as $Note_data) {
-                    $options .= '<span class="button-checkbox notes-main" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/large.' . $Note_data->main_img . '" id="note-' . $Note_data->id . '" data-val1="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/small.' . $Note_data->main_img . '"><button id="" type="button" class="btn image-toggler choose2 tab btn-default" data-image-id="#image1"><span class="span2">' . $Note_data->notes . '</span></button><input type="checkbox" class="note-select" name="notes[]" name2="service_frequency" value="' . $Note_data->id . '" id="" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/large.' . $Note_data->main_img . '"></span>';
+                    $options .= '<input class="checkbox" type="checkbox" name="1" value="' . $Note_data->id . '">' . $Note_data->notes . '<br/>';
                 }
             }
-            if (!empty($all_notes)) {
-                foreach ($all_notes as $all_data) {
-                    $options1 .= '<span class="button-checkbox notes-main" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $all_data->id . '/large.' . $all_data->main_img . '" id="note-' . $all_data->id . '" data-val1="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/small.' . $Note_data->main_img . '"><button id="" type="button" class="btn image-toggler choose2 tab btn-default" data-image-id="#image1"><span class="span2">' . $all_data->notes . '</span></button><input type="checkbox" class="note-select" name="notes[]" name2="service_frequency" value="' . $all_data->id . '" id="" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $all_data->id . '/large.' . $all_data->main_img . '"></span>';
-                }
-            }
-            $arr_variable = array('recomented' => $options, 'recomented-count' => count($Notes), 'all' => $options1, 'all-count' => count($all_notes));
-            $data['result'] = $arr_variable;
-            echo json_encode($data);
+            echo $options;
         }
     }
 

@@ -1,10 +1,16 @@
+<?php
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+use yii\helpers\Html;
+?>
 <div class="pad-20 hide-xs"></div>
 
 <div class="container">
     <div class="breadcrumb">
         <span class="current-page">Create Your Own</span>
         <ol class="path">
-            <li><a href="index.php">Home</a></li>
+            <li><?= Html::a('Home', ['/site/index'], ['class' => '']) ?></li>
             <li class="active">Create Your Own</li>
         </ol>
     </div>
@@ -30,54 +36,43 @@
         </div>
     </div>
 
-    <!--    <div class="hint-border">
-            <div class="container hint">
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
-                    <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="images/create-your-own-arrw.png"/></button></a>
-                    <input type="button" name="previous" class="previous action-button back" value="Previous" />
-                </div>
-                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 hint-msg-box">
-                    <p class="hint-msg">Are you a...</p>
-                </div>
-            </div>
-        </div>-->
     <div class="hint-border-bck">
     </div>
     <div class="container" style="min-height: 470px;">
         <form id="msform">
             <!-- Gender -->
-            <fieldset>
+            <fieldset id="tab1">
                 <div class="hint-border">
                     <div class="container hint">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
-                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="images/create-your-own-arrw.png"/></button></a>
+                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="<?= Yii::$app->homeUrl; ?>images/create-your-own-arrw.png"/></button></a>
                             <!--<input type="button" name="previous" class="previous action-button back" value="Previous" />-->
                         </div>
                         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 hint-msg-box">
-                            <p class="hint-msg">Are you a...</p>
+                            <p class="hint-msg">Is the recipient female or male?</p>
                         </div>
                     </div>
                 </div>
                 <div class="step_col_left">
-                    <label class="image-toggler choose choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab1" checked="">
-                        <span>Women</span>
-                    </label>
-                    <label class="image-toggler choose" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab2" checked="">
-                        <span>Men</span>
-                    </label>
+                    <?php
+                    $g = 0;
+                    foreach ($gender as $value) {
+                        $g++;
+                        ?>
+                        <label class="image-toggler choose gender-main" data-image-id="#image1" id="tab-<?= $value->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/gender/<?= $value->id ?>.<?= $value->img ?>'>
+                            <input class="gender" type="radio" name="gender" value="<?= $value->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/gender/<?= $value->id ?>.<?= $value->img ?>'>
+                            <!--<input type="radio" name="toggle" name2="service_frequency" value="<?= $value->id ?>" class="tab gender" id="tab1" checked="" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/gender/<?= $value->id ?>.<?= $value->img ?>'>-->
+                            <span><?= $value->gender ?></span>
+                        </label>
+                    <?php }
+                    ?>
                 </div>
                 <div class="step_col_right">
                     <div id="tab1show" class="tab-content">
-                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />
-                    </div>
-
-                    <div id="tab2show" class="tab-content">
-                        <img  src="images/create-your-own/men.png" title="Men" alt="image 1" id="image1" class="image-toggle img-responsive" />
+                        <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="gender_image"/>
+<!--                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />-->
                     </div>
                 </div>
-                <!--<input type="button" name="previous" class="previous action-button prev" value="Previous" />-->
                 <input type="button" name="next" class="next action-button nxt" value="Next" />
             </fieldset>
 
@@ -85,11 +80,11 @@
 
             <!-- character-end -->
 
-            <fieldset>
+            <fieldset id="tab2">
                 <div class="hint-border">
                     <div class="container hint">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
-                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="images/create-your-own-arrw.png"/></button></a>
+                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="<?= Yii::$app->homeUrl; ?>images/create-your-own-arrw.png"/></button></a>
                             <!--<input type="button" name="previous" class="previous action-button back" value="Previous" />-->
                         </div>
                         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 hint-msg-box">
@@ -98,29 +93,11 @@
                     </div>
                 </div>
                 <div class="step_col_left">
-                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
-                        <span class="span2">Dynamic</span>
-                    </label>
-                    <label class="image-toggler choose2" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab4">
-                        <span class="span2">Charismatic</span>
-                    </label>
-                    <label class="image-toggler choose2" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab5">
-                        <span class="span2">Musculine</span>
-                    </label>
                 </div>
                 <div class="step_col_right">
                     <div id="tab3show" class="tab-content">
-                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />
-                    </div>
-
-                    <div id="tab4show" class="tab-content">
-                        <img  src="images/create-your-own/men.png" title="Men" alt="image 1" id="image1" class="image-toggle img-responsive" />
-                    </div>
-                    <div id="tab5show" class="tab-content">
-                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />
+                        <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="character_image"/>
+                        <!--<img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />-->
                     </div>
                 </div>
                 <input type="button" name="previous" class="previous prev action-button" value="Previous" />
@@ -131,11 +108,11 @@
 
             <!-- Scent -->
 
-            <fieldset>
+            <fieldset id="tab3">
                 <div class="hint-border">
                     <div class="container hint">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
-                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="images/create-your-own-arrw.png"/></button></a>
+                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="<?= Yii::$app->homeUrl; ?>images/create-your-own-arrw.png"/></button></a>
                             <!--<input type="button" name="previous" class="previous action-button back" value="Previous" />-->
                         </div>
                         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 hint-msg-box">
@@ -144,30 +121,9 @@
                     </div>
                 </div>
                 <div class="step_col_left">
-                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab6" checked="">
-                        <span class="span2">Dynamic</span>
-                    </label>
-                    <label class="image-toggler choose2" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab7">
-                        <span class="span2">Charismatic</span>
-                    </label>
-                    <label class="image-toggler choose2" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab8">
-                        <span class="span2">Musculine</span>
-                    </label>
                 </div>
                 <div class="step_col_right">
-                    <div id="tab6show" class="tab-content">
-                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />
-                    </div>
-
-                    <div id="tab7show" class="tab-content">
-                        <img  src="images/create-your-own/men.png" title="Men" alt="image 1" id="image1" class="image-toggle img-responsive" />
-                    </div>
-                    <div id="tab8show" class="tab-content">
-                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />
-                    </div>
+                    <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="scent_image"/>
                 </div>
                 <input type="button" name="previous" class="previous prev action-button" value="Previous" />
                 <input type="button" name="next" class="next nxt action-button" value="Next" />
@@ -175,15 +131,15 @@
 
             <!-- Scent-end -->
             <!-- Notes -->
-            <fieldset>
+            <fieldset id="tab4">
                 <div class="hint-border">
                     <div class="container hint">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
-                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="images/create-your-own-arrw.png"/></button></a>
+                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="<?= Yii::$app->homeUrl; ?>images/create-your-own-arrw.png"/></button></a>
                             <!--<input type="button" name="previous" class="previous action-button back" value="Previous" />-->
                         </div>
                         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 hint-msg-box">
-                            <p class="hint-msg">Which scent do you prefer?</p>
+                            <p class="hint-msg">Choose up to 6 ingredients.</p>
                         </div>
                     </div>
                 </div>
@@ -191,90 +147,26 @@
                     <div id="notes">
                         <div class="product-info-tab">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#recommended">Recommended<span class="counter">(3)</span></a></li>
-                                <li><a data-toggle="tab" href="#all">All<span class="counter">(5)</span></a></li>
+                                <li class="active"><a data-toggle="tab" href="#recommended">Recommended<span class="counter" id="rec-count"></span></a></li>
+                                <li><a data-toggle="tab" href="#all">All<span class="counter" id="all-count"></span></a></li>
                             </ul>
 
                             <div class="tab-content notes-selection">
                                 <div id="recommended" class="tab-pane fade in active">
-<!--                                    <span class="button-checkbox">
-                                        <label class="image-toggler choose2 choose-grn btn" data-image-id="#image1" data-color="primary">
-                                            <input type="checkbox" name="toggle" name2="service_frequency" value="1" class="tab hidden" id="tab9" checked="">
-                                            <span class="span2">Dynamic</span>
-                                        </label>
-                                    </span>
-                                    <span class="button-checkbox">
-                                        <label class="image-toggler choose2 btn" data-image-id="#image1" data-color="success">
-                                            <input type="checkbox" name="toggle" name2="service_frequency" value="1" class="tab hidden" id="tab10">
-                                            <span class="span2">Charismatic</span>
-                                        </label>
-                                    </span>-->
-                                    <span class="button-checkbox">
-                                        <button id="tab9" type="button" class="btn image-toggler choose2 choose-grn tab"  data-image-id="#image1"><span class="span2">Violet Leaf</span></button>
-                                        <!--<input type="checkbox" class="hidden" checked />-->
-                                        <input type="checkbox" name="toggle" name2="service_frequency" value="1" id="tab9">
-                                            <!--<span class="span2">Dynamic</span>-->
-                                    </span>
-                                    <span class="button-checkbox">
-                                        <button id="tab10" type="button" class="btn image-toggler choose2 choose-grn tab"  data-image-id="#image1"><span class="span2">Lily</span></button>
-                                        <!--<input type="checkbox" class="hidden" checked />-->
-                                        <input type="checkbox" name="toggle" name2="service_frequency" value="1" class="tab" id="tab10">
-                                            <!--<span class="span2">Dynamic</span>-->
-                                    </span>
+
                                 </div>
                                 <div id="all" class="tab-pane fade">
-                                    <span class="button-checkbox">
-                                        <button id="tab11" type="button" class="btn image-toggler choose2 choose-grn tab"  data-image-id="#image1"><span class="span2">Violet Leaf</span></button>
-                                        <!--<input type="checkbox" class="hidden" checked />-->
-                                        <input type="checkbox" name="toggle" name2="service_frequency" value="1" id="tab9">
-                                            <!--<span class="span2">Dynamic</span>-->
-                                    </span>
-                                    <span class="button-checkbox">
-                                        <button id="tab12" type="button" class="btn image-toggler choose2 choose-grn tab"  data-image-id="#image1"><span class="span2">Lily</span></button>
-                                        <!--<input type="checkbox" class="hidden" checked />-->
-                                        <input type="checkbox" name="toggle" name2="service_frequency" value="1" class="tab" id="tab10">
-                                            <!--<span class="span2">Dynamic</span>-->
-                                    </span>
-                                    <span class="button-checkbox">
-                                        <button id="tab13" type="button" class="btn image-toggler choose2 choose-grn tab"  data-image-id="#image1"><span class="span2">Violet Leaf</span></button>
-                                        <!--<input type="checkbox" class="hidden" checked />-->
-                                        <input type="checkbox" name="toggle" name2="service_frequency" value="1" id="tab9">
-                                            <!--<span class="span2">Dynamic</span>-->
-                                    </span>
-                                    <span class="button-checkbox">
-                                        <button id="tab14" type="button" class="btn image-toggler choose2 choose-grn tab"  data-image-id="#image1"><span class="span2">Lily</span></button>
-                                        <!--<input type="checkbox" class="hidden" checked />-->
-                                        <input type="checkbox" name="toggle" name2="service_frequency" value="1" class="tab" id="tab10">
-                                            <!--<span class="span2">Dynamic</span>-->
-                                    </span>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                    <!--                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                                            <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
-                                            <span class="span2">Dynamic</span>
-                                        </label>
-                                        <label class="image-toggler choose2" data-image-id="#image1">
-                                            <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab4">
-                                            <span class="span2">Charismatic</span>
-                                        </label>
-                                        <label class="image-toggler choose2" data-image-id="#image1">
-                                            <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab5">
-                                            <span class="span2">Musculine</span>
-                                        </label>-->
                 </div>
                 <div class="step_col_right">
                     <div id="tab9show" class="tab-content">
-                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />
+                        <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="notes_image"/>
                     </div>
 
-                    <div id="tab10show" class="tab-content">
-                        <img  src="images/create-your-own/men.png" title="Men" alt="image 1" id="image1" class="image-toggle img-responsive" />
-                    </div>
-                    <div id="tab11show" class="tab-content">
-                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />
-                    </div>
                     <div class="perfume-selectionbg">
                         <div class="thumb-contain">
                             <div id="container">
@@ -380,5 +272,173 @@
 <div style="clear: both" class="clearfix"></div>
 
 <!--<div class="pad-20"></div>-->
+
+<script>
+    $(document).ready(function () {
+
+        $('.btnNext').click(function () {
+            var id = $(".nav-tabs li.active").attr('id').match(/\d+/);
+            if (validateDatas(id) == 0) {
+                $('#tab' + id + ' .validation').remove();
+                $('.nav-tabs > .active').next('li').find('a').trigger('click');
+            } else {
+                if (!$('.validation').length) {
+                    $('#tab' + id + ' p').after("<p class='validation' style='color: red;'>Please select an option!</p>");
+                }
+            }
+        });
+        $('.btnPrevious').click(function () {
+            $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+        });
+        $(document).on('change', 'input[type=radio][name=gender]', function () {
+            if ($(this).is(':checked')) {
+                $(this).parent().parent().parent().find('.choose-grn').removeClass('choose-grn');
+                $(this).parent().addClass('choose-grn');
+            }
+            var src_value = $(this).attr('data-val');
+            $('#gender_image').attr('src', src_value);
+            var curr_val = this.value;
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/gender-session',
+                success: function (data) {
+                    $("#tab2 .step_col_left").html(data);
+                }
+            });
+        });
+
+        $(document).on('mouseenter', '.character-main', function () {
+            var src_value = $(this).attr('data-val');
+            $('#character_image').attr('src', src_value);
+        });
+
+        $(document).on("mouseleave", ".character-main", function () {
+            var src_value = $('input[name=character]:checked', '#tab2').attr('data-val');
+            if (src_value === undefined || src_value === null) {
+                $('#character_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+            } else {
+                $('#character_image').attr('src', src_value);
+            }
+        });
+
+        $(document).on('change', 'input[type=radio][name=character]', function () {
+            if ($(this).is(':checked')) {
+                $(this).parent().parent().parent().find('.choose-grn').removeClass('choose-grn');
+                $(this).parent().addClass('choose-grn');
+            }
+            var src_value = $(this).attr('data-val');
+            $('#character_image').attr('src', src_value);
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/character-session',
+                success: function (data) {
+                    $("#tab3 .step_col_left").html(data);
+                }
+            });
+        });
+
+        $(document).on('mouseenter', '.scent-main', function () {
+            var src_value = $(this).attr('data-val');
+            $('#scent_image').attr('src', src_value);
+        });
+
+        $(document).on("mouseleave", ".scent-main", function () {
+            var src_value = $('input[name=scent]:checked', '#tab3').attr('data-val');
+            if (src_value === undefined || src_value === null) {
+                $('#scent_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+            } else {
+                $('#scent_image').attr('src', src_value);
+            }
+        });
+
+        $(document).on('change', 'input[type=radio][name=scent]', function () {
+            if ($(this).is(':checked')) {
+                $(this).parent().parent().parent().find('.choose-grn').removeClass('choose-grn');
+                $(this).parent().addClass('choose-grn');
+            }
+            var src_value = $(this).attr('data-val');
+            $('#scent_image').attr('src', src_value);
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/scent-session',
+                success: function (data) {
+                    var res = $.parseJSON(data);
+                    $("#tab4 .step_col_left #recommended").html(res.result['recomented']);
+                    $("#tab4 .step_col_left #all").html(res.result['all']);
+                    $("#tab4 #rec-count").text('(' + res.result['recomented-count'] + ')');
+                    $("#tab4 #all-count").text('(' + res.result['all-count'] + ')');
+                }
+            });
+        });
+
+        $(document).on('mouseenter', '.notes-main', function () {
+            var src_value = $(this).attr('data-val');
+            $('#notes_image').attr('src', src_value);
+        });
+
+        $(document).on("mouseleave", ".notes-main", function () {
+            var src_value = $('input[name="notes[]"]:checked', '#tab4').attr('data-val');
+            if (src_value === undefined || src_value === null) {
+                $('#notes_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+            } else {
+                $('#notes_image').attr('src', src_value);
+            }
+        });
+
+        $(document).on('click', '.notes-main', function (e) {
+            var count = parseInt($("#note-count").val());
+            var attr_id = $(this).attr('id');
+            var src_value = $(this).attr('data-val1');
+            if (count < 6) {
+                $('#' + attr_id + ' button').addClass('choose-grn');
+                count = parseInt(count) + 1;
+                $("#note-count").val(parseInt(count));
+                $("#container").append('<div class="tmb-img"><img src="' + src_value + '"><button href="" id="cls-img"><i class="fa fa-times" aria-hidden="true"></i></button></div>');
+            }
+        });
+    });
+    function validateDatas(id) {
+        if ('tab-' + id == 'tab-1') {
+            var result = validateCommon('.gender');
+        }
+        if ('tab-' + id == 'tab-2') {
+            var result = validateCommon('.character');
+        }
+        if ('tab-' + id == 'tab-3') {
+            var result = validateCommon('.scent');
+        }
+        if ('tab-' + id == 'tab-4') {
+            var result = validateNotes();
+        }
+        return result;
+    }
+    function validateCommon(data) {
+
+        if ($(data).is(':checked')) {
+            var valid = 0;
+        } else {
+            var valid = 1;
+        }
+        return valid;
+    }
+    function validateNotes() {
+        var count = parseInt($("#note-count").val());
+        if (count > 0) {
+            var valid = 0;
+        } else {
+            var valid = 1;
+        }
+        return valid;
+    }
+</script>
 
 
