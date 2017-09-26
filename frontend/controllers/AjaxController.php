@@ -84,8 +84,10 @@ class AjaxController extends \yii\web\Controller {
             $all_notes = \common\models\Notes::find()->where(['status' => 1])->all();
             if (!empty($Notes)) {
                 $options = '<input type="hidden" name="note-count" id="note-count" value="0"/>';
+                $i = 1;
                 foreach ($Notes as $Note_data) {
-                    $options .= '<span class="button-checkbox notes-main" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/large.' . $Note_data->main_img . '" id="note-' . $Note_data->id . '" data-val1="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/small.' . $Note_data->main_img . '"><button id="" type="button" class="btn image-toggler choose2 tab btn-default" data-image-id="#image1"><span class="span2">' . $Note_data->notes . '</span></button><input type="checkbox" class="note-select" name="notes[]" name2="service_frequency" value="' . $Note_data->id . '" id="" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/large.' . $Note_data->main_img . '"></span>';
+                    $options .= '<span class="button-checkbox notes-main" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/large.' . $Note_data->main_img . '" id="note-' . $Note_data->id . '" data-val1="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/small.' . $Note_data->main_img . '"><button id="" type="button" class="btn image-toggler choose2 tab btn-default" data-image-id="#image1"><span class="span2" id="' . $i . '">' . $Note_data->notes . '</span></button><input type="checkbox" class="note-select" name="notes[]" name2="service_frequency" value="' . $Note_data->id . '" id="" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/large.' . $Note_data->main_img . '"></span>';
+                    $i++;
                 }
             }
             if (!empty($all_notes)) {

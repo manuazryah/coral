@@ -235,34 +235,34 @@ use yii\helpers\Html;
             </div>
             <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:100%;height:240px;overflow:hidden;">
                 <div>
-                    <img data-u="image" src="images/happy-slider/1.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/1.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/2.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/2.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/3.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/3.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/4.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/4.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/1.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/1.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/2.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/2.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/3.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/3.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/4.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/4.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/3.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/3.jpg" />
                 </div>
                 <div>
-                    <img data-u="image" src="images/happy-slider/2.jpg" />
+                    <img data-u="image" src="<?= Yii::$app->homeUrl; ?>images/happy-slider/2.jpg" />
                 </div>
             </div>
         </div>
@@ -397,13 +397,22 @@ use yii\helpers\Html;
         $(document).on('click', '.notes-main', function (e) {
             var count = parseInt($("#note-count").val());
             var attr_id = $(this).attr('id');
+
             var src_value = $(this).attr('data-val1');
             if (count < 6) {
                 $('#' + attr_id + ' button').addClass('choose-grn');
                 count = parseInt(count) + 1;
                 $("#note-count").val(parseInt(count));
-                $("#container").append('<div class="tmb-img"><img src="' + src_value + '"><button href="" id="cls-img"><i class="fa fa-times" aria-hidden="true"></i></button></div>');
+                $("#container").append('<div class="tmb-img"><img src="' + src_value + '"><button id="cls-img" class="cls-img"><i class="fa fa-times" aria-hidden="true"></i></button></div>');
+                $("#" + attr_id + " span").append("  X1");
             }
+        });
+
+        $(document).on('click', '.cls-img', function (e) {
+            alert('fhgh');
+            $(this).closest(".tmb-img").fadeOut(300);
+            e.preventDefault();
+
         });
     });
     function validateDatas(id) {
