@@ -61,6 +61,7 @@ class SiteController extends Controller {
 	 * @return string
 	 */
 	public function actionIndex() {
+
 		if (!Yii::$app->user->isGuest) {
 			return $this->redirect(array('site/home'));
 		}
@@ -69,6 +70,7 @@ class SiteController extends Controller {
 		$model = new AdminUsers();
 		$model->scenario = 'login';
 		if ($model->load(Yii::$app->request->post()) && $model->login() && $this->setSession()) {
+
 			return $this->redirect(array('site/home'));
 		} else {
 			return $this->render('login', [
@@ -79,16 +81,21 @@ class SiteController extends Controller {
 
 	public function setSession() {
 		$post = AdminPost::findOne(Yii::$app->user->identity->post_id);
+
 		Yii::$app->session['post'] = $post->attributes;
 
 		return true;
 	}
 
 	public function actionHome() {
-		if (Yii::$app->user->isGuest) {
-			return $this->redirect(array('site/index'));
+		if (isset(Yii::$app->user->identity->id)) {
+			if (Yii::$app->user->isGuest) {
+				return $this->redirect(array('site/index'));
+			}
+			return $this->render('index');
+		} else {
+			throw new \yii\web\HttpException(2000, 'Session Expired.');
 		}
-		return $this->render('index');
 	}
 
 	public function actionLogin() {

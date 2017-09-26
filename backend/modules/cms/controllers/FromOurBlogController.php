@@ -16,125 +16,133 @@ use yii\helpers\FileHelper;
  */
 class FromOurBlogController extends Controller {
 
-        /**
-         * @inheritdoc
-         */
-        public function behaviors() {
-                return [
-                    'verbs' => [
-                        'class' => VerbFilter::className(),
-                        'actions' => [
-                        //'delete' => ['POST'],
-                        ],
-                    ],
-                ];
-        }
+	/**
+	 * @inheritdoc
+	 */
+	public function beforeAction($action) {
+		if (!parent::beforeAction($action)) {
+			return false;
+		}
+		if (Yii::$app->user->isGuest) {
+			$this->redirect(['/site/index']);
+			return false;
+		}
+		return true;
+	}
 
-        /**
-         * Lists all FromOurBlog models.
-         * @return mixed
-         */
-        public function actionIndex($id = NULL) {
-                if (!empty($id)) {
-                        $model = $this->findModel($id);
-                } else {
-                        $model = new FromOurBlog();
-                }
-                $ext = $model->image;
-                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model)  ) {
+	public function behaviors() {
+		return [
+		    'verbs' => [
+			'class' => VerbFilter::className(),
+			'actions' => [
+			//'delete' => ['POST'],
+			],
+		    ],
+		];
+	}
 
-                        $model->blog_date = date('Y-m-d', strtotime($model->blog_date));
-                        $model->save();
-                        $image = UploadedFile::getInstance($model, 'image');
+	/**
+	 * Lists all FromOurBlog models.
+	 * @return mixed
+	 */
+	public function actionIndex($id = NULL) {
+		if (!empty($id)) {
+			$model = $this->findModel($id);
+		} else {
+			$model = new FromOurBlog();
+		}
+		$ext = $model->image;
+		if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model)) {
 
-                        if (!empty($image)) {
-                                $model->image = $image->extension;
-                                $path_list = Yii::$app->basePath . '/../uploads/cms/from-blog/' . $model->id;
-                                $this->SaveImage($image, $model, 270, 390, $path_list);
-                        } else {
-                                $model->image = $ext;
-                        }
-                        $model->update();
+			$model->blog_date = date('Y-m-d', strtotime($model->blog_date));
+			$model->save();
+			$image = UploadedFile::getInstance($model, 'image');
 
-                        if (!empty($id)) {
-                                Yii::$app->getSession()->setFlash('success', 'Updated Successfully');
-                        } else {
-                                Yii::$app->getSession()->setFlash('success', 'Created Successfully');
-                        }
-                        return $this->redirect(['index']);
-                } 
-                $searchModel = new FromOurBlogSearch();
-                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-                return $this->render('index', [
-                            'searchModel' => $searchModel,
-                            'dataProvider' => $dataProvider,
-                            'model' => $model,
-                ]);
-        }
+			if (!empty($image)) {
+				$model->image = $image->extension;
+				$path_list = Yii::$app->basePath . '/../uploads/cms/from-blog/' . $model->id;
+				$this->SaveImage($image, $model, 270, 390, $path_list);
+			} else {
+				$model->image = $ext;
+			}
+			$model->update();
 
-        public function SaveImage($image, $model, $width, $height, $path) {
-                $size = [
-                        ['width' => 100, 'height' => 100, 'name' => 'small'],
-                ];
-                Yii::$app->UploadFile->UploadFile($model, $image, $path, $size);
-        }
+			if (!empty($id)) {
+				Yii::$app->getSession()->setFlash('success', 'Updated Successfully');
+			} else {
+				Yii::$app->getSession()->setFlash('success', 'Created Successfully');
+			}
+			return $this->redirect(['index']);
+		}
+		$searchModel = new FromOurBlogSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		return $this->render('index', [
+			    'searchModel' => $searchModel,
+			    'dataProvider' => $dataProvider,
+			    'model' => $model,
+		]);
+	}
 
-        /**
-         * Displays a single FromOurBlog model.
-         * @param integer $id
-         * @return mixed
-         */
-        public function actionView($id) {
-                return $this->render('view', [
-                            'model' => $this->findModel($id),
-                ]);
-        }
+	public function SaveImage($image, $model, $width, $height, $path) {
+		$size = [
+			['width' => 100, 'height' => 100, 'name' => 'small'],
+		];
+		Yii::$app->UploadFile->UploadFile($model, $image, $path, $size);
+	}
 
-        /**
-         * Creates a new FromOurBlog model.
-         * If creation is successful, the browser will be redirected to the 'view' page.
-         * @return mixed
-         */
-        public function actionCreate() {
-                $model = new FromOurBlog();
+	/**
+	 * Displays a single FromOurBlog model.
+	 * @param integer $id
+	 * @return mixed
+	 */
+	public function actionView($id) {
+		return $this->render('view', [
+			    'model' => $this->findModel($id),
+		]);
+	}
 
-                if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                        return $this->redirect(['view', 'id' => $model->id]);
-                } else {
-                        return $this->render('create', [
-                                    'model' => $model,
-                        ]);
-                }
-        }
+	/**
+	 * Creates a new FromOurBlog model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * @return mixed
+	 */
+	public function actionCreate() {
+		$model = new FromOurBlog();
 
-        /**
-         * Updates an existing FromOurBlog model.
-         * If update is successful, the browser will be redirected to the 'view' page.
-         * @param integer $id
-         * @return mixed
-         */
-        public function actionUpdate($id) {
-                $model = $this->findModel($id);
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			return $this->redirect(['view', 'id' => $model->id]);
+		} else {
+			return $this->render('create', [
+				    'model' => $model,
+			]);
+		}
+	}
 
-                if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                        return $this->redirect(['view', 'id' => $model->id]);
-                } else {
-                        return $this->render('update', [
-                                    'model' => $model,
-                        ]);
-                }
-        }
+	/**
+	 * Updates an existing FromOurBlog model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id
+	 * @return mixed
+	 */
+	public function actionUpdate($id) {
+		$model = $this->findModel($id);
 
-        /**
-         * Deletes an existing FromOurBlog model.
-         * If deletion is successful, the browser will be redirected to the 'index' page.
-         * @param integer $id
-         * @return mixed
-         */
-      
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			return $this->redirect(['view', 'id' => $model->id]);
+		} else {
+			return $this->render('update', [
+				    'model' => $model,
+			]);
+		}
+	}
 
-
-public function actionDelete($id) {
+	/**
+	 * Deletes an existing FromOurBlog model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 * @param integer $id
+	 * @return mixed
+	 */
+	public function actionDelete($id) {
 		$model = $this->findModel($id);
 		$path = Yii::$app->basePath . '/../uploads/cms/from-blog/' . $model->id;
 		if (file_exists($path))
@@ -148,10 +156,9 @@ public function actionDelete($id) {
 		return $this->redirect(['index']);
 	}
 
- /*
-         * to delete each image in the folder
-         */
-
+	/*
+	 * to delete each image in the folder
+	 */
 
 	function recursiveRemoveDirectory($directory) {
 		foreach (glob("{$directory}/*") as $file) {
@@ -164,23 +171,19 @@ public function actionDelete($id) {
 		FileHelper::removeDirectory($directory);
 	}
 
-
-       
-        
-
-        /**
-         * Finds the FromOurBlog model based on its primary key value.
-         * If the model is not found, a 404 HTTP exception will be thrown.
-         * @param integer $id
-         * @return FromOurBlog the loaded model
-         * @throws NotFoundHttpException if the model cannot be found
-         */
-        protected function findModel($id) {
-                if (($model = FromOurBlog::findOne($id)) !== null) {
-                        return $model;
-                } else {
-                        throw new NotFoundHttpException('The requested page does not exist.');
-                }
-        }
+	/**
+	 * Finds the FromOurBlog model based on its primary key value.
+	 * If the model is not found, a 404 HTTP exception will be thrown.
+	 * @param integer $id
+	 * @return FromOurBlog the loaded model
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	protected function findModel($id) {
+		if (($model = FromOurBlog::findOne($id)) !== null) {
+			return $model;
+		} else {
+			throw new NotFoundHttpException('The requested page does not exist.');
+		}
+	}
 
 }
