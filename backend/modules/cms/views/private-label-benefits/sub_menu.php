@@ -29,7 +29,7 @@ use yii\helpers\Html;
 	</li>
 	<li>
 		<?= Html::a('<span class="visible-xs"><i class="fa-home"></i></span>
-							<span class="hidden-xs">Brands</span>', ['/cms/private-lable-logos/index'], ['class' => '']) ?>
+							<span class="hidden-xs">Brands</span>', ['/cms/private-label-logos/index'], ['class' => '']) ?>
 
 	</li>
 

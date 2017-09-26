@@ -189,7 +189,7 @@ and open the template in the editor.
 									<li class="<?= $action == 'site/index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
 									<li class="<?= $action == 'site/about' ? 'active' : '' ?>"><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
 									<li class="<?= $action == 'product/index' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
-									<li class=""><?= Html::a('<span>international products</span>', ['/site/index'], ['class' => '']) ?></li>
+									<li class="<?= $action == 'product/international' ? 'active' : '' ?>"><?= Html::a('<span>international products</span>', ['/product/international', 'id' => $catag->category_code], ['class' => '']) ?></li>
 									<li class="<?= $action == 'site/private-label' ? 'active' : '' ?>"><?= Html::a('<span>private label</span>', ['/site/private-label'], ['class' => '']) ?></li>
 									<li class="<?= $action == 'site/showrooms' ? 'active' : '' ?>"><?= Html::a('<span>showrooms</span>', ['/site/showrooms'], ['class' => '']) ?></li>
 									<li class="<?= $action == 'site/contact' ? 'active' : '' ?>"><?= Html::a('<span>contact us</span>', ['/site/contact'], ['class' => '']) ?></li>

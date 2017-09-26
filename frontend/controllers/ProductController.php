@@ -15,295 +15,312 @@ use yii\db\Expression;
 
 class ProductController extends \yii\web\Controller {
 
-    /**
-     * Displays a Products based on category.
-     * @param category_code $id
-     * @return mixed
-     */
-    public function actionIndex($id = null, $type = null) {
+	/**
+	 * Displays a Products based on category.
+	 * @param category_code $id
+	 * @return mixed
+	 */
+	public function actionIndex($id = null, $type = null) {
 //        echo $id;
 //        exit;
-        $catag = Category::find()->where(['category_code' => $id])->one();
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere(['main_category' => 1]);
-        if (!empty($id)) {
-            $dataProvider->query->andWhere(['category' => $catag->id]);
-        }
-        if (isset(Yii::$app->session['gender_search'])) {
-            $dataProvider->query->andWhere(['gender_type' => Yii::$app->session['gender_search']]);
-        }
+		$catag = Category::find()->where(['category_code' => $id])->one();
+		$searchModel = new ProductSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$dataProvider->query->andWhere(['main_category' => 1]);
+		if (!empty($id)) {
+			$dataProvider->query->andWhere(['category' => $catag->id]);
+		}
+		if (isset(Yii::$app->session['gender_search'])) {
+			$dataProvider->query->andWhere(['gender_type' => Yii::$app->session['gender_search']]);
+		}
 
-        if (($type == 0 && $type != NULL) || ($type == 1)) {
-            $dataProvider->query->andWhere(['gender_type' => $type]);
-        }
-        $categories = Category::find()->where(['status' => 1])->all();
+		if (($type == 0 && $type != NULL) || ($type == 1)) {
+			$dataProvider->query->andWhere(['gender_type' => $type]);
+		}
+		$categories = Category::find()->where(['status' => 1])->all();
 
-        return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-                    'categories' => $categories,
-                    'catag' => $catag,
-                    'id' => $id,
-        ]);
-    }
+		return $this->render('index', [
+			    'searchModel' => $searchModel,
+			    'dataProvider' => $dataProvider,
+			    'categories' => $categories,
+			    'catag' => $catag,
+			    'id' => $id,
+		]);
+	}
 
-    public function actionCategory($id) {
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->where('category =' . $id);
-        $category = Category::find()->select('id,category')->where(['status' => 1])->all();
-        return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-                    'category' => $category,
-        ]);
-    }
+	public function actionInternational($id = null, $type = null) {
+		$catag = Category::find()->where(['category_code' => $id])->one();
+		$categories = Category::find()->where(['status' => 1])->all();
+		$searchModel = new ProductSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$dataProvider->query->andWhere(['main_category' => 2]);
+		if (!empty($id)) {
+			$dataProvider->query->andWhere(['category' => $catag->id]);
+		}
+		return $this->render('index', [
+			    'categories' => $categories,
+			    'dataProvider' => $dataProvider,
+			    'id' => $id,
+		]);
+	}
 
-    /**
-     * Displays a Particular Product.
-     * @param prodict_id  $product
-     * @return mixed
-     */
-    public function actionProduct_detail($product) {
-        if (isset(Yii::$app->user->identity->id)) {
-            $user_id = Yii::$app->user->identity->id;
-        } else {
-            $user_id = '';
-        }
-        $shipping_limit = Settings::findOne('1')->value;
-        $product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
-        $this->RecentlyViewed($product_details);
-        $product_reveiws = \common\models\CustomerReviews::find()->where(['product_id' => $product_details->id, 'status' => '1'])->all();
-        \Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $product_details->meta_keywords]);
-        \Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $product_details->meta_description]);
-        return $this->render('product_detail', [
-                    'product_details' => $product_details,
-                    'product_reveiws' => $product_reveiws,
-                    'user_id' => $user_id,
-                    'shipping_limit' => $shipping_limit,
-        ]);
-    }
+	public function actionCategory($id) {
+		$searchModel = new ProductSearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$dataProvider->query->where('category =' . $id);
+		$category = Category::find()->select('id,category')->where(['status' => 1])->all();
+		return $this->render('index', [
+			    'searchModel' => $searchModel,
+			    'dataProvider' => $dataProvider,
+			    'category' => $category,
+		]);
+	}
 
-    /**
-     * Save recently viewed product.
-     * @param product array
-     * if user logged in set user id otherwise set temporary session id
-     */
-    public function RecentlyViewed($product) {
-        $user_id = '';
-        $sessonid = '';
-        if (isset(Yii::$app->user->identity->id)) {
-            $user_id = Yii::$app->user->identity->id;
-            $model = RecentlyViewed::find()->where(['product_id' => $product->id, 'user_id' => $user_id])->one();
-        } else {
-            if (!isset(Yii::$app->session['temp_user_product']) || Yii::$app->session['temp_user_product'] == '') {
-                $milliseconds = round(microtime(true) * 1000);
-                Yii::$app->session['temp_user_product'] = $milliseconds;
-                $model = RecentlyViewed::find()->where(['product_id' => $product->id, 'session_id' => Yii::$app->session['temp_user_product']])->one();
-            }
-            $sessonid = Yii::$app->session['temp_user_product'];
-        }
-        if (empty($model)) {
-            $model = new RecentlyViewed();
-            $model->user_id = $user_id;
-            $model->session_id = $sessonid;
-            $model->product_id = $product->id;
-            $model->date = date('Y-m-d');
-        } else {
-            $model->date = date('Y-m-d');
-        }
-        $model->save();
-        return;
-    }
+	/**
+	 * Displays a Particular Product.
+	 * @param prodict_id  $product
+	 * @return mixed
+	 */
+	public function actionProduct_detail($product) {
+		if (isset(Yii::$app->user->identity->id)) {
+			$user_id = Yii::$app->user->identity->id;
+		} else {
+			$user_id = '';
+		}
+		$shipping_limit = Settings::findOne('1')->value;
+		$product_details = Product::find()->where(['canonical_name' => $product, 'status' => '1'])->one();
+		$this->RecentlyViewed($product_details);
+		$product_reveiws = \common\models\CustomerReviews::find()->where(['product_id' => $product_details->id, 'status' => '1'])->all();
+		\Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $product_details->meta_keywords]);
+		\Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $product_details->meta_description]);
+		return $this->render('product_detail', [
+			    'product_details' => $product_details,
+			    'product_reveiws' => $product_reveiws,
+			    'user_id' => $user_id,
+			    'shipping_limit' => $shipping_limit,
+		]);
+	}
 
-    /**
-     * Update recently viewed product.
-     * @param tmperory session for recently viewed product
-     * update session id to corresponding user user id
-     */
-    public function actionGetrecentproduct() {
-        if (isset(Yii::$app->user->identity->id)) {
-            if (isset(Yii::$app->session['temp_user_product'])) {
-                $models = RecentlyViewed::find()->where(['session_id' => Yii::$app->session['temp_user_product']])->all();
+	/**
+	 * Save recently viewed product.
+	 * @param product array
+	 * if user logged in set user id otherwise set temporary session id
+	 */
+	public function RecentlyViewed($product) {
+		$user_id = '';
+		$sessonid = '';
+		if (isset(Yii::$app->user->identity->id)) {
+			$user_id = Yii::$app->user->identity->id;
+			$model = RecentlyViewed::find()->where(['product_id' => $product->id, 'user_id' => $user_id])->one();
+		} else {
+			if (!isset(Yii::$app->session['temp_user_product']) || Yii::$app->session['temp_user_product'] == '') {
+				$milliseconds = round(microtime(true) * 1000);
+				Yii::$app->session['temp_user_product'] = $milliseconds;
+				$model = RecentlyViewed::find()->where(['product_id' => $product->id, 'session_id' => Yii::$app->session['temp_user_product']])->one();
+			}
+			$sessonid = Yii::$app->session['temp_user_product'];
+		}
+		if (empty($model)) {
+			$model = new RecentlyViewed();
+			$model->user_id = $user_id;
+			$model->session_id = $sessonid;
+			$model->product_id = $product->id;
+			$model->date = date('Y-m-d');
+		} else {
+			$model->date = date('Y-m-d');
+		}
+		$model->save();
+		return;
+	}
 
-                foreach ($models as $msd) {
-                    $data = RecentlyViewed::find()->where(['product_id' => $msd->product_id, 'user_id' => Yii::$app->user->identity->id])->one();
-                    if (empty($data)) {
-                        $msd->user_id = Yii::$app->user->identity->id;
-                        $msd->session_id = '';
-                        $msd->save();
-                    } else {
-                        $data->date = $msd->date;
-                        if ($data->save()) {
-                            $msd->delete();
-                        }
-                    }
-                }
-                unset(Yii::$app->session['temp_user_product']);
-            }
-        }
-    }
+	/**
+	 * Update recently viewed product.
+	 * @param tmperory session for recently viewed product
+	 * update session id to corresponding user user id
+	 */
+	public function actionGetrecentproduct() {
+		if (isset(Yii::$app->user->identity->id)) {
+			if (isset(Yii::$app->session['temp_user_product'])) {
+				$models = RecentlyViewed::find()->where(['session_id' => Yii::$app->session['temp_user_product']])->all();
 
-    /**
-     * Save product to wish list.
-     * @param product id
-     * if user logged in set user id otherwise set temporary session id
-     */
-    public function actionSavewishlist() {
-        $product_id = $_POST['product_id'];
-        if ($product_id != '') {
-            $user_id = '';
-            $sessonid = '';
-            if (isset(Yii::$app->user->identity->id)) {
-                $user_id = Yii::$app->user->identity->id;
-            } else {
-                if (!isset(Yii::$app->session['temp_wish_list']) || Yii::$app->session['temp_wish_list'] == '') {
-                    $milliseconds = round(microtime(true) * 1000);
-                    Yii::$app->session['temp_wish_list'] = $milliseconds;
-                }
-                $sessonid = Yii::$app->session['temp_wish_list'];
-            }
+				foreach ($models as $msd) {
+					$data = RecentlyViewed::find()->where(['product_id' => $msd->product_id, 'user_id' => Yii::$app->user->identity->id])->one();
+					if (empty($data)) {
+						$msd->user_id = Yii::$app->user->identity->id;
+						$msd->session_id = '';
+						$msd->save();
+					} else {
+						$data->date = $msd->date;
+						if ($data->save()) {
+							$msd->delete();
+						}
+					}
+				}
+				unset(Yii::$app->session['temp_user_product']);
+			}
+		}
+	}
 
-            $model = WishList::find()->where(['product' => $product_id])->one();
-            if (empty($model)) {
-                $model = new WishList();
-                $model->user_id = $user_id;
-                $model->session_id = $sessonid;
-                $model->product = $product_id;
-                $model->date = date('Y-m-d');
-            } else {
-                $model->date = date('Y-m-d');
-            }
-            $model->save();
-        }
-        return;
-    }
+	/**
+	 * Save product to wish list.
+	 * @param product id
+	 * if user logged in set user id otherwise set temporary session id
+	 */
+	public function actionSavewishlist() {
+		$product_id = $_POST['product_id'];
+		if ($product_id != '') {
+			$user_id = '';
+			$sessonid = '';
+			if (isset(Yii::$app->user->identity->id)) {
+				$user_id = Yii::$app->user->identity->id;
+			} else {
+				if (!isset(Yii::$app->session['temp_wish_list']) || Yii::$app->session['temp_wish_list'] == '') {
+					$milliseconds = round(microtime(true) * 1000);
+					Yii::$app->session['temp_wish_list'] = $milliseconds;
+				}
+				$sessonid = Yii::$app->session['temp_wish_list'];
+			}
 
-    /**
-     * Update recently viewed product.
-     * @param tmperory session for recently viewed product
-     * update session id to corresponding user user id
-     */
-    public function actionGetwishlistproduct() {
-        if (isset(Yii::$app->user->identity->id)) {
-            if (isset(Yii::$app->session['temp_wish_list'])) {
-                $models = WishList::find()->where(['session_id' => Yii::$app->session['temp_wish_list']])->all();
+			$model = WishList::find()->where(['product' => $product_id])->one();
+			if (empty($model)) {
+				$model = new WishList();
+				$model->user_id = $user_id;
+				$model->session_id = $sessonid;
+				$model->product = $product_id;
+				$model->date = date('Y-m-d');
+			} else {
+				$model->date = date('Y-m-d');
+			}
+			$model->save();
+		}
+		return;
+	}
 
-                foreach ($models as $msd) {
-                    $data = WishList::find()->where(['product' => $msd->product, 'user_id' => Yii::$app->user->identity->id])->one();
-                    if (empty($data)) {
-                        $msd->user_id = Yii::$app->user->identity->id;
-                        $msd->session_id = '';
-                        $msd->save();
-                    } else {
-                        $data->date = $msd->date;
-                        if ($data->save()) {
-                            $msd->delete();
-                        }
-                    }
-                }
-                unset(Yii::$app->session['temp_wish_list']);
-            }
-        }
-    }
+	/**
+	 * Update recently viewed product.
+	 * @param tmperory session for recently viewed product
+	 * update session id to corresponding user user id
+	 */
+	public function actionGetwishlistproduct() {
+		if (isset(Yii::$app->user->identity->id)) {
+			if (isset(Yii::$app->session['temp_wish_list'])) {
+				$models = WishList::find()->where(['session_id' => Yii::$app->session['temp_wish_list']])->all();
 
-    /**
-     * This function will display new modal for add new customer reviews
-     */
-    public function actionAddReview() {
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(array('site/login-signup'));
-        }
-        if (Yii::$app->request->isAjax) {
-            $product_id = $_POST['product_id'];
-            $model_review = new \common\models\CustomerReviews();
-            $data = $this->renderPartial('add_reviews', [
-                'model_review' => $model_review,
-                'product_id' => $product_id,
-            ]);
-            echo $data;
-        }
-    }
+				foreach ($models as $msd) {
+					$data = WishList::find()->where(['product' => $msd->product, 'user_id' => Yii::$app->user->identity->id])->one();
+					if (empty($data)) {
+						$msd->user_id = Yii::$app->user->identity->id;
+						$msd->session_id = '';
+						$msd->save();
+					} else {
+						$data->date = $msd->date;
+						if ($data->save()) {
+							$msd->delete();
+						}
+					}
+				}
+				unset(Yii::$app->session['temp_wish_list']);
+			}
+		}
+	}
 
-    /**
-     * This function will save new customer reviews
-     */
-    public function actionSaveReview() {
-        if (Yii::$app->request->isAjax) {
-            $model_review = new \common\models\CustomerReviews();
-            if ($model_review->load(Yii::$app->request->post())) {
-                $model_review->user_id = Yii::$app->user->identity->id;
-                $model_review->review_date = date('Y-m-d');
-                $model_review->save();
-                echo 1;
-                exit;
-            }
-        }
-    }
+	/**
+	 * This function will display new modal for add new customer reviews
+	 */
+	public function actionAddReview() {
+		if (Yii::$app->user->isGuest) {
+			return $this->redirect(array('site/login-signup'));
+		}
+		if (Yii::$app->request->isAjax) {
+			$product_id = $_POST['product_id'];
+			$model_review = new \common\models\CustomerReviews();
+			$data = $this->renderPartial('add_reviews', [
+			    'model_review' => $model_review,
+			    'product_id' => $product_id,
+			]);
+			echo $data;
+		}
+	}
 
-    public function actionGenderSearch() {
-        if (Yii::$app->request->isAjax) {
-            $gender = $_POST['gender'];
-            Yii::$app->session['gender_search'] = $gender;
-            if (isset(Yii::$app->session['gender_search'])) {
-                echo 1;
-                exit;
-            } else {
-                echo 0;
-                exit;
-            }
-        }
-    }
+	/**
+	 * This function will save new customer reviews
+	 */
+	public function actionSaveReview() {
+		if (Yii::$app->request->isAjax) {
+			$model_review = new \common\models\CustomerReviews();
+			if ($model_review->load(Yii::$app->request->post())) {
+				$model_review->user_id = Yii::$app->user->identity->id;
+				$model_review->review_date = date('Y-m-d');
+				$model_review->save();
+				echo 1;
+				exit;
+			}
+		}
+	}
 
-    public function actionSearch() {
-        if (Yii::$app->request->post()) {
+	public function actionGenderSearch() {
+		if (Yii::$app->request->isAjax) {
 
-            $keyword = $_POST['search_keyword'];
-            $searchModel = new ProductSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $dataProvider->query->andWhere(['like', 'product_name', $keyword])->orWhere(['like', 'canonical_name', $keyword]);
+			$gender = $_POST['gender'];
+			Yii::$app->session['gender_search'] = $gender;
+			if (isset(Yii::$app->session['gender_search'])) {
+				echo 1;
+				exit;
+			} else {
+				echo 0;
+				exit;
+			}
+		}
+	}
 
-            $category = Category::find()->where(['status' => 1])->andWhere(['like', 'category', $keyword])->all();
-            $category_products = array();
-            if (!empty($category)) {
-                foreach ($category as $value) {
-                    $cat_products = Product::find()->where(['status' => 1, 'category' => $value->id])->all();
-                    foreach ($cat_products as $cat_products) {
-                        $category_products[] = $cat_products->id;
-                    }
-                }
-                $dataProvider->query->orWhere(['IN', 'id', $category_products]);
-            }
+	public function actionSearch() {
+		if (Yii::$app->request->post()) {
 
-            $categories = Category::find()->where(['status' => 1])->all();
-            return $this->render('index', [
-                        'searchModel' => $searchModel,
-                        'dataProvider' => $dataProvider,
-                        'categories' => $categories,
-            ]);
-        }
-    }
+			$keyword = $_POST['search_keyword'];
+			$searchModel = new ProductSearch();
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			$dataProvider->query->andWhere(['like', 'product_name', $keyword])->orWhere(['like', 'canonical_name', $keyword]);
 
-    public function actionSearchKeyword() {
-        if (Yii::$app->request->isAjax) {
-            $keyword = $_POST['keyword'];
-            if ($keyword != '') {
-                $search_tags = \common\models\MasterSearchTag::find()->where(['status' => 1])->andWhere((['like', 'tag_name', $keyword]))->all();
-                $keyword_products = array();
-                if (!empty($search_tags)) {
-                    foreach ($search_tags as $value) {
-                        $search_products = Product::find()->where(['status' => 1])->andWhere(new Expression('FIND_IN_SET(:search_tag, search_tag)'))->addParams([':search_tag' => $value->id])->all();
-                        foreach ($search_products as $search_productss) {
-                            if (!in_array($search_productss->id, $keyword_products))
-                                $keyword_products[] = $search_productss->id;
-                        }
-                    }
-                }
-                $values = $this->renderPartial('_product_search', ['products' => $keyword_products]);
-                echo $values;
-            }
-        }
-    }
+			$category = Category::find()->where(['status' => 1])->andWhere(['like', 'category', $keyword])->all();
+			$category_products = array();
+			if (!empty($category)) {
+				foreach ($category as $value) {
+					$cat_products = Product::find()->where(['status' => 1, 'category' => $value->id])->all();
+					foreach ($cat_products as $cat_products) {
+						$category_products[] = $cat_products->id;
+					}
+				}
+				$dataProvider->query->orWhere(['IN', 'id', $category_products]);
+			}
+
+			$categories = Category::find()->where(['status' => 1])->all();
+			return $this->render('index', [
+				    'searchModel' => $searchModel,
+				    'dataProvider' => $dataProvider,
+				    'categories' => $categories,
+			]);
+		}
+	}
+
+	public function actionSearchKeyword() {
+		if (Yii::$app->request->isAjax) {
+			$keyword = $_POST['keyword'];
+			if ($keyword != '') {
+				$search_tags = \common\models\MasterSearchTag::find()->where(['status' => 1])->andWhere((['like', 'tag_name', $keyword]))->all();
+				$keyword_products = array();
+				if (!empty($search_tags)) {
+					foreach ($search_tags as $value) {
+						$search_products = Product::find()->where(['status' => 1])->andWhere(new Expression('FIND_IN_SET(:search_tag, search_tag)'))->addParams([':search_tag' => $value->id])->all();
+						foreach ($search_products as $search_productss) {
+							if (!in_array($search_productss->id, $keyword_products))
+								$keyword_products[] = $search_productss->id;
+						}
+					}
+				}
+				$values = $this->renderPartial('_product_search', ['products' => $keyword_products]);
+				echo $values;
+			}
+		}
+	}
 
 }

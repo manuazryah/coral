@@ -5,6 +5,7 @@
 use yii\helpers\Html;
 ?>
 
+
 <div class="pad-20 hide-xs"></div>
 
 <div class="container">
@@ -28,25 +29,31 @@ use yii\helpers\Html;
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 					<h5 class="heading"><?= $about->about_title; ?></h5>
-					<p><img class="img-responsive hidden-lg hidden-md hidden-sm" style="float: left;margin: 0 15px 10px 0;" src="<?= Yii::$app->homeUrl; ?>uploads/cms/about/<?= $about->id ?>/large.<?= $about->about_image ?>"/>
+					<p><img class="img-responsive hidden-lg hidden-md hidden-sm" style="float: left;margin: 0 15px 10px 0;" src="<?= Yii::$app->homeUrl; ?>images/about.jpg"/>
+
 						<?php
 						$content = str_ireplace('<p>', '', $about->about_content);
 						$content = str_ireplace('</p>', '', $content)
 						?>
 
-						<?= $content ?> </p>
-				</div>
+					<?= $content ?>				</div>
 			</div>
 		</div>
 	</div>
 	<div class="chairmans-msg-bg-color">
-		<div class="chairmans-msg-bg">
+		<div class="chairmans-msg-bg" style="background-image: url(images/chairmans-msg-bg.png);">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chairmans-img">
-						<img class="img-responsive hidden-md hidden-sm hidden-xs" src="<?= Yii::$app->homeUrl; ?>uploads/cms/about/<?= $about->id ?>/chairman/large.<?= $about->chairman_image ?>"/>
+						<div class="card">
+							<canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+							<div class="avatar">
+								<img src="<?= Yii::$app->homeUrl; ?>uploads/cms/about/<?= $about->id ?>/chairman/large.<?= $about->chairman_image ?>" alt="1">
+							</div>
+						</div>
+						<!--<img class="img-responsive hidden-md hidden-sm hidden-xs" src="images/chairnams-img.png"/>-->
 						<div class="hidden-lg">
-							<img class="img-responsive" src="<?= Yii::$app->homeUrl; ?>uploads/cms/about/<?= $about->id ?>/chairman/large.<?= $about->chairman_image ?>"/>
+						    <!--<img class="img-responsive" src="images/chairnams-img2.png"/>-->
 							<div class="chairmans-name">
 								<p class="name"><?= $about->chairman_name ?></p>
 								<p class="designation"><?= $about->chairman_position ?></p>
@@ -75,6 +82,9 @@ use yii\helpers\Html;
 			</div>
 		</div>
 	</div>
+
+
+
+
 </div>
 
-<div class="pad-20"></div>
