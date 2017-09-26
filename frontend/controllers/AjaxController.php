@@ -102,6 +102,20 @@ class AjaxController extends \yii\web\Controller {
     }
 
     /*
+     * This function note variables from session
+     * return result to the view
+     */
+
+    public function actionRemoveNotesSession() {
+        if (Yii::$app->request->isAjax) {
+            $note_id = $_POST['data_val'];
+            $notes_data = \common\models\Notes::find()->where(['id' => $note_id])->one();
+            echo $notes_data->notes;
+            exit;
+        }
+    }
+
+    /*
      * This function select Country code based on the country id
      * return result to the view
      */

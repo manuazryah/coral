@@ -401,12 +401,21 @@ use yii\helpers\Html;
 
             var src_value = $(this).attr('data-val1');
             if (count < 6) {
+//                $.ajax({
+//                    type: 'POST',
+//                    cache: false,
+//                    async: false,
+//                    data: {data_val: this.value},
+//                    url: '<?= Yii::$app->homeUrl; ?>ajax/notes-session',
+//                    success: function (data) {
+//                    }
+//                });
                 var item_count = parseInt($('#item-' + id).val());
                 var item_val = item_count + 1;
                 $('#' + attr_id + ' button').addClass('choose-grn');
                 count = parseInt(count) + 1;
                 $("#note-count").val(parseInt(count));
-                $("#container").append('<div class="tmb-img"><img src="' + src_value + '"><button id="cls-img" class="cls-img"><i class="fa fa-times" aria-hidden="true"></i></button></div>');
+                $("#container").append('<div class="tmb-img"><img src="' + src_value + '"><button id="cls-img" class="cls-img" data-val="' + id + '"><i class="fa fa-times" aria-hidden="true"></i></button></div>');
                 if (item_val == 1) {
                     $("#" + attr_id + " span").append("  X<span class='items'>1</span");
                 } else {
@@ -417,10 +426,28 @@ use yii\helpers\Html;
         });
 
         $(document).on('click', '.cls-img', function (e) {
-            alert('fhgh');
+            var item_id = $(this).attr('data-val');
             $(this).closest(".tmb-img").fadeOut(300);
-            e.preventDefault();
-
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: item_id},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/remove-notes-session',
+                success: function (data) {
+                    var count = parseInt($("#note-count").val());
+                    $("#note-count").val(count - 1);
+                    var item_count = parseInt($("#item-" + item_id).val());
+                    var res_count = item_count - 1;
+                    $("#item-" + item_id).val(res_count);
+                    if (res_count == 0) {
+                        $("#note-" + item_id + " span").text(data);
+                    } else {
+                        $("#note-" + item_id + " .items").text(res_count);
+                    }
+                    e.preventDefault();
+                }
+            });
         });
     });
     function validateDatas(id) {
