@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ],
                                     'urlCreator' => function ($action, $model) {
                                         if ($action === 'view') {
-                                            $url = Url::to(['index', 'id' => $model->order_id]);
+                                            $url = Url::to(['view', 'id' => $model->order_id]);
                                             return $url;
                                         }
 //                                        if ($action === 'delete') {

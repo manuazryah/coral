@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use common\models\User;
+use common\models\Product;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\OrderMasterSearch */
@@ -43,40 +44,28 @@ $this->params['breadcrumbs'][] = $this->title;
                             'columns' => [
                                 ['class' => 'yii\grid\SerialColumn'],
                                 'order_id',
-                                
-//                                'total_amount',
-//                                'order_date',
-                                // 'ship_address_id',
-                                // 'bill_address_id',
-                                // 'currency_id',
-                                // 'user_comment:ntext',
-                                // 'payment_mode',
-                                // 'admin_comment',
-                                // 'payment_status',
-                                // 'admin_status',
-                                // 'doc',
-                                // 'shipping_method',
                                 [
-                                    'attribute' => 'status',
-                                    'filter' => ['4' => 'Success', '5' => 'Failed'],
+                                    'attribute' => 'product_id',
+//                                    'filter' => ArrayHelper::map(Product::find()->all(), 'id', 'product_name'),
                                     'value' => function($data) {
-                                        return $data->status == 4 ? 'Success' : 'Failed';
+                                        $name = Product::findOne($data->product_id)->product_name;
+                                        $image = '<img src="' . Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_thumb.' . $product_details->profile . '" width="94px" height="93px"/>';
+                                        return $name ;
+//                                        return Product::findOne($data->product_id)->product_name;
                                     }
                                 ],
+                                'quantity',
+                                'amount',
+                                'rate',
+//                                
                                 [
-                                    'class' => 'yii\grid\ActionColumn',
-//                                    'contentOptions' => ['style' => 'width:100px;'],
-                                    'header' => 'Actions',
-                                    'template' => '{view}',
-                                    'buttons' => [
-                                        'view' => function ($url, $model) {
-                                            return Html::a('<span class="btn btn-success">View Details</span>', $url, [
-                                                        'title' => Yii::t('app', 'view'),
-                                                        'class' => '',
-                                            ]);
-                                        },
-                                    ],
+                                    'attribute' => 'status',
+                                    'filter' => ['1' => 'Delivered', '0' => 'Not Delivered'],
+                                    'value' => function($data) {
+                                        return $data->status == 1 ? 'Delivered' : 'Not Delivered';
+                                    }
                                 ],
+                                'delivered_date',
                             ],
                         ]);
                         ?>

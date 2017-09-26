@@ -304,7 +304,7 @@ and open the template in the editor.
 						<a href="#"><img src="<?= Yii::$app->homeUrl; ?>images/mastercard.png" class="img-responsive"/></a>
 						<a href="#"><img src="<?= Yii::$app->homeUrl; ?>images/visa.png" class="img-responsive"/></a>
 					</div>
-					<p><span>Coral perfume</span> @ 2017 All Rights Reserved. Design by Azryah</p>
+					<p><span>Coral perfume</span> @ 2017 All Rights Reserved.</p>
 				</div>
 			</section>
 			<?php $this->endBody() ?>
