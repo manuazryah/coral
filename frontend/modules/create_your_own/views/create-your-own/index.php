@@ -397,14 +397,22 @@ use yii\helpers\Html;
         $(document).on('click', '.notes-main', function (e) {
             var count = parseInt($("#note-count").val());
             var attr_id = $(this).attr('id');
+            var id = $(this).attr('id').match(/\d+/);
 
             var src_value = $(this).attr('data-val1');
             if (count < 6) {
+                var item_count = parseInt($('#item-' + id).val());
+                var item_val = item_count + 1;
                 $('#' + attr_id + ' button').addClass('choose-grn');
                 count = parseInt(count) + 1;
                 $("#note-count").val(parseInt(count));
                 $("#container").append('<div class="tmb-img"><img src="' + src_value + '"><button id="cls-img" class="cls-img"><i class="fa fa-times" aria-hidden="true"></i></button></div>');
-                $("#" + attr_id + " span").append("  X1");
+                if (item_val == 1) {
+                    $("#" + attr_id + " span").append("  X<span class='items'>1</span");
+                } else {
+                    $("#" + attr_id + " .items").text(item_val);
+                }
+                $('#item-' + id).val(item_val);
             }
         });
 
