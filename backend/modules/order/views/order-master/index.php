@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use common\models\User;
 
@@ -63,8 +64,37 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // 'admin_status',
                                 // 'doc',
                                 // 'shipping_method',
-                                'status',
-//                                ['class' => 'yii\grid\ActionColumn'],
+                                [
+                                    'attribute' => 'status',
+                                    'filter' => ['4' => 'Success', '5' => 'Failed'],
+                                    'value' => function($data) {
+                                        return $data->status == 4 ? 'Success' : 'Failed';
+                                    }
+                                ],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+//                                    'contentOptions' => ['style' => 'width:100px;'],
+                                    'header' => 'Actions',
+                                    'template' => '{view}',
+                                    'buttons' => [
+                                        'view' => function ($url, $model) {
+                                            return Html::a('<span class="btn btn-success">View Details</span>', $url, [
+                                                        'title' => Yii::t('app', 'view'),
+                                                        'class' => '',
+                                            ]);
+                                        },
+                                    ],
+                                    'urlCreator' => function ($action, $model) {
+                                        if ($action === 'view') {
+                                            $url = Url::to(['index', 'id' => $model->order_id]);
+                                            return $url;
+                                        }
+//                                        if ($action === 'delete') {
+//                                            $url = Url::to(['del', 'id' => $model->id]);
+//                                            return $url;
+//                                        }
+                                    }
+                                ],
                             ],
                         ]);
                         ?>

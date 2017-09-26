@@ -13,6 +13,7 @@ use Yii;
  * @property integer $product_id
  * @property integer $quantity
  * @property string $amount
+ * @property string $delivered_date
  * @property string $rate
  * @property string $doc
  * @property integer $status
@@ -33,10 +34,11 @@ class OrderDetails extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['master_id', 'order_id', 'product_id', 'quantity', 'amount', 'rate'], 'required'],
-            [['master_id',  'product_id', 'quantity', 'status'], 'integer'],
+            [['master_id', 'order_id', 'product_id', 'quantity', 'amount', 'rate', 'status'], 'required'],
+            [['master_id', 'product_id', 'quantity', 'status'], 'integer'],
             [['amount', 'rate'], 'number'],
-            [['doc'], 'safe'],
+            [['delivered_date', 'doc'], 'safe'],
+            [['order_id'], 'string', 'max' => 200],
         ];
     }
 
@@ -52,6 +54,7 @@ class OrderDetails extends \yii\db\ActiveRecord
             'product_id' => 'Product ID',
             'quantity' => 'Quantity',
             'amount' => 'Amount',
+            'delivered_date' => 'Delivered Date',
             'rate' => 'Rate',
             'doc' => 'Doc',
             'status' => 'Status',

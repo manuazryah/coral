@@ -31,7 +31,11 @@ use common\models\Settings;
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="top: 15px; text-align: right; padding-right: 0;">
                     <?php
-                    $price = ($product->offer_price == '0' ? $product->price : $product->offer_price);
+                    if ($product->offer_price == '0' || $product->offer_price == '') {
+                        $price = $product->price;
+                    } else {
+                        $price = $product->offer_price;
+                    }
                     $total = $price * $cart->quantity;
                     ?>
                     <p class="price">AED <?= $total; ?></p>

@@ -40,6 +40,9 @@ return [
 	'contacts' => [
 	    'class' => 'backend\modules\contacts\Module',
 	],
+	'order' => [
+	    'class' => 'backend\modules\order\Module',
+	],
     ],
     'components' => [
 	'request' => [

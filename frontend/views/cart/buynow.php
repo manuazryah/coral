@@ -58,7 +58,13 @@ $this->title = 'Shopping Cart';
                                         </div>
                                     </div>
                                 </td>
-                                <?php $price = ($product->offer_price == '0' ? $product->price : $product->offer_price); ?>
+                                <?php if($product->offer_price == '0' || $product->offer_price == ''){
+                                    $price = $product->price;
+                                }else{
+                                    $price = $product->offer_price;
+                                }
+?>
+                                <?php // $price = ($product->offer_price == '0' ? $product->price : $product->offer_price); ?>
                                 <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center price">AED <span class="price_<?= $cart->id?>"><?= $price; ?></span></td>
                                 <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align: center">
                                     <div class="input-group number-spinner">
