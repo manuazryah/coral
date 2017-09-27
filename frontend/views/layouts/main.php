@@ -38,7 +38,8 @@ and open the template in the editor.
 	<body>
 		<?php $this->beginBody() ?>
 		<?php $action = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id; // controller action id ?>
-		<div id<div id="top-header">
+		<div id="sticky-header">
+			<div id="top-header">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-3  col-sm-3 col-xs-3 left">
@@ -231,86 +232,87 @@ and open the template in the editor.
 					<!-- /.container-fluid -->
 				</nav>
 			</div>
-			<div class="clearfix"></div>
-			<?= $content ?>
+		</div>
+		<div class="clearfix"></div>
+		<?= $content ?>
 
-			<div class="clearfix"></div>
-			<section id="footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-5 col-sm-4 col-xs-5 br-right xs-100">
-							<h4 class="foot-hdng">certified services</h4>
-							<div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
-								<img src="<?= Yii::$app->homeUrl; ?>images/gmp.png" class="img-responsive"/>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
-								<img src="<?= Yii::$app->homeUrl; ?>images/iso.png" class="img-responsive"/>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
-								<img src="<?= Yii::$app->homeUrl; ?>images/coral-cert.png" class="img-responsive"/>
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12 features">
-								<ul>
-									<li>Quick Delivery</li>
-									<li>Customer Safety</li><br/>
-									<li>100% Satisfaction</li>
-									<li>Secure Payment</li>
-								</ul>
-							</div>
+		<div class="clearfix"></div>
+		<section id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 col-sm-4 col-xs-5 br-right xs-100">
+						<h4 class="foot-hdng">certified services</h4>
+						<div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
+							<img src="<?= Yii::$app->homeUrl; ?>images/gmp.png" class="img-responsive"/>
 						</div>
-						<div style="padding-left: 35px;" class="col-md-3 col-sm-4 col-xs-3 xs-50">
-							<h4 class="foot-hdng">coral perfume</h4>
-							<ul class="foot-site-link">
-								<li><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
-								<li><?= Html::a('<span>Terms and Conditions</span>', ['/site/terms-condition'], ['class' => '']) ?></li>
-								<li><?= Html::a('<span>Privacy Policies</span>', ['/site/privacy-policy'], ['class' => '']) ?></li>
-								<li><?= Html::a('<span>Return Policy</span>', ['/site/return-policy'], ['class' => '']) ?></li>
-								<li><?= Html::a('<span>FAQs</span>', ['/site/faq'], ['class' => '']) ?></li>
+						<div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
+							<img src="<?= Yii::$app->homeUrl; ?>images/iso.png" class="img-responsive"/>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
+							<img src="<?= Yii::$app->homeUrl; ?>images/coral-cert.png" class="img-responsive"/>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 features">
+							<ul>
+								<li>Quick Delivery</li>
+								<li>Customer Safety</li><br/>
+								<li>100% Satisfaction</li>
+								<li>Secure Payment</li>
 							</ul>
 						</div>
-						<div style="padding-left: 0px;" class="col-md-4 col-sm-4 col-xs-4 xs-50 br-left">
-							<div style="padding-left: 35px;" class="col-md-12 col-sm-12 col-xs-12">
-								<h4 class="foot-hdng">my account</h4>
-								<div class="col-md-12 my-account-link">
-									<ul>
-										<li><a href="#">My Account</a></li>
-										<li><?= Html::a('Private Label', ['/site/private-label'], ['class' => '']) ?></li>
-										<li><a href="#">Our Products</a></li>
-										<li><?= Html::a('Showrooms', ['/site/showrooms'], ['class' => '']) ?></li>
-										<li><a href="#">International Products</a></li>
-										<li><?= Html::a('contact us', ['/site/contact'], ['class' => '']) ?></li>
-
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-12 col-sm-12 hidden-xs foot-social">
+					</div>
+					<div style="padding-left: 35px;" class="col-md-3 col-sm-4 col-xs-3 xs-50">
+						<h4 class="foot-hdng">coral perfume</h4>
+						<ul class="foot-site-link">
+							<li><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
+							<li><?= Html::a('<span>Terms and Conditions</span>', ['/site/terms-condition'], ['class' => '']) ?></li>
+							<li><?= Html::a('<span>Privacy Policies</span>', ['/site/privacy-policy'], ['class' => '']) ?></li>
+							<li><?= Html::a('<span>Return Policy</span>', ['/site/return-policy'], ['class' => '']) ?></li>
+							<li><?= Html::a('<span>FAQs</span>', ['/site/faq'], ['class' => '']) ?></li>
+						</ul>
+					</div>
+					<div style="padding-left: 0px;" class="col-md-4 col-sm-4 col-xs-4 xs-50 br-left">
+						<div style="padding-left: 35px;" class="col-md-12 col-sm-12 col-xs-12">
+							<h4 class="foot-hdng">my account</h4>
+							<div class="col-md-12 my-account-link">
 								<ul>
-									<li><a href="<?= $facebook->content; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href="<?= $twitter->content; ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									<li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									<li><a href="#">My Account</a></li>
+									<li><?= Html::a('Private Label', ['/site/private-label'], ['class' => '']) ?></li>
+									<li><a href="#">Our Products</a></li>
+									<li><?= Html::a('Showrooms', ['/site/showrooms'], ['class' => '']) ?></li>
+									<li><a href="#">International Products</a></li>
+									<li><?= Html::a('contact us', ['/site/contact'], ['class' => '']) ?></li>
+
 								</ul>
 							</div>
 						</div>
-						<div style="text-align: center;" class="hidden-lg hidden-md hidden-sm col-xs-12 foot-social">
-							<ul style="margin: 0 auto; display: inline-block;">
-								<li><a href="<?= $facebook->content; ?>"target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<div class="col-md-12 col-sm-12 hidden-xs foot-social">
+							<ul>
+								<li><a href="<?= $facebook->content; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 								<li><a href="<?= $twitter->content; ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 								<li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
 								<li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 							</ul>
 						</div>
 					</div>
-				</div>
-				<div class="ownership">
-					<div class="supporting-logos">
-						<a href="#"><img src="<?= Yii::$app->homeUrl; ?>images/mastercard.png" class="img-responsive"/></a>
-						<a href="#"><img src="<?= Yii::$app->homeUrl; ?>images/visa.png" class="img-responsive"/></a>
+					<div style="text-align: center;" class="hidden-lg hidden-md hidden-sm col-xs-12 foot-social">
+						<ul style="margin: 0 auto; display: inline-block;">
+							<li><a href="<?= $facebook->content; ?>"target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="<?= $twitter->content; ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							<li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+							<li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+						</ul>
 					</div>
-					<p><span>Coral perfume</span> @ 2017 All Rights Reserved.</p>
 				</div>
-			</section>
-			<?php $this->endBody() ?>
+			</div>
+			<div class="ownership">
+				<div class="supporting-logos">
+					<a href="#"><img src="<?= Yii::$app->homeUrl; ?>images/mastercard.png" class="img-responsive"/></a>
+					<a href="#"><img src="<?= Yii::$app->homeUrl; ?>images/visa.png" class="img-responsive"/></a>
+				</div>
+				<p><span>Coral perfume</span> @ 2017 All Rights Reserved.</p>
+			</div>
+		</section>
+		<?php $this->endBody() ?>
 	</body>
 </html>
 <?php $this->endPage() ?>
@@ -432,7 +434,16 @@ and open the template in the editor.
 		}).mouseup(function () {
 		clearInterval(action);
 		});
-		});
+		});</script>
+<script>
+		$(window).on("scroll", function() {
+	if ($(window).scrollTop() > 300) {
+	$("#sticky-header").addClass("fixed");
+	} else {
+	//remove the background property so it comes transparent again (defined in your css)
+	$("#sticky-header").removeClass("fixed");
+	}
+	});
 </script>
 <!--<script>
     $(document).scroll(function () {

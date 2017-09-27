@@ -27,6 +27,7 @@ use common\models\Fregrance;
 					<?php }
 					?>
 				</a>
+				<div class="img-overlay"></div>
 			</div>
 			<ul class="text-center">
 				<input type="hidden" value="1" class="q_ty">

@@ -46,7 +46,7 @@ $current_action = Yii::$app->controller->action->id; // controller action id
 
 <div id="our-product">
 	<div class="container">
-		<div class="input-group gender-selection">
+		<div class="input-group gender-selection hidden-xs">
 			<div id="radioBtn" class="btn-group">
 				<span>Type:</span>
 				<a class="btn btn-primary btn-sm <?= $_GET['type'] == 1 && $_GET['type'] != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
@@ -71,9 +71,63 @@ $current_action = Yii::$app->controller->action->id; // controller action id
 				?>"main-categ="<?= $main_categry ?>">All</a>
 			</div>
 		</div>
+		<div class="panel-body hidden-lg hidden-md hidden-sm filter col-xs-8" >
+			<a data-toggle="collapse" href="#collapse2">
+				<i class="fa fa-align-justify " aria-hidden="true"></i> Category
+			</a>
+			<!--<h3 class="hidden visible-xs pull-right side_filter_toggle"><i class="fa fa-align-justify "></i>Filter</h3>-->
+			<div id="collapse2" class="panel-collapse collapse" >
+				<div class="col-lg-3 col-md-3 col-sm-12 left-accordation panel-body">
+					<div class="panel panel-default">
+						<div class="panel-body lit-blue" style="padding-left: 0px;">
+							<div class="slide-container">
+								<div class="list-group" id="mg-multisidetabs">
+									<div class="panel list-sub" style="display: block">
+										<div id="collapse1" class="panel-body" >
+											<div class="list-group">
+												<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>
+												<a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>international brands</span></a>
+												<a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>new arrivals</span></a>
+												<a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>trending</span></a>
+												<a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>something special</span></a>
+											</div>
+										</div>
+									</div>
+								</div><!-- ./ end list-group -->
+							</div><!-- ./ end slide-container -->
+						</div><!-- ./ end panel-body -->
+					</div><!-- ./ end panel panel-default-->
+				</div><!-- ./ endcol-lg-6 col-lg-offset-3 -->
+			</div>
+		</div>
+		<div class="panel-body hidden-lg hidden-md hidden-sm filter col-xs-4" >
+			<a data-toggle="collapse" href="#collapse0" style="float: right;">
+				Filter&nbsp;&nbsp;&nbsp;&nbsp;<i style="margin-right: 0px;" class="fa fa-align-justify " aria-hidden="true"></i>
+			</a>
+			<!--<h3 class="hidden visible-xs pull-right side_filter_toggle"><i class="fa fa-align-justify "></i>Filter</h3>-->
+			<div id="collapse0" class="panel-collapse collapse" >
+				<div class="input-group gender-selection">
+					<!--                    <div id="radioBtn" class="btn-group">
+								<span>Type:</span>
+								<a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y">All</a>
+								<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="W">Women</a>
+								<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="M">Men</a>
+								<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="U">Unisex</a>
+							    </div>-->
+					<div class="list-group lit-blue">
+						<div id="radioBtn" class="btn-group">
+							<a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y">All</a>
+							<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="W">Women</a>
+							<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="M">Men</a>
+							<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="U">Unisex</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="container">
-		<div class="col-lg-3 col-md-3 col-sm-12 left-accordation">
+		<div class="col-lg-3 col-md-3 col-sm-12 hidden-xs left-accordation panel-body">
 			<div class="panel panel-default">
 				<div class="panel-body lit-blue">
 					<div class="slide-container">

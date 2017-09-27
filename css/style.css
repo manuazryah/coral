@@ -757,6 +757,7 @@ input[type="checkbox"]:checked + label:after {
         padding: 0px;
         position: absolute;
         width: 100%;
+	height: auto;
         margin: 0 auto;
         background: white;
         top: 35px;
@@ -1538,7 +1539,7 @@ h1:after{
 
 #footer{
         background: #2d2d2d;
-        z-index: 90000000;
+	z-index: 10000;
         position: absolute;
         width: 100%;
         /*padding-bottom: 20px;*/
@@ -2025,6 +2026,7 @@ h1:after{
         position: absolute;
         top: 10px;
         right: -7px;
+	z-index: 1;
 }
 .MagicZoom .offer-tag span{
         color: white;
@@ -3506,7 +3508,10 @@ input[type="checkbox"]:checked:before {
         margin-bottom: 30px;
 }
 #privatelabel .how-it-works .icon i{
-        vertical-align: middle;
+	vertical-align: middle;
+	font-family: Bauhaus;
+	font-size: 24px;
+	color: #777677;
 }
 #privatelabel .how-it-works{
         background-image: url(../images/privatelabel-spraybottle.jpg);
@@ -3671,6 +3676,8 @@ input[type="checkbox"]:checked:before {
         padding-bottom: 50px;
 }
 #showrooms .showrooms{
+	min-height: 520px;
+	max-height: 520px;
         border: 1px solid #ddd;
         cursor: pointer;
         overflow: hidden;
@@ -4066,4 +4073,134 @@ fieldset .notes-selection{
         top: 0px;
         right: 0px;
         z-index: 800;
+}
+.mobile-search .search{
+	padding-left: 0px;
+	top: 27px !important;
+	padding: 0px;
+	left: -180px;
+}
+.mobile-search .SearchIcon
+{
+	color:#31221f;
+
+}
+.mobile-search .SearchBar:focus{
+	box-shadow: none;
+}
+.mobile-search .SearchBar{
+	background-color:#f5f5f5;
+	border:1px solid #dfdfdf;
+	border-radius: 0px;
+}
+.mobile-search .SearchButton
+{
+	background-color:white;
+	border:1px solid #dfdfdf;
+	color: #31221f;
+	border-radius: 0px;
+}
+.mobile-search .SearchButton:hover{
+	background-color:#61b346;
+	color: white;
+}
+.mobile-search .SearchButton:hover .SearchIcon{
+	color: white;
+}
+.top-nav .mobile-search li:nth-child(-n+2):after{
+	display: none;
+}
+.mobile-search li.dropdown:hover .dropdown-menu {
+	display: block;
+	min-width: 234px;
+	max-width: 234px;
+}
+.top-nav .mobile-search .dropdown .dropdown-menu{
+	min-width: 234px;
+	max-width: 234px;
+	border: none;
+	padding: 5px 5px;
+	margin-top: -5px;
+}
+#our-product .filter i {
+	color: #666;
+	margin-right: 12px;
+	background-color: #fff;
+	padding: 8px 6px;
+	line-height: 10px;
+	border: solid 1px #666;
+	cursor: pointer;
+}
+#our-product #collapse2{
+	position: absolute;
+	width: 100%;
+	left: 15px;
+	z-index: 1;
+}
+#our-product #collapse0{
+	position: absolute;
+	width: 100%;
+	/* left: 0px; */
+	z-index: 1;
+	top: 43px;
+	right: 0px;
+	float: right;
+}
+#our-product #collapse0 .gender-selection{
+	float: right;
+	right: 15px;
+	-webkit-box-shadow: 0 1px 1px #ddd;
+	box-shadow: 0 1px 1px #ddd;
+	margin: 0px;
+	border: 1px solid #ddd;
+}
+#our-product #collapse0 .list-group{
+	padding: 15px;
+}
+.img-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.4);
+	transition: all 0.5s ease-in-out 0s;
+	opacity: 0;
+}
+.gp_products_item:hover .img-overlay{
+	opacity: 1;
+}
+#sticky-header{
+	transition: all 0.5s ease-in-out 0s;
+}
+.fixed{
+	position: fixed;
+	width: 100%;
+	z-index: 90000;
+	transition: all 0.5s ease-in-out 0s;
+}
+#sticky-header.fixed #header{
+	padding-bottom: 0px;
+}
+#sticky-header.fixed #header .logo{
+	width: 60%;
+	text-align: center;
+	margin: 0 auto;
+	height: 50px;
+}
+#sticky-header.fixed #top-header{
+	display: none;
+}
+#sticky-header.fixed #header .search{
+	position: initial;
+}
+#sticky-header.fixed #header nav {
+	padding: 0px;
+	margin-top: 10px;
+}
+#sticky-header.fixed #header nav .navbar-right{
+	top: 0px;
+}
+#sticky-header.fixed #header .shopping-cart{
+	top: 35px;
 }

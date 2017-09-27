@@ -112,67 +112,127 @@ $youtube_video = CmsOthers::find()->where(['id' => 7])->one();
 		<div class="featured-pro sec-pad">
 
 			<h1>our featured products</h1>
-			<div class="product-slider">
-				<div id="adv_gp_products_4_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
-					<!--========= Wrapper for slides =========-->
-					<div class="carousel-inner" role="listbox">
-						<?php
-						$index = 0;
+			<div class="col-md-12 product-list" style="padding: 0px 50px;">
+				<div class="international-brands">
+					<?php
+					foreach ($featured_products as $featured_product) {
+						?>
+						<div class="item ">
+							<div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
+								<div class="gp_products_inner">
+									<div class="gp_products_item_image">
+										<a href="<?= Yii::$app->homeUrl . 'product_detail/' . $featured_product->canonical_name ?>">
+											<?php
+											$product_image = Yii::$app->basePath . '/../uploads/product/' . $featured_product->id . '/profile/' . $featured_product->canonical_name . '.' . $featured_product->profile;
+											if (file_exists($product_image)) {
+												?>
+												<img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $featured_product->id . '/profile/' . $featured_product->canonical_name . '.' . $featured_product->profile ?>" height="100%" alt="1" />
+												<?php
+											} else {
+												?>
+												<img src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_perfume.png' ?>" height="100%" alt="1" />
+											<?php }
+											?>
+										</a>
+										<div class="img-overlay"></div>
+									</div>
+									<ul class="text-center">
+										<input type="hidden" value="1" class="q_ty">
+										<?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', '#', ['class' => 'add_to_cart', 'id' => $featured_product->canonical_name]) ?>
+										<?= Html::a('<li><i class="fa fa-heart"></i></li>', 'javascript:void(0)', ['class' => 'add_to_wish_list', 'id' => $featured_product->id]) ?>
+										<?= Html::a('<li><i class="fa fa-eye"></i></li>', ['/product/product_detail', 'product' => $featured_product->canonical_name], ['class' => '']) ?>
+									</ul>
 
-						foreach ($featured_products as $featured_product) {
-							?>
-							<div class="item <?= $index == 0 ? "active" : "" ?>">
-								<div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-									<div class="gp_products_inner">
-										<div class="gp_products_item_image">
-											<a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
-												<img src="<?= Yii::$app->homeUrl; ?>uploads/product/<?= $featured_product->id ?>/profile/<?= $featured_product->canonical_name ?>.<?= $featured_product->profile ?>" alt="1" />
-											</a>
-										</div>
-										<ul class="text-center">
-											<a href="#"><li><i class="fa fa-facebook"></i></li></a>
-											<a href="#"><li><i class="fa fa-twitter"></i></li></a>
-											<a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+									<div class="gp_products_item_caption">
+
+										<ul class="gp_products_caption_name">
+											<li><a href="<?= Yii::$app->homeUrl . 'product_detail/' . $featured_product->canonical_name ?>"><?= $featured_product->product_name ?></a></li>
+											<?php $product_type = Fregrance::findOne($featured_product->product_type); ?>
+											<li><a href="<?= Yii::$app->homeUrl . 'product_detail/' . $featured_product->canonical_name ?>"><?= $product_type->name; ?></a></li>
 										</ul>
-										<div class="gp_products_item_caption">
-											<ul class="gp_products_caption_name">
-												<li><a href="#"><?= $featured_product->product_name ?></a></li>
+										<ul class="gp_products_caption_rating">
+											<?php
+											if ($featured_product->offer_price != "0") {
+												$percentage = round(100 - (($featured_product->offer_price / $featured_product->price) * 100));
+												?>
+												<li>AED <?= $featured_product->offer_price; ?></li>
+												<li class="center">AED <?= $featured_product->price; ?></li>
+												<li class="pull-right"><a href="#">(<?= $percentage ?>%OFF)</a></li>
+											<?php } else {
+												?>
+												<li class="center">AED <?= $featured_product->price; ?></li>
+											<?php } ?>
+										</ul>
 
-												<?php $product_type = Fregrance::findOne($featured_product->product_type); ?>
-												<li><a href="#"><?= $product_type->name; ?></a></li>
-											</ul>
-											<ul class="gp_products_caption_rating">
-												<li>AED 200.00</li>
-												<li class="center">AED 400.00</li>
-												<li class="pull-right"><a href="#">(40%OFF)</a></li>
-											</ul>
-										</div>
 									</div>
 								</div>
 							</div>
-							<?php
-							$index++;
-						}
-						?>
-
-					</div>
-
-					<!--======= Navigation Buttons =========-->
-
-					<!--======= Left Button =========-->
-					<a class="left carousel-control gp_products_carousel_control_left" href="#adv_gp_products_4_columns_carousel" role="button" data-slide="prev">
-						<span class="fa fa-angle-left gp_products_carousel_control_icons" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a>
-
-					<!--======= Right Button =========-->
-					<a class="right carousel-control gp_products_carousel_control_right" href="#adv_gp_products_4_columns_carousel" role="button" data-slide="next">
-						<span class="fa fa-angle-right gp_products_carousel_control_icons" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-
-				</div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
+						</div>
+					<?php } ?>
+				</div>
 			</div>
+			<!--			<div class="product-slider">
+							<div id="adv_gp_products_4_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
+								========= Wrapper for slides =========
+								<div class="carousel-inner" role="listbox">
+			<?php
+			$index = 0;
+
+			foreach ($featured_products as $featured_product) {
+				?>
+												<div class="item <?= $index == 0 ? "active" : "" ?>">
+													<div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
+														<div class="gp_products_inner">
+															<div class="gp_products_item_image">
+																<a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
+																	<img src="<?= Yii::$app->homeUrl; ?>uploads/product/<?= $featured_product->id ?>/profile/<?= $featured_product->canonical_name ?>.<?= $featured_product->profile ?>" alt="1" />
+																</a>
+																<div class="img-overlay"></div>
+															</div>
+															<ul class="text-center">
+																<a href="#"><li><i class="fa fa-facebook"></i></li></a>
+																<a href="#"><li><i class="fa fa-twitter"></i></li></a>
+																<a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+															</ul>
+															<div class="gp_products_item_caption">
+																<ul class="gp_products_caption_name">
+																	<li><a href="#"><?= $featured_product->product_name ?></a></li>
+
+				<?php $product_type = Fregrance::findOne($featured_product->product_type); ?>
+																	<li><a href="#"><?= $product_type->name; ?></a></li>
+																</ul>
+																<ul class="gp_products_caption_rating">
+																	<li>AED 200.00</li>
+																	<li class="center">AED 400.00</li>
+																	<li class="pull-right"><a href="#">(40%OFF)</a></li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+				<?php
+				$index++;
+			}
+			?>
+
+								</div>
+
+								======= Navigation Buttons =========
+
+								======= Left Button =========
+								<a class="left carousel-control gp_products_carousel_control_left" href="#adv_gp_products_4_columns_carousel" role="button" data-slide="prev">
+									<span class="fa fa-angle-left gp_products_carousel_control_icons" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
+								</a>
+
+								======= Right Button =========
+								<a class="right carousel-control gp_products_carousel_control_right" href="#adv_gp_products_4_columns_carousel" role="button" data-slide="next">
+									<span class="fa fa-angle-right gp_products_carousel_control_icons" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+
+							</div> *-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*
+						</div>-->
 
 		</div>
 		<?php
@@ -209,6 +269,7 @@ $youtube_video = CmsOthers::find()->where(['id' => 7])->one();
 									<a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
 										<img src="<?= Yii::$app->homeUrl; ?>images/featured-products/1.png" alt="1" />
 									</a>
+									<div class="img-overlay"></div>
 								</div>
 								<ul class="text-center">
 									<a href="#"><li><i class="fa fa-facebook"></i></li></a>
@@ -342,7 +403,6 @@ $youtube_video = CmsOthers::find()->where(['id' => 7])->one();
 		<div class="container">
 			<div class="row">
 				<?php
-				$from_blogs = common\models\FromOurBlog::find()->where(['status' => 1])->all();
 				foreach ($from_blogs as $from_blogs) {
 					?>
 					<div class="blog-box col-md-4 col-sm-4  col-xs-12">
@@ -354,7 +414,7 @@ $youtube_video = CmsOthers::find()->where(['id' => 7])->one();
 							<li><i class="fa fa-calendar-check-o" aria-hidden="true"></i><?= date('M d Y', strtotime($from_blogs->blog_date)) ?></li>
 						</ul>
 						<p><?= substr($from_blogs->content, 0, 150); ?></p>
-						<?php // Html::a('know more', ['blog-detail?id=' . $from_blogs->id]) ?>
+						<?php // Html::a('know more', ['blog-detail?id=' . $from_blogs->id])   ?>
 						<?= Html::a('know more', ['blog-detail', 'id' => $from_blogs->id]) ?>
 					</div>
 					<?php

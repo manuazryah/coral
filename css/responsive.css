@@ -198,14 +198,14 @@
 	#about-page .chairmans-name{
 		margin: 0 auto;
 		text-align: center;
-		padding-top: 60px;
+		padding-top: 0px;
 		position: initial;
 	}
 	#about-page .chairmans-name p{
 		text-align: center;
 	}
 	#about-page .chairmans-msg{
-		margin-top: 40px;
+		margin-top: 50px;
 		padding: 0px;
 		text-align: left;
 		padding-left: 117px;
@@ -476,11 +476,11 @@
 	#about-page .chairmans-name{
 		margin: 0 auto;
 		text-align: center;
-		padding-top: 60px;
+		padding-top: 0px;
 		position: initial;
 	}
 	#about-page .chairmans-msg{
-		margin-top: 40px;
+		margin-top: 50px;
 		padding: 0px;
 		text-align: left;
 		padding-left: 117px;
@@ -556,7 +556,12 @@
 	.news-block-one .inner-box .image {
 		padding-bottom: 20px;
 	}
-
+	#sticky-header.fixed #header nav .navbar-right {
+		top: 50px;
+	}
+	#sticky-header.fixed #header .logo {
+		height: 75px;
+	}
 }
 @media (max-width: 768px) and (min-width:458px){
 	.private-label .private-cntnt {
@@ -615,6 +620,9 @@
 	#header .shopping-cart{
 		top: 80px;
 		right: 45px;
+	}
+	#nav-header .navbar-inverse .navbar-nav>.active>a:after{
+		display: none;
 	}
 	#nav-header .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
 		text-align: right;
@@ -846,11 +854,11 @@
 	#about-page .chairmans-name{
 		margin: 0 auto;
 		text-align: center;
-		padding-top: 60px;
+		padding-top: 0px;
 		position: initial;
 	}
 	#about-page .chairmans-msg{
-		margin-top: 40px;
+		margin-top: 50px;
 		padding: 0px;
 		text-align: left;
 		padding-left: 117px;
@@ -946,6 +954,25 @@
 	.news-block-one .inner-box .image {
 		padding-bottom: 20px;
 	}
+	#header .right .navbar-right li:nth-child(3):after {
+		content: " | ";
+		color: #8c8c8c;
+	}
+	#radioBtn .btn-primary {
+		border: 1px solid #b5e1e0;
+		font-size: 14px;
+		font-weight: 100;
+		color: #515452;
+		width: 100%;
+		margin: 2px 0;
+	}
+	#sticky-header.fixed #header nav .navbar-right {
+		top: 50px;
+	}
+	#sticky-header.fixed #header .logo {
+		height: 75px;
+		width: 100%;
+	}
 }
 @media(max-width:458px){
 	.top-nav ul li:first-child a{
@@ -973,15 +1000,16 @@
 	#top-header .top-green{
 		padding: 5px 5px;
 	}
-	#top-header .right{
+	/*    #top-header .right{
 		top: 10px;
-	}
+	    }*/
 	#header .search{
 		top: 0px;
+		display: none;
 	}
 	#header nav .navbar-right{
 		right: 60px;
-		top: 50px;
+		top: 35px;
 	}
 	#nav-header .navbar{
 		min-height: 0px;
@@ -994,15 +1022,16 @@
 		font-size: 13px;
 	}
 	#header .navbar-toggle{
-		margin-right: 20px;
+		margin-right: 0px;
+		top: 20px;
 	}
 	#header .shopping-cart{
 		top: 80px;
 		right: 45px;
 	}
-	#header #logo{
+	/*    #header #logo{
 		width: 100%;
-	}
+	    }*/
 	#nav-header .navbar-nav{
 		margin: 0 auto;
 		text-align: center;
@@ -1014,7 +1043,7 @@
 	/*    #nav-header .navbar-nav li{
 		paddding: 0px;
 	    }*/
-	#header .right{
+	/*    #header .right{
 		margin: 0 auto;
 		text-align: center;
 		float: none;
@@ -1023,6 +1052,9 @@
 		right: 0px;
 		display: inline-flex;
 		width: 100%;
+	    }*/
+	#nav-header .navbar-inverse .navbar-nav>.active>a:after{
+		display: none;
 	}
 	#nav-header .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
 		text-align: right;
@@ -1349,14 +1381,14 @@
 	#about-page .chairmans-name{
 		margin: 0 auto;
 		text-align: center;
-		padding-top: 60px;
+		padding-top: 0px;
 		position: initial;
 	}
 	#about-page .chairmans-name p{
 		text-align: center;
 	}
 	#about-page .chairmans-msg{
-		margin-top: 40px;
+		margin-top: 50px;
 		padding: 0px;
 		text-align: left;
 		padding-left: 117px;
@@ -1463,5 +1495,35 @@
 		text-align: center;
 		padding: 0px !important;
 		margin-top: 15px;
+	}
+	#header .right .navbar-right li:nth-child(3):after {
+		content: " | ";
+		color: #8c8c8c;
+	}
+	#radioBtn .btn-primary {
+		border: 1px solid #b5e1e0;
+		font-size: 14px;
+		font-weight: 100;
+		color: #515452;
+		width: 100%;
+		margin: 2px 0;
+		background: #edf7f5;
+	}
+	#radioBtn .active {
+		background-color: #edf7f5;
+		border-color: #61b346;
+	}
+	.breadcrumb .path{
+		display: none;
+	}
+	.breadcrumb{
+		margin: 25px 0;
+	}
+	#sticky-header.fixed #header nav .navbar-right {
+		top: 50px;
+	}
+	#sticky-header.fixed #header .logo {
+		height: 75px;
+		width: 100%;
 	}
 }

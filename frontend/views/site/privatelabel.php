@@ -37,13 +37,14 @@ use yii\helpers\Html;
 			<div class="row">
 				<div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 right-box">
 					<?php
+					$i = 1;
 					foreach ($how_it_works as $how_it_work) {
 						?>
 						<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12 marg-bttm-30">
 							<div class="step-1 text-left md-text-center sm-text-center xs-text-center">
 								<div class="col-lg-2">
 									<div class="icon">
-										<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+										<i class="fa " aria-hidden="true"><?= $i; ?></i>
 									</div>
 								</div>
 								<div class="col-lg-10">
@@ -52,7 +53,9 @@ use yii\helpers\Html;
 								</div>
 							</div>
 						</div>
-					<?php }
+						<?php
+						$i++;
+					}
 					?>
 
 				</div>
@@ -61,7 +64,7 @@ use yii\helpers\Html;
 		</div>
 	</div>
 
-	<div class="benefits">
+	<div class="benefits" style="background-image: url(images/privatelabel-benifits-bg.jpg)">
 		<div class="container">
 			<div class="row">
 				<h5 class="heading text-center">BENEFITS</h5>
