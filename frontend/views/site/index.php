@@ -175,36 +175,36 @@ $youtube_video = CmsOthers::find()->where(['id' => 7])->one();
 
                         foreach ($featured_products as $featured_product) {
                                 ?>
-                                                                                                                                <div class="item <?= $index == 0 ? "active" : "" ?>">
-                                                                                                                                        <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                                                                                                                                <div class="gp_products_inner">
-                                                                                                                                                        <div class="gp_products_item_image">
-                                                                                                                                                                <a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
-                                                                                                                                                                        <img src="<?= Yii::$app->homeUrl; ?>uploads/product/<?= $featured_product->id ?>/profile/<?= $featured_product->canonical_name ?>.<?= $featured_product->profile ?>" alt="1" />
-                                                                                                                                                                </a>
-                                                                                                                                                                <div class="img-overlay"></div>
-                                                                                                                                                        </div>
-                                                                                                                                                        <ul class="text-center">
-                                                                                                                                                                <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                                                                                                                                                <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                                                                                                                                                <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                                                                                                                                        </ul>
-                                                                                                                                                        <div class="gp_products_item_caption">
-                                                                                                                                                                <ul class="gp_products_caption_name">
-                                                                                                                                                                        <li><a href="#"><?= $featured_product->product_name ?></a></li>
+                                                                                                                                                                                                                        <div class="item <?= $index == 0 ? "active" : "" ?>">
+                                                                                                                                                                                                                        <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
+                                                                                                                                                                                                                        <div class="gp_products_inner">
+                                                                                                                                                                                                                        <div class="gp_products_item_image">
+                                                                                                                                                                                                                        <a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
+                                                                                                                                                                                                                        <img src="<?= Yii::$app->homeUrl; ?>uploads/product/<?= $featured_product->id ?>/profile/<?= $featured_product->canonical_name ?>.<?= $featured_product->profile ?>" alt="1" />
+                                                                                                                                                                                                                        </a>
+                                                                                                                                                                                                                        <div class="img-overlay"></div>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                        <ul class="text-center">
+                                                                                                                                                                                                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                                                                                                                                                                                                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                                                                                                                                                                                                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                        <div class="gp_products_item_caption">
+                                                                                                                                                                                                                        <ul class="gp_products_caption_name">
+                                                                                                                                                                                                                        <li><a href="#"><?= $featured_product->product_name ?></a></li>
 
                                 <?php $product_type = Fregrance::findOne($featured_product->product_type); ?>
-                                                                                                                                                                        <li><a href="#"><?= $product_type->name; ?></a></li>
-                                                                                                                                                                </ul>
-                                                                                                                                                                <ul class="gp_products_caption_rating">
-                                                                                                                                                                        <li>AED 200.00</li>
-                                                                                                                                                                        <li class="center">AED 400.00</li>
-                                                                                                                                                                        <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                                                                                                                                                </ul>
-                                                                                                                                                        </div>
-                                                                                                                                                </div>
-                                                                                                                                        </div>
-                                                                                                                                </div>
+                                                                                                                                                                                                                        <li><a href="#"><?= $product_type->name; ?></a></li>
+                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                        <ul class="gp_products_caption_rating">
+                                                                                                                                                                                                                        <li>AED 200.00</li>
+                                                                                                                                                                                                                        <li class="center">AED 400.00</li>
+                                                                                                                                                                                                                        <li class="pull-right"><a href="#">(40%OFF)</a></li>
+                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                        </div>
                                 <?php
                                 $index++;
                         }
@@ -248,150 +248,96 @@ $youtube_video = CmsOthers::find()->where(['id' => 7])->one();
 
                 </div>
         </div>
+        <?php if (count($international_products) > 0) { ?>
+                <div class="international-brands sec-pad">
+                        <h1>international brands</h1>
+                        <div class="product-slider">
+                                <div id="adv_gp_products_7_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
+                                        <!--========= Wrapper for slides =========-->
+                                        <div class="carousel-inner" role="listbox">
 
-        <div class="international-brands sec-pad">
-                <h1>international brands</h1>
-                <div class="product-slider">
-                        <div id="adv_gp_products_7_columns_carousel" class="carousel slide four_shows_one_move gp_products_carousel_wrapper" data-ride="carousel" data-interval="2000">
-                                <!--========= Wrapper for slides =========-->
-                                <div class="carousel-inner" role="listbox">
-
-                                        <!--========= 1st slide =========-->
-                                        <div class="item active">
-                                                <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                                        <div class="gp_products_inner">
-                                                                <div class="gp_products_item_image">
-                                                                        <a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
-                                                                                <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/1.png" alt="1" />
-                                                                        </a>
-                                                                        <div class="img-overlay"></div>
-                                                                </div>
-                                                                <ul class="text-center">
-                                                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                                                </ul>
-                                                                <div class="gp_products_item_caption">
-                                                                        <ul class="gp_products_caption_name">
-                                                                                <li><a href="#">Waves</a></li>
-                                                                                <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                                                        </ul>
-                                                                        <ul class="gp_products_caption_rating">
-                                                                                <li>AED 200.00</li>
-                                                                                <li class="center">AED 400.00</li>
-                                                                                <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                                                        </ul>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-                                        <!--========= 2nd slide =========-->
-                                        <div class="item">
-                                                <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                                        <div class="gp_products_inner">
-                                                                <div class="gp_products_item_image">
-                                                                        <a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
-                                                                                <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/2.png" alt="2" />
-                                                                        </a>
-                                                                </div>
-                                                                <ul class="text-center">
-                                                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                                                </ul>
-                                                                <div class="gp_products_item_caption">
-                                                                        <ul class="gp_products_caption_name">
-                                                                                <li><a href="#">Waves</a></li>
-                                                                                <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                                                        </ul>
-                                                                        <ul class="gp_products_caption_rating">
-                                                                                <li>AED 200.00</li>
-                                                                                <li>AED 400.00</li>
-                                                                                <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                                                        </ul>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-                                        <!--========= 3rd slide =========-->
-                                        <div class="item">
-                                                <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                                        <div class="gp_products_inner">
-                                                                <div class="gp_products_item_image">
-                                                                        <a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
-                                                                                <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/3.png" alt="3" />
-                                                                        </a>
-                                                                </div>
-                                                                <ul class="text-center">
-                                                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                                                </ul>
-                                                                <div class="gp_products_item_caption">
-                                                                        <ul class="gp_products_caption_name">
-                                                                                <li><a href="#">Waves</a></li>
-                                                                                <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                                                        </ul>
-                                                                        <ul class="gp_products_caption_rating">
-                                                                                <li>AED 200.00</li>
-                                                                                <li>AED 400.00</li>
-                                                                                <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                                                        </ul>
+                                                <?php
+                                                $z = 0;
+                                                foreach ($international_products as $international) {
+                                                        $z++;
+                                                        ?>
+                                                        <div class="item <?php
+                                                        if ($z == 1) {
+                                                                echo ' active';
+                                                        }
+                                                        ?>">
+                                                                <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
+                                                                        <div class="gp_products_inner">
+                                                                                <div class="gp_products_item_image">
+                                                                                        <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $international->canonical_name ?>">
+                                                                                                <?php
+                                                                                                $product_images = Yii::$app->basePath . '/../uploads/product/' . $international->id . '/profile/' . $international->canonical_name . '.' . $international->profile;
+                                                                                                if (file_exists($product_images)) {
+                                                                                                        ?>
+                                                                                                        <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $international->id . '/profile/' . $international->canonical_name . '.' . $international->profile ?>" height="100%" alt="1" />
+                                                                                                        <?php
+                                                                                                } else {
+                                                                                                        ?>
+                                                                                                        <img src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_perfume.png' ?>" height="100%" alt="1" />
+                                                                                                <?php }
+                                                                                                ?>
+                                                                                        </a>
+                                                                                        <div class="img-overlay"></div>
+                                                                                </div>
+                                                                                <ul class="text-center">
+                                                                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
+                                                                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
+                                                                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                                                                                </ul>
+                                                                                <div class="gp_products_item_caption">
+                                                                                        <ul class="gp_products_caption_name">
+                                                                                                <li><a href="#"><?= $international->product_name ?></a></li>
+                                                                                                <?php $product_type = Fregrance::findOne($international->product_type); ?>
+                                                                                                <li><a href="#"><?= $product_type->name; ?></a></li>
+                                                                                        </ul>
+                                                                                        <ul class="gp_products_caption_rating">
+                                                                                                <?php
+                                                                                                if ($val->offer_price != "0") {
+                                                                                                        $percentage = round(100 - (($international->offer_price / $international->price) * 100));
+                                                                                                        ?>
+                                                                                                        <li>AED <?= $international->offer_price; ?></li>
+                                                                                                        <li class="center">AED <?= $international->price; ?></li>
+                                                                                                        <li class="pull-right"><a href="#">( <?= $percentage ?>%OFF)</a></li>
+                                                                                                <?php } else {
+                                                                                                        ?>
+                                                                                                        <li class="center">AED <?= $international->price; ?></li>
+                                                                                                <?php } ?>
+                                                                                        </ul>
+                                                                                </div>
+                                                                        </div>
                                                                 </div>
                                                         </div>
-                                                </div>
+                                                <?php } ?>
+
+
+
+
+
                                         </div>
 
-                                        <!--========= 4th slide =========-->
-                                        <div class="item">
-                                                <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                                        <div class="gp_products_inner">
-                                                                <div class="gp_products_item_image">
-                                                                        <a href="<?= Yii::$app->homeUrl; ?>site/product-detail">
-                                                                                <img src="<?= Yii::$app->homeUrl; ?>images/featured-products/4.png" alt="4" />
-                                                                        </a>
-                                                                </div>
-                                                                <ul class="text-center">
-                                                                        <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                                                        <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                                                        <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
-                                                                </ul>
-                                                                <div class="gp_products_item_caption">
-                                                                        <ul class="gp_products_caption_name">
-                                                                                <li><a href="#">Waves</a></li>
-                                                                                <li><a href="#">Davidoff Men Cool Water Natural Spray</a></li>
-                                                                        </ul>
-                                                                        <ul class="gp_products_caption_rating">
-                                                                                <li>AED 200.00</li>
-                                                                                <li>AED 400.00</li>
-                                                                                <li class="pull-right"><a href="#">(40%OFF)</a></li>
-                                                                        </ul>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
+                                        <!--======= Navigation Buttons =========-->
 
-                                </div>
+                                        <!--======= Left Button =========-->
+                                        <a class="left carousel-control gp_products_carousel_control_left" href="#adv_gp_products_7_columns_carousel" role="button" data-slide="prev">
+                                                <span class="fa fa-angle-left gp_products_carousel_control_icons" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                        </a>
 
-                                <!--======= Navigation Buttons =========-->
+                                        <!--======= Right Button =========-->
+                                        <a class="right carousel-control gp_products_carousel_control_right" href="#adv_gp_products_7_columns_carousel" role="button" data-slide="next">
+                                                <span class="fa fa-angle-right gp_products_carousel_control_icons" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                        </a>
 
-                                <!--======= Left Button =========-->
-                                <a class="left carousel-control gp_products_carousel_control_left" href="#adv_gp_products_7_columns_carousel" role="button" data-slide="prev">
-                                        <span class="fa fa-angle-left gp_products_carousel_control_icons" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                </a>
-
-                                <!--======= Right Button =========-->
-                                <a class="right carousel-control gp_products_carousel_control_right" href="#adv_gp_products_7_columns_carousel" role="button" data-slide="next">
-                                        <span class="fa fa-angle-right gp_products_carousel_control_icons" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                </a>
-
-                        </div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
+                                </div> <!--*-*-*-*-*-*-*-*-*-*- END BOOTSTRAP CAROUSEL *-*-*-*-*-*-*-*-*-*-->
+                        </div>
                 </div>
-        </div>
+        <?php } ?>
 
         <div class="blog sec-pad">
                 <h1>From our blog</h1>
