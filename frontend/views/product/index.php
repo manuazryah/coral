@@ -49,16 +49,26 @@ $current_action = Yii::$app->controller->action->id; // controller action id
 		<div class="input-group gender-selection">
 			<div id="radioBtn" class="btn-group">
 				<span>Type:</span>
-				<a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="Y" id="0" pro_cat="<?php
+				<a class="btn btn-primary btn-sm <?= $_GET['type'] == 1 && $_GET['type'] != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
 				if (isset($id)) {
 					echo $id;
 				}
-				?>" main-categ="<?= $current_action == 'international' ? '2' : '1' ?>">Women</a>
-				<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="1" pro_cat="<?php
+				?>" main-categ="<?= $main_categry ?>">Women</a>
+				<a class="btn btn-primary btn-sm <?= $_GET['type'] == 0 && $_GET['type'] != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
 				if (isset($id)) {
 					echo $id;
 				}
-				?>"main-categ="<?= $current_action == 'international' ? '2' : '1' ?>">Men</a>
+				?>"main-categ="<?= $main_categry ?>">Men</a>
+				<a class="btn btn-primary btn-sm <?= $_GET['type'] == 2 && $_GET['type'] != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
+				if (isset($id)) {
+					echo $id;
+				}
+				?>"main-categ="<?= $main_categry ?>">Unisex</a>
+				<a class="btn btn-primary btn-sm <?= $_GET['type'] == "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
+				if (isset($id)) {
+					echo $id;
+				}
+				?>"main-categ="<?= $main_categry ?>">All</a>
 			</div>
 		</div>
 	</div>
@@ -68,7 +78,7 @@ $current_action = Yii::$app->controller->action->id; // controller action id
 				<div class="panel-body lit-blue">
 					<div class="slide-container">
 						<div class="list-group" id="mg-multisidetabs">
-							<a href="#" class="list-group-item active-head "><span>Other Products</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
+							<a href="#" class="list-group-item active-head "><span><?= $main_categry == 1 ? "Our Products" : "Inetrnational Products " ?></span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
 							<div class="panel list-sub" style="display: block">
 								<div class="panel-body">
 									<div class="list-group">
@@ -84,19 +94,12 @@ $current_action = Yii::$app->controller->action->id; // controller action id
 												$active_class = 'list-group-item';
 											}
 											?>
-											<?php
-											if ($current_action == 'international') {
-												?>
-												<?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/international', 'id' => $category->category_code], ['class' => $active_class]) ?>
 
-											<?php } elseif ($current_action == 'index') {
-												?>
-												<?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $category->category_code], ['class' => $active_class])
-												?>
-											<?php }
+											<?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $category->category_code, 'category' => $main_categry], ['class' => $active_class])
 											?>
 
-																								<!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
+
+																										<!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
 										<?php }
 										?>
 									</div>

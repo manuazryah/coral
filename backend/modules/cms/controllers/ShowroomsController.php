@@ -62,7 +62,7 @@ class ShowroomsController extends Controller {
 		}
 
 		if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->SaveExtension($model, $image_)) {
-			return $this->redirect('index');
+
 			if ($model->validate() && $model->save() && $this->SaveImage($model)) {
 				$model = new Showrooms();
 				Yii::$app->getSession()->setFlash('success', "Updated Successfully");

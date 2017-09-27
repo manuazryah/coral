@@ -20,49 +20,56 @@ class ProductController extends \yii\web\Controller {
 	 * @param category_code $id
 	 * @return mixed
 	 */
-	public function actionIndex($id = null, $type = null) {
+	public function actionIndex($id = null, $type = null, $category) {
 //        echo $id;
 //        exit;
 		$catag = Category::find()->where(['category_code' => $id])->one();
 		$searchModel = new ProductSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$dataProvider->query->andWhere(['main_category' => 1]);
+		$dataProvider->query->andWhere(['main_category' => $category]);
 		if (!empty($id)) {
 			$dataProvider->query->andWhere(['category' => $catag->id]);
 		}
-		if (isset(Yii::$app->session['gender_search'])) {
-			$dataProvider->query->andWhere(['gender_type' => Yii::$app->session['gender_search']]);
-		}
 
-		if (($type == 0 && $type != NULL) || ($type == 1)) {
+		if ((!empty($type) && $type == 0) || $type != "") {
 			$dataProvider->query->andWhere(['gender_type' => $type]);
+		} else {
+//			echo "sd";
+//			exit;
 		}
-		$categories = Category::find()->where(['status' => 1])->all();
+//		if (isset(Yii::$app->session['gender_search'])) {
+//			$dataProvider->query->andWhere(['gender_type' => Yii::$app->session['gender_search']]);
+//		}
+//		if (($type == 0 && $type != NULL) || ($type == 1)) {
+//			$dataProvider->query->andWhere(['gender_type' => $type]);
+//		}
+		$categories = Category::find()->where(['status' => 1, 'main_category' => $category])->all();
 
 		return $this->render('index', [
 			    'searchModel' => $searchModel,
 			    'dataProvider' => $dataProvider,
 			    'categories' => $categories,
 			    'catag' => $catag,
+			    'main_categry' => $category,
 			    'id' => $id,
 		]);
 	}
 
-	public function actionInternational($id = null, $type = null) {
-		$catag = Category::find()->where(['category_code' => $id])->one();
-		$categories = Category::find()->where(['status' => 1])->all();
-		$searchModel = new ProductSearch();
-		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$dataProvider->query->andWhere(['main_category' => 2]);
-		if (!empty($id)) {
-			$dataProvider->query->andWhere(['category' => $catag->id]);
-		}
-		return $this->render('index', [
-			    'categories' => $categories,
-			    'dataProvider' => $dataProvider,
-			    'id' => $id,
-		]);
-	}
+//	public function actionInternational($id = null, $type = null) {
+//		$catag = Category::find()->where(['category_code' => $id])->one();
+//		$categories = Category::find()->where(['status' => 1])->all();
+//		$searchModel = new ProductSearch();
+//		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//		$dataProvider->query->andWhere(['main_category' => 2]);
+//		if (!empty($id)) {
+//			$dataProvider->query->andWhere(['category' => $catag->id]);
+//		}
+//		return $this->render('index', [
+//			    'categories' => $categories,
+//			    'dataProvider' => $dataProvider,
+//			    'id' => $id,
+//		]);
+//	}
 
 	public function actionCategory($id) {
 		$searchModel = new ProductSearch();
@@ -262,8 +269,9 @@ class ProductController extends \yii\web\Controller {
 		if (Yii::$app->request->isAjax) {
 
 			$gender = $_POST['gender'];
-			Yii::$app->session['gender_search'] = $gender;
-			if (isset(Yii::$app->session['gender_search'])) {
+
+			//Yii::$app->session['gender_search'] = $gender;
+			if (!empty($gender) || $gender != "") {
 				echo 1;
 				exit;
 			} else {

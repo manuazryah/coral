@@ -9,6 +9,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use common\models\CmsOthers;
+use common\models\Category;
 
 AppAsset::register($this);
 ?>
@@ -98,7 +99,7 @@ and open the template in the editor.
 						</div>
 						<?= Html::endForm() ?>
 						<div class="col-md-2 col-sm-4 col-xs-4" id="logo">
-							<?= Html::a('<div class="logo"></div>', ['index'], ['class' => '']) ?>
+							<?= Html::a('<div class="logo"></div>', ['site/index'], ['class' => '']) ?>
 						</div>
 						<div class="col-md-5 col-sm-8 col-xs-8 right">
 							<nav>
@@ -184,13 +185,15 @@ and open the template in the editor.
 						<div class="container">
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<?php
-								$catag = common\models\Category::find()->one();
+								$category_main = $_GET['category'];
+								$catag = Category::find()->where(['status' => 1, 'main_category' => 1])->one();
+								$catag_2 = Category::find()->where(['status' => 1, 'main_category' => 2])->one();
 								?>
 								<ul class="nav navbar-nav">
 									<li class="<?= $action == 'site/index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
 									<li class="<?= $action == 'site/about' ? 'active' : '' ?>"><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
-									<li class="<?= $action == 'product/index' ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code], ['class' => '']) ?></li>
-									<li class="<?= $action == 'product/international' ? 'active' : '' ?>"><?= Html::a('<span>international products</span>', ['/product/international', 'id' => $catag->category_code], ['class' => '']) ?></li>
+									<li class="<?= $category_main == 1 ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code, 'category' => 1], ['class' => '']) ?></li>
+									<li class="<?= $category_main == 2 ? 'active' : '' ?>"><?= Html::a('<span>international products</span>', ['/product/index', 'id' => $catag_2->category_code, 'category' => 2], ['class' => '']) ?></li>
 									<li class="<?= $action == 'site/private-label' ? 'active' : '' ?>"><?= Html::a('<span>private label</span>', ['/site/private-label'], ['class' => '']) ?></li>
 									<li class="<?= $action == 'site/showrooms' ? 'active' : '' ?>"><?= Html::a('<span>showrooms</span>', ['/site/showrooms'], ['class' => '']) ?></li>
 									<li class="<?= $action == 'site/contact' ? 'active' : '' ?>"><?= Html::a('<span>contact us</span>', ['/site/contact'], ['class' => '']) ?></li>
