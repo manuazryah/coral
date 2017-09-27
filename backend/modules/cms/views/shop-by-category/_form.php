@@ -12,19 +12,19 @@ use yii\widgets\ActiveForm;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'link')->dropDownList(['' => '--Select--', '0' => 'Men', '1' => 'Women', '2' => 'All']) ?>
+        <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
         </div>
         <?php
         $label = '';
         if ($model->id == 1) {
-                $label = 'Image (633*580)';
+                $label = 'Image (634*582)';
         } else if ($model->id == 2) {
-                $label = 'Image (632*272)';
+                $label = 'Image (634*274)';
         } else if ($model->id == 3) {
-                $label = 'Image (632*272)';
+                $label = 'Image (634*274)';
         } else if ($model->id == 4) {
-                $label = 'Image (1267*307)';
+                $label = 'Image (1268*309)';
         }
         ?>
         <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'image')->fileInput()->label($label) ?>

@@ -2,10 +2,16 @@
         <?php
         $p = 0;
         foreach ($products as $value) {
+                if (isset($value->tag_name)) {
+                        $name = $value->tag_name;
+                } else if (isset($value->product_name)) {
+                        $name = $value->product_name;
+                } else if (isset($value->category)) {
+                        $name = $value->category;
+                }
                 $p++;
-                $product_detail = common\models\Product::findOne($value);
                 ?>
-                <li class="<?= $p == 1 ? 'search-selected' : '' ?>" id="<?= $product_detail->product_name ?>"><?= $product_detail->product_name ?></li>
+                <li class="<?= $p == 1 ? 'search-selected' : '' ?>" id="<?= $name ?>"><?= $name ?></li>
         <?php } ?>
 </ul>
 

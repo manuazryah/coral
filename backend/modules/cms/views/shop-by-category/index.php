@@ -42,10 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-md-8">
                         <div class="panel panel-default">
                                 <div class="panel-body table-responsive">
-                                        <button class="btn btn-white" id="search-option" style="float: right;">
-                                                <i class="linecons-search"></i>
-                                                <span>Search</span>
-                                        </button>
+
 
                                         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -67,17 +64,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 ],
                                                     [
                                                     'attribute' => 'link',
-                                                    'filter' => ['0' => 'Men', '1' => 'Women', '2' => 'All'],
-                                                    'value' => function($data) {
-
-                                                            if ($data->link == 0) {
-                                                                    return 'Men';
-                                                            } else if ($data->link == 1) {
-                                                                    return 'Women';
-                                                            } else if ($data->link == 2) {
-                                                                    return 'All';
-                                                            }
-                                                    }
+                                                //   'filter' => ['0' => 'Men', '1' => 'Women', '2' => 'All'],
+//                                                    'value' => function($data) {
+//
+//                                                            if ($data->link == 0) {
+//                                                                    return 'Men';
+//                                                            } else if ($data->link == 1) {
+//                                                                    return 'Women';
+//                                                            } else if ($data->link == 2) {
+//                                                                    return 'All';
+//                                                            }
+//                                                    }
                                                 ],
 //
                                                 [

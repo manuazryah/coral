@@ -10,7 +10,7 @@ return [
     'login-signup' => 'site/login-signup',
     'terms-condition' => 'site/terms-condition',
     'privacy-policy' => 'site/privacy-policy',
-    'return-policy' => 'site/return-policy',
+    'delivery-information' => 'site/return-policy',
     'contact' => 'site/contact',
     'faq' => 'site/faq',
     'product_detail/<product:\w+(-\w+)*>' => 'product/product_detail',
@@ -22,4 +22,5 @@ return [
     'contact-info' => 'myaccounts/user/update-contact-info',
     'coral-perfumes-blog-detail/<id>' => 'site/blog-detail',
     'coral-perfumes-blogs' => 'site/our-blog',
+    'product-search/<keyword:\w+(-\w+)*>' => 'product/search',
 ];
