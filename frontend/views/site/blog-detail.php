@@ -32,19 +32,19 @@ use yii\helpers\Html;
 				<!--                <div class="btn-box text-center">
 						    <a href="post-standard.html" class="theme-btn btn-style-two">Read More</a>
 						</div>-->
-				<div class="post-meta clearfix col-lg-12">
-					<div class="pull-left">
-						<ul class="social-icon-one">
-							<li class="share">Share:</li>
-							<li><a href="#"><span class="icon fa fa-twitter"></span></a></li>
-							<li><a href="#"><span class="icon fa fa-facebook"></span></a></li>
-							<li><a href="#"><span class="icon fa fa-pinterest-p"></span></a></li>
-						</ul>
-					</div>
-					<div class="pull-right" style="padding: 6px 0; padding-right: 40px;">
-						<div class="tags"><a href="#"><span>by</span> Jowanna</a> <a href="#">7 Comments</a></div>
-					</div>
-				</div>
+				<!--				<div class="post-meta clearfix col-lg-12">
+									<div class="pull-left">
+										<ul class="social-icon-one">
+											<li class="share">Share:</li>
+											<li><a href="#"><span class="icon fa fa-twitter"></span></a></li>
+											<li><a href="#"><span class="icon fa fa-facebook"></span></a></li>
+											<li><a href="#"><span class="icon fa fa-pinterest-p"></span></a></li>
+										</ul>
+									</div>
+									<div class="pull-right" style="padding: 6px 0; padding-right: 40px;">
+										<div class="tags"><a href="#"><span>by</span> Jowanna</a> <a href="#">7 Comments</a></div>
+									</div>
+								</div>-->
 			</div>
 		</div>
 	</div>

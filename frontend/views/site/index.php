@@ -164,7 +164,7 @@ $youtube_video = CmsOthers::find()->where(['id' => 7])->one();
 							</div>
 						</div>
 					<?php } ?>
-				<!--<button class="black"><?= Html::a('View more', ['product/index', 'featured' => 1]) ?></button>-->
+					<button class="black"><?= Html::a('View more', ['product/index', 'featured' => 1]) ?></button>
 				</div>
 			</div>
 			<!--			<div class="product-slider">

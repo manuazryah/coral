@@ -25,7 +25,8 @@ use yii\helpers\Html;
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" >
 					<div class="showrooms">
 
-						<div class="col-lg-12  col-md-12  col-sm-6  col-xs-12 pad-0">
+						<div class="col-lg-12  col-md-12  col-sm-6  col-xs-12 pad-0" style="min-height: 260px;
+						     max-height: 260px;">
 							<div class="content addr_p">
 								<h3><?= $showroom->title ?></h3>
 								<?= $showroom->address ?>

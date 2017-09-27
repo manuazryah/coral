@@ -49,28 +49,29 @@ $current_action = Yii::$app->controller->action->id; // controller action id
 		<div class="input-group gender-selection hidden-xs">
 			<div id="radioBtn" class="btn-group">
 				<span>Type:</span>
-				<a class="btn btn-primary btn-sm <?= $_GET['type'] == 1 && $_GET['type'] != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
+				<a class="btn btn-primary btn-sm <?= $type == 1 && $type != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
 				if (isset($id)) {
 					echo $id;
 				}
 				?>" main-categ="<?= $main_categry ?>">Women</a>
-				<a class="btn btn-primary btn-sm <?= $_GET['type'] == 0 && $_GET['type'] != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
+				<a class="btn btn-primary btn-sm <?= $type == 0 && $type != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
 				if (isset($id)) {
 					echo $id;
 				}
 				?>"main-categ="<?= $main_categry ?>">Men</a>
-				<a class="btn btn-primary btn-sm <?= $_GET['type'] == 2 && $_GET['type'] != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
+				<a class="btn btn-primary btn-sm <?= $type == 2 && $type != "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
 				if (isset($id)) {
 					echo $id;
 				}
 				?>"main-categ="<?= $main_categry ?>">Unisex</a>
-				<a class="btn btn-primary btn-sm <?= $_GET['type'] == "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
+				<a class="btn btn-primary btn-sm <?= $type == "" ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
 				if (isset($id)) {
 					echo $id;
 				}
 				?>"main-categ="<?= $main_categry ?>">All</a>
 			</div>
 		</div>
+
 		<div class="panel-body hidden-lg hidden-md hidden-sm filter col-xs-8" >
 			<a data-toggle="collapse" href="#collapse2">
 				<i class="fa fa-align-justify " aria-hidden="true"></i> Category
