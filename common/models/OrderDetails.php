@@ -38,7 +38,6 @@ class OrderDetails extends \yii\db\ActiveRecord
             [['master_id', 'product_id', 'quantity', 'status'], 'integer'],
             [['amount', 'rate'], 'number'],
             [['delivered_date', 'doc'], 'safe'],
-            [['order_id'], 'string', 'max' => 200],
         ];
     }
 

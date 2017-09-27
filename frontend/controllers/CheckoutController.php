@@ -52,10 +52,11 @@ class CheckoutController extends \yii\web\Controller {
     function orderbilling($bill_address) {
         $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
         $model1->bill_address_id = $bill_address;
+        $model1->status = 2;
         $model1->save();
-        if (Yii::$app->request->post()['UserAddress']['check']) {
+         if (isset(Yii::$app->request->post()['UserAddress']['check'])) {
             $model1->ship_address_id = $bill_address;
-            $model1->status = 2;
+            $model1->status = 3;
             $model1->save();
             $this->redirect(array('checkout/confirm'));
         } else {

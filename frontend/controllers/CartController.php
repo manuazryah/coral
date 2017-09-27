@@ -317,10 +317,11 @@ class CartController extends \yii\web\Controller {
             if ($model1->save()) {
                 $this->Updateorderid($model1->order_id);
                 return ['master_id' => $model1->id, 'order_id' => $model1->order_id];
-            } else {
-                var_dump($model1->getErrors());
-                exit;
             }
+//            else {
+//                var_dump($model1->getErrors());
+//                exit;
+//            }
         } else if (Yii::$app->session['temp_user']) {
             yii::$app->session['after_login'] = 'cart/proceed';
             $this->redirect(array('site/login'));
@@ -333,13 +334,14 @@ class CartController extends \yii\web\Controller {
             $check = OrderDetails::find()->where(['order_id' => $orders['order_id'], 'product_id' => $cart->product_id])->one();
             if (!empty($check)) {
                 $check->quantity = $cart->quantity;
-                if ($prod_details->offer_price != '') {
-                    $price = $prod_details->offer_price;
-                } else {
+                if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
                     $price = $prod_details->price;
+                } else {
+                    $price = $prod_details->offer_price;
                 }
                 $check->amount = $price;
                 $check->rate = ($cart->quantity) * ($price);
+                $check->status = '0';
                 $check->save();
             } else {
                 $model_prod = new OrderDetails;
@@ -347,14 +349,21 @@ class CartController extends \yii\web\Controller {
                 $model_prod->order_id = $orders['order_id'];
                 $model_prod->product_id = $cart->product_id;
                 $model_prod->quantity = $cart->quantity;
-                if ($prod_details->offer_price != '') {
-                    $price = $prod_details->offer_price;
-                } else {
+                if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
                     $price = $prod_details->price;
+                } else {
+                    $price = $prod_details->offer_price;
                 }
                 $model_prod->amount = $price;
                 $model_prod->rate = ($cart->quantity) * ($price);
-                $model_prod->save();
+                $model_prod->status = '0';
+                if ($model_prod->save()) {
+                    return TRUE;
+                }
+//                 else {
+//                var_dump($model_prod->getErrors());
+//                exit;
+//            }
             }
         }
     }
@@ -364,7 +373,7 @@ class CartController extends \yii\web\Controller {
         if (!empty($cart_contents)) {
             foreach ($cart_contents as $cart_content) {
                 $prod_details = Product::findOne($cart_content->product_id);
-                if ($prod_details->offer_price == '0') {
+                if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
                     $price = $prod_details->price;
                 } else {
                     $price = $prod_details->offer_price;
@@ -392,10 +401,10 @@ class CartController extends \yii\web\Controller {
         $subtotal = '0';
         foreach ($cart as $cart_item) {
             $product = Product::findOne($cart_item->product_id);
-            if ($product->offer_price != '') {
-                $price = $product->offer_price;
-            } else {
+            if ($product->offer_price == '0' || $product->offer_price == '') {
                 $price = $product->price;
+            } else {
+                $price = $product->offer_price;
             }
             $subtotal += ($price * $cart_item->quantity);
         }

@@ -21,6 +21,12 @@ use common\models\Settings;
             } else {
                 $image = Yii::$app->homeUrl . 'uploads/product/profile_thumb.png';
             }
+            if ($product->offer_price == '0' || $product->offer_price == '') {
+                $price = $product->price;
+            } else {
+                $price = $product->offer_price;
+            }
+            $total = $price * $cart->quantity;
             ?>
             <div class="media">
                 <a class="thumbnail col-lg-2 col-md-2 col-sm-2 col-xs-2" href="#"> <img class="media-object" src="<?= $image ?>"> </a>
@@ -30,15 +36,7 @@ use common\models\Settings;
                     <h5 class="brand-name"><a href="#"><?= $brand->brand; ?></a></h5>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="top: 15px; text-align: right; padding-right: 0;">
-                    <?php
-                    if ($product->offer_price == '0' || $product->offer_price == '') {
-                        $price = $product->price;
-                    } else {
-                        $price = $product->offer_price;
-                    }
-                    $total = $price * $cart->quantity;
-                    ?>
-                    <p class="price">AED <?= $total; ?></p>
+                    <p class="price">AED <?= $total ?></p>
                 </div>
             </div>
         <?php } ?>
