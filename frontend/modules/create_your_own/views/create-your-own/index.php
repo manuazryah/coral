@@ -182,16 +182,49 @@ use yii\helpers\Html;
             </fieldset>
 
             <!-- Notes-end -->
-
-            <fieldset>
-                <h2 class="fs-title">Personal Details</h2>
-                <h3 class="fs-subtitle">We will never sell it</h3>
-                <input type="text" name="fname" placeholder="First Name" />
-                <input type="text" name="lname" placeholder="Last Name" />
-                <input type="text" name="phone" placeholder="Phone" />
-                <textarea name="address" placeholder="Address"></textarea>
-                <input type="button" name="previous" class="previous action-button" value="Previous" />
-                <input type="submit" name="submit" class="submit action-button" value="Submit" />
+            <fieldset id="tab5">
+                <div class="hint-border">
+                    <div class="container hint">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
+                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="<?= Yii::$app->homeUrl; ?>images/create-your-own-arrw.png"/></button></a>
+                            <!--<input type="button" name="previous" class="previous action-button back" value="Previous" />-->
+                        </div>
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 hint-msg-box">
+                            <p class="hint-msg">Choose the flacon for your perfume.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="step_col_left">
+                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
+                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
+                        <span class="span2">Dynamic</span>
+                    </label>
+                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
+                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
+                        <span class="span2">Dynamic</span>
+                    </label>
+                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
+                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
+                        <span class="span2">Dynamic</span>
+                    </label>
+                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
+                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
+                        <span class="span2">Dynamic</span>
+                    </label>
+                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
+                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
+                        <span class="span2">Dynamic</span>
+                    </label>
+                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
+                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
+                        <span class="span2">Dynamic</span>
+                    </label>
+                </div>
+                <div class="step_col_right">
+                    <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="scent_image"/>
+                </div>
+                <input type="button" name="previous" class="previous prev action-button" value="Previous" />
+                <input type="button" name="next" class="next nxt action-button" value="Next" />
             </fieldset>
         </form>
     </div>
@@ -401,15 +434,15 @@ use yii\helpers\Html;
 
             var src_value = $(this).attr('data-val1');
             if (count < 6) {
-//                $.ajax({
-//                    type: 'POST',
-//                    cache: false,
-//                    async: false,
-//                    data: {data_val: this.value},
-//                    url: '<?= Yii::$app->homeUrl; ?>ajax/notes-session',
-//                    success: function (data) {
-//                    }
-//                });
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    async: false,
+                    data: {data_val: id},
+                    url: '<?= Yii::$app->homeUrl; ?>ajax/add-notes-session',
+                    success: function (data) {
+                    }
+                });
                 var item_count = parseInt($('#item-' + id).val());
                 var item_val = item_count + 1;
                 $('#' + attr_id + ' button').addClass('choose-grn');

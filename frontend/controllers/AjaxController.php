@@ -102,7 +102,33 @@ class AjaxController extends \yii\web\Controller {
     }
 
     /*
-     * This function note variables from session
+     * This function add note variables to session
+     * return result to the view
+     */
+
+    public function actionAddNotesSession() {
+        if (Yii::$app->request->isAjax) {
+            $note_id = $_POST['data_val'];
+            $note_data = \common\models\Notes::findOne($note_id);
+            $note_session = Yii::$app->session['create-your-own'];
+            $prev_note = Yii::$app->session['create-your-own']['note-data'];
+            $prev_note_price = Yii::$app->session['create-your-own']['notes-price'];
+            if (empty($prev_note)) {
+                $next_note = $note_data->id;
+            } else {
+                $next_note = $prev_note . "," . $note_data->id;
+            }
+            if (empty($prev_note_price)) {
+                $next_note_price = $note_data->price;
+            } else {
+                $next_note_price = $prev_note_price . "," . $note_data->price;
+            }
+            Yii::$app->session['create-your-own'] = array_merge($note_session, ['note-data' => $next_note, 'notes-price' => $next_note_price]);
+        }
+    }
+
+    /*
+     * This function remove note variables from session
      * return result to the view
      */
 
@@ -110,7 +136,13 @@ class AjaxController extends \yii\web\Controller {
         if (Yii::$app->request->isAjax) {
             $note_id = $_POST['data_val'];
             $notes_data = \common\models\Notes::find()->where(['id' => $note_id])->one();
-            echo $notes_data->notes;
+            $arr_note_data = Yii::$app->session['create-your-own']['note-data'];
+            $arr_note_price = Yii::$app->session['create-your-own']['notes-price'];
+            $prev_session = Yii::$app->session['create-your-own'];
+//            $session_note_price = explode(',', Yii::$app->session['create-your-own']['notes-price']);
+            var_dump($prev_session);
+            var_dump($arr_note_data);
+            var_dump($arr_note_price);
             exit;
         }
     }
