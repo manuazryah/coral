@@ -128,41 +128,64 @@ $current_action = Yii::$app->controller->action->id; // controller action id
 	</div>
 	<div class="container">
 		<div class="col-lg-3 col-md-3 col-sm-12 hidden-xs left-accordation panel-body">
-			<div class="panel panel-default">
-				<div class="panel-body lit-blue">
-					<div class="slide-container">
-						<div class="list-group" id="mg-multisidetabs">
-							<a href="#" class="list-group-item active-head "><span><?= $main_categry == 1 ? "Our Products" : "Inetrnational Products " ?></span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
-							<div class="panel list-sub" style="display: block">
-								<div class="panel-body">
-									<div class="list-group">
-										<?php
-										foreach ($categories as $category) {
-											if (isset($catag->id)) {
-												if ($category->id == $catag->id) {
-													$active_class = 'list-group-item active';
+			<?php if (!empty($main_categry)) { ?>
+				<div class="panel panel-default">
+					<div class="panel-body lit-blue">
+						<div class="slide-container">
+							<div class="list-group" id="mg-multisidetabs">
+								<a href="#" class="list-group-item active-head "><span>
+										<?= $main_categry == 1 ? "Our Products" : "Inetrnational Products " ?></span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
+								<div class="panel list-sub" style="display: block">
+									<div class="panel-body">
+										<div class="list-group">
+											<?php
+											foreach ($categories as $category) {
+
+												if (isset($catag->id)) {
+													if ($category->id == $catag->id) {
+														$active_class = 'list-group-item active';
+													} else {
+														$active_class = 'list-group-item';
+													}
 												} else {
 													$active_class = 'list-group-item';
 												}
-											} else {
-												$active_class = 'list-group-item';
-											}
+												?>
+
+												<?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $category->category_code, 'category' => $main_categry], ['class' => $active_class])
+												?>
+
+
+																											<!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
+											<?php }
 											?>
-
-											<?= Html::a('<span>' . $category->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $category->category_code, 'category' => $main_categry], ['class' => $active_class])
-											?>
-
-
-																										<!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
-										<?php }
-										?>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div><!-- ./ end list-group -->
-					</div><!-- ./ end slide-container -->
-				</div><!-- ./ end panel-body -->
-			</div><!-- ./ end panel panel-default-->
+							</div><!-- ./ end list-group -->
+						</div><!-- ./ end slide-container -->
+					</div><!-- ./ end panel-body -->
+				</div><!-- ./ end panel panel-default-->
+			<?php } else {
+				?>
+				<div class="panel panel-default">
+					<div class="panel-body lit-blue">
+						<div class="slide-container">
+							<div class="list-group" id="mg-multisidetabs">
+								<?= Html::a('<span>Exclusive Brands</span>', ['product/index', 'category' => 1, 'featured' => 1], ['class' => 'list-group-item active-head'])
+								?>
+								<?= Html::a('<span>Brands</span>', ['product/index', 'id' => $category->category_code, 'category' => $main_categry], ['class' => 'list-group-item active-head'])
+								?>
+	<!--								<a data-toggle="collapse" href="#collapse1" class="list-group-item active-head "><span>Exclusive Brands</span></a>
+								<a data-toggle="collapse" href="#collapse1" class="list-group-item active-head "><span>Brands</span></a>-->
+
+							</div><!-- ./ end list-group -->
+						</div><!-- ./ end slide-container -->
+					</div><!-- ./ end panel-body -->
+				</div>
+
+			<?php }
+			?>
 		</div><!-- ./ endcol-lg-6 col-lg-offset-3 -->
 
 		<div class="col-md-9 product-list">
