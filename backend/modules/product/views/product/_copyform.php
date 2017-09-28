@@ -21,6 +21,10 @@ use dosamigos\ckeditor\CKEditor;
 <div class="product-form form-inline">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div style="float: right;">
+        <?= Html::submitButton($model->isNewRecord ? '<i class="fa fa-plus" style="margin-right: 9px;"></i><span style="padding-right: 9px;">Create</span>' : '<i class="glyphicon glyphicon-pencil" style="margin-right: 9px;"></i><span style="padding-right: 9px;">Update</span>', ['class' => 'btn btn-success  btn-icon ']) ?>
+
+    </div>
     <?= $form->errorSummary($model); ?>
     <ul class="nav nav-tabs">
         <!--        <li class="active">
@@ -52,7 +56,7 @@ use dosamigos\ckeditor\CKEditor;
         <div class="tab-pane active" id="general">
             <div class="row" style="margin: 0 auto; padding: 15px 15px;">
                 <div class='col-md-12 col-sm-6 col-xs-12 '>
-                  <?= $form->field($model, 'main_category')->dropDownList(['1' => 'Our Products', '2' => 'International Products']) ?>
+                    <?= $form->field($model, 'main_category')->dropDownList(['1' => 'Our Products', '2' => 'International Products']) ?>
                 </div>
                 <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Category::find()->where(['main_category' => $model->main_category])->all(), 'id', 'category'), ['prompt' => 'select']); ?>
@@ -133,6 +137,9 @@ use dosamigos\ckeditor\CKEditor;
                     <?= $form->field($model, 'related_product')->dropDownList(ArrayHelper::map(Product::find()->where(['status' => '1'])->all(), 'id', 'product_name'), ['class' => 'form-control', 'id' => 'product-related_product', 'multiple' => 'multiple']) ?>
 
                 </div>
+                <div class='col-md-4 col-sm-6 col-xs-12 '>
+                    <?= $form->field($model, 'sort')->textInput(); ?>
+                </div>
                 <div class='col-md-12 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'main_description')->textArea(['rows' => '6'], ['maxlength' => '453']); ?>
 
@@ -198,7 +205,7 @@ use dosamigos\ckeditor\CKEditor;
                 <div class='col-md-6 col-sm-6 col-xs-12 '>
                     <?= $form->field($model, 'other_image[]')->fileInput(['multiple' => true, 'accept' => 'image/*'])->label('Gallery Images<i> (455*315)</i>') ?>
                     <?php if (!$model->isNewRecord) { ?>
-                                                                                                                                                                                                                        <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
+                                                                                                                                                                                                                                <!--<a href=''><img src="<?= yii::$app->homeUrl ?>/../../uploads/product/1/dasda_0.jpg" width="100" alt="Delete"></a>-->
                         <div class="row">
                             <?php
                             $path = Yii::getAlias('@paths') . '/product/' . $model->id . '/gallery_thumb';
@@ -239,10 +246,10 @@ use dosamigos\ckeditor\CKEditor;
 
 
     </div>
-    <li style="float: right;">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 5px; height: 36px; width:100px;']) ?>
+    <div style="float: right;">
+        <?= Html::submitButton($model->isNewRecord ? '<i class="fa fa-plus" style="margin-right: 9px;"></i><span style="padding-right: 9px;">Create</span>' : '<i class="glyphicon glyphicon-pencil" style="margin-right: 9px;"></i><span style="padding-right: 9px;">Update</span>', ['class' => 'btn btn-success  btn-icon ']) ?>
 
-    </li>
+    </div>
 
 
 

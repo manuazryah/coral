@@ -38,6 +38,7 @@ use Imagine\Image\Box;
  * @property integer $status
  * @property integer $featured_product
  * @property string $profile
+ * @property string $sort
  */
 class Product extends \yii\db\ActiveRecord {
 
@@ -111,6 +112,7 @@ class Product extends \yii\db\ActiveRecord {
             'gallery_alt' => 'Gallery Alt',
             'related_product' => 'Related Products',
             'featured_product' => 'Featured Product',
+            'sort' => 'Sort Number',
         ];
     }
 

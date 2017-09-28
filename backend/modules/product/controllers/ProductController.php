@@ -96,6 +96,7 @@ class ProductController extends Controller {
                 $model->meta_title = Yii::$app->request->post()['Product']['meta_title'];
                 $model->profile_alt = Yii::$app->request->post()['Product']['profile_alt'];
                 $model->gallery_alt = Yii::$app->request->post()['Product']['gallery_alt'];
+                $model->sort = Yii::$app->request->post()['Product']['sort'];
                 $model->other_image = '';
                 if ($model->save()) {
                     if ($file11) {
@@ -168,6 +169,8 @@ class ProductController extends Controller {
             $model->meta_title = Yii::$app->request->post()['Product']['meta_title'];
             $model->profile_alt = Yii::$app->request->post()['Product']['profile_alt'];
             $model->gallery_alt = Yii::$app->request->post()['Product']['gallery_alt'];
+            $sort_number = Yii::$app->request->post()['Product']['sort'];
+            $this->check_sort($sort_number,$model->id);
             $model->other_image = '';
             if ($model->save()) {
                 if ($file11) {
@@ -192,6 +195,15 @@ class ProductController extends Controller {
             return $this->render('update', [
                         'model' => $model,
             ]);
+        }
+    }
+
+    function check_sort($sort_number, $id = NULL) {
+//        ['sort'=>$sort_number]
+//        'id != :id and type != :type', ['id'=>1, 'type'=>1]
+        $product = Product::find()->where('id = :id and sort != :sort', ['id' => $id, 'type' => 1])->one();
+        if ($product) {
+            $sort_number = $sort_number + .01;
         }
     }
 
@@ -257,6 +269,7 @@ class ProductController extends Controller {
                 $model->meta_title = Yii::$app->request->post()['Product']['meta_title'];
                 $model->profile_alt = Yii::$app->request->post()['Product']['profile_alt'];
                 $model->gallery_alt = Yii::$app->request->post()['Product']['gallery_alt'];
+                $model->sort = Yii::$app->request->post()['Product']['sort'];
                 $model->other_image = '';
                 if ($model->save()) {
                     $this->UpdateProductEan($model->item_ean);

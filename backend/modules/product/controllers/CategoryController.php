@@ -183,9 +183,11 @@ class CategoryController extends Controller {
                     exit;
 //            array('id' => $model->id, 'category' => $category);
                 } else {
-                    var_dump($model->getErrors());
-//            echo '0';
+                     echo json_encode(array("con" => "2", 'msg' => $model->getErrors())); //Failed
                     exit;
+//                    var_dump($model->getErrors());
+////            echo '0';
+//                    exit;
                 }
             }
         }
