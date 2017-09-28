@@ -12,6 +12,7 @@ use common\models\RecentlyViewed;
 use common\models\WishList;
 use common\models\Settings;
 use yii\db\Expression;
+use common\models\CmsMetaTags;
 
 class ProductController extends \yii\web\Controller {
 
@@ -52,6 +53,9 @@ class ProductController extends \yii\web\Controller {
 //			$dataProvider->query->andWhere(['gender_type' => $type]);
 //		}
 		$categories = Category::find()->where(['status' => 1, 'main_category' => $category])->all();
+		$meta_tags = CmsMetaTags::find()->where(['id' => 3])->one();
+		\Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $meta_tags->meta_keyword]);
+		\Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $meta_tags->meta_description]);
 
 		return $this->render('index', [
 			    'searchModel' => $searchModel,
@@ -61,6 +65,7 @@ class ProductController extends \yii\web\Controller {
 			    'main_categry' => $category,
 			    'id' => $id,
 			    'type' => $type,
+			    'meta_title' => $meta_tags->meta_title,
 		]);
 	}
 

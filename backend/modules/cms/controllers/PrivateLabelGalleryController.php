@@ -83,14 +83,14 @@ class PrivateLabelGalleryController extends Controller {
 				if (!empty($banner_image)) {
 					$path = Yii::$app->basePath . '/../uploads/cms/private-label/banner';
 					$size = [
-						['width' => 100, 'height' => 100, 'name' => small],
+						['width' => 100, 'height' => 100, 'name' => 'small'],
 					];
 					Yii::$app->UploadFile->UploadFile($model, $banner_image, $path, $size);
 				}
 				if (!empty($image)) {
 					$path = Yii::$app->basePath . '/../uploads/cms/private-label/images';
 					$size = [
-						['width' => 100, 'height' => 100, 'name' => small],
+						['width' => 100, 'height' => 100, 'name' => 'small'],
 					];
 					Yii::$app->UploadFile->UploadFile($model, $image, $path, $size);
 				}
@@ -148,14 +148,14 @@ class PrivateLabelGalleryController extends Controller {
 		if (!empty($banner_image)) {
 			$path = Yii::$app->basePath . '/../uploads/cms/private-label/banner';
 			$size = [
-				['width' => 100, 'height' => 100, 'name' => small],
+				['width' => 100, 'height' => 100, 'name' => 'small'],
 			];
 			Yii::$app->UploadFile->UploadFile($model, $banner_image, $path, $size);
 		}
 		if (!empty($image)) {
 			$path = Yii::$app->basePath . '/../uploads/cms/private-label/images';
 			$size = [
-				['width' => 100, 'height' => 100, 'name' => small],
+				['width' => 100, 'height' => 100, 'name' => 'small'],
 			];
 			Yii::$app->UploadFile->UploadFile($model, $image, $path, $size);
 		}

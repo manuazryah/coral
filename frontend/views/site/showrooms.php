@@ -3,6 +3,11 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+
+if (isset($meta_title) && $meta_title != '')
+	$this->title = $meta_title;
+else
+	$this->title = 'coral perfumes';
 ?>
 
 <div class="pad-20 hide-xs"></div>
@@ -29,7 +34,7 @@ use yii\helpers\Html;
 						     max-height: 260px;">
 							<div class="content addr_p">
 								<h3><?= $showroom->title ?></h3>
-								<?= $showroom->address ?>
+	<?= $showroom->address ?>
 
 								<p class="txt-green"><?= $showroom->email ?></p>
 							</div>

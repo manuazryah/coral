@@ -10,7 +10,10 @@ use common\models\Category;
 use common\models\SubCategory;
 use yii\helpers\Url;
 
-$this->title = 'Products';
+if (isset($meta_title) && $meta_title != '')
+	$this->title = $meta_title;
+else
+	$this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php
@@ -50,26 +53,49 @@ $gender_params = \yii::$app->getRequest()->getQueryParams();
                 <div class="input-group gender-selection hidden-xs">
                         <div id="radioBtn" class="btn-group">
                                 <span>Type:</span>
-				<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 1) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
-				if (isset($id)) {
-					echo $id;
-				}
-				?>" main-categ="<?= $main_categry ?>">Women</a>
-				<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 0) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
-				if (isset($id)) {
-					echo $id;
-				}
-				?>"main-categ="<?= $main_categry ?>">Men</a>
-				<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 2) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
-				if (isset($id)) {
-					echo $id;
-				}
-				?>"main-categ="<?= $main_categry ?>">Unisex</a>
-				<a class="btn btn-primary btn-sm <?= (empty($gender_params['type']) ) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
-				if (isset($id)) {
-					echo $id;
-				}
-				?>"main-categ="<?= $main_categry ?>">All</a>
+				<?php if (isset($gender_params['type'])) { ?>
+					<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 1) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
+					if (isset($id)) {
+						echo $id;
+					}
+					?>" main-categ="<?= $main_categry ?>">Women</a>
+					<a class="btn btn-primary btn-sm <?= ($gender_params['type'] == 0 && $gender_params['type'] != "") ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
+					if (isset($id)) {
+						echo $id;
+					}
+					?>"main-categ="<?= $main_categry ?>">Men</a>
+					<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 2) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
+					if (isset($id)) {
+						echo $id;
+					}
+					?>"main-categ="<?= $main_categry ?>">Unisex</a>
+					<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
+					if (isset($id)) {
+						echo $id;
+					}
+					?>"main-categ="<?= $main_categry ?>">All</a>
+				<?php } else { ?>
+					<a class="btn btn-primary btn-sm  notActive gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
+					if (isset($id)) {
+						echo $id;
+					}
+					?>" main-categ="<?= $main_categry ?>">Women</a>
+					<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
+					if (isset($id)) {
+						echo $id;
+					}
+					?>"main-categ="<?= $main_categry ?>">Men</a>
+					<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
+					if (isset($id)) {
+						echo $id;
+					}
+					?>"main-categ="<?= $main_categry ?>">Unisex</a>
+					<a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
+					if (isset($id)) {
+						echo $id;
+					}
+					?>"main-categ="<?= $main_categry ?>">All</a>
+<?php } ?>
                         </div>
                 </div>
 
@@ -130,13 +156,13 @@ $gender_params = \yii::$app->getRequest()->getQueryParams();
         </div>
         <div class="container">
                 <div class="col-lg-3 col-md-3 col-sm-12 hidden-xs left-accordation panel-body">
-			<?php if (!empty($main_categry)) { ?>
+<?php if (!empty($main_categry)) { ?>
 				<div class="panel panel-default">
 					<div class="panel-body lit-blue">
 						<div class="slide-container">
 							<div class="list-group" id="mg-multisidetabs">
 								<a href="#" class="list-group-item active-head "><span>
-										<?= $main_categry == 1 ? "Our Products" : "Inetrnational Products " ?></span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
+	<?= $main_categry == 1 ? "Our Products" : "Inetrnational Products " ?></span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
 								<div class="panel list-sub" style="display: block">
 									<div class="panel-body">
 										<div class="list-group">
@@ -170,7 +196,7 @@ $gender_params = \yii::$app->getRequest()->getQueryParams();
 												?>
 
 
-		                                                                                                                                                                                                                                                                        <!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
+																											<!--<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>-->
 											<?php }
 											?>
 										</div>

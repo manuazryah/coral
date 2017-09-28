@@ -1,6 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+
+if (isset($meta_title) && $meta_title != '')
+	$this->title = $meta_title;
+else
+	$this->title = 'coralperfumes';
 ?>
 
 <div class="pad-20 hide-xs"></div>
@@ -35,7 +40,7 @@ use yii\helpers\Html;
 						<p style="    min-height: 78px;
 						   max-height: 78px;"><?= substr($mode->content, 0, 150); ?></p>
 						<!--						<a href="blog-detail.php">know more</a>-->
-						<?= Html::a('know more', ['blog-detail', 'id' => $mode->id]) ?>
+	<?= Html::a('know more', ['blog-detail', 'id' => $mode->id]) ?>
 					</div>
 				</div>
 				<?php
