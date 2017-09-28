@@ -20,33 +20,76 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         </div>
                         <div class="panel-body">
-                                <?=  Html::a('<i class="fa-th-list"></i><span> Manage Subscribe</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                                <?= Html::a('<i class="fa-th-list"></i><span> Manage Subscribe</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                                 <div class="panel-body"><div class="subscribe-view">
-                                                <p>
-                                                        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                                                        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-                                                        'class' => 'btn btn-danger',
-                                                        'data' => [
-                                                        'confirm' => 'Are you sure you want to delete this item?',
-                                                        'method' => 'post',
-                                                        ],
-                                                        ]) ?>
-                                                </p>
 
-                                                <?= DetailView::widget([
-                                                'model' => $model,
-                                                'attributes' => [
-                                                            'id',
-            'email:email',
-            'date',
-            'status',
-                                                ],
-                                                ]) ?>
-</div>
+
+                                                <div class="table-responsive">
+                                                        <table id="example-1"  class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                                <thead>
+                                                                        <tr>
+
+                                                                                <th>Email</th>
+                                                                        </tr>
+                                                                </thead>
+
+                                                                <tbody>
+
+
+                                                                        <tr>
+                                                                                <td>
+
+                                                                                        <?php
+                                                                                        $i = 0;
+                                                                                        foreach ($model as $value) {
+                                                                                                $i++;
+                                                                                                echo $value->email . ', ';
+                                                                                                if ($i % 100 == 0)
+                                                                                                        echo'</td></tr><tr><td>';
+                                                                                        }
+                                                                                        ?>
+                                                                                </td>
+
+
+
+                                                                        </tr>
+                                                                </tbody>
+
+                                                        </table>
+
+                                                </div>
                                         </div>
                                 </div>
                         </div>
                 </div>
         </div>
+</div>
 
 
+
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>js/table/dataTables.bootstrap.css">
+<script src="<?= Yii::$app->homeUrl; ?>js/table/jquery.dataTables.min.js"></script>
+
+<script src="<?= Yii::$app->homeUrl; ?>js/table/dataTables.bootstrap.js"></script>
+<script src="<?= Yii::$app->homeUrl; ?>js/table/jquery.dataTables.yadcf.js"></script>
+<script src="<?= Yii::$app->homeUrl; ?>js/table/dataTables.tableTools.min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function ($)
+        {
+                $("#example-1").dataTable({
+                        aLengthMenu: [
+                                [30, 50, 100, -1], [30, 50, 100, "All"]
+                        ]
+                });
+
+
+        });
+</script>
+
+<style>
+        #example-1_filter{
+                display: none;
+        }.dataTables_wrapper .table thead>tr .sorting:before, .dataTables_wrapper .table thead>tr .sorting_asc:before, .dataTables_wrapper .table thead>tr .sorting_desc:before{
+                display: none;
+        }
+</style>

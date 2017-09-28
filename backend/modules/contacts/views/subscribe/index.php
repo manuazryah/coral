@@ -33,9 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         <span>Search</span>
                                                 </button>
 
-                                                <button class="btn btn-white" style="float: right;">
-                                                        <span>Bulk View</span>
-                                                </button>
+                                                <?= Html::a('<i class="fa fa-eye"></i><span> Bulk View</span>', ['view'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone', 'style' => 'float:right']) ?>
+
                                                 <?=
                                                 GridView::widget([
                                                     'dataProvider' => $dataProvider,
