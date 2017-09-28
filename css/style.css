@@ -1862,6 +1862,9 @@ h1:after{
 #product-page .start-shopping{
         margin-right: 0px;
         margin-left: 15px;
+        background: #61b346;
+    border: 2px solid #61b346;
+    color: white;
 }
 #product-page .action{
         display: inline-block;
