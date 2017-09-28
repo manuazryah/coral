@@ -8,6 +8,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\db\Expression;
+use common\models\CreateYourOwn;
 
 class AjaxController extends \yii\web\Controller {
 
@@ -213,6 +214,48 @@ class AjaxController extends \yii\web\Controller {
             $arr_variable1 = array('heading' => $heading, 'first-line' => Yii::$app->session['create-your-own']['line-1'], 'second-line' => Yii::$app->session['create-your-own']['line-2'], 'tot-count' => sprintf('%0.2f', Yii::$app->session['create-your-own']['total-amount']) . ' $', 'note-imgs' => $options, 'bottle-src' => $bottle_src);
             $data['result'] = $arr_variable1;
             echo json_encode($data);
+        }
+    }
+
+    /*
+     * This function save create your own data and check when the user is logged in or not
+     * return result to the view
+     */
+
+    public function actionCheckOut() {
+
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->session['create-your-own'];
+            $user_id = '';
+            $sessonid = '';
+            $flag = 0;
+            $model = new CreateYourOwn();
+            if (isset(Yii::$app->user->identity->id)) {
+                $user_id = Yii::$app->user->identity->id;
+                $flag = 1;
+            } else {
+                if (!isset(Yii::$app->session['temp_create_yourown']) || Yii::$app->session['temp_create_yourown'] == '') {
+                    $milliseconds = round(microtime(true) * 1000);
+                    Yii::$app->session['temp_create_yourown'] = $milliseconds;
+                }
+                $sessonid = Yii::$app->session['temp_create_yourown'];
+            }
+            $model->user_id = $user_id;
+            $model->session_id = $sessonid;
+            $model->order_id = 111;
+            $model->gender = $data['gender'];
+            $model->character_id = $data['character'];
+            $model->scent = $data['scent'];
+            $model->note = $data['note-data'];
+            $model->bottle = $data['bottle'];
+            $model->label_1 = $data['line-1'];
+            $model->label_2 = $data['line-2'];
+            $model->tot_amount = $data['total-amount'];
+            $model->user_status = 1;
+            $model->admin_status = 1;
+            $model->comments = '';
+            $model->save();
+            echo $flag;
         }
     }
 

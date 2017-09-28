@@ -563,6 +563,25 @@ use yii\helpers\Html;
                 }
             });
         });
+
+        $(document).on('click', '.chkout', function (e) {
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/check-out',
+                success: function (data) {
+                    if (data == 0) {
+                        alert('Before proceeding to checkout please login');
+                        window.open(
+                                '<?= Yii::$app->homeUrl; ?>site/login-signup',
+                                '_blank' // <- This is what makes it open in a new window.
+                                );
+                    }
+                }
+            });
+        });
     });
 </script>
 
