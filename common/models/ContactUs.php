@@ -19,41 +19,40 @@ use Yii;
  */
 class ContactUs extends \yii\db\ActiveRecord {
 
-    /**
-     * @inheritdoc
-     */
-    public static function tableName() {
-        return 'contact_us';
-    }
+        /**
+         * @inheritdoc
+         */
+        public static function tableName() {
+                return 'contact_us';
+        }
 
-    /**
-     * @inheritdoc
-     */
-    public function rules() {
-        return [
-            [['first_name', 'last_name', 'email', 'country', 'reason', 'mobile_no'], 'required'],
-            [['country'], 'integer'],
-            [['date'], 'safe'],
-            [['first_name', 'last_name', 'email', 'reason'], 'string', 'max' => 100],
-            [['country_code', 'mobile_no'], 'string', 'max' => 50],
-        ];
-    }
+        /**
+         * @inheritdoc
+         */
+        public function rules() {
+                return [
+                        [['first_name', 'last_name', 'email', 'country', 'reason', 'mobile_no'], 'required'],
+                        [['date'], 'safe'],
+                        [['first_name', 'last_name', 'email', 'reason', 'country'], 'string', 'max' => 100],
+                        [['country_code', 'mobile_no'], 'string', 'max' => 50],
+                ];
+        }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels() {
-        return [
-            'id' => 'ID',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'email' => 'Email',
-            'country_code' => 'Country Code',
-            'mobile_no' => 'Mobile No',
-            'country' => 'Country',
-            'reason' => 'Reason',
-            'date' => 'Date',
-        ];
-    }
+        /**
+         * @inheritdoc
+         */
+        public function attributeLabels() {
+                return [
+                    'id' => 'ID',
+                    'first_name' => 'First Name',
+                    'last_name' => 'Last Name',
+                    'email' => 'Email',
+                    'country_code' => 'Country Code',
+                    'mobile_no' => 'Mobile No',
+                    'country' => 'Country',
+                    'reason' => 'Reason',
+                    'date' => 'Date',
+                ];
+        }
 
 }

@@ -12,32 +12,39 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subscribe-index">
 
-    <div class="row">
-        <div class="col-md-12">
+        <div class="row">
+                <div class="col-md-12">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
 
 
-                </div>
-                <div class="panel-body">
+                                </div>
+                                <div class="panel-body">
 
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-                    <div class="table-responsive" style="border: none">
-                        <button class="btn btn-white" id="search-option" style="float: right;">
-                            <i class="linecons-search"></i>
-                            <span>Search</span>
-                        </button>
-                        <?=
-                        GridView::widget([
-                            'dataProvider' => $dataProvider,
-                            'filterModel' => $searchModel,
-                            'columns' => [
-                                ['class' => 'yii\grid\SerialColumn'],
+                                        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                                        <div class="table-responsive" style="border: none">
+
+
+
+                                                <button class="btn btn-white" id="search-option" style="float: right;">
+                                                        <i class="linecons-search"></i>
+                                                        <span>Search</span>
+                                                </button>
+
+                                                <button class="btn btn-white" style="float: right;">
+                                                        <span>Bulk View</span>
+                                                </button>
+                                                <?=
+                                                GridView::widget([
+                                                    'dataProvider' => $dataProvider,
+                                                    'filterModel' => $searchModel,
+                                                    'columns' => [
+                                                            ['class' => 'yii\grid\SerialColumn'],
 //                                'id',
-                                'email:email',
-                                'date',
+                                                        'email:email',
+                                                        'date',
 //                                [
 //                                    'attribute' => 'status',
 //                                    'filter' => ['1' => 'Enable', '0' => 'Disable'],
@@ -45,23 +52,25 @@ $this->params['breadcrumbs'][] = $this->title;
 //                                        return $data->status == 1 ? 'Enable' : 'Disable';
 //                                    }
 //                                ],
-                                ['class' => 'yii\grid\ActionColumn'],
-                            ],
-                        ]);
-                        ?>
-                    </div>
+                                                        ['class' => 'yii\grid\ActionColumn',
+                                                            'template' => '{delete}',
+                                                        ],
+                                                    ],
+                                                ]);
+                                                ?>
+                                        </div>
+                                </div>
+                        </div>
                 </div>
-            </div>
         </div>
-    </div>
 </div>
 
 <script>
-    $(document).ready(function () {
-        $(".filters").slideToggle();
-        $("#search-option").click(function () {
-            $(".filters").slideToggle();
+        $(document).ready(function () {
+                $(".filters").slideToggle();
+                $("#search-option").click(function () {
+                        $(".filters").slideToggle();
+                });
         });
-    });
 </script>
 
