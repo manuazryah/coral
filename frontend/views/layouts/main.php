@@ -131,8 +131,8 @@ and open the template in the editor.
                                     <ul class="navbar-right">
                                         <?php if (Yii::$app->user->isGuest) { ?>
                                             <li><?= Html::a('<span>Login / Signup</span>', ['/site/login-signup'], ['class' => '']) ?></li>
-                                        <?php }
-                                        else { ?>
+                                        <?php } else {
+                                            ?>
                                             <li><?= Html::a('<span>My Account</span>', ['/myaccounts/user/index'], ['class' => '']) ?></li>
                                             <?php
                                             echo '<li>' . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['style' => 'background: white;border: none;']) . Html::endForm() . '</li>';
@@ -168,7 +168,7 @@ and open the template in the editor.
 
                                     </ul>
                                     <div class="col-md-12 checkout-btn-space">
-<?= Html::a('<button class="green2">check out</button>', ['/cart/mycart'], ['class' => '']) ?>
+                                        <?= Html::a('<button class="green2">check out</button>', ['/cart/mycart'], ['class' => '']) ?>
                                         <!--<button class="green2">check out</button>-->
                                     </div>
                                 </div>
@@ -207,14 +207,14 @@ and open the template in the editor.
                                     <li class="<?= $action == 'site/about' ? 'active' : '' ?>"><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
 <!--                                                                        <li class="<?= $main_categry == 1 ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code, 'category' => 1], ['class' => '']) ?></li>
                                     <li class="<?= $main_categry == 2 ? 'active' : '' ?>"><?= Html::a('<span>international products</span>', ['/product/index', 'id' => $catag_2->category_code, 'category' => 2], ['class' => '']) ?></li>-->
-<?php if (!empty($params['category'])) { ?>
+                                    <?php if (!empty($params['category'])) { ?>
                                         <li class="<?= $params['category'] == 1 ? 'active' : '' ?>"><?= Html::a('<span>Exclusive Brands</span>', ['/product/index', 'id' => $catag->category_code, 'category' => 1], ['class' => '']) ?></li>
                                         <li class="<?= $params['category'] == 2 ? 'active' : '' ?>"><?= Html::a('<span>Brands</span>', ['/product/index', 'id' => $catag_2->category_code, 'category' => 2], ['class' => '']) ?></li>
-<?php }
-else { ?>
+                                    <?php } else {
+                                        ?>
                                         <li class=""><?= Html::a('<span>Exclusive Brands</span>', ['/product/index', 'id' => $catag->category_code, 'category' => 1], ['class' => '']) ?></li>
                                         <li class=""><?= Html::a('<span>Brands</span>', ['/product/index', 'id' => $catag_2->category_code, 'category' => 2], ['class' => '']) ?></li>
-<?php } ?>
+                                    <?php } ?>
                                     <li class="<?= $action == 'site/private-label' ? 'active' : '' ?>"><?= Html::a('<span>private label manufacturing</span>', ['/site/private-label'], ['class' => '']) ?></li>
                                     <li class="<?= $action == 'site/showrooms' ? 'active' : '' ?>"><?= Html::a('<span>showrooms</span>', ['/site/showrooms'], ['class' => '']) ?></li>
                                     <li class="<?= $action == 'site/contact' ? 'active' : '' ?>"><?= Html::a('<span>contact us</span>', ['/site/contact'], ['class' => '']) ?></li>
@@ -253,8 +253,9 @@ else { ?>
                 </nav>
             </div>
         </div>
+        <div class="marg-855"></div>
         <div class="clearfix"></div>
-<?= $content ?>
+        <?= $content ?>
 
         <div class="clearfix"></div>
         <section id="footer">
@@ -332,7 +333,7 @@ else { ?>
                 <p><span>Coral perfume</span> @ 2017 All Rights Reserved.</p>
             </div>
         </section>
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

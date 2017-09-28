@@ -142,7 +142,7 @@ class CheckoutController extends \yii\web\Controller {
     public function actionPaymentSuccess($id) {
         $model = OrderMaster::find()->where(['order_id' => $id])->one();
         if (!empty($model)) {
-            $model->status = 4;
+            $model->payment_status = 4;
             $model->save();
             Yii::$app->session['orderid'] = '';
             $model1 = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();

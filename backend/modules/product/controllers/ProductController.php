@@ -132,19 +132,6 @@ class ProductController extends Controller {
         }
     }
 
-    public function Upload($model, $file) {
-        if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $model->id)) {
-            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $model->id);
-            chmod(\Yii::$app->basePath . '/../uploads/product/' . $model->id, 0777);
-        }
-        if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/')) {
-            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/');
-            chmod(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/', 0777);
-        }
-        $file->saveAs(Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '_big.' . $file->extension);
-        return TRUE;
-    }
-
 //    public function Upload($model, $filee) {
 //        $filee->saveAs(Yii::$app->basePath . '/../images/companyImages/' . $model->id . '.' . $filee->extension);
 //    }
@@ -157,6 +144,7 @@ class ProductController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $profile = $model->profile;
         if ($model->load(Yii::$app->request->post())) {
             $ai = '';
             $file11 = UploadedFile::getInstances($model, 'profile');
@@ -164,6 +152,8 @@ class ProductController extends Controller {
 //            $model->item_ean = date(Ymdhis);
             if ($file11) {
                 $model->profile = $file11[0]->extension;
+            } else {
+                $model->profile = $profile;
             }
             $tag = Yii::$app->request->post()['Product']['search_tag'];
             if ($tag) {
@@ -205,6 +195,19 @@ class ProductController extends Controller {
         }
     }
 
+    public function Upload($model, $file) {
+        if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $model->id)) {
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $model->id);
+            chmod(\Yii::$app->basePath . '/../uploads/product/' . $model->id, 0777);
+        }
+        if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/')) {
+            mkdir(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/');
+            chmod(\Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/', 0777);
+        }
+        $file->saveAs(Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '_big.' . $file->extension);
+        return TRUE;
+    }
+
     public function actionCopy($id) {
         $model = new Product();
 
@@ -222,6 +225,7 @@ class ProductController extends Controller {
         $model->stock = '';
         $serial_no = \common\models\Settings::findOne(3)->value;
         $model->item_ean = $this->generateProductEan($serial_no);
+        $profile = $model->profile;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 $ean = Product::find()->max('id');
@@ -235,6 +239,8 @@ class ProductController extends Controller {
                 $file12 = UploadedFile::getInstances($model, 'other_image');
                 if ($file11) {
                     $model->profile = $file11[0]->extension;
+                } else {
+                    $model->profile = $profile;
                 }
 //            $model->item_ean = date(Ymdhis);
 
@@ -450,6 +456,7 @@ class ProductController extends Controller {
             }
         }
     }
+
     public function actionSubcategory() {
         if (yii::$app->request->isAjax) {
             $category = Yii::$app->request->post()['category'];

@@ -19,44 +19,46 @@ use Yii;
  */
 class PrivateLabelGallery extends \yii\db\ActiveRecord {
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName() {
-		return 'private_label_gallery';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName() {
+        return 'private_label_gallery';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules() {
-		return [
-			[['our_process_title', 'other_title'], 'string'],
-			[['our_process_title', 'other_title', 'banner_image'], 'required', 'on' => 'create'],
-			[['CB'], 'required'],
-			[['CB', 'UB'], 'integer'],
-			[['DOC', 'DOU'], 'safe'],
-			[['banner_image', 'image'], 'string', 'max' => 100],
-			[['banner_image'], 'file', 'extensions' => 'png, jpg, jpeg'],
-			//[['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules() {
+        return [
+            [['our_process_title', 'other_title', 'about_title', 'about_content'], 'string'],
+            [['our_process_title', 'other_title', 'banner_image', 'about_title', 'about_content'], 'required', 'on' => 'create'],
+            [['CB'], 'required'],
+            [['CB', 'UB'], 'integer'],
+            [['DOC', 'DOU'], 'safe'],
+            [['banner_image', 'image'], 'string', 'max' => 100],
+            [['banner_image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+                //[['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels() {
-		return [
-		    'id' => 'ID',
-		    'banner_image' => 'Banner Image',
-		    'image' => 'Image',
-		    'our_process_title' => 'Our Process Title',
-		    'other_title' => 'Other Title',
-		    'CB' => 'Cb',
-		    'UB' => 'Ub',
-		    'DOC' => 'Doc',
-		    'DOU' => 'Dou',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+        return [
+            'id' => 'ID',
+            'banner_image' => 'Banner Image',
+            'image' => 'Image',
+            'our_process_title' => 'Our Process Title',
+            'other_title' => 'Other Title',
+            'about_title' => 'About Title',
+            'about_content' => 'About Content',
+            'CB' => 'Cb',
+            'UB' => 'Ub',
+            'DOC' => 'Doc',
+            'DOU' => 'Dou',
+        ];
+    }
 
 }

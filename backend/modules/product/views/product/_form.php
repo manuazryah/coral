@@ -52,8 +52,7 @@ use dosamigos\ckeditor\CKEditor;
         <div class="tab-pane active" id="general">
             <div class="row" style="margin: 0 auto; padding: 15px 15px;">
                 <div class='col-md-12 col-sm-6 col-xs-12 '>
-                    <?php if ($model->isNewRecord) $model->main_category = '1'; ?>
-                    <?= $form->field($model, 'main_category')->radioList(['1' => 'Our Products', '2' => 'International Products'], ['class' => 'main_category']); ?>
+                  <?= $form->field($model, 'main_category')->dropDownList(['1' => 'Our Products', '2' => 'International Products']) ?>
                 </div>
                 <div class='col-md-4 col-sm-6 col-xs-12 '>
                     <?php
