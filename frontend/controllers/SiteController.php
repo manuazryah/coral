@@ -420,8 +420,10 @@ class SiteController extends Controller {
 //        $this->layout = 'adminlogin';
                 $model = new User();
                 if ($model->load(Yii::$app->request->post())) {
-                        $check_exists = User::find()->where("username = '" . $model->username . "' OR email = '" . $model->email . "'")->one();
+
+                        $check_exists = User::find()->where("username = '" . $model->username . "' OR email = '" . $model->username . "'")->one();
                         if (!empty($check_exists)) {
+
                                 $token_value = $this->tokenGenerator();
                                 $token = $check_exists->id . '_' . $token_value;
                                 $val = base64_encode($token);
@@ -429,7 +431,7 @@ class SiteController extends Controller {
                                 $token_model->user_id = $check_exists->id;
                                 $token_model->token = $token_value;
                                 $token_model->save();
-                                $this->sendMail($val, $check_exists->email);
+                                $this->sendMail($val, $check_exists);
                                 Yii::$app->getSession()->setFlash('success', 'A mail has been sent');
                         } else {
                                 Yii::$app->getSession()->setFlash('error', 'Invalid username');
@@ -453,37 +455,16 @@ class SiteController extends Controller {
                 return $token;
         }
 
-        public function sendMail($val, $email) {
+        public function sendMail($val, $model) {
 
-                $to = $email;
-
-// subject
+                $to = $model->email;
                 $subject = 'Change password';
+                $message = $this->renderPartial('forgot_mail', ['model' => $model, 'val' => $val]);
 
-// message
-                echo
-                $message = '
-<html>
-<head>
-  <title>Forgot Password</title>
-</head>
-<body>
-  <p>Change Password</p>
-  <table>
-
-     <tr>
-      <td><a href="' . Yii::$app->homeUrl . 'site/new-password?token=' . $val . '">Click here change password</a></td>
-    </tr>
-
-  </table>
-</body>
-</html>
-';
-                exit;
 // To send HTML mail, the Content-type header must be set
                 $headers = 'MIME-Version: 1.0' . "\r\n";
                 $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n" .
-                        "From: 'noreplay@azryah.com";
+                        "From: 'perfumedunia.com";
                 mail($to, $subject, $message, $headers);
         }
 
