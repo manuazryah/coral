@@ -47,15 +47,15 @@ class SiteController extends Controller {
 		return [
 		    'access' => [
 			'class' => AccessControl::className(),
-			'only' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products'],
+			'only' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products', 'verification'],
 			'rules' => [
 				[
-				'actions' => ['signup', 'login-signup', 'product-detail', 'our-products'],
+				'actions' => ['signup', 'login-signup', 'product-detail', 'our-products', 'verification'],
 				'allow' => true,
 				'roles' => ['?'],
 			    ],
 				[
-				'actions' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products'],
+				'actions' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products', 'verification'],
 				'allow' => true,
 				'roles' => ['@'],
 			    ],
@@ -229,18 +229,32 @@ class SiteController extends Controller {
 		]);
 	}
 
+	public function actionVerification($id) {
+
+		$model = User::find()->where(['id' => $id])->one();
+
+		if (!empty($model)) {
+			$model->email_verification = 1;
+			$model->save();
+			return $this->redirect(array('site/login'));
+		} else {
+			return $this->redirect(array('site/index'));
+		}
+	}
+
 	public function Emailverification($user) {
 
 		$to = $user->email;
 		$subject = 'Email Verification';
-		$message = $this->renderPartial('email_verifictn', ['model' => $user]);
+		echo $message = $this->renderPartial('email_verifictn', ['model' => $user]);
+		exit;
 
 
 // To send HTML mail, the Content-type header must be set
 		$headers = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n" .
 			"From: info@perfumedunia.com";
-		mail($to, $subject, $message, $headers);
+		//mail($to, $subject, $message, $headers);
 	}
 
 	/**

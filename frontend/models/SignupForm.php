@@ -82,6 +82,7 @@ class SignupForm extends Model {
 		$user->country_code = $this->country_code;
 		$user->mobile_no = $this->mobile_no;
 		$user->email = $this->email;
+		$user->email_verification = 0;
 		$user->notification = $this->notification;
 		$user->setPassword($this->password);
 		$user->generateAuthKey();

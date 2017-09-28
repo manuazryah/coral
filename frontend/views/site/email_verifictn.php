@@ -19,7 +19,7 @@ use yii\helpers\Html;
 
 				<p>Hi <?= $model->first_name ?>,</p>
 				<p>Thank You for registering with us . please click on the below link to login</p>
-				<p><a href="http://<?= Yii::$app->request->serverName ?>" style="display: inline-block;cursor: pointer;padding: 6px 12px;font-size: 13px;line-height: 1.42857143;text-decoration: none;color: #fff;border-color: #80b636;background-color: #8dc63f;border: 1px solid transparent;">Click Here</a></p>
+				<p><a href="http://<?= Yii::$app->request->serverName ?>/site/verification?id=<?= $model->id ?>" style="display: inline-block;cursor: pointer;padding: 6px 12px;font-size: 13px;line-height: 1.42857143;text-decoration: none;color: #fff;border-color: #80b636;background-color: #8dc63f;border: 1px solid transparent;">Click Here</a></p>
 			</div>
 		</div>
 
