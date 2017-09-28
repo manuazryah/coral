@@ -9,16 +9,14 @@
 $(document).on('submit', '#add_category', function (event) {
     event.preventDefault();
     if (valid()) {
-        var main_category = $('#product-main_category').val();
-//        var main_category = $('input:radio[name="Product[main_category]"]:checked').val();
+        var main_category = $('input:radio[name="Product[main_category]"]:checked').val();
         var category = $('#subcategory-category').val();
         var code = $('#subcategory-categorycode').val();
         var form = $('.modal-title').attr('field_id');
-//        addcategory(main_category,category,code);
         $.ajax({
             url: homeUrl + 'product/category/ajaxaddcategory',
             type: "post",
-            data: {main_category: main_category, cat: category, code: code},
+            data: {main_category: main_category, cat: category, status: status, code: code},
             success: function (data) {
                 var $data = JSON.parse(data);
                 if ($data.con === "1") {
@@ -29,7 +27,7 @@ $(document).on('submit', '#add_category', function (event) {
 //                    $('#subcategory-category').val('');
                     $('#modal-1').modal('toggle');
                 } else {
-                    alert($data.msg['category'] + ' or ' + $data.msg['category_code']);
+
                 }
 
             }, error: function () {
@@ -46,8 +44,7 @@ $(document).on('submit', '#add_category', function (event) {
 /****      Add Sub Category     *****/
 $(document).on('submit', '#add_subcategory', function (event) {
     event.preventDefault();
-    var main_category = $('#product-main_category').val();
-//    var main_category = $('input:radio[name="Product[main_category]"]:checked').val();
+    var main_category = $('input:radio[name="Product[main_category]"]:checked').val();
     var category = $('#product-prcat').val();
     var catname = $('#product-prcat option:selected').text();
     var subcat = $('#product_subcat').val();
@@ -209,8 +206,7 @@ $('#product-main_category').change(function () {
 $('#subcategory-main_category').click(function () {
     var $ids = $(this).attr('id');
     var ids = $ids.split('-');
-    var main_category = $(this).val();
-//    var main_category = $('input:radio[name="SubCategory[main_category]"]:checked').val();
+    var main_category = $('input:radio[name="SubCategory[main_category]"]:checked').val();
     main_category_(main_category, ids);
 
 });
@@ -229,9 +225,6 @@ $("#product-category").change(function () {
         }
     });
 });
-//$('#product-sort').keyup(function () {
-//    var sort = $(this).val();
-//});
 
 
 var valid = function () { //Validation Function - Sample, just checks for empty fields
