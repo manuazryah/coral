@@ -112,18 +112,12 @@ class AjaxController extends \yii\web\Controller {
             $note_data = \common\models\Notes::findOne($note_id);
             $note_session = Yii::$app->session['create-your-own'];
             $prev_note = Yii::$app->session['create-your-own']['note-data'];
-            $prev_note_price = Yii::$app->session['create-your-own']['notes-price'];
             if (empty($prev_note)) {
                 $next_note = $note_data->id;
             } else {
                 $next_note = $prev_note . "," . $note_data->id;
             }
-            if (empty($prev_note_price)) {
-                $next_note_price = $note_data->price;
-            } else {
-                $next_note_price = $prev_note_price . "," . $note_data->price;
-            }
-            Yii::$app->session['create-your-own'] = array_merge($note_session, ['note-data' => $next_note, 'notes-price' => $next_note_price]);
+            Yii::$app->session['create-your-own'] = array_merge($note_session, ['note-data' => $next_note]);
         }
     }
 
@@ -136,14 +130,89 @@ class AjaxController extends \yii\web\Controller {
         if (Yii::$app->request->isAjax) {
             $note_id = $_POST['data_val'];
             $notes_data = \common\models\Notes::find()->where(['id' => $note_id])->one();
-            $arr_note_data = Yii::$app->session['create-your-own']['note-data'];
-            $arr_note_price = Yii::$app->session['create-your-own']['notes-price'];
             $prev_session = Yii::$app->session['create-your-own'];
-//            $session_note_price = explode(',', Yii::$app->session['create-your-own']['notes-price']);
-            var_dump($prev_session);
-            var_dump($arr_note_data);
-            var_dump($arr_note_price);
+            $arr_note_data = explode(',', Yii::$app->session['create-your-own']['note-data']);
+            $new_str = '';
+            $j = 1;
+            foreach ($arr_note_data as $value) {
+                if ($value == $notes_data->id) {
+                    if ($j != 1) {
+                        $new_str .= $value . ',';
+                    }
+                    $j++;
+                } else {
+                    $new_str .= $value . ',';
+                }
+            }
+            Yii::$app->session['create-your-own'] = array_merge($prev_session, ['note-data' => rtrim($new_str, ',')]);
+            echo $notes_data->notes;
             exit;
+        }
+    }
+
+    /*
+     * This function set bottle value in session variable
+     * return result to the view
+     */
+
+    public function actionBottleSession() {
+        if (Yii::$app->request->isAjax) {
+            $bottle = $_POST['data_val'];
+            $bottle_data = \common\models\Bottle::find()->where(['id' => $bottle])->one();
+            $sess = Yii::$app->session['create-your-own'];
+            Yii::$app->session['create-your-own'] = array_merge($sess, ['bottle' => $bottle_data->id, 'bottle-price' => $bottle_data->price]);
+            $bottle_src = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottle_data->id . '/main.' . $bottle_data->bottle_img;
+            echo $bottle_src;
+            exit;
+        }
+    }
+
+    /*
+     * This function set bottle label value in session variable
+     * return result to the view
+     */
+
+    public function actionLabelSession() {
+        if (Yii::$app->request->isAjax) {
+            $line1 = $_POST['line_1'];
+            $line2 = $_POST['line_2'];
+            $sess = Yii::$app->session['create-your-own'];
+            $amount = 0;
+            $amount += Yii::$app->session['create-your-own']['character-price'];
+            $amount += Yii::$app->session['create-your-own']['scent-price'];
+            $amount += Yii::$app->session['create-your-own']['bottle-price'];
+            $arr_note_data = explode(',', Yii::$app->session['create-your-own']['note-data']);
+            foreach ($arr_note_data as $value) {
+                $note_model = \common\models\Notes::find()->where(['id' => $value])->one();
+                $amount += $note_model->price;
+            }
+            Yii::$app->session['create-your-own'] = array_merge($sess, ['line-1' => $line1, 'line-2' => $line2, 'total-amount' => $amount]);
+            $gender_name = '';
+            $character_name = '';
+            $scent_name = '';
+            if (isset(Yii::$app->session['create-your-own']['gender'])) {
+                $gender_name = \common\models\Gender::findOne(Yii::$app->session['create-your-own']['gender'])->gender;
+            }
+            if (isset(Yii::$app->session['create-your-own']['character'])) {
+                $character_name = \common\models\Characters::findOne(Yii::$app->session['create-your-own']['character'])->name;
+            }
+            if (isset(Yii::$app->session['create-your-own']['gender'])) {
+                $scent_name = \common\models\Scent::findOne(Yii::$app->session['create-your-own']['scent'])->scent;
+            }
+            $heading = $gender_name . '  >  ' . $character_name . '  >  ' . $scent_name;
+            $options = '';
+            if (isset(Yii::$app->session['create-your-own']['note-data'])) {
+                $arr_note_data = explode(',', Yii::$app->session['create-your-own']['note-data']);
+                foreach ($arr_note_data as $value) {
+                    $datas = \common\models\Notes::find()->where(['id' => $value])->one();
+                    $options .= '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><img src="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $datas->id . '/small.' . $datas->sub_img . '"></div>';
+                }
+            }
+            $bottle_data = \common\models\Bottle::find()->where(['id' => Yii::$app->session['create-your-own']['bottle']])->one();
+            $bottle_src = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottle_data->id . '/main.' . $bottle_data->bottle_img;
+            $arr_variable1 = array('heading' => $heading, 'first-line' => Yii::$app->session['create-your-own']['line-1'], 'second-line' => Yii::$app->session['create-your-own']['line-2'], 'tot-count' => sprintf('%0.2f', Yii::$app->session['create-your-own']['total-amount']) . ' $', 'note-imgs' => $options, 'bottle-src' => $bottle_src);
+            $data['result'] = $arr_variable1;
+            echo json_encode($data);
         }
     }
 

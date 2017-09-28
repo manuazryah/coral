@@ -195,36 +195,84 @@ use yii\helpers\Html;
                     </div>
                 </div>
                 <div class="step_col_left">
-                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
-                        <span class="span2">Dynamic</span>
-                    </label>
-                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
-                        <span class="span2">Dynamic</span>
-                    </label>
-                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
-                        <span class="span2">Dynamic</span>
-                    </label>
-                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
-                        <span class="span2">Dynamic</span>
-                    </label>
-                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
-                        <span class="span2">Dynamic</span>
-                    </label>
-                    <label class="image-toggler choose2 choose-grn" data-image-id="#image1">
-                        <input type="radio" name="toggle" name2="service_frequency" value="1" class="tab" id="tab3" checked="">
-                        <span class="span2">Dynamic</span>
-                    </label>
+                    <div id="kryesore">
+                        <?php
+                        foreach ($bottle as $val) {
+                            ?>
+                            <label class="image-toggler choose2 bottle-main" data-image-id="#image1" id="tab-<?= $val->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/bottle/<?= $val->id ?>/main.<?= $val->bottle_img ?>'>
+                                <input class="bottle" type="radio" name="bottle" value="<?= $val->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/bottle/<?= $val->id ?>/main.<?= $val->bottle_img ?>'>
+                                <span class="span2"><?= $val->name ?></span>
+                            </label>
+                        <?php }
+                        ?>
+                    </div>
                 </div>
                 <div class="step_col_right">
-                    <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="scent_image"/>
+                    <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="bottle_image"/>
                 </div>
                 <input type="button" name="previous" class="previous prev action-button" value="Previous" />
                 <input type="button" name="next" class="next nxt action-button" value="Next" />
+            </fieldset>
+
+            <fieldset id="tab6">
+                <div class="hint-border">
+                    <div class="container hint">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
+                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="<?= Yii::$app->homeUrl; ?>images/create-your-own-arrw.png"/></button></a>
+                            <!--<input type="button" name="previous" class="previous action-button back" value="Previous" />-->
+                        </div>
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 hint-msg-box">
+                            <p class="hint-msg">Whats the name of your perfume?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="step_col_left">
+                    <input type="text" name="line-1" id="line-1" value="" placeholder="Enter label1 text here" maxlength="<?= $botle->text_length ?>"/>
+                    <p style="float:right;font-size: 11px;">Max :<?= $botle->text_length ?> characters </p>
+                    <input type="text" name="line-2" id="line-2" value="" placeholder="Enter label2 text here" maxlength="<?= $botle->text_length ?>"/>
+                    <p style="float:right;font-size: 11px;">Max :<?= $botle->text_length ?> characters </p>
+                </div>
+                <div class="step_col_right">
+                    <img src="" class="img-responsive" id="bottle1_image"/>
+                </div>
+                <input type="button" name="previous" class="previous prev action-button" value="Previous" />
+                <input type="button" name="next" class="next nxt action-button" value="Next" />
+            </fieldset>
+
+            <fieldset id="tab7">
+                <div class="hint-border">
+                    <div class="container hint">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
+                            <a href="#"><button class="back" name="previous" class="previous action-button back" value="Previous"><img src="<?= Yii::$app->homeUrl; ?>images/create-your-own-arrw.png"/></button></a>
+                            <!--<input type="button" name="previous" class="previous action-button back" value="Previous" />-->
+                        </div>
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10 hint-msg-box">
+                            <p class="hint-msg">Done!</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="step_col_left" style="width: 435px;">
+                    <p style="text-align: center;font-weight: 600;padding-bottom: 15px;" id="done-heading"></p>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <h3 style="text-align:left;font-size: 20px;font-weight: 600;" id="first_line"></h3>
+                            <h4 style="text-align:left;font-size: 18px;font-weight: 600;" id="second_line"></h4>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <h2 style="text-align:right;font-size: 22px;font-weight: 600;" id="tot-amt"></h2>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 35px;">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="note-images">
+                        </div>
+                    </div>
+                </div>
+                <div class="step_col_right" style="width: 465px;">
+                    <img src="" class="img-responsive" id="bottle2_image"/>
+                </div>
+                <input type="button" name="previous" class="previous prev action-button" value="Previous" />
+                <input type="button" name="checkout" class="chkout action-button" value="Checkout" />
             </fieldset>
         </form>
     </div>
@@ -475,6 +523,7 @@ use yii\helpers\Html;
                     $("#item-" + item_id).val(res_count);
                     if (res_count == 0) {
                         $("#note-" + item_id + " span").text(data);
+                        $("#note-" + item_id + ' button').removeClass('choose-grn');
                     } else {
                         $("#note-" + item_id + " .items").text(res_count);
                     }
@@ -482,40 +531,39 @@ use yii\helpers\Html;
                 }
             });
         });
-    });
-    function validateDatas(id) {
-        if ('tab-' + id == 'tab-1') {
-            var result = validateCommon('.gender');
-        }
-        if ('tab-' + id == 'tab-2') {
-            var result = validateCommon('.character');
-        }
-        if ('tab-' + id == 'tab-3') {
-            var result = validateCommon('.scent');
-        }
-        if ('tab-' + id == 'tab-4') {
-            var result = validateNotes();
-        }
-        return result;
-    }
-    function validateCommon(data) {
 
-        if ($(data).is(':checked')) {
-            var valid = 0;
-        } else {
-            var valid = 1;
-        }
-        return valid;
-    }
-    function validateNotes() {
-        var count = parseInt($("#note-count").val());
-        if (count > 0) {
-            var valid = 0;
-        } else {
-            var valid = 1;
-        }
-        return valid;
-    }
+        $(document).on('mouseenter', '.bottle-main', function () {
+            var src_value = $(this).attr('data-val');
+            $('#bottle_image').attr('src', src_value);
+        });
+
+        $(document).on("mouseleave", ".bottle-main", function () {
+            var src_value = $('input[name=bottle]:checked', '#tab5').attr('data-val');
+            if (src_value === undefined || src_value === null) {
+                $('#bottle_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+            } else {
+                $('#bottle_image').attr('src', src_value);
+            }
+        });
+        $(document).on('change', 'input[type=radio][name=bottle]', function () {
+            if ($(this).is(':checked')) {
+                $(this).parent().parent().parent().find('.choose-grn').removeClass('choose-grn');
+                $(this).parent().addClass('choose-grn');
+            }
+            var src_value = $(this).attr('data-val');
+            $('#bottle_image').attr('src', src_value);
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/bottle-session',
+                success: function (data) {
+                    $('#bottle1_image').attr('src', data);
+                }
+            });
+        });
+    });
 </script>
 
 

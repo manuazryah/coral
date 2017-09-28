@@ -4,6 +4,7 @@ var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
 $(document).on('click', '.next', function () {
+
     var id = $(this).closest("fieldset").attr('id').match(/\d+/);
     if (validateDatas(id) == 0) {
         if (animating)
@@ -215,6 +216,12 @@ function validateDatas(id) {
     if ('tab-' + id == 'tab-4') {
         var result = validateNotes();
     }
+    if ('tab-' + id == 'tab-5') {
+        var result = validateNotes();
+    }
+    if ('tab-' + id == 'tab-6') {
+        var result = validateLabel();
+    }
     return result;
 }
 function validateCommon(data) {
@@ -233,5 +240,28 @@ function validateNotes() {
     } else {
         var valid = 1;
     }
+    return valid;
+}
+function validateLabel() {
+    var line1 = $('#line-1').val();
+    var line2 = $('#line-2').val();
+    $.ajax({
+        type: 'POST',
+        cache: false,
+        async: false,
+        data: {line_1: line1, line_2: line2},
+        url: homeUrl + 'ajax/label-session',
+        success: function (data) {
+            var res = $.parseJSON(data);
+            $('#done-heading').text(res.result['heading']);
+            $('#first_line').text(res.result['first-line']);
+            $('#second_line').text(res.result['second-line']);
+            $('#tot-amt').text(res.result['tot-count']);
+            $("#note-images").html(res.result['note-imgs']);
+            $('#bottle2_image').attr('src', res.result['bottle-src']);
+            alert("Are you sure you wouldn't like to label your perfume?");
+        }
+    });
+    var valid = 0;
     return valid;
 }

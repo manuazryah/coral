@@ -32,7 +32,7 @@ class Bottle extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['name', 'price'], 'required'],
+            [['name', 'price', 'text_length'], 'required'],
             [['bottle_img'], 'required', 'on' => 'create'],
             [['text_length', 'status', 'CB', 'UB'], 'integer'],
             [['price'], 'number'],
