@@ -38,7 +38,7 @@ use Imagine\Image\Box;
  * @property integer $status
  * @property integer $featured_product
  * @property string $profile
- * @property string $sort
+ * @property float $sort
  */
 class Product extends \yii\db\ActiveRecord {
 

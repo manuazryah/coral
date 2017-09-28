@@ -85,6 +85,107 @@ if (isset($meta_title) && $meta_title != '')
 			</div>
 		</div>
 	</div>
+    <div class="strategic-approuch">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="heading">Our strategic approuch to your marketing</h5>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 left">
+                    <div class="msg-block top-box">
+                        <p class="mg-0 xs-marbttm-15">
+                            <strong>1. Planning & Discuss</strong><br>
+                            <span class="text-light">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et quasi.</span>
+                        </p>
+                        <p class="mg-0 hidden-lg hidden-md hidden-sm xs-marbttm-15">
+                            <strong>2. Creative Process</strong><br>
+                            <span class="text-light">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et quasi.</span>
+                        </p>
+                    </div>
+                    <div class="msg-block bottom-box">
+                        <p class="mg-0 xs-marbttm-15">
+                            <strong>3. Development</strong><br>
+                            <span class="text-light">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et quasi.</span>
+                        </p>
+                        <p class="mg-0 hidden-lg hidden-md hidden-sm xs-marbttm-15">
+                            <strong>4. Final Product</strong><br>
+                            <span class="text-light">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et quasi.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 hidden-xs graph">
+                    <img class="center-block img-responsive" src="images/strategic-approuch.png">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs right">
+                    <div class="msg-block top-box">
+                        <p class="mg-0">
+                            <strong>2. Creative Process</strong><br>
+                            <span class="text-light">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et quasi.</span>
+                        </p>
+                    </div>
+                    <div class="msg-block bottom-box">
+                        <p class="mg-0">
+                            <strong>4. Final Product</strong><br>
+                            <span class="text-light">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et quasi.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sister-concern">
+        <div class="container border-box">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h5 class="heading">Sister Concerns</h5>
+            </div>
+            <div style="clear: both">
+                <div class="owl-item active col-lg-4 col-md-4 col-sm-6 col-xs-12"><div class="item our-services hover-shadow">
+                        <img class="img-responsive" src="http://webpentagon.com/demo/themeforest/wordpress/specialists/wp-content/uploads/bfi_thumb/serv-11-ncougkdd37fhexy3es6f0ssifxgy2l0ut5mc0ukgk6.jpg" alt="services-image">
+                        <div class="content-our-services">
+                            <p><strong>Business Growth</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>  
+                            <ul>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                            </ul>                    
+                        </div>                      
+                    </div>
+                </div>
+                <div class="owl-item active col-lg-4 col-md-4 col-sm-6 col-xs-12"><div class="item our-services hover-shadow">
+                        <img class="img-responsive" src="http://webpentagon.com/demo/themeforest/wordpress/specialists/wp-content/uploads/bfi_thumb/serv-11-ncougkdd37fhexy3es6f0ssifxgy2l0ut5mc0ukgk6.jpg" alt="services-image">
+                        <div class="content-our-services">
+                            <p><strong>Business Growth</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>  
+                            <ul>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                            </ul>                            
+                        </div>                      
+                    </div>
+                </div>
+                <div class="owl-item active col-lg-4 col-md-4 col-sm-6 col-xs-12"><div class="item our-services hover-shadow">
+                        <img class="img-responsive" src="http://webpentagon.com/demo/themeforest/wordpress/specialists/wp-content/uploads/bfi_thumb/serv-11-ncougkdd37fhexy3es6f0ssifxgy2l0ut5mc0ukgk6.jpg" alt="services-image">
+                        <div class="content-our-services">
+                            <p><strong>Business Growth</strong></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>  
+                            <ul>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                                <li>Sed ut perspiciatis unde omnis</li>
+                            </ul>                       
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pad-20"></div>
 
 
 
