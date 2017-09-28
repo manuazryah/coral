@@ -6,4 +6,5 @@ return [
     'category' => 'product/category/index',
     'sub-category' => 'product/sub-category/index',
     'forgot-password' => 'site/forgot',
+    'country-codes' => 'product/country-code/index',
 ];
