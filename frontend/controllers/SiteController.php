@@ -218,7 +218,10 @@ class SiteController extends Controller {
 						}
 					}
 				} else {
+
 					$this->Emailverification($user);
+Yii::$app->session->setFlash('success', 'Please Verify Your Email Id.');
+return $this->redirect(Yii::$app->request->referrer);
 				}
 			}
 		}
@@ -246,15 +249,15 @@ class SiteController extends Controller {
 
 		$to = $user->email;
 		$subject = 'Email Verification';
-		echo $message = $this->renderPartial('email_verifictn', ['model' => $user]);
-		exit;
+		 $message = $this->renderPartial('email_verifictn', ['model' => $user]);
+		
 
 
 // To send HTML mail, the Content-type header must be set
 		$headers = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n" .
 			"From: info@perfumedunia.com";
-		//mail($to, $subject, $message, $headers);
+		mail($to, $subject, $message, $headers);
 	}
 
 	/**

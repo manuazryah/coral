@@ -199,7 +199,6 @@ $('#product-main_category').change(function () {
     var $ids = $(this).attr('id');
     var ids = $ids.split('-');
     var main_category = $(this).val();
-//    var main_category = $('input:radio[name="Product[main_category]"]:checked').val();
     main_category_(main_category, ids);
 
 });

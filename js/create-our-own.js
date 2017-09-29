@@ -217,7 +217,7 @@ function validateDatas(id) {
         var result = validateNotes();
     }
     if ('tab-' + id == 'tab-5') {
-        var result = validateNotes();
+        var result = validateCommon('.bottle');
     }
     if ('tab-' + id == 'tab-6') {
         var result = validateLabel();

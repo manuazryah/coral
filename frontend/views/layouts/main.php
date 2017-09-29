@@ -205,8 +205,7 @@ and open the template in the editor.
                                 <ul class="nav navbar-nav">
                                     <li class="<?= $action == 'site/index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
                                     <li class="<?= $action == 'site/about' ? 'active' : '' ?>"><?= Html::a('<span>About Us</span>', ['/site/about'], ['class' => '']) ?></li>
-<!--                                                                        <li class="<?= $main_categry == 1 ? 'active' : '' ?>"><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $catag->category_code, 'category' => 1], ['class' => '']) ?></li>
-                                    <li class="<?= $main_categry == 2 ? 'active' : '' ?>"><?= Html::a('<span>international products</span>', ['/product/index', 'id' => $catag_2->category_code, 'category' => 2], ['class' => '']) ?></li>-->
+
                                     <?php if (!empty($params['category'])) { ?>
                                         <li class="<?= $params['category'] == 1 ? 'active' : '' ?>"><?= Html::a('<span>Exclusive Brands</span>', ['/product/index', 'id' => $catag->category_code, 'category' => 1], ['class' => '']) ?></li>
                                         <li class="<?= $params['category'] == 2 ? 'active' : '' ?>"><?= Html::a('<span>Brands</span>', ['/product/index', 'id' => $catag_2->category_code, 'category' => 2], ['class' => '']) ?></li>

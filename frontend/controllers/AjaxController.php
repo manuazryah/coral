@@ -8,6 +8,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\db\Expression;
+use common\models\CreateYourOwn;
 
 class AjaxController extends \yii\web\Controller {
 
@@ -82,8 +83,9 @@ class AjaxController extends \yii\web\Controller {
             Yii::$app->session['create-your-own'] = array_merge($sess, ['scent' => $scent_id, 'scent-price' => $scent_data->price]);
             $Notes = \common\models\Notes::find()->where(new Expression('FIND_IN_SET(:scent_id, scent_id)'))->addParams([':scent_id' => $scent_id])->andWhere(['status' => 1])->all();
             $all_notes = \common\models\Notes::find()->where(['status' => 1])->all();
+            $options = '<input type="hidden" name="note-count" id="note-count" value="0"/>';
+            $options1 = '';
             if (!empty($Notes)) {
-                $options = '<input type="hidden" name="note-count" id="note-count" value="0"/>';
                 $i = 1;
                 foreach ($Notes as $Note_data) {
                     $options .= '<span class="button-checkbox notes-main" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/large.' . $Note_data->main_img . '" id="note-' . $Note_data->id . '" data-val1="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/small.' . $Note_data->main_img . '"><button id="" type="button" class="btn image-toggler choose2 tab btn-default" data-image-id="#image1"><span class="span2" id="' . $i . '">' . $Note_data->notes . '</span></button><input type="checkbox" class="note-select" name="notes[]" name2="service_frequency" value="' . $Note_data->id . '" id="" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/large.' . $Note_data->main_img . '"></span><input type="hidden" name="item-count" id="item-' . $Note_data->id . '" value="0"/>';
@@ -92,7 +94,7 @@ class AjaxController extends \yii\web\Controller {
             }
             if (!empty($all_notes)) {
                 foreach ($all_notes as $all_data) {
-                    $options1 .= '<span class="button-checkbox notes-main" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $all_data->id . '/large.' . $all_data->main_img . '" id="note-' . $all_data->id . '" data-val1="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $Note_data->id . '/small.' . $Note_data->main_img . '"><button id="" type="button" class="btn image-toggler choose2 tab btn-default" data-image-id="#image1"><span class="span2">' . $all_data->notes . '</span></button><input type="checkbox" class="note-select" name="notes[]" name2="service_frequency" value="' . $all_data->id . '" id="" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $all_data->id . '/large.' . $all_data->main_img . '"></span><input type="hidden" name="item-count" id="item-' . $all_data->id . '" value="0"/>';
+                    $options1 .= '<span class="button-checkbox notes-main" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $all_data->id . '/large.' . $all_data->main_img . '" id="note-' . $all_data->id . '" data-val1="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $all_data->id . '/small.' . $all_data->main_img . '"><button id="" type="button" class="btn image-toggler choose2 tab btn-default" data-image-id="#image1"><span class="span2">' . $all_data->notes . '</span></button><input type="checkbox" class="note-select" name="notes[]" name2="service_frequency" value="' . $all_data->id . '" id="" data-val="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $all_data->id . '/large.' . $all_data->main_img . '"></span><input type="hidden" name="item-count" id="item-' . $all_data->id . '" value="0"/>';
                 }
             }
             $arr_variable = array('recomented' => $options, 'recomented-count' => count($Notes), 'all' => $options1, 'all-count' => count($all_notes));
@@ -111,11 +113,15 @@ class AjaxController extends \yii\web\Controller {
             $note_id = $_POST['data_val'];
             $note_data = \common\models\Notes::findOne($note_id);
             $note_session = Yii::$app->session['create-your-own'];
-            $prev_note = Yii::$app->session['create-your-own']['note-data'];
-            if (empty($prev_note)) {
-                $next_note = $note_data->id;
+            if (isset(Yii::$app->session['create-your-own']['note-data'])) {
+                $prev_note = Yii::$app->session['create-your-own']['note-data'];
+                if (empty($prev_note)) {
+                    $next_note = $note_data->id;
+                } else {
+                    $next_note = $prev_note . "," . $note_data->id;
+                }
             } else {
-                $next_note = $prev_note . "," . $note_data->id;
+                $next_note = $note_data->id;
             }
             Yii::$app->session['create-your-own'] = array_merge($note_session, ['note-data' => $next_note]);
         }
@@ -162,8 +168,10 @@ class AjaxController extends \yii\web\Controller {
             $sess = Yii::$app->session['create-your-own'];
             Yii::$app->session['create-your-own'] = array_merge($sess, ['bottle' => $bottle_data->id, 'bottle-price' => $bottle_data->price]);
             $bottle_src = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottle_data->id . '/main.' . $bottle_data->bottle_img;
-            echo $bottle_src;
-            exit;
+            $max_length = 'Max :' . $bottle_data->text_length . ' characters ';
+            $arr_variable2 = array('bottle-src' => $bottle_src, 'max-length' => $max_length, 'max-limit' => $bottle_data->text_length);
+            $data['result'] = $arr_variable2;
+            echo json_encode($data);
         }
     }
 
@@ -213,6 +221,48 @@ class AjaxController extends \yii\web\Controller {
             $arr_variable1 = array('heading' => $heading, 'first-line' => Yii::$app->session['create-your-own']['line-1'], 'second-line' => Yii::$app->session['create-your-own']['line-2'], 'tot-count' => sprintf('%0.2f', Yii::$app->session['create-your-own']['total-amount']) . ' $', 'note-imgs' => $options, 'bottle-src' => $bottle_src);
             $data['result'] = $arr_variable1;
             echo json_encode($data);
+        }
+    }
+
+    /*
+     * This function save create your own data and check when the user is logged in or not
+     * return result to the view
+     */
+
+    public function actionCheckOut() {
+
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->session['create-your-own'];
+            $user_id = '';
+            $sessonid = '';
+            $flag = 0;
+            $model = new CreateYourOwn();
+            if (isset(Yii::$app->user->identity->id)) {
+                $user_id = Yii::$app->user->identity->id;
+                $flag = 1;
+            } else {
+                if (!isset(Yii::$app->session['temp_create_yourown']) || Yii::$app->session['temp_create_yourown'] == '') {
+                    $milliseconds = round(microtime(true) * 1000);
+                    Yii::$app->session['temp_create_yourown'] = $milliseconds;
+                }
+                $sessonid = Yii::$app->session['temp_create_yourown'];
+            }
+            $model->user_id = $user_id;
+            $model->session_id = $sessonid;
+            $model->order_id = 111;
+            $model->gender = $data['gender'];
+            $model->character_id = $data['character'];
+            $model->scent = $data['scent'];
+            $model->note = $data['note-data'];
+            $model->bottle = $data['bottle'];
+            $model->label_1 = $data['line-1'];
+            $model->label_2 = $data['line-2'];
+            $model->tot_amount = $data['total-amount'];
+            $model->user_status = 1;
+            $model->admin_status = 1;
+            $model->comments = '';
+            $model->save();
+            echo $flag;
         }
     }
 

@@ -24,6 +24,7 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
         <div class="container">
                 <div class="">
                         <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 lit-blue form-feild-box">
+
                                 <h4>Sign in</h4>
                                 <p class="sub-discrip">Sign in with your email and password.</p>
                                 <?php $form = ActiveForm::begin(['action' => Yii::$app->homeUrl . 'site/login']); ?>
@@ -44,6 +45,16 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
                         </div>
 
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 lit-blue form-feild-box">
+<?php if (Yii::$app->session->hasFlash('error')): ?>
+					<div class="alert alert-danger" role="alert">
+						<?= Yii::$app->session->getFlash('error') ?>
+					</div>
+				<?php endif; ?>
+				<?php if (Yii::$app->session->hasFlash('success')): ?>
+					<div class="alert alert-success" role="alert">
+						<?= Yii::$app->session->getFlash('success') ?>
+					</div>
+				<?php endif; ?>
                                 <h4>Creat Your Account</h4>
                                 <p class="sub-discrip">*Required fields. You may unsubscribe at any time.</p>
                                 <?php

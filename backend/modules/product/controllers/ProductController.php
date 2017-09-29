@@ -170,8 +170,7 @@ class ProductController extends Controller {
             $model->profile_alt = Yii::$app->request->post()['Product']['profile_alt'];
             $model->gallery_alt = Yii::$app->request->post()['Product']['gallery_alt'];
             $sort_number = Yii::$app->request->post()['Product']['sort'];
-            $this->check_sort($sort_number, $model->id);
-            $model->sort = $sort_number;
+            $this->check_sort($sort_number,$model->id);
             $model->other_image = '';
             if ($model->save()) {
                 if ($file11) {
@@ -199,34 +198,14 @@ class ProductController extends Controller {
         }
     }
 
-//    function check_sort($sort_number, $id = NULL) {
-////        ['sort'=>$sort_number]
-////        'id != :id and type != :type', ['id'=>1, 'type'=>1]
-//        $product = Product::find()->where('id != :id and sort = :sort', ['id' => $id, 'sort' => $sort_number])->one();
-//        if ($product) {
-////            echo 'hh';exit;
-//            $sort_number = $sort_number + .01;
-//            $this->sort_exist($sort_number, $id);
-//        } else {
-////            echo 'y';exit;
-//            return $sort_number;
-//        }
-//    }
-//
-//    function sort_exist($sort_number, $id) {
-//        $product = Product::find()->where(['sort' => $sort_number])->one();
-//        if ($product) {
-//            exit('how');
-//            $sort_number = $sort_number + .01;
-//            $this->sort_exist($sort_number, $id);
-//        } else {
-////             exit('ivde');
-////            $product = Product::findOne($id);
-//            var_dump($product);exit;
-//            $product->sort = $sort_number;
-//            $product->save();
-//        }
-//    }
+    function check_sort($sort_number, $id = NULL) {
+//        ['sort'=>$sort_number]
+//        'id != :id and type != :type', ['id'=>1, 'type'=>1]
+        $product = Product::find()->where('id = :id and sort != :sort', ['id' => $id, 'type' => 1])->one();
+        if ($product) {
+            $sort_number = $sort_number + .01;
+        }
+    }
 
     public function Upload($model, $file) {
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $model->id)) {
