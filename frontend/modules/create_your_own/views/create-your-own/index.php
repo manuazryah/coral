@@ -199,8 +199,8 @@ use yii\helpers\Html;
                         <?php
                         foreach ($bottle as $val) {
                             ?>
-                            <label class="image-toggler choose2 bottle-main" data-image-id="#image1" id="tab-<?= $val->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/bottle/<?= $val->id ?>/main.<?= $val->bottle_img ?>'>
-                                <input class="bottle" type="radio" name="bottle" value="<?= $val->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/bottle/<?= $val->id ?>/main.<?= $val->bottle_img ?>'>
+                            <label class="image-toggler choose2 bottle-main" data-image-id="#image1" id="tab-<?= $val->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/bottle/<?= $val->id ?>/large.<?= $val->bottle_img ?>'>
+                                <input class="bottle" type="radio" name="bottle" value="<?= $val->id ?>" data-val='<?= Yii::$app->homeUrl; ?>uploads/create_your_own/bottle/<?= $val->id ?>/large.<?= $val->bottle_img ?>'>
                                 <span class="span2"><?= $val->name ?></span>
                             </label>
                         <?php }
@@ -215,6 +215,9 @@ use yii\helpers\Html;
             </fieldset>
 
             <fieldset id="tab6">
+                <div id="dialog_box" style="display: none;">
+                    Really delete?
+                </div>
                 <div class="hint-border">
                     <div class="container hint">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 bck-arrow">
@@ -227,10 +230,10 @@ use yii\helpers\Html;
                     </div>
                 </div>
                 <div class="step_col_left">
-                    <input type="text" name="line-1" id="line-1" value="" placeholder="Enter label1 text here" maxlength="<?= $botle->text_length ?>"/>
-                    <p style="float:right;font-size: 11px;">Max :<?= $botle->text_length ?> characters </p>
-                    <input type="text" name="line-2" id="line-2" value="" placeholder="Enter label2 text here" maxlength="<?= $botle->text_length ?>"/>
-                    <p style="float:right;font-size: 11px;">Max :<?= $botle->text_length ?> characters </p>
+                    <input class="max-len-limit" type="text" name="line-1" id="line-1" value="" placeholder="Enter label1 text here" maxlength=""/>
+                    <p class="max-len" style="float:right;font-size: 11px;"></p>
+                    <input class="max-len-limit" type="text" name="line-2" id="line-2" value="" placeholder="Enter label2 text here" maxlength=""/>
+                    <p class="max-len" style="float:right;font-size: 11px;"></p>
                 </div>
                 <div class="step_col_right">
                     <img src="" class="img-responsive" id="bottle1_image"/>
@@ -559,7 +562,35 @@ use yii\helpers\Html;
                 data: {data_val: this.value},
                 url: '<?= Yii::$app->homeUrl; ?>ajax/bottle-session',
                 success: function (data) {
-                    $('#bottle1_image').attr('src', data);
+                    var res = $.parseJSON(data);
+                    $('#bottle_image').attr('src', res.result['bottle-src']);
+                    $('#bottle1_image').attr('src', res.result['bottle-src']);
+                    $('.max-len').text(res.result['max-length']);
+                    $('.max-len-limit').attr('maxlength', res.result['max-limit']);
+                }
+            });
+        });
+
+        $(document).on('click', '.chkout', function (e) {
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: false,
+                data: {data_val: this.value},
+                url: '<?= Yii::$app->homeUrl; ?>ajax/check-out',
+                success: function (data) {
+                    if (data == 0) {
+                        alert('Before proceeding to checkout please login');
+                        window.open(
+                                '<?= Yii::$app->homeUrl; ?>site/login-signup',
+                                '_blank' // <- This is what makes it open in a new window.
+                                );
+                    } else if (data == 1) {
+                        window.open(
+                                '<?= Yii::$app->homeUrl; ?>cart/mycart',
+                                '_blank' // <- This is what makes it open in a new window.
+                                );
+                    }
                 }
             });
         });
