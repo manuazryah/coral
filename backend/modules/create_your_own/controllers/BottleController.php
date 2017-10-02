@@ -83,7 +83,7 @@ class BottleController extends Controller {
         $image = UploadedFile::getInstance($model, 'bottle_img');
         $path = Yii::$app->basePath . '/../uploads/create_your_own/bottle';
         $size = [
-            ['width' => 70, 'height' => 70, 'name' => 'small'],
+            ['width' => 100, 'height' => 100, 'name' => 'small'],
         ];
 
         if (!empty($image)) {
