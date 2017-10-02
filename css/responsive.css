@@ -976,6 +976,7 @@
 	}
 }
 @media(max-width:458px){
+
 	.top-nav ul li:first-child a{
 		padding: 5px 10px;
 	}
@@ -1029,7 +1030,7 @@
 	}
 	#header .shopping-cart{
 		top: 80px;
-		right: 45px;
+		/*right: 45px;*/
 	}
 	/*    #header #logo{
 		width: 100%;
@@ -1092,7 +1093,7 @@
 		padding: 13px 10px;
 	}
 	#footer .features ul li{
-		width: 100%;
+		/*width: 100%;*/
 	}
 	.xs-100{
 		width: 100%;
@@ -1407,7 +1408,7 @@
 		top: 10px;
 	}
 	#about-page .chairmans-msg-bg{
-		height: 350px;
+		height: auto;
 	}
 	#about-page .chairmans-name p{
 		text-align: center;
@@ -1522,7 +1523,7 @@
 		margin: 25px 0;
 	}
 	#sticky-header.fixed #header nav .navbar-right {
-		top: 34px;
+		top: 20px;
 	}
 	#sticky-header.fixed #header .logo {
 		height: 75px;
@@ -1530,5 +1531,11 @@
 	}
 	#youtube-vid iframe{
 		width: 410px !important;
+	}
+	#footer .my-account-link{
+		width: 145px;
+	}
+	.link_resp{
+		width: auto !important;
 	}
 }
