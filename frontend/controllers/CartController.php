@@ -155,9 +155,9 @@ class CartController extends \yii\web\Controller {
     }
 
     public function actionMycart() {
-        if (isset(Yii::$app->session['temp_create_yourown'])) {
+        if (isset(Yii::$app->session['create_own'])) {
             /* Change tempuser cart to login user */
-            $this->addtocart(Yii::$app->session['temp_create_yourown']);
+            $this->addtocart();
         }
         $date = $this->date();
         $shipping_limit = Settings::findOne('1');
@@ -393,21 +393,33 @@ class CartController extends \yii\web\Controller {
         $cart_contents = Cart::findAll($condition);
         if (!empty($cart_contents)) {
             foreach ($cart_contents as $cart_content) {
-                $prod_details = Product::findOne($cart_content->product_id);
-                if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
-                    $price = $prod_details->price;
+                if ($cart_content->item_type == 1) {
+//                    echo 'dsad';exit;
+                    $prod_details = CreateYourOwn::findOne($cart_content->product_id);
+                    $bottles = \common\models\Bottle::findOne($prod_details->bottle);
+                    $product_image = Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img;
+                    if (file_exists($product_image)) {
+                        $image = '<img src="' . Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img. '" alt="item1" />';
+                    }
+                    $price = $prod_details->tot_amount;
                 } else {
-                    $price = $prod_details->offer_price;
+                    $prod_details = Product::findOne($cart_content->product_id);
+                    if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
+                        $price = $prod_details->price;
+                    } else {
+                        $price = $prod_details->offer_price;
+                    }
+                    $product_image = Yii::$app->basePath . '/../uploads/product/' . $prod_details->id . '/profile/' . $prod_details->canonical_name . '.' . $prod_details->profile;
+                    if (file_exists($product_image)) {
+                        $image = '<img src="' . Yii::$app->homeUrl . 'uploads/product/' . $prod_details->id . '/profile/' . $prod_details->canonical_name . '_thumb.' . $prod_details->profile . '" alt="item1" />';
+                    } else {
+                        $image = '<img src="' . Yii::$app->homeUrl . 'uploads/product/profile_thumb.png" alt=""/>';
+                    }
                 }
-                $product_image = Yii::$app->basePath . '/../uploads/product/' . $prod_details->id . '/profile/' . $prod_details->canonical_name . '.' . $prod_details->profile;
-                if (file_exists($product_image)) {
-                    $image = '<img src="' . Yii::$app->homeUrl . 'uploads/product/' . $prod_details->id . '/profile/' . $prod_details->canonical_name . '_thumb.' . $prod_details->profile . '" alt="item1" />';
-                } else {
-                    $image = '<img src="' . Yii::$app->homeUrl . 'uploads/product/profile_thumb.png" alt=""/>';
-                }
+                $product_name = $cart_content->item_type == 1 ? $prod_details->label_1 : $prod_details->product_name;
                 echo '<li class="clearfix">
                        ' . $image . '
-                       <span class="item-name">' . $prod_details->product_name . '</span>
+                       <span class="item-name">' . $product_name . '</span>
                        <span class="item-price">' . $price . '</span>
                        <span class="item-quantity">Quantity: ' . $cart_content->quantity . '</span>
                        </li>';
@@ -460,9 +472,8 @@ class CartController extends \yii\web\Controller {
         }
     }
 
-    function addtocart($temp) {
-        $datas = \common\models\CreateYourOwn::find()->where(['session_id' => $temp, 'status' => 0])->orWhere(['user_id' => Yii::$app->user->identity->id, 'status' => 0])->all();
-
+    function addtocart() {
+        $datas = \common\models\CreateYourOwn::find()->where(['session_id' => Yii::$app->session['temp_create_yourown'], 'status' => 0])->orWhere(['user_id' => Yii::$app->user->identity->id, 'status' => 0])->all();
         if (!empty($datas)) {
             foreach ($datas as $msd) {
                 $model = new Cart();

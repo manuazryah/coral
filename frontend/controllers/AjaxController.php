@@ -258,6 +258,7 @@ class AjaxController extends \yii\web\Controller {
             $model->label_2 = $data['line-2'];
             $model->tot_amount = $data['total-amount'];
             if ($model->save()) {
+                yii::$app->session['create_own'] = $model->id;
                 yii::$app->session['after_login'] = 'cart/mycart';
             }
             echo $flag;
