@@ -16,7 +16,8 @@ use common\models\Settings;
             <?php
             if ($cart->item_type == 1) {
                 $product = \common\models\CreateYourOwn::findOne($cart->product_id);
-                $bottles = common\models\Bottle::findOne($product->bottle);
+
+                $bottles = \common\models\Bottle::findOne($product->bottle);
                 $product_image = Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img;
                 if (file_exists($product_image)) {
                     $image = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img;

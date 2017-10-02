@@ -289,9 +289,6 @@ class CartController extends \yii\web\Controller {
         $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
         if (!empty($model1)) {
             $model1->user_id = Yii::$app->user->identity->id;
-            if ($cart->item_type == 1) {
-                $model1->item_type = 1;
-            }
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
             $model1->status = 1;
@@ -312,9 +309,6 @@ class CartController extends \yii\web\Controller {
             $serial_no = \common\models\Settings::findOne(4)->value;
             $model1->order_id = $this->generateProductEan($serial_no);
             $model1->user_id = Yii::$app->user->identity->id;
-            if ($cart->item_type == 1) {
-                $model1->item_type = 1;
-            }
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
             $model1->status = 1;
