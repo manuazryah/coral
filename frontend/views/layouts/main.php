@@ -319,10 +319,10 @@ and open the template in the editor.
 							<div class="col-md-12 my-account-link">
 								<ul>
 									<li><a href="#">My Account</a></li>
-									<li><?= Html::a('Private Label', ['/site/private-label'], ['class' => '']) ?></li>
-									<li><a href="#">Our Products</a></li>
+									<!--<li><?= Html::a('Private Label', ['/site/private-label'], ['class' => '']) ?></li>-->
+									<!--<li><a href="#">Exclusive Brands</a></li>-->
 									<li><?= Html::a('Showrooms', ['/site/showrooms'], ['class' => '']) ?></li>
-									<li><a href="#">International Products</a></li>
+									<!--<li><a href="#">Brands</a></li>-->
 									<li><?= Html::a('contact us', ['/site/contact'], ['class' => '']) ?></li>
 
 								</ul>
