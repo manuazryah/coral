@@ -18,34 +18,31 @@ use Yii;
  * @property string $doc
  * @property integer $status
  */
-class OrderDetails extends \yii\db\ActiveRecord
-{
+class OrderDetails extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'order_details';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['master_id', 'order_id', 'product_id', 'quantity', 'amount', 'rate', 'status'], 'required'],
-            [['master_id', 'product_id', 'quantity', 'status'], 'integer'],
-            [['amount', 'rate'], 'number'],
-            [['delivered_date', 'doc'], 'safe'],
+                [['master_id', 'order_id', 'product_id', 'quantity', 'amount', 'rate', 'status'], 'required'],
+                [['master_id', 'product_id', 'quantity', 'status'], 'integer'],
+                [['amount', 'rate'], 'number'],
+                [['delivered_date', 'doc', 'item_type'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'master_id' => 'Master ID',
@@ -59,4 +56,5 @@ class OrderDetails extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
 }

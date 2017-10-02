@@ -24,27 +24,25 @@ use Yii;
  * @property integer $shipping_method
  * @property integer $status
  */
-class OrderMaster extends \yii\db\ActiveRecord
-{
+class OrderMaster extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'order_master';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['order_id', 'user_id', 'total_amount', 'order_date'], 'required'],
-            [['user_id', 'ship_address_id', 'bill_address_id', 'currency_id', 'payment_mode', 'admin_comment', 'payment_status', 'admin_status', 'shipping_method', 'status'], 'integer'],
-            [['total_amount'], 'number'],
-            [['order_date', 'doc'], 'safe'],
-            [['user_comment'], 'string'],
+                [['order_id', 'user_id', 'total_amount', 'order_date'], 'required'],
+                [['user_id', 'ship_address_id', 'bill_address_id', 'currency_id', 'payment_mode', 'admin_comment', 'payment_status', 'admin_status', 'shipping_method', 'status'], 'integer'],
+                [['total_amount'], 'number'],
+                [['order_date', 'doc'], 'safe'],
+                [['user_comment'], 'string'],
 //            [['order_id'], 'string', 'max' => 200],
         ];
     }
@@ -52,8 +50,7 @@ class OrderMaster extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'order_id' => 'Order ID',
@@ -73,4 +70,5 @@ class OrderMaster extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
 }

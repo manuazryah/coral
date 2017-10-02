@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
     <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
         <?= $form->field($model, 'bottle_img')->fileInput() ?>
         <?php if (isset($model->bottle_img)) { ?>
-            <img src="<?= Yii::$app->homeUrl ?>../uploads/create_your_own/bottle/<?= $model->id ?>/main.<?= $model->bottle_img; ?>?<?= rand() ?>" width="320" height="110"/>
+            <img src="<?= Yii::$app->homeUrl ?>../uploads/create_your_own/bottle/<?= $model->id ?>/small.<?= $model->bottle_img; ?>?<?= rand() ?>" width="" height=""/>
 
             <?php
         } elseif (!empty($model->bottle_img)) {

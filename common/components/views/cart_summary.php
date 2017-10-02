@@ -14,26 +14,35 @@ use common\models\Settings;
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?php foreach ($cart_items as $cart) { ?>
             <?php
-            $product = Product::findOne($cart->product_id);
-            $product_image = Yii::$app->basePath . '/../uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '.' . $product->profile;
-            if (file_exists($product_image)) {
-                $image = Yii::$app->homeUrl . 'uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '_thumb.' . $product->profile;
+            if ($cart->item_type == 1) {
+                $product = \common\models\CreateYourOwn::findOne($cart->product_id);
+                $bottles = common\models\Bottle::findOne($product->bottle);
+                $product_image = Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img;
+                if (file_exists($product_image)) {
+                    $image = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img;
+                }
+                $price = $product->tot_amount;
             } else {
-                $image = Yii::$app->homeUrl . 'uploads/product/profile_thumb.png';
-            }
-            if ($product->offer_price == '0' || $product->offer_price == '') {
-                $price = $product->price;
-            } else {
-                $price = $product->offer_price;
+                $product = Product::findOne($cart->product_id);
+                $product_image = Yii::$app->basePath . '/../uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '.' . $product->profile;
+                if (file_exists($product_image)) {
+                    $image = Yii::$app->homeUrl . 'uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '_thumb.' . $product->profile;
+                } else {
+                    $image = Yii::$app->homeUrl . 'uploads/product/profile_thumb.png';
+                }
+                if ($product->offer_price == '0' || $product->offer_price == '') {
+                    $price = $product->price;
+                } else {
+                    $price = $product->offer_price;
+                }
             }
             $total = $price * $cart->quantity;
             ?>
             <div class="media">
                 <a class="thumbnail col-lg-2 col-md-2 col-sm-2 col-xs-2" href="#"> <img class="media-object" src="<?= $image ?>"> </a>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="top: 10px; text-align: left">
-                    <h4 class="product-heading"><a href="#"><?= $product->product_name; ?></a></h4>
-                    <?php $brand = Brand::findOne($product->brand); ?>
-                    <h5 class="brand-name"><a href="#"><?= $brand->brand; ?></a></h5>
+                    <h4 class="product-heading"><a href="#"><?= $cart->item_type == 1 ? $product->label_1 : $product->product_name; ?></a></h4>
+                    <h5 class="brand-name"><a href="#"><?= $cart->item_type == 1 ? $product->label_2 : Brand::findOne($product->brand)->brand; ?></a></h5>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="top: 15px; text-align: right; padding-right: 0;">
                     <p class="price">AED <?= $total ?></p>

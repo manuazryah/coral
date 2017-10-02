@@ -42,7 +42,7 @@ class CartSummaryWidget extends Widget {
         $master = OrderMaster::find()->where('user_id = :user_id and status != :status', ['user_id' => $user_id, 'status' => '4'])->one();
         $cart_items = OrderDetails::find()->where(['order_id' => $master->order_id])->all();
         $shipping_limit = Settings::findOne('1')->value;
-        return $this->render('cart_summary', ['cart_items' => $cart_items, 'subtotal' => $master,'shipping_limit'=>$shipping_limit]);
+        return $this->render('cart_summary', ['cart_items' => $cart_items, 'subtotal' => $master, 'shipping_limit' => $shipping_limit]);
         //return Html::encode($this->message);
     }
 

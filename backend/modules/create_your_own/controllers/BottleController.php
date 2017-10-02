@@ -80,33 +80,16 @@ class BottleController extends Controller {
      * @return mixed
      */
     public function UploadSingle($model) {
-        $model->bottle_img = UploadedFile::getInstance($model, 'bottle_img');
-        if (isset($model->bottle_img)) {
-            $filename = Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $model->id . '/';
-            if (!file_exists($filename)) {
-                mkdir(Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $model->id, 0777);
-            }
-            if ($model->bottle_img->saveAs(Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $model->id . '/main.' . $model->bottle_img->extension)) {
-                if ($model->isNewRecord) {
-                    $update = Scent::findOne($model->id);
-                    $update->bottle_img = $model->bottle_img->extension;
-                    $update->update();
-                } else {
-                    $model->bottle_img = $model->bottle_img->extension;
-                    $model->save();
-                }
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if (!$model->isNewRecord) {
-                $update = Bottle::findOne($model->id);
-                $model->bottle_img = $update->bottle_img;
-                $model->save();
-            }
-            return true;
+        $image = UploadedFile::getInstance($model, 'bottle_img');
+        $path = Yii::$app->basePath . '/../uploads/create_your_own/bottle';
+        $size = [
+                ['width' => 300, 'height' => 75, 'name' => 'small'],
+        ];
+
+        if (!empty($image)) {
+            Yii::$app->UploadFile->UploadFile($model, $image, $path . '/' . $model->id, $size);
         }
+        return TRUE;
     }
 
     /**

@@ -167,7 +167,7 @@ class AjaxController extends \yii\web\Controller {
             $bottle_data = \common\models\Bottle::find()->where(['id' => $bottle])->one();
             $sess = Yii::$app->session['create-your-own'];
             Yii::$app->session['create-your-own'] = array_merge($sess, ['bottle' => $bottle_data->id, 'bottle-price' => $bottle_data->price]);
-            $bottle_src = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottle_data->id . '/main.' . $bottle_data->bottle_img;
+            $bottle_src = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottle_data->id . '/large.' . $bottle_data->bottle_img;
             $max_length = 'Max :' . $bottle_data->text_length . ' characters ';
             $arr_variable2 = array('bottle-src' => $bottle_src, 'max-length' => $max_length, 'max-limit' => $bottle_data->text_length);
             $data['result'] = $arr_variable2;
@@ -217,7 +217,7 @@ class AjaxController extends \yii\web\Controller {
                 }
             }
             $bottle_data = \common\models\Bottle::find()->where(['id' => Yii::$app->session['create-your-own']['bottle']])->one();
-            $bottle_src = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottle_data->id . '/main.' . $bottle_data->bottle_img;
+            $bottle_src = Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottle_data->id . '/large.' . $bottle_data->bottle_img;
             $arr_variable1 = array('heading' => $heading, 'first-line' => Yii::$app->session['create-your-own']['line-1'], 'second-line' => Yii::$app->session['create-your-own']['line-2'], 'tot-count' => sprintf('%0.2f', Yii::$app->session['create-your-own']['total-amount']) . ' $', 'note-imgs' => $options, 'bottle-src' => $bottle_src);
             $data['result'] = $arr_variable1;
             echo json_encode($data);
@@ -249,7 +249,7 @@ class AjaxController extends \yii\web\Controller {
             }
             $model->user_id = $user_id;
             $model->session_id = $sessonid;
-            $model->order_id = 111;
+            $model->order_id = '';
             $model->gender = $data['gender'];
             $model->character_id = $data['character'];
             $model->scent = $data['scent'];
@@ -261,7 +261,9 @@ class AjaxController extends \yii\web\Controller {
             $model->user_status = 1;
             $model->admin_status = 1;
             $model->comments = '';
-            $model->save();
+            if ($model->save()) {
+                yii::$app->session['after_login'] = 'cart/mycart';
+            }
             echo $flag;
         }
     }

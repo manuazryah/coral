@@ -17,21 +17,19 @@ use Yii;
  * @property integer $gift_option
  * @property double $rate
  */
-class Cart extends \yii\db\ActiveRecord
-{
+class Cart extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'cart';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
 //            [['user_id', 'product_id', 'quantity', 'options', 'date', 'gift_option', 'rate'], 'required'],
 //            [['user_id', 'product_id', 'quantity', 'options', 'gift_option'], 'integer'],
@@ -44,8 +42,7 @@ class Cart extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
@@ -56,6 +53,8 @@ class Cart extends \yii\db\ActiveRecord
             'date' => 'Date',
             'gift_option' => 'Gift Option',
             'rate' => 'Rate',
+            'item_type' => 'Item Type',
         ];
     }
+
 }

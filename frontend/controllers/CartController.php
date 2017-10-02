@@ -14,6 +14,7 @@ use yii\di\Instance;
 use yii\db\Expression;
 use common\models\OrderMaster;
 use common\models\OrderDetails;
+use common\models\CreateYourOwn;
 
 class CartController extends \yii\web\Controller {
 
@@ -78,7 +79,7 @@ class CartController extends \yii\web\Controller {
                 if (isset(Yii::$app->session['temp_user'])) {
                     /*                     * *******Change tempuser cart to login user********* */
                     $this->changecart(Yii::$app->session['temp_user']);
-//                
+//
                 }
                 $condition = ['user_id' => Yii::$app->user->identity->id];
             } else {
@@ -154,6 +155,10 @@ class CartController extends \yii\web\Controller {
     }
 
     public function actionMycart() {
+        if (isset(Yii::$app->session['temp_create_yourown'])) {
+            /* Change tempuser cart to login user */
+            $this->addtocart(Yii::$app->session['temp_create_yourown']);
+        }
         $date = $this->date();
         $shipping_limit = Settings::findOne('1');
         if (isset(Yii::$app->user->identity->id)) {
@@ -170,8 +175,6 @@ class CartController extends \yii\web\Controller {
         }
         if (!empty($cart_items)) {
             $subtotal = $this->total($cart_items);
-
-
             return $this->render('buynow', ['carts' => $cart_items, 'subtotal' => $subtotal, 'shipping_limit' => $shipping_limit->value]);
         } else {
             return $this->render('emptycart');
@@ -286,6 +289,9 @@ class CartController extends \yii\web\Controller {
         $model1 = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
         if (!empty($model1)) {
             $model1->user_id = Yii::$app->user->identity->id;
+            if ($cart->item_type == 1) {
+                $model1->item_type = 1;
+            }
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
             $model1->status = 1;
@@ -306,7 +312,9 @@ class CartController extends \yii\web\Controller {
             $serial_no = \common\models\Settings::findOne(4)->value;
             $model1->order_id = $this->generateProductEan($serial_no);
             $model1->user_id = Yii::$app->user->identity->id;
-
+            if ($cart->item_type == 1) {
+                $model1->item_type = 1;
+            }
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
             $model1->status = 1;
@@ -330,14 +338,22 @@ class CartController extends \yii\web\Controller {
 
     public function orderProducts($orders, $carts) {
         foreach ($carts as $cart) {
-            $prod_details = Product::findOne($cart->product_id);
+            if ($cart->item_type == 1) {
+                $prod_details = CreateYourOwn::findOne($cart->product_id);
+            } else {
+                $prod_details = Product::findOne($cart->product_id);
+            }
             $check = OrderDetails::find()->where(['order_id' => $orders['order_id'], 'product_id' => $cart->product_id])->one();
             if (!empty($check)) {
                 $check->quantity = $cart->quantity;
-                if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
-                    $price = $prod_details->price;
+                if ($cart->item_type == 1) {
+                    $price = $prod_details->tot_amount;
                 } else {
-                    $price = $prod_details->offer_price;
+                    if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
+                        $price = $prod_details->price;
+                    } else {
+                        $price = $prod_details->offer_price;
+                    }
                 }
                 $check->amount = $price;
                 $check->rate = ($cart->quantity) * ($price);
@@ -349,10 +365,15 @@ class CartController extends \yii\web\Controller {
                 $model_prod->order_id = $orders['order_id'];
                 $model_prod->product_id = $cart->product_id;
                 $model_prod->quantity = $cart->quantity;
-                if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
-                    $price = $prod_details->price;
+                if ($cart->item_type == 1) {
+                    $price = $prod_details->tot_amount;
+                    $model_prod->item_type = 1;
                 } else {
-                    $price = $prod_details->offer_price;
+                    if ($prod_details->offer_price == '0' || $prod_details->offer_price == '') {
+                        $price = $prod_details->price;
+                    } else {
+                        $price = $prod_details->offer_price;
+                    }
                 }
                 $model_prod->amount = $price;
                 $model_prod->rate = ($cart->quantity) * ($price);
@@ -400,13 +421,17 @@ class CartController extends \yii\web\Controller {
     public function total($cart) {
         $subtotal = '0';
         foreach ($cart as $cart_item) {
-            $product = Product::findOne($cart_item->product_id);
-            if ($product->offer_price == '0' || $product->offer_price == '') {
-                $price = $product->price;
+            if ($cart_item->item_type == 1) {
+                $subtotal += $cart_item->rate;
             } else {
-                $price = $product->offer_price;
+                $product = Product::findOne($cart_item->product_id);
+                if ($product->offer_price == '0' || $product->offer_price == '') {
+                    $price = $product->price;
+                } else {
+                    $price = $product->offer_price;
+                }
+                $subtotal += ($price * $cart_item->quantity);
             }
-            $subtotal += ($price * $cart_item->quantity);
         }
         return $subtotal;
     }
@@ -433,6 +458,28 @@ class CartController extends \yii\web\Controller {
             $msd->user_id = Yii::$app->user->identity->id;
             $msd->save();
         }
+    }
+
+    function addtocart($temp) {
+        $datas = \common\models\CreateYourOwn::find()->where(['session_id' => $temp])->orWhere(['user_id' => Yii::$app->user->identity->id])->all();
+
+        if (!empty($datas)) {
+            foreach ($datas as $msd) {
+                $model = new Cart();
+                $model->user_id = Yii::$app->user->identity->id;
+                $model->product_id = $msd->id;
+                $model->quantity = 1;
+                $model->date = date('Y-m-d h:m:s');
+                $model->rate = $msd->tot_amount;
+                $model->item_type = 1;
+                if ($model->save()) {
+                    $msd->session_id = '';
+                    $msd->user_id = Yii::$app->user->identity->id;
+                    $msd->save();
+                }
+            }
+        }
+        return;
     }
 
     function date() {
