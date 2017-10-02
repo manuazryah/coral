@@ -1862,9 +1862,9 @@ h1:after{
 #product-page .start-shopping{
         margin-right: 0px;
         margin-left: 15px;
-       background: rgba(97, 179, 70, 0.85);
-    border: 2px solid #61b346;
-    color: white;
+	background: rgba(97, 179, 70, 0.85);
+	border: 2px solid #61b346;
+	color: white;
 }
 #product-page .action{
         display: inline-block;
@@ -2194,7 +2194,7 @@ a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
         background-color: #fff;
 }
 #radioBtn .btn-primary{
-        border: 1px solid #b5e1e0;
+	border: 1px solid #a3e4c6;
         font-size: 14px;
         font-weight: 100;
         color: #515452;
@@ -4228,13 +4228,13 @@ fieldset .notes-selection{
 	top: 35px;
 }
 #kryesore{
-    overflow-y: scroll;
-    max-height: 248px;
-    background: #edf7f5;
-    border: 1px solid #ddd;
-    padding: 11px 0px;
-    min-height: 248px;
+	overflow-y: scroll;
+	max-height: 248px;
+	background: #edf7f5;
+	border: 1px solid #ddd;
+	padding: 11px 0px;
+	min-height: 248px;
 }
 #create-your-own .chkout {
-    left: 455px !important;
+	left: 455px !important;
 }

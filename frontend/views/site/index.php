@@ -42,8 +42,8 @@ if (isset($meta_title) && $meta_title != '')
 						<div class="row">
 							<!-- Slide Text Layer -->
 							<div class="slide-text slide_style_right">
-								<p data-animation="animated fadeInLeft"><?= $value->slider_first_tittle ?></p>
-								<h3 data-animation="animated zoomInRight"><?= $value->slider_second_tittle ?></h3>
+								<p data-animation="animated fadeInLeft" class="hidden-sm hidden-xs"><?= $value->slider_first_tittle ?></p>
+								<h3 data-animation="animated zoomInRight" class="hidden-sm hidden-xs"><?= $value->slider_second_tittle ?></h3>
 								<?php if (isset($value->slider_link) && $value->slider_link != '') { ?>
 									<a href="<?= $value->slider_link ?>" target="_blank" class="start-shopping" data-animation="animated fadeInLeft">start shopping</a>
 								<?php } ?>

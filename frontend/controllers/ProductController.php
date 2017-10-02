@@ -37,6 +37,7 @@ class ProductController extends \yii\web\Controller {
 
 		if (!empty($id)) {
 			$dataProvider->query->andWhere(['category' => $catag->id]);
+			$category = $catag->main_category;
 		}
 
 		if ((!empty($type) && $type == 0) || $type != "") {
@@ -53,6 +54,7 @@ class ProductController extends \yii\web\Controller {
 //			$dataProvider->query->andWhere(['gender_type' => $type]);
 //		}
 		$categories = Category::find()->where(['status' => 1, 'main_category' => $category])->all();
+
 		$meta_tags = CmsMetaTags::find()->where(['id' => 3])->one();
 		\Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $meta_tags->meta_keyword]);
 		\Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $meta_tags->meta_description]);
@@ -66,6 +68,7 @@ class ProductController extends \yii\web\Controller {
 			    'id' => $id,
 			    'type' => $type,
 			    'meta_title' => $meta_tags->meta_title,
+			    'featured_status' => $featured
 		]);
 	}
 
