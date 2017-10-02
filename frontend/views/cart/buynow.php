@@ -61,9 +61,19 @@ $this->title = 'Shopping Cart';
                                         <a class="thumbnail pull-left col-lg-5 col-md-5 col-sm-12 col-xs-12" href="#"> <img class="media-object" src="<?= $image ?>"> </a>
                                         <div class="media-body">
                                             <h4 class="product-heading"><a href="#">
-                                                    <?= $cart->item_type == 1 ? $product->label_1 : $product->product_name; ?>
+                                                    <?= $cart->item_type == 1 ? 'Custom Perfume' : $product->product_name; ?>
+                                                    <?php
+                                                    $label1 = '';
+                                                    $label2 = '';
+                                                    if (isset($product->label_1)) {
+                                                        $label1 = $product->label_1;
+                                                    }
+                                                    if (isset($product->label_2)) {
+                                                        $label2 = $product->label_2;
+                                                    }
+                                                    ?>
                                                 </a></h4>
-                                            <h5 class="brand-name"><a href="#"><?= $cart->item_type == 1 ? $product->label_2 : Brand::findOne($product->brand)->brand; ?></a></h5>
+                                            <h5 class="brand-name"><a href="#"><?= $cart->item_type == 1 ? $label1 . ' , ' . $label2 : Brand::findOne($product->brand)->brand; ?></a></h5>
                                             <!--<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>-->
                                         </div>
                                     </div>

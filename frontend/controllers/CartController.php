@@ -399,7 +399,7 @@ class CartController extends \yii\web\Controller {
                     $bottles = \common\models\Bottle::findOne($prod_details->bottle);
                     $product_image = Yii::$app->basePath . '/../uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img;
                     if (file_exists($product_image)) {
-                        $image = '<img src="' . Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img. '" alt="item1" />';
+                        $image = '<img src="' . Yii::$app->homeUrl . 'uploads/create_your_own/bottle/' . $bottles->id . '/small.' . $bottles->bottle_img . '" alt="item1" />';
                     }
                     $price = $prod_details->tot_amount;
                 } else {
@@ -416,7 +416,7 @@ class CartController extends \yii\web\Controller {
                         $image = '<img src="' . Yii::$app->homeUrl . 'uploads/product/profile_thumb.png" alt=""/>';
                     }
                 }
-                $product_name = $cart_content->item_type == 1 ? $prod_details->label_1 : $prod_details->product_name;
+                $product_name = $cart_content->item_type == 1 ? 'Custom Perfume' : $prod_details->product_name;
                 echo '<li class="clearfix">
                        ' . $image . '
                        <span class="item-name">' . $product_name . '</span>

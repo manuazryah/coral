@@ -41,8 +41,18 @@ use common\models\Settings;
             <div class="media">
                 <a class="thumbnail col-lg-2 col-md-2 col-sm-2 col-xs-2" href="#"> <img class="media-object" src="<?= $image ?>"> </a>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="top: 10px; text-align: left">
-                    <h4 class="product-heading"><a href="#"><?= $cart->item_type == 1 ? $product->label_1 : $product->product_name; ?></a></h4>
-                    <h5 class="brand-name"><a href="#"><?= $cart->item_type == 1 ? $product->label_2 : Brand::findOne($product->brand)->brand; ?></a></h5>
+                    <h4 class="product-heading"><a href="#"><?= $cart->item_type == 1 ? 'Custom Perfume' : $product->product_name; ?></a></h4>
+                    <?php
+                    $label1 = '';
+                    $label2 = '';
+                    if (isset($product->label_1)) {
+                        $label1 = $product->label_1;
+                    }
+                    if (isset($product->label_2)) {
+                        $label2 = $product->label_2;
+                    }
+                    ?>
+                    <h5 class="brand-name"><a href="#"><?= $cart->item_type == 1 ? $label1 . ' , ' . $label2 : Brand::findOne($product->brand)->brand; ?></a></h5>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="top: 15px; text-align: right; padding-right: 0;">
                     <p class="price">AED <?= $total ?></p>
