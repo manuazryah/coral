@@ -169,8 +169,9 @@ class ProductController extends Controller {
             $model->meta_title = Yii::$app->request->post()['Product']['meta_title'];
             $model->profile_alt = Yii::$app->request->post()['Product']['profile_alt'];
             $model->gallery_alt = Yii::$app->request->post()['Product']['gallery_alt'];
-            $sort_number = Yii::$app->request->post()['Product']['sort'];
-            $model->sort = $this->check_sort($sort_number, $model->id);
+//            $sort_number = Yii::$app->request->post()['Product']['sort'];
+//            $model->sort = $this->check_sort($sort_number, $model->id);
+            $model->sort = Yii::$app->request->post()['Product']['sort'];
             $model->other_image = '';
             if ($model->save()) {
                 if ($file11) {
@@ -198,17 +199,17 @@ class ProductController extends Controller {
         }
     }
 
-    function check_sort($sort_number, $id = NULL) {
-//        ['sort'=>$sort_number]
-//        'id != :id and type != :type', ['id'=>1, 'type'=>1]
-        $product = Product::find()->where('id != :id and sort = :sort', ['id' => $id, 'sort' => $sort_number])->one();
-        if ($product) {
-            $new_sort = $sort_number + .01;
-            $this->check_sort($new_sort, $id);
-        } else {
-            return $sort_number;
-        }
-    }
+//    function check_sort($sort_number, $id = NULL) {
+////        ['sort'=>$sort_number]
+////        'id != :id and type != :type', ['id'=>1, 'type'=>1]
+//        $product = Product::find()->where('id != :id and sort = :sort', ['id' => $id, 'sort' => $sort_number])->one();
+//        if ($product) {
+//            $new_sort = $sort_number + .01;
+//            $this->check_sort($new_sort, $id);
+//        } else {
+//            return $sort_number;
+//        }
+//    }
 
     public function Upload($model, $file) {
         if (!is_dir(\Yii::$app->basePath . '/../uploads/product/' . $model->id)) {
@@ -430,6 +431,7 @@ class ProductController extends Controller {
             $availablity = Yii::$app->request->post()['availablity'];
             $id = Yii::$app->request->post()['id'];
             $featured = Yii::$app->request->post()['featured'];
+            $sort = Yii::$app->request->post()['sort'];
 //        echo yii::$app->homeUrl;exit;
             if ($id) {
                 $model = $this->findModel($id);
@@ -438,6 +440,7 @@ class ProductController extends Controller {
                 $model->stock = $stock;
                 $model->stock_availability = $availablity;
                 $model->featured_product = $featured;
+                $model->sort = $sort;
                 if ($model->save()) {
                     echo json_encode(array('msg' => 'success', 'title' => 'succesfully changed'));
                 } else {

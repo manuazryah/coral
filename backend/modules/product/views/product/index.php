@@ -111,6 +111,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     },
                                 ],
                                 [
+                                    'attribute' => 'sort',
+                                    'format' => 'raw',
+                                    'value' => function ($data) {
+                                        return \yii\helpers\Html::textInput('sort', $data->sort, ['class' => 'form-control product_form', 'id' => 'product_sort_' . $data->id]);
+                                    },
+                                ],
+                                [
                                     'class' => 'yii\grid\ActionColumn',
                                     'header' => 'Action',
 //          'headerOptions' => ['style' => 'color:#337ab7'],
@@ -165,11 +172,12 @@ $this->params['breadcrumbs'][] = $this->title;
             var stock = $('#product_stock_' + res['2']).val();
             var availablity = $('#product_stockavailable_' + res['2']).val();
             var featured = $('#product_featuredproduct_' + res['2']).val();
+            var sort = $('#product_sort_' + res['2']).val();
             var id = res['2'];
             $.ajax({
                 url: homeUrl + 'product/product/ajaxchange_product',
                 type: "post",
-                data: {price: price, offerprice: offerprice, stock: stock, availablity: availablity, id: id, featured: featured},
+                data: {price: price, offerprice: offerprice, stock: stock, availablity: availablity, id: id, featured: featured, sort: sort},
                 success: function (data) {
                     var $data = JSON.parse(data);
                     if ($data.msg === "success") {
