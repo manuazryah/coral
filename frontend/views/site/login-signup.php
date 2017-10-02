@@ -24,28 +24,7 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
         <div class="container">
                 <div class="">
                         <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 lit-blue form-feild-box">
-
-                                <h4>Sign in</h4>
-                                <p class="sub-discrip">Sign in with your email and password.</p>
-                                <?php $form = ActiveForm::begin(['action' => Yii::$app->homeUrl . 'site/login']); ?>
-
-                                <?= $form->field($model_login, 'username')->textInput(['placeholder' => 'username']) ?>
-
-                                <?= $form->field($model_login, 'password')->passwordInput(['placeholder' => '********']) ?>
-
-                                <?= Html::submitButton('submit', ['class' => 'green2']) ?>
-                                <div class="form-group col-md-6">
-                                        <?= $form->field($model_login, 'rememberMe')->checkbox() ?>
-                                </div>
-                                <div class="form-group col-md-6">
-                                        <?= Html::a('Forgot your password ?', ['/forgot-password'], ['style' => 'color: #4694d2']) ?>
-                                </div>
-
-                                <?php ActiveForm::end(); ?>
-                        </div>
-
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 lit-blue form-feild-box">
-<?php if (Yii::$app->session->hasFlash('error')): ?>
+				<?php if (Yii::$app->session->hasFlash('error')): ?>
 					<div class="alert alert-danger" role="alert">
 						<?= Yii::$app->session->getFlash('error') ?>
 					</div>
@@ -55,37 +34,57 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
 						<?= Yii::$app->session->getFlash('success') ?>
 					</div>
 				<?php endif; ?>
+                                <h4>Sign in</h4>
+                                <p class="sub-discrip">Sign in with your email and password.</p>
+				<?php $form = ActiveForm::begin(['action' => Yii::$app->homeUrl . 'site/login']); ?>
+
+				<?= $form->field($model_login, 'username')->textInput(['placeholder' => 'username']) ?>
+
+				<?= $form->field($model_login, 'password')->passwordInput(['placeholder' => '********']) ?>
+
+				<?= Html::submitButton('submit', ['class' => 'green2']) ?>
+                                <div class="form-group col-md-6">
+					<?= $form->field($model_login, 'rememberMe')->checkbox() ?>
+                                </div>
+                                <div class="form-group col-md-6">
+					<?= Html::a('Forgot your password ?', ['/forgot-password'], ['style' => 'color: #4694d2']) ?>
+                                </div>
+
+				<?php ActiveForm::end(); ?>
+                        </div>
+
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 lit-blue form-feild-box">
                                 <h4>Creat Your Account</h4>
                                 <p class="sub-discrip">*Required fields. You may unsubscribe at any time.</p>
-                                <?php
-                                $form1 = ActiveForm::begin([
-                                            'action' => Yii::$app->homeUrl . 'site/signup'
-                                ]);
-                                ?>
+				<?php
+				$form1 = ActiveForm::begin([
+					    'action' => Yii::$app->homeUrl . 'site/signup'
+				]);
+				?>
 
 
 
                                 <div class="form-group col-md-12 form-group1">
                                         <label for="usr">Name*</label>
                                         <div class="col-md-6 first-name">
-                                                <?= $form1->field($model, 'first_name')->textInput(['placeholder' => 'First Name', 'id' => 'first_name_id'])->label(FALSE) ?>
+						<?= $form1->field($model, 'first_name')->textInput(['placeholder' => 'First Name', 'id' => 'first_name_id'])->label(FALSE) ?>
                                         </div>
                                         <div class="col-md-6 last-name">
-                                                <?= $form1->field($model, 'last_name')->textInput(['placeholder' => 'Last Name', 'id' => 'last_name_id'])->label(FALSE) ?>
+						<?= $form1->field($model, 'last_name')->textInput(['placeholder' => 'Last Name', 'id' => 'last_name_id'])->label(FALSE) ?>
                                         </div>
                                 </div>
-                                <?= $form1->field($model, 'email')->textInput(['id' => 'email_id'])->label('E-Mail Address*') ?>
-                                <?php
-                                $countries = ArrayHelper::map(CountryCode::findAll(['status' => 1]), 'id', 'country_name');
-                                $countrie_code = ArrayHelper::map(CountryCode::findAll(['status' => 1]), 'id', 'country_code');
-                                ?>
+				<?= $form1->field($model, 'email')->textInput(['id' => 'email_id'])->label('E-Mail Address*') ?>
+				<?php
+				$countries = ArrayHelper::map(CountryCode::findAll(['status' => 1]), 'id', 'country_name');
+				$countrie_code = ArrayHelper::map(CountryCode::findAll(['status' => 1]), 'id', 'country_code');
+				?>
 
                                 <div class="form-group col-md-6 form-group1">
-                                        <?= $form->field($model, 'country', ['options' => ['class' => 'country-select']])->dropDownList($countries, ['prompt' => '-Choose a country-',]) ?>
-                                        <?php // $form1->field($model, 'country')->dropDownList(['1' => 'UAE'], ['class' => 'country-select']);  ?>
+					<?= $form->field($model, 'country', ['options' => ['class' => 'country-select']])->dropDownList($countries, ['prompt' => '-Choose a country-',]) ?>
+					<?php // $form1->field($model, 'country')->dropDownList(['1' => 'UAE'], ['class' => 'country-select']);  ?>
                                 </div>
                                 <div class="form-group col-md-6 form-group1">
-                                        <?= $form1->field($model, 'gender')->dropDownList(['1' => 'Male', 2 => 'Female']); ?>
+					<?= $form1->field($model, 'gender')->dropDownList(['1' => 'Male', 2 => 'Female']); ?>
                                 </div>
 
                                 <div class="form-group col-md-6 form-group1" id="date_form_group_id">
@@ -93,24 +92,24 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
                                         <div class="date-dropdowns" id="dob_id">
                                                 <select id="signupform-day" class="day" name="SignupForm[day]">
                                                         <option value="">DD</option>
-                                                        <?php foreach (Yii::$app->SetValues->Dates() as $value) { ?>
-                                                                <option value="<?= $value ?>"><?= $value ?></option>
-                                                        <?php }
-                                                        ?>
+							<?php foreach (Yii::$app->SetValues->Dates() as $value) { ?>
+								<option value="<?= $value ?>"><?= $value ?></option>
+							<?php }
+							?>
                                                 </select>
                                                 <select id="signupform-month" class="month" name="SignupForm[month]">
                                                         <option value="">MM</option>
-                                                        <?php foreach (Yii::$app->SetValues->Months() as $key => $value) { ?>
-                                                                <option value="<?= $key ?>"><?= $value ?></option>
-                                                        <?php }
-                                                        ?>
+							<?php foreach (Yii::$app->SetValues->Months() as $key => $value) { ?>
+								<option value="<?= $key ?>"><?= $value ?></option>
+							<?php }
+							?>
                                                 </select>
                                                 <select id="signupform-year" class="year" name="SignupForm[year]">
                                                         <option value="">YYYY</option>
-                                                        <?php foreach (Yii::$app->SetValues->Years() as $value) { ?>
-                                                                <option value="<?= $value ?>"><?= $value ?></option>
-                                                        <?php }
-                                                        ?>
+							<?php foreach (Yii::$app->SetValues->Years() as $value) { ?>
+								<option value="<?= $value ?>"><?= $value ?></option>
+							<?php }
+							?>
                                                 </select>
                                         <!--<select class="day"><option value="00">DD</option><option value="01">1st</option><option value="02">2nd</option><option value="03">3rd</option><option value="04">4th</option><option value="05">5th</option><option value="06">6th</option><option value="07">7th</option><option value="08">8th</option><option value="09">9th</option><option value="10">10th</option><option value="11">11th</option><option value="12">12th</option><option value="13">13th</option><option value="14">14th</option><option value="15">15th</option><option value="16">16th</option><option value="17">17th</option><option value="18">18th</option><option value="19">19th</option><option value="20">20th</option><option value="21">21st</option><option value="22">22nd</option><option value="23">23rd</option><option value="24">24th</option><option value="25">25th</option><option value="26">26th</option><option value="27">27th</option><option value="28">28th</option><option value="29">29th</option></select>-->
                         <!--                        <select class="month" name="example6_[month]"><option value="00">MM</option><option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select>
@@ -122,40 +121,40 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
                                         <div class="date-dropdowns">
                                                 <select class="day" id="cntry_code_id"style="position: absolute; border-right: 1px solid #d1d2d0" name="SignupForm[country_code]">
                                                 <!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
-                                                        <?php
-                                                        foreach ($countrie_code as $key => $countrie_cod) {
-                                                                ?>
-                                                                <option value="<?= $key ?>"><?= $countrie_cod ?></option>
-                                                        <?php }
-                                                        ?>
+							<?php
+							foreach ($countrie_code as $key => $countrie_cod) {
+								?>
+								<option value="<?= $key ?>"><?= $countrie_cod ?></option>
+							<?php }
+							?>
                                                 </select>
                                                 <input style="padding-left: 70px;" type="phone" id="signupform-mobile_no" class="form-control" name="SignupForm[mobile_no]" value="" data-format="+1 (ddd) ddd-dddd" placeholder="555 555 5555">
                                         </div>
                                 </div>
                                 <div class="form-group col-md-12 form-group1">
-                                        <?= $form1->field($model, 'username')->textInput(['id' => 'username_id'])->label('Username*') ?>
+					<?= $form1->field($model, 'username')->textInput(['id' => 'username_id'])->label('Username*') ?>
                                 </div>
                                 <div class="form-group col-md-12 form-group1">
-                                        <?= $form1->field($model, 'password')->passwordInput()->label('Password*') ?>
+					<?= $form1->field($model, 'password')->passwordInput()->label('Password*') ?>
                                 </div>
                                 <div class="form-group col-md-12 form-group1">
-                                        <?= $form1->field($model, 'password_repeat')->passwordInput()->label('Confirm Password*') ?>
+					<?= $form1->field($model, 'password_repeat')->passwordInput()->label('Confirm Password*') ?>
                                 </div>
                                 <div class="form-group login-group-checkbox col-md-12 form-group1">
-                                        <?= $form1->field($model, 'rules')->checkbox() ?>
+					<?= $form1->field($model, 'rules')->checkbox() ?>
                                 </div>
                                 <div class="form-group login-group-checkbox col-md-12 form-group1">
-                                        <?= $form1->field($model, 'notification')->checkbox() ?>
+					<?= $form1->field($model, 'notification')->checkbox() ?>
                                 </div>
-                                <?= Html::submitButton('submit', ['class' => 'green2']) ?>
-                                <?php ActiveForm::end(); ?>
+				<?= Html::submitButton('submit', ['class' => 'green2']) ?>
+				<?php ActiveForm::end(); ?>
                         </div>
                 </div>
         </div>
 </div>
 <div class="pad-20"></div>
 <script>
-        $("document").ready(function () {
+	$("document").ready(function () {
 //		$("#email_id").blur(function () {
 //
 //			var email = $(this).val();
@@ -167,97 +166,97 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
 //			var username = $(this).val();
 //			usernameunique(username);
 //		});
-                $("body").click(function (event) {
-                        var clicked_id = event.target.id;
-                        var arr = ["signupform-password_repeat", "last_name_id", "email_id", "signupform-country", "signupform-gender", "signupform-day", "signupform-month", "signupform-year", "signupform-mobile_no", "signupform-password", "username_id"];
-                        if (jQuery.inArray(clicked_id, arr) !== -1) {
-                                displayerrors(clicked_id);
-                        }
-                        $("#email_id").blur(function () {
-                                var email = $(this).val();
-                                emailunique(email);
-                                //showLoader();
-                        });
-                        $("#username_id").blur(function () {
-                                var username = $(this).val();
-                                usernameunique(username);
-                        });
-                        $('#signupform-password_repeat').on('keyup', function () {
-                                CheckConfirmPasswordMatch();
-                        });
-                        /*
-                         * Purpose   :- On change of country dropdown
-                         * parameter :- country_id
-                         * return   :- The list of states depends on the country_id
-                         */
-                        $('#signupform-country').change(function () {
-                                var country_id = $(this).val();
-                                //showLoader();
-                                $.ajax({
-                                        type: 'POST',
-                                        cache: false,
-                                        data: {country_id: country_id},
-                                        url: homeUrl + 'ajax/countrycode',
-                                        success: function (data) {
-                                                if (data == 0) {
-                                                        alert('Failed to Load data, please try again error:1001');
-                                                } else {
-                                                        $('#cntry_code_id').val(data).attr("selected", "selected");
-                                                        //$(".state-change").html(data);
-                                                }
-                                                hideLoader();
-                                        }
-                                });
-                        });
-                        function CheckConfirmPasswordMatch() {
-                                if (($("#signupform-password_repeat ").val()) !== ($("#signupform-password ").val())) {
-                                        $(".field-signupform-password_repeat ").addClass('has-error');
-                                        if ($(".field-signupform-password_repeat div").text() === "") {
-                                                $(".field-signupform-password_repeat div").append("Password Mismatch");
-                                        }
-                                } else {
-                                        $(".field-signupform-password_repeat ").removeClass('has-error');
-                                        $(".field-signupform-password_repeat ").addClass('has-success');
-                                }
-                        }
-                        function displayerrors(clicked_id, arr) {
-                                if (!$("#first_name_id").val()) {
-                                        $(".field-first_name_id ").addClass('has-error');
-                                        if ($(".help-block").text() === "") {
-                                                $(".field-first_name_id div").append("First Name cannot be blank");
-                                        }
-                                }
-                                if ((!$("#email_id").val()) && (clicked_id !== "last_name_id")) {
-                                        $(".field-email_id ").addClass('has-error');
-                                        if ($(".field-email_id div").text() === "") {
-                                                $(".field-email_id div").append("Email Id cannot be blank");
-                                        }
-                                } else {
-                                        emailunique($("#email_id").val());
-                                }
-                                if (($("#signupform-day").val() === "") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && ($("#signupform-month").val() === "") && ($("#signupform-year").val() === "") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
-                                        $('#date_form_group_id').addClass("required has-error");
-                                        if ($("#dob_id div").text() === "") {
-                                                $('#dob_id').append($('<div class="help-block"> DOB cannot be blank </div>'));
-                                        }
-                                } else {
-                                        $('#date_form_group_id').removeClass("required has-error");
-                                        $('#dob_id div').empty();
-                                }
-                                if ((!$("#username_id").val()) && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id") && (clicked_id !== "signupform-mobile_no")) {
-                                        $(".field-username_id ").addClass('has-error');
-                                        if ($(".field-username_id div").text() === "") {
-                                                $(".field-username_id div").append("Username cannot be blank");
-                                        }
-                                }
-                                if ((!$("#signupform-password").val()) && (clicked_id !== "username_id") && (clicked_id !== "signupform-password") && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
-                                        $(".field-signupform-password ").addClass('has-error');
-                                        if ($(".field-signupform-password div").text() === "") {
-                                                $(".field-signupform-password div").append("Passwordcannot be blank");
-                                        }
-                                }
-                        }
-                });
+		$("body").click(function (event) {
+			var clicked_id = event.target.id;
+			var arr = ["signupform-password_repeat", "last_name_id", "email_id", "signupform-country", "signupform-gender", "signupform-day", "signupform-month", "signupform-year", "signupform-mobile_no", "signupform-password", "username_id"];
+			if (jQuery.inArray(clicked_id, arr) !== -1) {
+				displayerrors(clicked_id);
+			}
+			$("#email_id").blur(function () {
+				var email = $(this).val();
+				emailunique(email);
+				//showLoader();
+			});
+			$("#username_id").blur(function () {
+				var username = $(this).val();
+				usernameunique(username);
+			});
+			$('#signupform-password_repeat').on('keyup', function () {
+				CheckConfirmPasswordMatch();
+			});
+			/*
+			 * Purpose   :- On change of country dropdown
+			 * parameter :- country_id
+			 * return   :- The list of states depends on the country_id
+			 */
+			$('#signupform-country').change(function () {
+				var country_id = $(this).val();
+				//showLoader();
+				$.ajax({
+					type: 'POST',
+					cache: false,
+					data: {country_id: country_id},
+					url: homeUrl + 'ajax/countrycode',
+					success: function (data) {
+						if (data == 0) {
+							alert('Failed to Load data, please try again error:1001');
+						} else {
+							$('#cntry_code_id').val(data).attr("selected", "selected");
+							//$(".state-change").html(data);
+						}
+						hideLoader();
+					}
+				});
+			});
+			function CheckConfirmPasswordMatch() {
+				if (($("#signupform-password_repeat ").val()) !== ($("#signupform-password ").val())) {
+					$(".field-signupform-password_repeat ").addClass('has-error');
+					if ($(".field-signupform-password_repeat div").text() === "") {
+						$(".field-signupform-password_repeat div").append("Password Mismatch");
+					}
+				} else {
+					$(".field-signupform-password_repeat ").removeClass('has-error');
+					$(".field-signupform-password_repeat ").addClass('has-success');
+				}
+			}
+			function displayerrors(clicked_id, arr) {
+				if (!$("#first_name_id").val()) {
+					$(".field-first_name_id ").addClass('has-error');
+					if ($(".help-block").text() === "") {
+						$(".field-first_name_id div").append("First Name cannot be blank");
+					}
+				}
+				if ((!$("#email_id").val()) && (clicked_id !== "last_name_id")) {
+					$(".field-email_id ").addClass('has-error');
+					if ($(".field-email_id div").text() === "") {
+						$(".field-email_id div").append("Email Id cannot be blank");
+					}
+				} else {
+					emailunique($("#email_id").val());
+				}
+				if (($("#signupform-day").val() === "") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && ($("#signupform-month").val() === "") && ($("#signupform-year").val() === "") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
+					$('#date_form_group_id').addClass("required has-error");
+					if ($("#dob_id div").text() === "") {
+						$('#dob_id').append($('<div class="help-block"> DOB cannot be blank </div>'));
+					}
+				} else {
+					$('#date_form_group_id').removeClass("required has-error");
+					$('#dob_id div').empty();
+				}
+				if ((!$("#username_id").val()) && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id") && (clicked_id !== "signupform-mobile_no")) {
+					$(".field-username_id ").addClass('has-error');
+					if ($(".field-username_id div").text() === "") {
+						$(".field-username_id div").append("Username cannot be blank");
+					}
+				}
+				if ((!$("#signupform-password").val()) && (clicked_id !== "username_id") && (clicked_id !== "signupform-password") && (clicked_id !== "signupform-mobile_no") && (clicked_id !== "signupform-day") && (clicked_id !== "signupform-month") && (clicked_id !== "signupform-year") && (clicked_id !== "signupform-country") && (clicked_id !== "signupform-gender") && (clicked_id !== "last_name_id") && (clicked_id !== "email_id")) {
+					$(".field-signupform-password ").addClass('has-error');
+					if ($(".field-signupform-password div").text() === "") {
+						$(".field-signupform-password div").append("Passwordcannot be blank");
+					}
+				}
+			}
+		});
 //		function usernameunique(username) {
 //			//showLoader();
 //			$.ajax({
@@ -278,23 +277,23 @@ $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['st
 //			});
 //
 //		}
-                function emailunique(email) {
-                        //showLoader();
-                        $.ajax({
-                                type: 'POST',
-                                cache: false,
-                                data: {email: email},
-                                url: homeUrl + 'ajax/email-unique',
-                                success: function (data) {
-                                        if (data == 0) {
-                                                $(".field-email_id").addClass('has-error');
-                                                if ($(".field-email_id div").text() === "") {
-                                                        $(".field-email_id div").append("Email Id Already Exist");
-                                                }
-                                        }
-                                        hideLoader();
-                                }
-                        });
-                }
-        });
+		function emailunique(email) {
+			//showLoader();
+			$.ajax({
+				type: 'POST',
+				cache: false,
+				data: {email: email},
+				url: homeUrl + 'ajax/email-unique',
+				success: function (data) {
+					if (data == 0) {
+						$(".field-email_id").addClass('has-error');
+						if ($(".field-email_id div").text() === "") {
+							$(".field-email_id div").append("Email Id Already Exist");
+						}
+					}
+					hideLoader();
+				}
+			});
+		}
+	});
 </script>

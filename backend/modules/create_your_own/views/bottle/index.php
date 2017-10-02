@@ -63,17 +63,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             'maxButtonCount' => 3,
                         ],
                         'columns' => [
-                                ['class' => 'yii\grid\SerialColumn'],
+                            ['class' => 'yii\grid\SerialColumn'],
 //                            'id',
                             'name',
 //                            'text_length',
                             'price',
-                                [
+                            [
                                 'attribute' => 'bottle_img',
                                 'format' => 'raw',
                                 'value' => function ($data) {
                                     if (isset($data->bottle_img)) {
-                                        $img = '<img width="70px" src="' . Yii::$app->homeUrl . '../uploads/create_your_own/bottle/' . $data->id . '/small.' . $data->bottle_img . '?' . rand() . '"/>';
+                                        $img = '<img width="120px" src="' . Yii::$app->homeUrl . '../uploads/create_your_own/bottle/' . $data->id . '/main.' . $data->bottle_img . '?' . rand() . '"/>';
                                     } else {
                                         $img = '';
                                     }

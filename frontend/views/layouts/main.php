@@ -128,10 +128,26 @@ and open the template in the editor.
                                     </div>
                                     <?= Html::endForm() ?>
 
-                                    <ul class="navbar-right">
+                                    <ul class="navbar-right hidden-lg hidden-md">
+                                        <?php if (Yii::$app->user->isGuest) { ?>
+                                            <li><?= Html::a('<span>Login/Signup</span>', ['/site/login-signup'], ['class' => '']) ?></li>
+                                            <?php
+                                        }
+                                        else {
+                                            ?>
+                                            <li><?= Html::a('<span>My Account</span>', ['/myaccounts/user/index'], ['class' => '']) ?></li>
+                                            <?php
+                                            echo '<li>' . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['style' => 'background: white;border: none;']) . Html::endForm() . '</li>';
+                                        }
+                                        ?>
+                                        <li><a href="#" id="cart_2"><i class="fa fa-shopping-basket" aria-hidden="true"></i>  <span class="badge cart_count">(0)</span></a></li>
+                                    </ul>
+                                    <ul class="navbar-right hidden-sm hidden-xs">
                                         <?php if (Yii::$app->user->isGuest) { ?>
                                             <li><?= Html::a('<span>Login / Signup</span>', ['/site/login-signup'], ['class' => '']) ?></li>
-                                        <?php } else {
+                                            <?php
+                                        }
+                                        else {
                                             ?>
                                             <li><?= Html::a('<span>My Account</span>', ['/myaccounts/user/index'], ['class' => '']) ?></li>
                                             <?php
@@ -140,6 +156,8 @@ and open the template in the editor.
                                         ?>
                                         <li><a href="#" id="cart"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Cart <span class="badge cart_count">(0)</span></a></li>
                                     </ul>
+
+
 
                                     <!--                                    <ul class="navbar-right">
                                                                             <li><?= Html::a('<span>Login / Signup</span>', ['site/login-signup'], ['class' => '']) ?></li>
@@ -209,7 +227,9 @@ and open the template in the editor.
                                     <?php if (!empty($params['category'])) { ?>
                                         <li class="<?= $params['category'] == 1 ? 'active' : '' ?>"><?= Html::a('<span>Exclusive Brands</span>', ['/product/index', 'id' => $catag->category_code, 'category' => 1], ['class' => '']) ?></li>
                                         <li class="<?= $params['category'] == 2 ? 'active' : '' ?>"><?= Html::a('<span>Brands</span>', ['/product/index', 'id' => $catag_2->category_code, 'category' => 2], ['class' => '']) ?></li>
-                                    <?php } else {
+                                        <?php
+                                    }
+                                    else {
                                         ?>
                                         <li class=""><?= Html::a('<span>Exclusive Brands</span>', ['/product/index', 'id' => $catag->category_code, 'category' => 1], ['class' => '']) ?></li>
                                         <li class=""><?= Html::a('<span>Brands</span>', ['/product/index', 'id' => $catag_2->category_code, 'category' => 2], ['class' => '']) ?></li>
@@ -353,7 +373,7 @@ and open the template in the editor.
 //    }, function () {
 //        $(".shopping-cart").hide();
 //    }
-//    );
+                    //    );
 
                     $('ul.nav li.dropdown').hover(function () {
             $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
@@ -361,13 +381,20 @@ and open the template in the editor.
             $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });</script>
 <script>
-            (function () {    $("#cart").on("click", function () {    $(".shopping-cart").fadeToggle("fast"); }); $("#cart").hover (function () {    $(".shopping-cart").show("fast"); }); $('.shopping-cart').hover(function() {    $('.shopping-cart').show(); }); $('.shopping-cart').mouseleave(function() {    $('.shopping-cart').hide(); }); $('#cart').hover(function () {    $('.shopping-cart').hover("fast"); }); })();
+            (function () {
+            $("#cart").on("click", function () {    $(".shopping-cart").fadeToggle("fast"); });
+                    $("#cart_2").on("click", function () {    $(".shopping-cart").fadeToggle("fast"); });
+                    $("#cart").hover (function () {    $(".shopping-cart").show("fast"); });
+                    $("#cart_2").hover (function () {    $(".shopping-cart").show("fast"); });
+                    $('.shopping-cart').hover(function() {    $('.shopping-cart').show(); });
+                    $('.shopping-cart').mouseleave(function() {    $('.shopping-cart').hide(); });
+                    $('#cart').hover(function () {    $('.shopping-cart').hover("fast"); }); })();
 //    jQuery('#cart').on('mouseover', function () {
 //        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeToggle("fast");
 //    });
 //    jQuery('#cart').on("mouseout", function () {
 //        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeOut("fast");
-//    });
+            //    });
             $(document).ready(function () {
 
     $("#addSchool").click(function () {
@@ -381,7 +408,7 @@ and open the template in the editor.
 //            cursor: "crosshair",
 //            zoomWindowFadeIn: 500,
 //            zoomWindowFadeOut: 750
-//        });
+            //        });
 
     });</script>
 <script>
@@ -423,7 +450,7 @@ and open the template in the editor.
 //            // remove was checked from other radios
 //            $radio.siblings('input[name="rad"]').data('waschecked', false);
 //        });
-//    });
+            //    });
 
 
             $(function () {

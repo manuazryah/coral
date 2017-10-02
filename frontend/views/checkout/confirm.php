@@ -51,18 +51,14 @@ $this->title = 'Checkout-Confirm';
                             <?php
                             if ($order_details) {
                                 foreach ($order_details as $order) {
-                                    if ($order->item_type == 1) {
-                                        $product = \common\models\CreateYourOwn::findOne($order->product_id);
-                                    } else {
-                                        $product = Product::findOne($order->product_id);
-                                        $product_type = Fregrance::findOne($product->product_type);
-                                    }
+                                    $product = Product::findOne($order->product_id);
+                                    $product_type = Fregrance::findOne($product->product_type);
                                     ?>
                                     <tr>
                                         <td class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                             <div class="media-body">
-                                                <h5 class="product-heading"><?= $order->item_type == 1 ? $product->label_1 : $product->product_name; ?></h5>
-                                                <h5 class="brand-name"><?= $order->item_type == 1 ? $product->label_2 : \common\models\Brand::findOne($product->brand)->brand; ?></h5>
+                                                <h5 class="product-heading"><?= $product->product_name ?></h5>
+                                                <h5 class="brand-name"><?= $product_type->name; ?></h5>
                                             </div>
                                         </td>
                                         <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right quantity"><?= $order->quantity ?></td>
@@ -100,7 +96,7 @@ $this->title = 'Checkout-Confirm';
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lit-blue" style="padding: 0 30px;padding-right: 55px; padding-bottom: 30px; margin-bottom: 5px;">
                 <!--<a href="cart.php"><button class="continue-shopping">Return to cart</button></a>-->
-                <?= Html::a('<button class="green2">confirm order</button>', ['confirm_order'], ['class' => '']) ?>
+                 <?= Html::a('<button class="green2">confirm order</button>', ['confirm_order'], ['class' => '']) ?>
             </div>
         </div>
 
