@@ -128,10 +128,12 @@ and open the template in the editor.
                                                                         </div>
 									<?= Html::endForm() ?>
 									<?php
-									if (strlen(Yii::$app->user->identity->username) >= 10) {
-										$name = substr(Yii::$app->user->identity->username, 0, 10) . '...';
-									} else {
-										$name = Yii::$app->user->identity->username;
+									if (!empty(Yii::$app->user->identity->username)) {
+										if (strlen(Yii::$app->user->identity->username) >= 10) {
+											$name = substr(Yii::$app->user->identity->username, 0, 10) . '...';
+										} else {
+											$name = Yii::$app->user->identity->username;
+										}
 									}
 									?>
 

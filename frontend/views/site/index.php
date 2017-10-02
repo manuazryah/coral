@@ -302,7 +302,7 @@ if (isset($meta_title) && $meta_title != '')
 											</ul>
 											<ul class="gp_products_caption_rating">
 												<?php
-												if ($val->offer_price != "0") {
+												if ($international->offer_price != "0") {
 													$percentage = round(100 - (($international->offer_price / $international->price) * 100));
 													?>
 													<li>AED <?= $international->offer_price; ?></li>
