@@ -61,7 +61,7 @@ class OrderMasterController extends Controller {
      * @return mixed
      */
     public function actionView($id) {
-         $searchModel = new OrderDetailsSearch();
+        $searchModel = new OrderDetailsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere(['order_id' => $id]);
 
@@ -79,7 +79,6 @@ class OrderMasterController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    
 
     /**
      * Finds the OrderMaster model based on its primary key value.
@@ -93,6 +92,20 @@ class OrderMasterController extends Controller {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionChangeAdminStatus() {
+        if (yii::$app->request->isAjax) {
+            $id = Yii::$app->request->post()['id'];
+            $admin_status = Yii::$app->request->post()['status'];
+            $model = OrderMaster::find()->where(['id' => $id])->one();
+            $model->admin_status = $admin_status;
+            if ($model->save()) {
+                echo 1;
+            } else {
+                echo 0;
+            }
         }
     }
 

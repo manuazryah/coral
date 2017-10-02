@@ -31,12 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                    <?php // ech  Html::a('<i class="fa-th-list"></i><span> Create Order Master</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                    <button class="btn btn-white" id="search-option" style="float: right;">
-                        <i class="linecons-search"></i>
-                        <span>Search</span>
-                    </button>
+                    <?= Html::a('<i class="fa-th-list"></i><span> Manage Order </span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                     <div class="table-responsive" style="border: none">
+                        <button class="btn btn-white" id="search-option" style="float: right;">
+                            <i class="linecons-search"></i>
+                            <span>Search</span>
+                        </button>
                         <?=
                         GridView::widget([
                             'dataProvider' => $dataProvider,
@@ -48,16 +48,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'attribute' => 'product_id',
 //                                    'filter' => ArrayHelper::map(Product::find()->all(), 'id', 'product_name'),
                                     'value' => function($data) {
-                                        $name = Product::findOne($data->product_id)->product_name;
-                                        $image = '<img src="' . Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_thumb.' . $product_details->profile . '" width="94px" height="93px"/>';
-                                        return $name ;
+                                        if ($data->item_type == 1) {
+                                            $name = 'Custom Perfume';
+                                        } else {
+                                            $name = Product::findOne($data->product_id)->product_name;
+                                        }
+//                                        $image = '<img src="' . Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_thumb.' . $product_details->profile . '" width="94px" height="93px"/>';
+                                        return $name;
 //                                        return Product::findOne($data->product_id)->product_name;
                                     }
                                 ],
                                 'quantity',
                                 'amount',
                                 'rate',
-//                                
+//
                                 [
                                     'attribute' => 'status',
                                     'filter' => ['1' => 'Delivered', '0' => 'Not Delivered'],

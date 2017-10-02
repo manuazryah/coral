@@ -32,15 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                     <?php // ech  Html::a('<i class="fa-th-list"></i><span> Create Order Master</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                    <button class="btn btn-white" id="search-option" style="float: right;">
-                        <i class="linecons-search"></i>
-                        <span>Search</span>
-                    </button>
                     <div class="table-responsive" style="border: none">
+                        <button class="btn btn-white" id="search-option" style="float: right;">
+                            <i class="linecons-search"></i>
+                            <span>Search</span>
+                        </button>
                         <?=
                         GridView::widget([
                             'dataProvider' => $dataProvider,
                             'filterModel' => $searchModel,
+                            'rowOptions' => function ($model, $key, $index, $grid) {
+                                return ['id' => $model['id']];
+                            },
                             'columns' => [
                                 ['class' => 'yii\grid\SerialColumn'],
                                 'order_id',
@@ -60,8 +63,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // 'user_comment:ntext',
                                 // 'payment_mode',
                                 // 'admin_comment',
-                                // 'payment_status',
-                                // 'admin_status',
+                                [
+                                    'attribute' => 'payment_status',
+                                    'value' => function ($data) {
+                                        if (isset($data->payment_status)) {
+                                            return $data->payment_status;
+                                        } else {
+                                            return '';
+                                        }
+                                    },
+                                ],
+                                [
+                                    'attribute' => 'admin_status',
+                                    'format' => 'raw',
+                                    'filter' => ['0' => 'Not Delivered', '1' => 'Delivered'],
+                                    'value' => function ($data) {
+                                        return \yii\helpers\Html::dropDownList('admin_status', null, ['0' => 'Not Delivered', '1' => 'Delivered'], ['options' => [$data->admin_status => ['Selected' => 'selected']], 'class' => 'form-control admin_status_field', 'id' => 'order_admin_status-' . $data->id,]);
+                                    },
+                                ],
                                 // 'doc',
                                 // 'shipping_method',
                                 [
@@ -78,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'template' => '{view}',
                                     'buttons' => [
                                         'view' => function ($url, $model) {
-                                            return Html::a('<span class="btn btn-success">View Details</span>', $url, [
+                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
                                                         'title' => Yii::t('app', 'view'),
                                                         'class' => '',
                                             ]);
@@ -110,6 +129,19 @@ $this->params['breadcrumbs'][] = $this->title;
         $(".filters").slideToggle();
         $("#search-option").click(function () {
             $(".filters").slideToggle();
+        });
+        $('.admin_status_field').on('change', function () {
+            var change_id = $(this).attr('id').match(/\d+/);
+            var admin_status = $(this).val();
+            $.ajax({
+                url: homeUrl + 'order/order-master/change-admin-status',
+                type: "post",
+                data: {status: admin_status, id: change_id},
+                success: function (data) {
+                    alert('Admin Status Changed Sucessfully');
+                }, error: function () {
+                }
+            });
         });
     });
 </script>
