@@ -11,9 +11,9 @@ use common\models\SubCategory;
 use yii\helpers\Url;
 
 if (isset($meta_title) && $meta_title != '')
-	$this->title = $meta_title;
+        $this->title = $meta_title;
 else
-	$this->title = 'Products';
+        $this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php
@@ -32,16 +32,16 @@ $brands_sub = Category::find()->where(['status' => 1, 'main_category' => 2])->al
 <div class="container">
         <div class="breadcrumb">
                 <span class="current-page"><?php
-			if (isset($catag->category)) {
-				echo $catag->category;
-				$m_id = $catag->category_code;
-				$m_link = $catag->category;
-			} else {
-				echo 'PRODUCTS';
-				$m_id = '';
-				$m_link = 'PRODUCTS';
-			}
-			?></span>
+                        if (isset($catag->category)) {
+                                echo $catag->category;
+                                $m_id = $catag->category_code;
+                                $m_link = $catag->category;
+                        } else {
+                                echo 'PRODUCTS';
+                                $m_id = '';
+                                $m_link = 'PRODUCTS';
+                        }
+                        ?></span>
                 <ol class="path">
                         <li><?= Html::a('<span>Home</span>', ['index'], ['class' => '']) ?></li>
                         <li><?= Html::a('<span>our products</span>', ['/product/index', 'id' => $m_id], ['class' => '']) ?></li>
@@ -55,81 +55,113 @@ $brands_sub = Category::find()->where(['status' => 1, 'main_category' => 2])->al
                 <div class="input-group gender-selection hidden-xs">
                         <div id="radioBtn" class="btn-group">
                                 <span>Type:</span>
-				<?php if (isset($gender_params['type'])) { ?>
-					<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 1) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
-					if (isset($id)) {
-						echo $id;
-					}
-					?>" main-categ="<?= $main_categry ?>"featured="<?php
-					   if (isset($featured_status)) {
-						   echo $featured_status;
-					   }
-					   ?>">Women</a>
-					<a class="btn btn-primary btn-sm <?= ($gender_params['type'] == 0 && $gender_params['type'] != "") ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
-					if (isset($id)) {
-						echo $id;
-					}
-					?>"main-categ="<?= $main_categry ?>"featured="<?php
-					   if (isset($featured_status)) {
-						   echo $featured_status;
-					   }
-					   ?>">Men</a>
-					<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 2) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
-					if (isset($id)) {
-						echo $id;
-					}
-					?>"main-categ="<?= $main_categry ?> "featured="<?php
-					   if (isset($featured_status)) {
-						   echo $featured_status;
-					   }
-					   ?>" >Unisex</a>
-					<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
-					if (isset($id)) {
-						echo $id;
-					}
-					?>"main-categ="<?= $main_categry ?>" featured="<?php
-					   if (isset($featured_status)) {
-						   echo $featured_status;
-					   }
-					   ?>">All</a>
-				   <?php } else { ?>
-					<a class="btn btn-primary btn-sm  notActive gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
-					if (isset($id)) {
-						echo $id;
-					}
-					?>" main-categ="<?= $main_categry ?>"featured="<?php
-					   if (isset($featured_status)) {
-						   echo $featured_status;
-					   }
-					   ?>">Women</a>
-					<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
-					if (isset($id)) {
-						echo $id;
-					}
-					?>"main-categ="<?= $main_categry ?>"featured="<?php
-					   if (isset($featured_status)) {
-						   echo $featured_status;
-					   }
-					   ?>">Men</a>
-					<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
-					if (isset($id)) {
-						echo $id;
-					}
-					?>"main-categ="<?= $main_categry ?>"featured="<?php
-					   if (isset($featured_status)) {
-						   echo $featured_status;
-					   }
-					   ?>">Unisex</a>
-					<a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
-					if (isset($id)) {
-						echo $id;
-					}
-					?>"main-categ="<?= $main_categry ?>"featured="<?php
-					   if (isset($featured_status)) {
-						   echo $featured_status;
-					   }
-					   ?>">All</a>
-				   <?php } ?>
+                                <?php if (isset($gender_params['type'])) { ?>
+                                        <a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 1) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
+                                        if (isset($id)) {
+                                                echo $id;
+                                        }
+                                        ?>" main-categ="<?= $main_categry ?>"featured="<?php
+                                           if (isset($featured_status)) {
+                                                   echo $featured_status;
+                                           }
+                                           ?>" keyword="<?php
+                                           if (isset($keyword)) {
+                                                   echo $keyword;
+                                           }
+                                           ?>">Women</a>
+                                        <a class="btn btn-primary btn-sm <?= ($gender_params['type'] == 0 && $gender_params['type'] != "") ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
+                                        if (isset($id)) {
+                                                echo $id;
+                                        }
+                                        ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                           if (isset($featured_status)) {
+                                                   echo $featured_status;
+                                           }
+                                           ?>" keyword="<?php
+                                           if (isset($keyword)) {
+                                                   echo $keyword;
+                                           }
+                                           ?>">Men</a>
+                                        <a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 2) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
+                                        if (isset($id)) {
+                                                echo $id;
+                                        }
+                                        ?>"main-categ="<?= $main_categry ?>" featured="<?php
+                                           if (isset($featured_status)) {
+                                                   echo $featured_status;
+                                           }
+                                           ?>" keyword="<?php
+                                           if (isset($keyword)) {
+                                                   echo $keyword;
+                                           }
+                                           ?>">Unisex</a>
+                                        <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
+                                        if (isset($id)) {
+                                                echo $id;
+                                        }
+                                        ?>"main-categ="<?= $main_categry ?>" featured="<?php
+                                           if (isset($featured_status)) {
+                                                   echo $featured_status;
+                                           }
+                                           ?>" keyword="<?php
+                                           if (isset($keyword)) {
+                                                   echo $keyword;
+                                           }
+                                           ?>">All</a>
+                                   <?php } else { ?>
+                                        <a class="btn btn-primary btn-sm  notActive gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
+                                        if (isset($id)) {
+                                                echo $id;
+                                        }
+                                        ?>" main-categ="<?= $main_categry ?>"featured="<?php
+                                           if (isset($featured_status)) {
+                                                   echo $featured_status;
+                                           }
+                                           ?>" keyword="<?php
+                                           if (isset($keyword)) {
+                                                   echo $keyword;
+                                           }
+                                           ?>">Women</a>
+                                        <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
+                                        if (isset($id)) {
+                                                echo $id;
+                                        }
+                                        ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                           if (isset($featured_status)) {
+                                                   echo $featured_status;
+                                           }
+                                           ?>" keyword="<?php
+                                           if (isset($keyword)) {
+                                                   echo $keyword;
+                                           }
+                                           ?>">Men</a>
+                                        <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
+                                        if (isset($id)) {
+                                                echo $id;
+                                        }
+                                        ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                           if (isset($featured_status)) {
+                                                   echo $featured_status;
+                                           }
+                                           ?>" keyword="<?php
+                                           if (isset($keyword)) {
+                                                   echo $keyword;
+                                           }
+                                           ?>">Unisex</a>
+                                        <a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
+                                        if (isset($id)) {
+                                                echo $id;
+                                        }
+                                        ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                           if (isset($featured_status)) {
+                                                   echo $featured_status;
+                                           }
+                                           ?>" keyword="<?php
+                                           if (isset($keyword)) {
+                                                   echo $keyword;
+                                           }
+                                           ?>">All</a>
+                                   <?php } ?>
                         </div>
                 </div>
 
@@ -141,104 +173,107 @@ $brands_sub = Category::find()->where(['status' => 1, 'main_category' => 2])->al
                         <div id="collapse2" class="panel-collapse collapse" >
                                 <div class="col-lg-3 col-md-3 col-sm-12 left-accordation panel-body">
                                         <div class="panel panel-default">
-						<?php if (isset($featured_status) || $main_categry == 1) { ?>
-							<div class="panel-body lit-blue">
-								<div class="slide-container">
-									<div class="list-group" id="mg-multisidetabs">
-										<a data-toggle="collapse" href="#exclusive_resp" class="list-group-item active-head "><span>Exclusive Brands</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
-										<div class="panel list-sub" style="display: block">
+                                                <?php if (isset($featured_status) || $main_categry == 1 || isset($keyword)) {
+                                                        ?>
+                                                        <div class="panel-body lit-blue">
+                                                                <div class="slide-container">
+                                                                        <div class="list-group" id="mg-multisidetabs">
+                                                                                <a data-toggle="collapse" href="#exclusive_resp" class="list-group-item active-head "><span>Exclusive Brands</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
+                                                                                <div class="panel list-sub" style="display: block">
 
-											<div id="exclusive_resp" class="panel-body panel-collapse collapse <?= (!empty($id) && $main_categry == 1) ? 'in' : '' ?>" >
-												<div class="list-group">
-													<?php
-													foreach ($exclusive_brands_sub as $exclusive_brands) {
+                                                                                        <div id="exclusive_resp" class="panel-body panel-collapse collapse <?= (!empty($id) && $main_categry == 1) ? 'in' : '' ?>" >
+                                                                                                <div class="list-group">
+                                                                                                        <?php
+                                                                                                        foreach ($exclusive_brands_sub as $exclusive_brands) {
 
-														if (isset($catag->id)) {
-															if ($exclusive_brands->id == $catag->id) {
-																$active_class = 'list-group-item active';
-															} else {
-																$active_class = 'list-group-item';
-															}
-														} else {
-															$active_class = 'list-group-item';
-														}
-														if (isset($featured_status)) {
-															?>
-															<?= Html::a('<span>' . $exclusive_brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $exclusive_brands->category_code, 'category' => 1, 'featured' => $featured_status], ['class' => $active_class])
-															?>
-														<?php } else {
-															?>
-															<?= Html::a('<span>' . $exclusive_brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $exclusive_brands->category_code, 'category' => 1], ['class' => $active_class])
-															?>
-															<?php
-														}
-														?>
+                                                                                                                if (isset($catag->id)) {
+                                                                                                                        if ($exclusive_brands->id == $catag->id) {
+                                                                                                                                $active_class = 'list-group-item active';
+                                                                                                                        } else {
+                                                                                                                                $active_class = 'list-group-item';
+                                                                                                                        }
+                                                                                                                } else {
+                                                                                                                        $active_class = 'list-group-item';
+                                                                                                                }
+                                                                                                                if (isset($featured_status) || isset($keyword)) {
+                                                                                                                        ?>
+                                                                                                                        <?= Html::a('<span>' . $exclusive_brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $exclusive_brands->category_code, 'category' => 1, 'featured' => $featured_status, 'keyword' => $keyword], ['class' => $active_class])
+                                                                                                                        ?>
+                                                                                                                        <?php
+                                                                                                                } else {
+                                                                                                                        ?>
+                                                                                                                        <?= Html::a('<span>' . $exclusive_brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $exclusive_brands->category_code, 'category' => 1], ['class' => $active_class])
+                                                                                                                        ?>
+                                                                                                                        <?php
+                                                                                                                }
+                                                                                                                ?>
 
-													<?php } ?>
-												</div>
-											</div>
-										</div>
-									</div><!-- ./ end list-group -->
-								</div><!-- ./ end slide-container -->
-							</div>
-						<?php } ?>
-						<?php if (isset($featured_status) || $main_categry == 2) { ?><!-- ./ end panel-body -->
-							<div class="panel-body lit-blue">
-								<div class="slide-container">
-									<div class="list-group" id="mg-multisidetabs">
-										<a data-toggle="collapse" href="#brand_resp" class="list-group-item active-head "><span>Brands</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
-										<div class="panel list-sub" style="display: block">
-											<div id="brand_resp" class="panel-body panel-collapse collapse <?= (!empty($id) && $main_categry == 2) ? 'in' : '' ?>" >
-												<div class="list-group">
-													<?php
-													foreach ($brands_sub as $brands) {
-														if (isset($catag->id)) {
-															if ($brands->id == $catag->id) {
-																$active_class = 'list-group-item active';
-															} else {
-																$active_class = 'list-group-item';
-															}
-														} else {
-															$active_class = 'list-group-item';
-														}
-														?>
-														<?php
-														if (isset($featured_status)) {
-															?>
-															<?= Html::a('<span>' . $brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $brands->category_code, 'category' => 2, 'featured' => $featured_status], ['class' => $active_class])
-															?>
-														<?php } else {
-															?>
-															<?= Html::a('<span>' . $brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $brands->category_code, 'category' => 2], ['class' => $active_class])
-															?>
-															<?php
-														}
-														?>
-													<?php } ?>
-												</div>
-											</div>
-										</div>
-									</div><!-- ./ end list-group -->
-								</div><!-- ./ end slide-container -->
-							</div>
-						<?php } ?>
-						<!--                                                <div class="panel-body lit-blue" style="padding-left: 0px;">
-													<div class="slide-container">
-														<div class="list-group" id="mg-multisidetabs">
-															<div class="panel list-sub" style="display: block">
-																<div id="collapse1" class="panel-body" >
-																	<div class="list-group">
-																		<a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>
-																		<a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>international brands</span></a>
-																		<a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>new arrivals</span></a>
-																		<a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>trending</span></a>
-																		<a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>something special</span></a>
-																	</div>
-																</div>
-															</div>
-														</div> ./ end list-group
-													</div> ./ end slide-container
-												</div> ./ end panel-body -->
+                                                                                                        <?php } ?>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div><!-- ./ end list-group -->
+                                                                </div><!-- ./ end slide-container -->
+                                                        </div>
+                                                <?php } ?>
+                                                <?php if (isset($featured_status) || $main_categry == 2 || isset($keyword)) { ?><!-- ./ end panel-body -->
+                                                        <div class="panel-body lit-blue">
+                                                                <div class="slide-container">
+                                                                        <div class="list-group" id="mg-multisidetabs">
+                                                                                <a data-toggle="collapse" href="#brand_resp" class="list-group-item active-head "><span>Brands</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
+                                                                                <div class="panel list-sub" style="display: block">
+                                                                                        <div id="brand_resp" class="panel-body panel-collapse collapse <?= (!empty($id) && $main_categry == 2) ? 'in' : '' ?>" >
+                                                                                                <div class="list-group">
+                                                                                                        <?php
+                                                                                                        foreach ($brands_sub as $brands) {
+                                                                                                                if (isset($catag->id)) {
+                                                                                                                        if ($brands->id == $catag->id) {
+                                                                                                                                $active_class = 'list-group-item active';
+                                                                                                                        } else {
+                                                                                                                                $active_class = 'list-group-item';
+                                                                                                                        }
+                                                                                                                } else {
+                                                                                                                        $active_class = 'list-group-item';
+                                                                                                                }
+                                                                                                                ?>
+                                                                                                                <?php
+                                                                                                                if (isset($featured_status) || isset($keyword)) {
+                                                                                                                        ?>
+                                                                                                                        <?= Html::a('<span>' . $brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $brands->category_code, 'category' => 2, 'featured' => $featured_status, 'keyword' => $keyword], ['class' => $active_class])
+                                                                                                                        ?>
+                                                                                                                        <?php
+                                                                                                                } else {
+                                                                                                                        ?>
+                                                                                                                        <?= Html::a('<span>' . $brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $brands->category_code, 'category' => 2], ['class' => $active_class])
+                                                                                                                        ?>
+                                                                                                                        <?php
+                                                                                                                }
+                                                                                                                ?>
+                                                                                                        <?php } ?>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div><!-- ./ end list-group -->
+                                                                </div><!-- ./ end slide-container -->
+                                                        </div>
+                                                <?php } ?>
+                                                <!--                                                <div class="panel-body lit-blue" style="padding-left: 0px;">
+                                                                                                        <div class="slide-container">
+                                                                                                                <div class="list-group" id="mg-multisidetabs">
+                                                                                                                        <div class="panel list-sub" style="display: block">
+                                                                                                                                <div id="collapse1" class="panel-body" >
+                                                                                                                                        <div class="list-group">
+                                                                                                                                                <a href="#" class="list-group-item active"><span>Our featured products</span><span class="fa fa-caret-right pull-left"></span></a>
+                                                                                                                                                <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>international brands</span></a>
+                                                                                                                                                <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>new arrivals</span></a>
+                                                                                                                                                <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>trending</span></a>
+                                                                                                                                                <a href="#" class="list-group-item"><span class="fa fa-caret-left pull-left"></span><span>something special</span></a>
+                                                                                                                                        </div>
+                                                                                                                                </div>
+                                                                                                                        </div>
+                                                                                                                </div> ./ end list-group
+                                                                                                        </div> ./ end slide-container
+                                                                                                </div> ./ end panel-body -->
                                         </div><!-- ./ end panel panel-default-->
                                 </div><!-- ./ endcol-lg-6 col-lg-offset-3 -->
                         </div>
@@ -253,85 +288,117 @@ $brands_sub = Category::find()->where(['status' => 1, 'main_category' => 2])->al
 
                                         <div class="list-group lit-blue">
                                                 <div id="radioBtn" class="btn-group">
-							<!--                                                        <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y">All</a>
-														<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="W">Women</a>
-														<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="M">Men</a>
-														<a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="U">Unisex</a>-->
-							<?php if (isset($gender_params['type'])) { ?>
-								<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 1) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
-								if (isset($id)) {
-									echo $id;
-								}
-								?>" main-categ="<?= $main_categry ?>"featured="<?php
-								   if (isset($featured_status)) {
-									   echo $featured_status;
-								   }
-								   ?>">Women</a>
-								<a class="btn btn-primary btn-sm <?= ($gender_params['type'] == 0 && $gender_params['type'] != "") ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
-								if (isset($id)) {
-									echo $id;
-								}
-								?>"main-categ="<?= $main_categry ?>"featured="<?php
-								   if (isset($featured_status)) {
-									   echo $featured_status;
-								   }
-								   ?>">Men</a>
-								<a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 2) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
-								if (isset($id)) {
-									echo $id;
-								}
-								?>"main-categ="<?= $main_categry ?> "featured="<?php
-								   if (isset($featured_status)) {
-									   echo $featured_status;
-								   }
-								   ?>" >Unisex</a>
-								<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
-								if (isset($id)) {
-									echo $id;
-								}
-								?>"main-categ="<?= $main_categry ?>" featured="<?php
-								   if (isset($featured_status)) {
-									   echo $featured_status;
-								   }
-								   ?>">All</a>
-							   <?php } else { ?>
-								<a class="btn btn-primary btn-sm  notActive gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
-								if (isset($id)) {
-									echo $id;
-								}
-								?>" main-categ="<?= $main_categry ?>"featured="<?php
-								   if (isset($featured_status)) {
-									   echo $featured_status;
-								   }
-								   ?>">Women</a>
-								<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
-								if (isset($id)) {
-									echo $id;
-								}
-								?>"main-categ="<?= $main_categry ?>"featured="<?php
-								   if (isset($featured_status)) {
-									   echo $featured_status;
-								   }
-								   ?>">Men</a>
-								<a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
-								if (isset($id)) {
-									echo $id;
-								}
-								?>"main-categ="<?= $main_categry ?>"featured="<?php
-								   if (isset($featured_status)) {
-									   echo $featured_status;
-								   }
-								   ?>">Unisex</a>
-								<a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
-								if (isset($id)) {
-									echo $id;
-								}
-								?>"main-categ="<?= $main_categry ?>"featured="<?php
-								   if (isset($featured_status)) {
-									   echo $featured_status;
-								   }
-								   ?>">All</a>
-							   <?php } ?>
+                                                        <!--                                                        <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y">All</a>
+                                                                                                                <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="W">Women</a>
+                                                                                                                <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="M">Men</a>
+                                                                                                                <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="U">Unisex</a>-->
+                                                        <?php if (isset($gender_params['type'])) { ?>
+                                                                <a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 1) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
+                                                                if (isset($id)) {
+                                                                        echo $id;
+                                                                }
+                                                                ?>" main-categ="<?= $main_categry ?>"featured="<?php
+                                                                   if (isset($featured_status)) {
+                                                                           echo $featured_status;
+                                                                   }
+                                                                   ?>" keyword="<?php
+                                                                   if (isset($keyword)) {
+                                                                           echo $keyword;
+                                                                   }
+                                                                   ?>">Women</a>
+                                                                <a class="btn btn-primary btn-sm <?= ($gender_params['type'] == 0 && $gender_params['type'] != "") ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
+                                                                if (isset($id)) {
+                                                                        echo $id;
+                                                                }
+                                                                ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                                                   if (isset($featured_status)) {
+                                                                           echo $featured_status;
+                                                                   }
+                                                                   ?>" keyword="<?php
+                                                                   if (isset($keyword)) {
+                                                                           echo $keyword;
+                                                                   }
+                                                                   ?>">Men</a>
+                                                                <a class="btn btn-primary btn-sm <?= (!empty($gender_params['type']) && $gender_params['type'] == 2) ? 'active' : 'notActive' ?> gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
+                                                                if (isset($id)) {
+                                                                        echo $id;
+                                                                }
+                                                                ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                                                   if (isset($featured_status)) {
+                                                                           echo $featured_status;
+                                                                   }
+                                                                   ?>" keyword="<?php
+                                                                   if (isset($keyword)) {
+                                                                           echo $keyword;
+                                                                   }
+                                                                   ?>">Unisex</a>
+                                                                <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
+                                                                if (isset($id)) {
+                                                                        echo $id;
+                                                                }
+                                                                ?>"main-categ="<?= $main_categry ?>" featured="<?php
+                                                                   if (isset($featured_status)) {
+                                                                           echo $featured_status;
+                                                                   }
+                                                                   ?>" keyword="<?php
+                                                                   if (isset($keyword)) {
+                                                                           echo $keyword;
+                                                                   }
+                                                                   ?>">All</a>
+                                                           <?php } else { ?>
+                                                                <a class="btn btn-primary btn-sm  notActive gender-select" data-toggle="happy" data-title="Y" id="1" pro_cat="<?php
+                                                                if (isset($id)) {
+                                                                        echo $id;
+                                                                }
+                                                                ?>" main-categ="<?= $main_categry ?>"featured="<?php
+                                                                   if (isset($featured_status)) {
+                                                                           echo $featured_status;
+                                                                   }
+                                                                   ?>" keyword="<?php
+                                                                   if (isset($keyword)) {
+                                                                           echo $keyword;
+                                                                   }
+                                                                   ?>">Women</a>
+                                                                <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="0" pro_cat="<?php
+                                                                if (isset($id)) {
+                                                                        echo $id;
+                                                                }
+                                                                ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                                                   if (isset($featured_status)) {
+                                                                           echo $featured_status;
+                                                                   }
+                                                                   ?>" keyword="<?php
+                                                                   if (isset($keyword)) {
+                                                                           echo $keyword;
+                                                                   }
+                                                                   ?>">Men</a>
+                                                                <a class="btn btn-primary btn-sm notActive gender-select" data-toggle="happy" data-title="N" id="2" pro_cat="<?php
+                                                                if (isset($id)) {
+                                                                        echo $id;
+                                                                }
+                                                                ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                                                   if (isset($featured_status)) {
+                                                                           echo $featured_status;
+                                                                   }
+                                                                   ?>" keyword="<?php
+                                                                   if (isset($keyword)) {
+                                                                           echo $keyword;
+                                                                   }
+                                                                   ?>">Unisex</a>
+                                                                <a class="btn btn-primary btn-sm active gender-select" data-toggle="happy" data-title="N" id="" pro_cat="<?php
+                                                                if (isset($id)) {
+                                                                        echo $id;
+                                                                }
+                                                                ?>"main-categ="<?= $main_categry ?>"featured="<?php
+                                                                   if (isset($featured_status)) {
+                                                                           echo $featured_status;
+                                                                   }
+                                                                   ?>" keyword="<?php
+                                                                   if (isset($keyword)) {
+                                                                           echo $keyword;
+                                                                   }
+                                                                   ?>">All</a>
+                                                           <?php } ?>
                                                 </div>
                                         </div>
                                 </div>
@@ -339,102 +406,102 @@ $brands_sub = Category::find()->where(['status' => 1, 'main_category' => 2])->al
                 </div>
         </div>
         <div class="container">
-		<div class="col-lg-3 col-md-3 col-sm-12 hidden-xs left-accordation panel-body">
-			<div class="panel panel-default">
-				<?php if (isset($featured_status) || $main_categry == 1) { ?>
-					<div class="panel-body lit-blue">
-						<div class="slide-container">
-							<div class="list-group" id="mg-multisidetabs">
-								<a data-toggle="collapse" href="#collapse4" class="list-group-item active-head "><span>Exclusive Brands</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
-								<div class="panel list-sub" style="display: block">
+                <div class="col-lg-3 col-md-3 col-sm-12 hidden-xs left-accordation panel-body">
+                        <div class="panel panel-default">
+                                <?php if (isset($featured_status) || $main_categry == 1 || isset($keyword)) { ?>
+                                        <div class="panel-body lit-blue">
+                                                <div class="slide-container">
+                                                        <div class="list-group" id="mg-multisidetabs">
+                                                                <a data-toggle="collapse" href="#collapse4" class="list-group-item active-head "><span>Exclusive Brands</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
+                                                                <div class="panel list-sub" style="display: block">
 
-									<div id="collapse4" class="panel-body panel-collapse collapse <?= (!empty($id) && $main_categry == 1) ? 'in' : '' ?>" >
-										<div class="list-group">
-											<?php
-											foreach ($exclusive_brands_sub as $exclusive_brands) {
+                                                                        <div id="collapse4" class="panel-body panel-collapse collapse <?= (!empty($id) && $main_categry == 1) ? 'in' : '' ?>" >
+                                                                                <div class="list-group">
+                                                                                        <?php
+                                                                                        foreach ($exclusive_brands_sub as $exclusive_brands) {
 
-												if (isset($catag->id)) {
-													if ($exclusive_brands->id == $catag->id) {
-														$active_class = 'list-group-item active';
-													} else {
-														$active_class = 'list-group-item';
-													}
-												} else {
-													$active_class = 'list-group-item';
-												}
-												if (isset($featured_status)) {
-													?>
-													<?= Html::a('<span>' . $exclusive_brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $exclusive_brands->category_code, 'category' => 1, 'featured' => $featured_status], ['class' => $active_class])
-													?>
-												<?php } else {
-													?>
-													<?= Html::a('<span>' . $exclusive_brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $exclusive_brands->category_code, 'category' => 1], ['class' => $active_class])
-													?>
-													<?php
-												}
-												?>
+                                                                                                if (isset($catag->id)) {
+                                                                                                        if ($exclusive_brands->id == $catag->id) {
+                                                                                                                $active_class = 'list-group-item active';
+                                                                                                        } else {
+                                                                                                                $active_class = 'list-group-item';
+                                                                                                        }
+                                                                                                } else {
+                                                                                                        $active_class = 'list-group-item';
+                                                                                                }
+                                                                                                if (isset($featured_status) || isset($keyword)) {
+                                                                                                        ?>
+                                                                                                        <?= Html::a('<span>' . $exclusive_brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $exclusive_brands->category_code, 'category' => 1, 'featured' => $featured_status, 'keyword' => $keyword], ['class' => $active_class])
+                                                                                                        ?>
+                                                                                                <?php } else {
+                                                                                                        ?>
+                                                                                                        <?= Html::a('<span>' . $exclusive_brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $exclusive_brands->category_code, 'category' => 1], ['class' => $active_class])
+                                                                                                        ?>
+                                                                                                        <?php
+                                                                                                }
+                                                                                                ?>
 
-											<?php } ?>
-										</div>
-									</div>
-								</div>
-							</div><!-- ./ end list-group -->
-						</div><!-- ./ end slide-container -->
-					</div>
-				<?php } ?>
-				<?php if (isset($featured_status) || $main_categry == 2) { ?><!-- ./ end panel-body -->
-					<div class="panel-body lit-blue">
-						<div class="slide-container">
-							<div class="list-group" id="mg-multisidetabs">
-								<a data-toggle="collapse" href="#collapse5" class="list-group-item active-head "><span>Brands</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
-								<div class="panel list-sub" style="display: block">
-									<div id="collapse5" class="panel-body panel-collapse collapse <?= (!empty($id) && $main_categry == 2) ? 'in' : '' ?>" >
-										<div class="list-group">
-											<?php
-											foreach ($brands_sub as $brands) {
-												if (isset($catag->id)) {
-													if ($brands->id == $catag->id) {
-														$active_class = 'list-group-item active';
-													} else {
-														$active_class = 'list-group-item';
-													}
-												} else {
-													$active_class = 'list-group-item';
-												}
-												?>
-												<?php
-												if (isset($featured_status)) {
-													?>
-													<?= Html::a('<span>' . $brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $brands->category_code, 'category' => 2, 'featured' => $featured_status], ['class' => $active_class])
-													?>
-												<?php } else {
-													?>
-													<?= Html::a('<span>' . $brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $brands->category_code, 'category' => 2], ['class' => $active_class])
-													?>
-													<?php
-												}
-												?>
-											<?php } ?>
-										</div>
-									</div>
-								</div>
-							</div><!-- ./ end list-group -->
-						</div><!-- ./ end slide-container -->
-					</div>
-				<?php } ?><!-- ./ end panel-body -->
-			</div><!-- ./ end panel panel-default-->
-		</div>
-		<!-- ./ endcol-lg-6 col-lg-offset-3 -->
+                                                                                        <?php } ?>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div><!-- ./ end list-group -->
+                                                </div><!-- ./ end slide-container -->
+                                        </div>
+                                <?php } ?>
+                                <?php if (isset($featured_status) || $main_categry == 2 || isset($keyword)) { ?><!-- ./ end panel-body -->
+                                        <div class="panel-body lit-blue">
+                                                <div class="slide-container">
+                                                        <div class="list-group" id="mg-multisidetabs">
+                                                                <a data-toggle="collapse" href="#collapse5" class="list-group-item active-head "><span>Brands</span><span class="glyphicon glyphicon-menu-down mg-icon pull-right"></span></a>
+                                                                <div class="panel list-sub" style="display: block">
+                                                                        <div id="collapse5" class="panel-body panel-collapse collapse <?= (!empty($id) && $main_categry == 2) ? 'in' : '' ?>" >
+                                                                                <div class="list-group">
+                                                                                        <?php
+                                                                                        foreach ($brands_sub as $brands) {
+                                                                                                if (isset($catag->id)) {
+                                                                                                        if ($brands->id == $catag->id) {
+                                                                                                                $active_class = 'list-group-item active';
+                                                                                                        } else {
+                                                                                                                $active_class = 'list-group-item';
+                                                                                                        }
+                                                                                                } else {
+                                                                                                        $active_class = 'list-group-item';
+                                                                                                }
+                                                                                                ?>
+                                                                                                <?php
+                                                                                                if (isset($featured_status) || isset($keyword)) {
+                                                                                                        ?>
+                                                                                                        <?= Html::a('<span>' . $brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $brands->category_code, 'category' => 2, 'featured' => $featured_status, 'keyword' => $keyword], ['class' => $active_class])
+                                                                                                        ?>
+                                                                                                <?php } else {
+                                                                                                        ?>
+                                                                                                        <?= Html::a('<span>' . $brands->category . '</span><span class="fa fa-caret-right pull-left">', ['product/index', 'id' => $brands->category_code, 'category' => 2], ['class' => $active_class])
+                                                                                                        ?>
+                                                                                                        <?php
+                                                                                                }
+                                                                                                ?>
+                                                                                        <?php } ?>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div><!-- ./ end list-group -->
+                                                </div><!-- ./ end slide-container -->
+                                        </div>
+                                <?php } ?><!-- ./ end panel-body -->
+                        </div><!-- ./ end panel panel-default-->
+                </div>
+                <!-- ./ endcol-lg-6 col-lg-offset-3 -->
 
-		<div class="col-md-9 product-list">
-			<div class="international-brands">
+                <div class="col-md-9 product-list">
+                        <div class="international-brands">
 
-				<?=
-				ListView::widget([
-				    'dataProvider' => $dataProvider,
-				    'itemView' => '_view2',
-				]);
-				?>
+                                <?=
+                                ListView::widget([
+                                    'dataProvider' => $dataProvider,
+                                    'itemView' => '_view2',
+                                ]);
+                                ?>
 
                         </div>
                 </div>
