@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     </div>
     <div class='col-md-12 col-sm-6 col-xs-12 left_padd'> 
-        <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+        <?= $form->field($model, 'content')->textarea(['maxlength' => '200', 'rows' => 6])->label('Content<i> (200 characters)</i>') ?>
 
     </div>
     <div class='col-md-4 col-sm-6 col-xs-12' style="float:right;">

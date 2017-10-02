@@ -32,7 +32,7 @@ class AboutSisterConcern extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content', 'image', 'CB', 'UB', 'DOC'], 'required'],
+            [['title', 'content',  'CB', 'UB', 'DOC'], 'required'],
             [['content'], 'string'],
             [['CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
