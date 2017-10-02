@@ -2798,7 +2798,7 @@ input[type="checkbox"]:checked:before {
 }
 #checkout .summery-box .thumbnail a>img, #checkout .summery-box .thumbnail>img{
         position: absolute;
-        width: 60%;
+        /*width: 60%;*/
         text-align: center;
         margin: 0 auto;
         left: 0px;
