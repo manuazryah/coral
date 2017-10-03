@@ -32,36 +32,7 @@ class ProductController extends \yii\web\Controller {
                 }
 
                 if (isset($keyword) && $keyword != '') {
-                        $dataProvider->query->andWhere(['like', 'product_name', $keyword])->orWhere(['like', 'canonical_name', $keyword]);
-                        /*
-                         * search category
-                         */
-                        $categorys = Category::find()->where(['status' => 1])->andWhere(['like', 'category', $keyword])->all();
-                        $category_products = array();
-                        if (!empty($categorys)) {
-                                foreach ($categorys as $value) {
-                                        $cat_products = Product::find()->where(['status' => 1, 'category' => $value->id])->all();
-                                        foreach ($cat_products as $cat_products) {
-                                                $category_products[] = $cat_products->id;
-                                        }
-                                }
-                                $dataProvider->query->orWhere(['IN', 'id', $category_products]);
-                        }
-                        /*
-                         * search search tags
-                         */
-                        $search_tags = \common\models\MasterSearchTag::find()->where(['status' => 1])->andWhere((['like', 'tag_name', $keyword]))->all();
-                        $keyword_products = array();
-                        if (!empty($search_tags)) {
-                                foreach ($search_tags as $value) {
-                                        $search_products = Product::find()->where(['status' => 1])->andWhere(new Expression('FIND_IN_SET(:search_tag, search_tag)'))->addParams([':search_tag' => $value->id])->all();
-                                        foreach ($search_products as $search_productss) {
-                                                if (!in_array($search_productss->id, $keyword_products))
-                                                        $keyword_products[] = $search_productss->id;
-                                        }
-                                }
-                                $dataProvider->query->orWhere(['IN', 'id', $keyword_products]);
-                        }
+                        $this->Search($keyword, $dataProvider);
                 }
 
                 if (!empty($category)) {
@@ -80,14 +51,6 @@ class ProductController extends \yii\web\Controller {
                 if (!empty($featured)) {
                         $dataProvider->query->andWhere(['featured_product' => $featured]);
                 }
-//		if (isset(Yii::$app->session['gender_search'])) {
-//			$dataProvider->query->andWhere(['gender_type' => Yii::$app->session['gender_search']]);
-//		}
-//		if (($type == 0 && $type != NULL) || ($type == 1)) {
-//			$dataProvider->query->andWhere(['gender_type' => $type]);
-//		}
-
-
 
 
                 $categories = Category::find()->where(['status' => 1, 'main_category' => $category])->all();
@@ -125,6 +88,41 @@ class ProductController extends \yii\web\Controller {
 //			    'id' => $id,
 //		]);
 //	}
+
+
+        public function Search($keyword, $dataProvider) {
+                $dataProvider->query->andWhere(['like', 'product_name', $keyword])->orWhere(['like', 'canonical_name', $keyword]);
+                /*
+                 * search category
+                 */
+                $categorys = Category::find()->where(['status' => 1])->andWhere(['like', 'category', $keyword])->all();
+                $category_products = array();
+                if (!empty($categorys)) {
+                        foreach ($categorys as $value) {
+                                $cat_products = Product::find()->where(['status' => 1, 'category' => $value->id])->all();
+                                foreach ($cat_products as $cat_products) {
+                                        $category_products[] = $cat_products->id;
+                                }
+                        }
+                        $dataProvider->query->orWhere(['IN', 'id', $category_products]);
+                }
+                /*
+                 * search search tags
+                 */
+                $search_tags = \common\models\MasterSearchTag::find()->where(['status' => 1])->andWhere((['like', 'tag_name', $keyword]))->all();
+                $keyword_products = array();
+                if (!empty($search_tags)) {
+                        foreach ($search_tags as $value) {
+                                $search_products = Product::find()->where(['status' => 1])->andWhere(new Expression('FIND_IN_SET(:search_tag, search_tag)'))->addParams([':search_tag' => $value->id])->all();
+                                foreach ($search_products as $search_productss) {
+                                        if (!in_array($search_productss->id, $keyword_products))
+                                                $keyword_products[] = $search_productss->id;
+                                }
+                        }
+                        $dataProvider->query->orWhere(['IN', 'id', $keyword_products]);
+                }
+                return $dataProvider;
+        }
 
         public function actionCategory($id) {
                 $searchModel = new ProductSearch();
