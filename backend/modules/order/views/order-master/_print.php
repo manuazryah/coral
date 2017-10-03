@@ -19,10 +19,10 @@
             }
 
             @media print {
-                footer {
-                    position: fixed;
-                    bottom: 0;
-                }
+                /*                footer {
+                                    position: fixed;
+                                    bottom: 0;
+                                }*/
 
                 .content-block, p {
                     page-break-inside: avoid;
