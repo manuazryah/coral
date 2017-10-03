@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use common\models\User;
 use common\models\Product;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\OrderMasterSearch */
@@ -70,6 +71,27 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 ],
                                 'delivered_date',
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+//                                    'header' => 'Actions',
+                                    'template' => '{view-more}',
+                                    'buttons' => [
+                                        'view-more' => function ($url, $model) {
+                                            if ($model->item_type == 1) {
+                                                return Html::a('<span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>', $url, [
+                                                            'title' => Yii::t('app', 'view more'),
+                                                            'class' => '',
+                                                ]);
+                                            }
+                                        },
+                                    ],
+                                    'urlCreator' => function ($action, $model) {
+                                        if ($action === 'view-more') {
+                                            $url = Url::to(['view-more', 'id' => $model->id]);
+                                            return $url;
+                                        }
+                                    }
+                                ],
                             ],
                         ]);
                         ?>

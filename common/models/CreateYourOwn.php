@@ -49,7 +49,7 @@ class CreateYourOwn extends \yii\db\ActiveRecord {
             'user_id' => 'User ID',
             'session_id' => 'Session ID',
             'gender' => 'Gender',
-            'character_id' => 'Character ID',
+            'character_id' => 'Character',
             'scent' => 'Scent',
             'note' => 'Note',
             'bottle' => 'Bottle',

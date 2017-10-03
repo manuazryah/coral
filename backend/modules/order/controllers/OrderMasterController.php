@@ -9,6 +9,9 @@ use common\models\OrderDetailsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\CreateYourOwn;
+use common\models\CreateYourOwnSearch;
+use common\models\OrderDetails;
 
 /**
  * OrderMasterController implements the CRUD actions for OrderMaster model.
@@ -47,7 +50,7 @@ class OrderMasterController extends Controller {
     public function actionIndex() {
         $searchModel = new OrderMasterSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere(['status' => '4'])->orWhere(['status' => '5']);
+//        $dataProvider->query->andWhere(['status' => '4'])->orWhere(['status' => '5']);
 
         return $this->render('index', [
                     'searchModel' => $searchModel,
@@ -69,9 +72,37 @@ class OrderMasterController extends Controller {
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
         ]);
-//        return $this->render('view', [
-//                    'model' => $this->findModel($id),
-//        ]);
+    }
+
+    /**
+     * Displays a custom perfume detailed view.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionViewMore($id) {
+        $order_details = OrderDetails::find()->where(['id' => $id])->one();
+        $searchModel = new CreateYourOwnSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['id' => $order_details->product_id]);
+        return $this->render('view_more', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * This function print order details.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPrint($id) {
+        $order_master = OrderMaster::find()->where(['order_id' => $id])->one();
+        $order_details = OrderDetails::find()->where(['order_id' => $id])->all();
+        echo $this->renderPartial('_print', [
+            'order_master' => $order_master,
+            'order_details' => $order_details,
+        ]);
+        exit;
     }
 
     /**

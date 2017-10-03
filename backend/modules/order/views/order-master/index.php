@@ -76,9 +76,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'attribute' => 'admin_status',
                                     'format' => 'raw',
-                                    'filter' => ['0' => 'Not Delivered', '1' => 'Delivered'],
+                                    'filter' => ['0' => 'Pending', '1' => 'Order Placed', '2' => 'Order Packed', '3' => 'Order Dispatched', '4' => 'Order Delivered'],
                                     'value' => function ($data) {
-                                        return \yii\helpers\Html::dropDownList('admin_status', null, ['0' => 'Not Delivered', '1' => 'Delivered'], ['options' => [$data->admin_status => ['Selected' => 'selected']], 'class' => 'form-control admin_status_field', 'id' => 'order_admin_status-' . $data->id,]);
+                                        return \yii\helpers\Html::dropDownList('admin_status', null, ['0' => 'Pending', '1' => 'Order Placed', '2' => 'Order Packed', '3' => 'Order Dispatched', '4' => 'Order Delivered'], ['options' => [$data->admin_status => ['Selected' => 'selected']], 'class' => 'form-control admin_status_field', 'id' => 'order_admin_status-' . $data->id,]);
                                     },
                                 ],
                                 // 'doc',
@@ -94,12 +94,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'class' => 'yii\grid\ActionColumn',
 //                                    'contentOptions' => ['style' => 'width:100px;'],
                                     'header' => 'Actions',
-                                    'template' => '{view}',
+                                    'template' => '{view}{print}',
                                     'buttons' => [
                                         'view' => function ($url, $model) {
-                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                                            return Html::a('<span><i class="fa fa-eye" aria-hidden="true"></i></span>', $url, [
                                                         'title' => Yii::t('app', 'view'),
                                                         'class' => '',
+                                            ]);
+                                        },
+                                        'print' => function ($url, $model) {
+                                            return Html::a('<span><i class="fa fa-print" aria-hidden="true"></i></span>', $url, [
+                                                        'title' => Yii::t('app', 'print'),
+                                                        'class' => '',
+                                                        'target' => '_blank',
                                             ]);
                                         },
                                     ],
@@ -108,10 +115,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                             $url = Url::to(['view', 'id' => $model->order_id]);
                                             return $url;
                                         }
-//                                        if ($action === 'delete') {
-//                                            $url = Url::to(['del', 'id' => $model->id]);
-//                                            return $url;
-//                                        }
+                                        if ($action === 'print') {
+                                            $url = Url::to(['print', 'id' => $model->order_id]);
+                                            return $url;
+                                        }
                                     }
                                 ],
                             ],
