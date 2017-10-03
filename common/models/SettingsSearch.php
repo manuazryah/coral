@@ -18,7 +18,7 @@ class SettingsSearch extends Settings {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['label', 'DOU', 'value'], 'safe'],
+            [['label', 'DOU', 'value', 'prefix'], 'safe'],
         ];
     }
 
@@ -58,6 +58,7 @@ class SettingsSearch extends Settings {
         $query->andFilterWhere([
             'id' => $this->id,
             'value' => $this->value,
+            'prefix' => $this->prefix,
             'DOU' => $this->DOU,
         ]);
 

@@ -291,6 +291,7 @@ class CartController extends \yii\web\Controller {
             $model1->user_id = Yii::$app->user->identity->id;
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
+            $model1->net_amount = $this->net_amount($total_amt);
             $model1->status = 1;
 //            date_default_timezone_set('Asia/Kolkata');
             $model1->order_date = date('Y-m-d H:i:s');
@@ -306,11 +307,13 @@ class CartController extends \yii\web\Controller {
     public function addOrder($cart) {
         $model1 = new OrderMaster;
         if (isset(Yii::$app->user->identity->id)) {
-            $serial_no = \common\models\Settings::findOne(4)->value;
-            $model1->order_id = $this->generateProductEan($serial_no);
+            $serial_no = Settings::findOne(4)->value;
+            $prefix = Settings::findOne(4)->prefix;
+            $model1->order_id = $this->generateProductEan($prefix . $serial_no);
             $model1->user_id = Yii::$app->user->identity->id;
             $total_amt = $this->total($cart);
             $model1->total_amount = $total_amt;
+            $model1->net_amount = $this->net_amount($total_amt);
             $model1->status = 1;
 //            date_default_timezone_set('Asia/Kolkata');
             $model1->order_date = date('Y-m-d H:i:s');
@@ -373,7 +376,7 @@ class CartController extends \yii\web\Controller {
                 $model_prod->rate = ($cart->quantity) * ($price);
                 $model_prod->status = '0';
                 if ($model_prod->save()) {
-                    return TRUE;
+//                    return TRUE;
                 }
 //                 else {
 //                var_dump($model_prod->getErrors());
@@ -428,7 +431,7 @@ class CartController extends \yii\web\Controller {
         $subtotal = '0';
         foreach ($cart as $cart_item) {
             if ($cart_item->item_type == 1) {
-                $subtotal += $cart_item->rate;
+                $subtotal += ($cart_item->rate * $cart_item->quantity);
             } else {
                 $product = Product::findOne($cart_item->product_id);
                 if ($product->offer_price == '0' || $product->offer_price == '') {
@@ -440,6 +443,16 @@ class CartController extends \yii\web\Controller {
             }
         }
         return $subtotal;
+    }
+
+    function net_amount($total_amt) {
+        $limit = Settings::findOne(1)->value;
+        $net_amnt = $total_amt;
+        if ($limit > $total_amt) {
+            $extra = Settings::findOne(2)->value;
+            $net_amnt = $extra + $total_amt;
+        }
+        return $net_amnt;
     }
 
     public function generateProductEan($serial_no) {

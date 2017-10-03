@@ -91,7 +91,8 @@ use dosamigos\ckeditor\CKEditor;
                 <?php
                 if ($model->isNewRecord) {
                     $serial_no = \common\models\Settings::findOne(3)->value;
-                    $model->item_ean = $this->context->generateProductEan($serial_no);
+                    $prefix = \common\models\Settings::findOne(3)->prefix;
+                    $model->item_ean = $this->context->generateProductEan($prefix.$serial_no);
                 }
                 ?>
                 <div class='col-md-4 col-sm-6 col-xs-12'>

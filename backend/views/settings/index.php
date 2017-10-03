@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                                'id',
                                 'label',
                                 'value',
+                                'prefix',
 //                                'DOU',
                                 ['class' => 'yii\grid\ActionColumn',
                                     'template' => '{update}'],

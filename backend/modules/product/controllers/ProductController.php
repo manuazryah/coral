@@ -240,7 +240,8 @@ class ProductController extends Controller {
         $model->offer_price = '';
         $model->stock = '';
         $serial_no = \common\models\Settings::findOne(3)->value;
-        $model->item_ean = $this->generateProductEan($serial_no);
+        $prefix = \common\models\Settings::findOne(3)->prefix;
+        $model->item_ean = $this->generateProductEan($prefix.$serial_no);
         $profile = $model->profile;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {

@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $label
  * @property string $value
+ * @property string $prefix
  * @property string $DOU
  */
 class Settings extends \yii\db\ActiveRecord
@@ -31,7 +32,7 @@ class Settings extends \yii\db\ActiveRecord
             [['label', 'value'], 'required'],
             [['value'], 'integer'],
             [['DOU'], 'safe'],
-            [['label'], 'string', 'max' => 200],
+            [['label','prefix'], 'string', 'max' => 200],
         ];
     }
 
@@ -44,6 +45,7 @@ class Settings extends \yii\db\ActiveRecord
             'id' => 'ID',
             'label' => 'Label',
             'value' => 'Value',
+            'prefix' => 'Prefix',
             'DOU' => 'Dou',
         ];
     }
