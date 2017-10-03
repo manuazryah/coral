@@ -29,6 +29,7 @@ class CheckoutController extends \yii\web\Controller {
                 if ($model->load(Yii::$app->request->post())) {
                     Yii::$app->SetValues->Attributes($model);
                     $model->user_id = Yii::$app->user->identity->id;
+                    $model->status = 1;
                     if ($model->save()) {
                         $this->orderbilling($model->id);
                     }
@@ -54,7 +55,7 @@ class CheckoutController extends \yii\web\Controller {
         $model1->bill_address_id = $bill_address;
         $model1->status = 2;
         $model1->save();
-         if (isset(Yii::$app->request->post()['UserAddress']['check'])) {
+        if (isset(Yii::$app->request->post()['UserAddress']['check'])) {
             $model1->ship_address_id = $bill_address;
             $model1->status = 3;
             $model1->save();
