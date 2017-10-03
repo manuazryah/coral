@@ -210,6 +210,7 @@ class SiteController extends Controller {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
+                $this->sendResponseMail($model);
                 if ($user->email_verification == 1) {
                     if (Yii::$app->getUser()->login($user)) {
                         if (yii::$app->session['after_login'] != '') {
@@ -612,6 +613,22 @@ class SiteController extends Controller {
                 ]);
             }
         }
+    }
+
+    /**
+     * Response Mail function
+     *
+     * @return mixed
+     */
+    public function sendResponseMail($model) {
+        $message = Yii::$app->mailer->compose('response-mail') // a view rendering result becomes the message body here
+                ->setFrom('info@caringpeople.in')
+                ->setTo('manu@azryah.com')
+                ->setSubject('Welcome to Coral Perfume');
+        echo $message;
+        exit;
+        $message->send();
+        return TRUE;
     }
 
 }
