@@ -42,7 +42,7 @@ use common\models\Settings;
             <div class="media">
                 <a class="thumbnail col-lg-2 col-md-2 col-sm-2 col-xs-2" href="#"> <img class="media-object" src="<?= $image ?>"> </a>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="top: 10px; text-align: left">
-                    <h4 class="product-heading"><a href="#"><?= $cart->item_type == 1 ? 'Custom Perfume' : $product->product_name; ?></a></h4>
+                    <h4 class="product-heading"><a href="#" title='<?= $cart->item_type == 1 ? 'Custom Perfume' : $product->product_name; ?>'><?= $cart->item_type == 1 ? 'Custom Perfume' : substr($product->product_name, 0, 23); ?></a></h4>
                     <?php
                     $label1 = '';
                     $label2 = '';

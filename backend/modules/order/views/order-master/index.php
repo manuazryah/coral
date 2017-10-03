@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return $name->first_name . ' ' . $name->last_name;
                                     }
                                 ],
-                                'total_amount',
+                                'net_amount',
                                 'order_date',
                                 // 'ship_address_id',
                                 // 'bill_address_id',
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // 'shipping_method',
                                 [
                                     'attribute' => 'status',
-                                    'filter' => ['4' => 'Success', '5' => 'Failed'],
+                                    'filter' => ['4' => 'Success', '1,2,3' => 'Failed'],
                                     'value' => function($data) {
                                         return $data->status == 4 ? 'Success' : 'Failed';
                                     }

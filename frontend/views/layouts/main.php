@@ -295,7 +295,7 @@ and open the template in the editor.
                                                         <img src="<?= Yii::$app->homeUrl; ?>images/iso.png" class="img-responsive"/>
                                                 </div>
                                                 <div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
-                                                        <img src="<?= Yii::$app->homeUrl; ?>images/coral-cert.png" class="img-responsive"/>
+                                                        <img src="<?= Yii::$app->homeUrl; ?>images/certified-logo.png" class="img-responsive"/>
                                                 </div>
                                                 <div class="col-md-12 col-sm-12 col-xs-12 features">
                                                         <ul>

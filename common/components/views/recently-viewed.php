@@ -45,13 +45,13 @@ if (!empty($recently_viewed)) {
                                         </div>
                                         <div class="gp_products_item_caption">
                                             <ul class="gp_products_caption_name">
-                                                <li><a href="#"><?= $model->product_name ?></a></li>
+                                                <li><a href="#" title="<?= $model->product_name?>"><?= substr($model->product_name, 0, 31) ?></a></li>
                                                 <?php $product_type = Fregrance::findOne($model->product_type); ?>
                                                 <li><a href="#"><?= $product_type->name; ?></a></li>
                                             </ul>
                                             <ul class="gp_products_caption_rating">
                                                 <?php
-                                                if ($model->offer_price != "0") {
+                                                if ($model->offer_price != "0" && $model->offer_price != '') {
                                                     $percentage = round(100 - (($model->offer_price / $model->price) * 100));
                                                     ?>
                                                     <li>AED <?= $model->offer_price; ?></li>
@@ -59,7 +59,8 @@ if (!empty($recently_viewed)) {
                                                     <li class="pull-right"><a href="#">(<?= $percentage ?>%OFF)</a></li>
                                                 <?php } else {
                                                     ?>
-                                                    <li class="center">AED <?= $model->price; ?></li>
+                                                    <li>AED <?= $model->price; ?></li>
+                                                    <li class="center"></li>
                                                 <?php } ?>
                                             </ul>
                                         </div>
