@@ -90,7 +90,6 @@
                 <?php
                 $qty_total = 0;
                 $amount_total = 0;
-                $delivary_charge = 0;
                 foreach ($order_details as $value) {
                     if ($value->item_type == 1) {
                         $product = common\models\CreateYourOwn::find()->where(['id' => $value->product_id])->one();
@@ -108,6 +107,11 @@
                     $qty_total += $value->quantity;
                     $amount_total += $value->rate;
                 }
+                $shiplimit = \common\models\Settings::findOne('1')->value;
+                if ($shiplimit > $amount_total) {
+                    $delivary_charge = \common\models\Settings::findOne('2')->value;
+                }
+//                $delivary_charge = 0;
                 $grand_total = $amount_total + $delivary_charge;
                 ?>
             </table>
