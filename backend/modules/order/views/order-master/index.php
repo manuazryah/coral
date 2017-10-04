@@ -103,11 +103,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ]);
                                         },
                                         'print' => function ($url, $model) {
+//                                            if ($model->item_type == 1) {
                                             return Html::a('<span><i class="fa fa-print" aria-hidden="true"></i></span>', $url, [
                                                         'title' => Yii::t('app', 'print'),
                                                         'class' => '',
                                                         'target' => '_blank',
                                             ]);
+//                                            }
                                         },
                                     ],
                                     'urlCreator' => function ($action, $model) {
