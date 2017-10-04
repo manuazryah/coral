@@ -9,6 +9,11 @@ $youtube_video = CmsOthers::find()->where(['id' => 7])->one();
 if (isset($meta_title) && $meta_title != '')
     $this->title = $meta_title;
 ?>
+<style>
+    iframe, object, embed {
+        max-width: 100%;
+    }
+</style>
 <section id="main-slider">
     <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000" >
 
@@ -292,9 +297,10 @@ if (isset($meta_title) && $meta_title != '')
                                             <?= Html::a(' <div class="img-overlay"></div>', 'product_detail/' . $international->canonical_name, []) ?>
                                         </div>
                                         <ul class="text-center">
-                                            <a href="#"><li><i class="fa fa-facebook"></i></li></a>
-                                            <a href="#"><li><i class="fa fa-twitter"></i></li></a>
-                                            <a href="#"><li><i class="fa fa-linkedin"></i></li></a>
+                                            <input type="hidden" value="1" class="q_ty">
+                                            <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', '#', ['class' => 'add_to_cart', 'id' => $international->canonical_name]) ?>
+                                            <?= Html::a('<li><i class="fa fa-heart"></i></li>', 'javascript:void(0)', ['class' => 'add_to_wish_list', 'id' => $international->id]) ?>
+                                            <?= Html::a('<li><i class="fa fa-eye"></i></li>', ['/product/product_detail', 'product' => $international->canonical_name], ['class' => '']) ?>
                                         </ul>
                                         <div class="gp_products_item_caption">
                                             <ul class="gp_products_caption_name">

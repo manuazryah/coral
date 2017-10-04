@@ -62,11 +62,11 @@ and open the template in the editor.
                                             <li><?= $shipping->content; ?></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown hidden-lg hidden-md hidden-sm"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="truck"></i></a>
+<!--                                    <li class="dropdown hidden-lg hidden-md hidden-sm"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="truck"></i></a>
                                         <ul class="dropdown-menu">
                                             <li><?= $shipping->content; ?></li>
                                         </ul>
-                                    </li>
+                                    </li>-->
                                     <li>
                                         <!--										<a href="#">Blog</a>-->
                                         <?= Html::a('Blog', ['our-blog']) ?>
@@ -143,7 +143,7 @@ and open the template in the editor.
                                             <?php
                                         } else {
                                             ?>
-                                            <li><?= Html::a('<span>My Account</span>', ['/myaccounts/user/index'], ['class' => '']) ?></li>
+                                            <li><?= Html::a('<span><i class="fa fa-user" aria-hidden="true"></i></span>', ['/myaccounts/user/index'], ['class' => '']) ?></li> 
                                             <?php
                                             echo '<li>' . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Logout', ['style' => 'background: white;border: none;']) . Html::endForm() . '</li>';
                                         }
@@ -289,10 +289,10 @@ and open the template in the editor.
                     <div class="col-md-5 col-sm-4 col-xs-5 br-right xs-100">
                         <h4 class="foot-hdng">certified services</h4>
                         <div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
-                            <img src="<?= Yii::$app->homeUrl; ?>images/gmp.png" class="img-responsive"/>
+                            <img src="<?= Yii::$app->homeUrl; ?>images/certified-logo1.png" class="img-responsive"/>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
-                            <img src="<?= Yii::$app->homeUrl; ?>images/iso.png" class="img-responsive"/>
+                            <img src="<?= Yii::$app->homeUrl; ?>images/certified-logo2.png" class="img-responsive"/>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-3 certified-logo">
                             <img src="<?= Yii::$app->homeUrl; ?>images/certified-logo.png" class="img-responsive"/>

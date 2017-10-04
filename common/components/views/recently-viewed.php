@@ -42,7 +42,7 @@ if (!empty($recently_viewed)) {
                                                 <?php }
                                                 ?>
                                             </a>
-                                            <?= Html::a(' <div class="img-overlay"></div>', 'product_detail/' . $model->canonical_name, []) ?>
+                                            <?= Html::a(' <div class="img-overlay"></div>', $model->canonical_name, []) ?>
                                         </div>
                                         <ul class="text-center">
                                             <input type="hidden" value="1" class="q_ty">
@@ -52,7 +52,7 @@ if (!empty($recently_viewed)) {
                                         </ul>
                                         <div class="gp_products_item_caption">
                                             <ul class="gp_products_caption_name">
-                                                <li><a href="#" title="<?= $model->product_name?>"><?= substr($model->product_name, 0, 31) ?></a></li>
+                                                <li><a href="#" title="<?= $model->product_name ?>"><?= substr($model->product_name, 0, 31) ?></a></li>
                                                 <?php $product_type = Fregrance::findOne($model->product_type); ?>
                                                 <li><a href="#"><?= $product_type->name; ?></a></li>
                                             </ul>

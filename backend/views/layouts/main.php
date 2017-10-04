@@ -34,21 +34,21 @@ AppAsset::register($this);
 
 
 
-                <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
-
-                        <!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
+                <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebaowered By Azryah Networksr by default, "chat-visible" to make chat appear always -->
+owered By Azryah Networks
+                        <!-- Add "fixed" class to make the sidebar fixed always to the broowered By Azryah Networkswser viewport. -->
                         <!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
                         <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
                         <div class="sidebar-menu toggle-others fixed">
 
                                 <div class="sidebar-menu-inner">
 
-                                        <header class="logo-env">
+                                    <header class="logo-env" >
 
                                                 <!-- logo -->
                                                 <div class="logo">
                                                         <a href="<?= yii::$app->homeUrl; ?>" class="logo-expanded">
-                                                                <img src="<?= yii::$app->homeUrl; ?>images/logo.jpg" width="104" alt="" />
+                                                                <img src="<?= yii::$app->homeUrl; ?>images/logo-3.png" width="104" alt="" />
                                                         </a>
 
                                                         <a href="<?= yii::$app->homeUrl; ?>" class="logo-collapsed">

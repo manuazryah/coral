@@ -5,6 +5,11 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Forgot-password';
 ?>
+<style>
+.margin-auto .form-group {
+    padding: 0 0px;
+}
+</style>
 
 <div class="pad-20 hide-xs"></div>
 

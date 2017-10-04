@@ -40,7 +40,7 @@ if (!empty($related_product)) {
                                             <?php }
                                             ?>
                                         </a>
-                                        <?= Html::a(' <div class="img-overlay"></div>', 'product_detail/' . $val->canonical_name, []) ?>
+                                        <?= Html::a(' <div class="img-overlay"></div>', $val->canonical_name, []) ?>
                                     </div>
                                     <ul class="text-center">
                                         <input type="hidden" value="1" class="q_ty">
