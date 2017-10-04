@@ -155,6 +155,7 @@ class CartController extends \yii\web\Controller {
     }
 
     public function actionMycart() {
+        $this->changecart(Yii::$app->session['temp_user']);
         if (isset(Yii::$app->session['create_own'])) {
             /* Change tempuser cart to login user */
             $this->addtocart();
