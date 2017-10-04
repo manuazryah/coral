@@ -56,7 +56,7 @@ use common\models\Settings;
                     <h5 class="brand-name"><a href="#"><?= $cart->item_type == 1 ? $label1 . ' , ' . $label2 : Brand::findOne($product->brand)->brand; ?></a></h5>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="top: 15px; text-align: right; padding-right: 0;">
-                    <p class="price">AED <?= $total ?></p>
+                    <p class="price">AED <?= sprintf('%0.2f', $total) ?></p>
                 </div>
             </div>
         <?php } ?>
@@ -68,10 +68,10 @@ use common\models\Settings;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 label">Shipping</div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pad-0" style="padding: 15px 15px; border-top: 1px solid #ddd;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price"><?= $subtotal->total_amount ?></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price"><?= sprintf('%0.2f', $subtotal->total_amount) ?></div>
             <?php
             $shipextra = Settings::findOne('2')->value;
-            $ship_charge = $subtotal->total_amount <= $shipping_limit ? $shipextra : 0.00
+            $ship_charge = $subtotal->total_amount <= $shipping_limit ? sprintf('%0.2f', $shipextra) : 0.00
             ?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price"><?= $ship_charge ?></div>
         </div>
@@ -82,7 +82,7 @@ use common\models\Settings;
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pad-0" style="padding: 15px 15px; border-top: 1px solid #ddd;">
             <?php $grand_total = $subtotal->total_amount + $ship_charge ?>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price">AED <?= $grand_total ?></div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price">AED <?= sprintf('%0.2f', $grand_total) ?></div>
         </div>
     </div>
 </div>

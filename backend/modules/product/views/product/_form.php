@@ -119,11 +119,7 @@ use dosamigos\ckeditor\CKEditor;
                     <?= $form->field($model, 'stock')->textInput(['type' => 'number', 'min' => '0', 'autocomplete' => 'off']) ?>
                 </div>
                 <div class='col-md-4 col-sm-6 col-xs-12 '>
-                    <?php
-                    if ($model->isNewRecord) {
-                        $model->stock_unit = 5;
-                    }
-                    ?>
+                   
                     <?= $form->field($model, 'stock_unit')->dropDownList(ArrayHelper::map(Unit::find()->all(), 'id', 'unit_name')) ?>
                     <label onclick="jQuery('#modal-3').modal('show', {backdrop: 'fade'});" class="btn btn-icon btn-white extra_btn add_unit" attr_id="product-stock_unit">Add Unit</label>
                 </div>
@@ -177,7 +173,7 @@ use dosamigos\ckeditor\CKEditor;
                     <?=
                     $form->field($model, 'product_detail')->widget(CKEditor::className(), [
                         'options' => ['rows' => 6],
-                        'preset' => 'basic'
+                        'preset' => 'custom'
                     ])
                     ?>
                 </div>

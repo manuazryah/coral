@@ -4008,7 +4008,7 @@ fieldset .notes-selection{
     max-height: 220px;
     overflow-y: scroll;
 }
-#notes .product-info-tab .nav-tabs>li.active>a, #product-page .product-info-tab .nav-tabs>li.active>a:focus, #product-page .product-info-tab .nav-tabs>li.active>a:hover {
+#notes .product-info-tab .nav-tabs>li.active>a, #notes .product-info-tab .nav-tabs>li.active>a:focus, #notes .product-info-tab .nav-tabs>li.active>a:hover {
     cursor: default;
     background-color: #b4e0de;
     border: 1px solid #ddd;

@@ -148,7 +148,7 @@ use dosamigos\ckeditor\CKEditor;
                     <?=
                     $form->field($model, 'product_detail')->widget(CKEditor::className(), [
                         'options' => ['rows' => 6],
-                        'preset' => 'basic'
+                        'preset' => 'custom'
                     ])
                     ?>
                 </div>

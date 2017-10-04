@@ -24,7 +24,7 @@ use dosamigos\ckeditor\CKEditor;
 			<?=
 			$form->field($model, 'index_content')->widget(CKEditor::className(), [
 			    'options' => ['rows' => 6],
-			    'preset' => 'basic'
+			    'preset' => 'custom'
 			])
 			?>
 		</div>
@@ -50,7 +50,7 @@ use dosamigos\ckeditor\CKEditor;
 			<?=
 			$form->field($model, 'chairman_message')->widget(CKEditor::className(), [
 			    'options' => ['rows' => 6],
-			    'preset' => 'basic'
+			    'preset' => 'custom'
 			])
 			?>
 		</div>

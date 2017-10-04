@@ -58,8 +58,6 @@ $(document).ready(function () {
 	$(".remove-wish-list").click(function () {
 		var canname = $(this).attr('id');
 		var list_id = $(this).attr('data-val');
-		alert(canname);
-		alert(list_id);
 		removewishlist(list_id, canname);
 	});
 
