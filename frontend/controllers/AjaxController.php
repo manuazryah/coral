@@ -213,7 +213,12 @@ class AjaxController extends \yii\web\Controller {
                 $arr_note_data = explode(',', Yii::$app->session['create-your-own']['note-data']);
                 foreach ($arr_note_data as $value) {
                     $datas = \common\models\Notes::find()->where(['id' => $value])->one();
-                    $options .= '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><img src="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $datas->id . '/small.' . $datas->sub_img . '"></div>';
+                    if (strlen($datas->notes) > 10) {
+                        $str = substr($datas->notes, 0, 7) . '...';
+                    } else {
+                        $str = $datas->notes;
+                    }
+                    $options .= '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><img src="' . Yii::$app->homeUrl . 'uploads/create_your_own/notes/' . $datas->id . '/small.' . $datas->sub_img . '"><p style="font-size:12px;" title="' . $datas->notes . '">' . $str . '</p></div>';
                 }
             }
             $bottle_data = \common\models\Bottle::find()->where(['id' => Yii::$app->session['create-your-own']['bottle']])->one();

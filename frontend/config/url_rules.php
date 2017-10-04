@@ -23,4 +23,5 @@ return [
     'coral-perfumes-blog-detail/<id>' => 'site/blog-detail',
     'coral-perfumes-blogs' => 'site/our-blog',
     'product-search/<keyword:\w+(-\w+)*>' => 'product/search',
+    'create-your-own' => 'create_your_own/create-your-own/index',
 ];

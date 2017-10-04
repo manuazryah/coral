@@ -48,15 +48,15 @@ class SiteController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products', 'verification'],
+                'only' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products', 'verification', 'send-response-mail'],
                 'rules' => [
                     [
-                        'actions' => ['signup', 'login-signup', 'product-detail', 'our-products', 'verification'],
+                        'actions' => ['signup', 'login-signup', 'product-detail', 'our-products', 'verification', 'send-response-mail'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products', 'verification'],
+                        'actions' => ['logout', 'signup', 'login-signup', 'product-detail', 'our-products', 'verification', 'send-response-mail'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -248,17 +248,12 @@ class SiteController extends Controller {
 
     public function Emailverification($user) {
 
-        $to = $user->email;
-        $subject = 'Email Verification';
-        echo $message = $this->renderPartial('email_verifictn', ['model' => $user]);
-        exit;
-
-
-// To send HTML mail, the Content-type header must be set
-        $headers = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n" .
-                "From: info@perfumedunia.com";
-        //mail($to, $subject, $message, $headers);
+        $message = Yii::$app->mailer->compose('email_varification', ['model' => $user]) // a view rendering result becomes the message body here
+                ->setFrom('no-replay@coralperfumes.com')
+                ->setTo($user->email)
+                ->setSubject('Email Verification');
+        $message->send();
+        return TRUE;
     }
 
     /**
@@ -527,15 +522,12 @@ class SiteController extends Controller {
 
     public function sendMail($val, $model) {
 
-        $to = $model->email;
-        $subject = 'Change password';
-        $message = $this->renderPartial('forgot_mail', ['model' => $model, 'val' => $val]);
-
-// To send HTML mail, the Content-type header must be set
-        $headers = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n" .
-                "From: info@perfumedunia.com";
-        mail($to, $subject, $message, $headers);
+        $message = Yii::$app->mailer->compose('forgot_mail', ['model' => $model, 'val' => $val]) // a view rendering result becomes the message body here
+                ->setFrom('no-replay@coralperfumes.com')
+                ->setTo($model->email)
+                ->setSubject('Change Password');
+        $message->send();
+        return TRUE;
     }
 
     public function actionNewPassword($token) {
@@ -620,13 +612,14 @@ class SiteController extends Controller {
      *
      * @return mixed
      */
-    public function sendResponseMail($model) {
+    public function actionSendResponseMail() {
+        $data = $this->renderPartial('response_mail');
+        echo $data;
+        exit;
         $message = Yii::$app->mailer->compose('response-mail') // a view rendering result becomes the message body here
-                ->setFrom('info@caringpeople.in')
+                ->setFrom('info@coralperfumes.com')
                 ->setTo('manu@azryah.com')
                 ->setSubject('Welcome to Coral Perfume');
-        echo $message;
-        exit;
         $message->send();
         return TRUE;
     }

@@ -267,7 +267,7 @@ use yii\helpers\Html;
                         </div>
                     </div>
                     <div class="row" style="padding-top: 35px;">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="note-images">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="note-images" style="padding:0px;">
                         </div>
                     </div>
                 </div>
