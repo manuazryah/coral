@@ -299,6 +299,7 @@
     }
     .slide-text{
         top: 25%;
+        display: none;
     }
     .form-feild-box{
         margin: 15px 30px;
@@ -1012,6 +1013,10 @@
     .category-grid img{
         width: 100%;
     }
+    .slide-text{
+        top: 25%;
+        display: none;
+    }
 }
 @media(max-width:458px){
 
@@ -1581,5 +1586,9 @@
     }
     #header .right .navbar-right li a {   
         padding: 0 5px;
+    }
+    .slide-text{
+        top: 25%;
+        display: none;
     }
 }
