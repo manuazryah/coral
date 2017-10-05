@@ -2543,6 +2543,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: #8c8c8c;
     margin-left: 0px;
     line-height: 29px;
+    word-wrap: break-word;
 }
 .delete-address{
     font-size: 14px;
@@ -4263,4 +4264,18 @@ fieldset .notes-selection{
     line-height: 22px;
     letter-spacing: .8px;
     padding-left: 31px;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: #93c622;
+    border-color: #99c600;
+}
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    color: #141514;
+}
+.pagination>li>a, .pagination>li>span {
+    color: #080808;
+}
+.user-address-hei{
+    min-height: 180px;
+    max-height: 180px;
 }

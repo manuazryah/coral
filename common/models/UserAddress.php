@@ -36,11 +36,11 @@ class UserAddress extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['name', 'address', 'landmark', 'location', 'emirate', 'post_code', 'mobile_number'], 'required'],
-            [['user_id', 'emirate', 'post_code', 'status', 'CB', 'UB'], 'integer'],
+            [['name', 'address', 'location', 'emirate', 'post_code', 'mobile_number'], 'required'],
+            [['user_id', 'emirate', 'post_code', 'status', 'CB', 'UB', 'mobile_number'], 'integer'],
             [['address'], 'string'],
             [['DOC', 'DOU', 'country_code'], 'safe'],
-            [['name', 'location', 'mobile_number'], 'string', 'max' => 100],
+            [['name', 'location'], 'string', 'max' => 100],
             [['landmark'], 'string', 'max' => 250],
         ];
     }

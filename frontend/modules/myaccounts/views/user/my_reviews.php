@@ -20,7 +20,7 @@ use yii\helpers\Html;
     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
         <p class="subject"> <?= $model->tittle ?></p>
         <i><?= \common\models\User::findOne($model->user_id)->first_name ?> on <?= date("M d , Y", strtotime($model->review_date)) ?></i>
-        <p class="message"><?= $reveiws->description ?></p>
+        <p class="message"><?= $model->description ?></p>
     </div>
 </div>
 

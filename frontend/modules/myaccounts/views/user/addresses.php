@@ -14,6 +14,9 @@ use yii\helpers\ArrayHelper;
         padding-left: 0px !important;
         margin-bottom: 0px;
     }
+    .user-adddress p {
+        line-height: 15px;
+    }
 </style>
 <div class="pad-20 hide-xs"></div>
 
@@ -50,7 +53,7 @@ use yii\helpers\ArrayHelper;
                         </div>
                         <div class="form-group col-md-6">
                             <?= $form->field($model, 'emirate')->dropDownList(ArrayHelper::map(Emirates::find()->all(), 'id', 'name'), ['prompt' => 'select']); ?>
-                            
+
                         </div>
 
                         <div class="form-group col-md-4">
@@ -58,7 +61,7 @@ use yii\helpers\ArrayHelper;
                         </div>
                         <div class="form-group col-md-8">
                             <label for="pwd">Mobile Number</label>
-                            <div class="date-dropdowns" style="padding-right: 15px;">
+                            <div class="date-dropdowns" style="">
                                 <select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" id="user-country_code" name="UserAddress[country_code]">
                                 <!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
                                     <?php foreach ($country_codes as $country_code) { ?>
@@ -66,10 +69,11 @@ use yii\helpers\ArrayHelper;
                                     <?php }
                                     ?>
                                 </select>
-                                <input style="padding-left: 70px;" type="phone" id="user-mobile_number" class="form-control" name="UserAddress[mobile_number]" value="<?= $model->mobile_number ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">
+                                <?= $form->field($model, 'mobile_number')->textInput(['placeholder' => '555 555 5555', 'data-format' => '+1 (ddd) ddd-dddd', 'style' => 'padding-left: 70px;'])->label(FALSE) ?>
+                                <!--<input style="padding-left: 70px;" type="phone" id="user-mobile_number" class="form-control" name="UserAddress[mobile_number]" value="<?= $model->mobile_number ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">-->
                             </div>
                         </div>
-                        <?= Html::submitButton('save changes', ['class' => 'green2']) ?>
+                        <?= Html::submitButton('Create', ['class' => 'green2']) ?>
                         <?php ActiveForm::end(); ?>
                     </div>
                 </div>
@@ -80,9 +84,14 @@ use yii\helpers\ArrayHelper;
                 foreach ($user_address as $value) {
                     ?>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 user-adddress lit-blue" id="useraddress-<?= $value->id ?>">
-                        <p><strong><?= $value->name ?></strong></p>
-                        <p><?= $value->address ?></p>
-                        <p><?= $value->mobile_number ?></p>
+                        <div class="user-address-hei">
+                            <p><strong><?= $value->name ?></strong></p>
+                            <p><?= $value->address ?></p>
+                            <p><?= $value->landmark ?></p>
+                            <p><?= $value->location ?></p>
+                            <p><?= $value->post_code ?></p>
+                            <p><?= $value->mobile_number ?></p>
+                        </div>
                         <label id="Radio0">
                             <input type="radio" name="default-address" value="<?= $value->id ?>" <?php
                             if ($value->status == 1) {
@@ -118,17 +127,20 @@ use yii\helpers\ArrayHelper;
             });
         });
         $('.delete-address').on('click', function () {
-            var idd = $(this).attr('data-val');
-            $.ajax({
-                url: '<?= Yii::$app->homeUrl; ?>myaccounts/user/remove-address',
-                type: "POST",
-                data: {id: idd},
-                success: function (data) {
-                    if (data == 1) {
-                        $("#useraddress-" + idd).remove();
+            if (confirm("Are you sure you want to delete this?"))
+            {
+                var idd = $(this).attr('data-val');
+                $.ajax({
+                    url: '<?= Yii::$app->homeUrl; ?>myaccounts/user/remove-address',
+                    type: "POST",
+                    data: {id: idd},
+                    success: function (data) {
+                        if (data == 1) {
+                            $("#useraddress-" + idd).remove();
+                        }
                     }
-                }
-            });
+                });
+            }
         });
     });
 </script>

@@ -7,6 +7,11 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<style>
+    .field-user-mobile_no{
+        padding: 0px !important;
+    }
+</style>
 <div class="pad-20 hide-xs"></div>
 
 <div class="container">
@@ -35,15 +40,16 @@ use yii\widgets\ActiveForm;
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="pwd">Mobile Number</label>
-                                <div class="date-dropdowns">
-                                    <select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" id="user-country_code" name="User[country_code]">
+                                <div class="date-dropdowns" style="">
+                                    <select class="day" style="position: absolute; border-right: 1px solid #d1d2d0" id="user-country_code" name="UserAddress[country_code]">
                                     <!--<select id="signupform-day" class="day" name="SignupForm[day]">-->
                                         <?php foreach ($country_codes as $country_code) { ?>
                                             <option value="<?= $country_code ?>" <?= $country_code == $model->country_code ? ' selected' : '' ?>><?= $country_code ?></option>
                                         <?php }
                                         ?>
                                     </select>
-                                    <input style="padding-left: 70px;" type="phone" id="user-mobile_no" class="form-control" name="User[mobile_no]" value="<?= $model->mobile_no ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">
+                                    <?= $form->field($model, 'mobile_no')->textInput(['placeholder' => '555 555 5555', 'data-format' => '+1 (ddd) ddd-dddd', 'style' => 'padding-left: 70px;'])->label(FALSE) ?>
+                                    <!--<input style="padding-left: 70px;" type="phone" id="user-mobile_number" class="form-control" name="UserAddress[mobile_number]" value="<?php // $model->mobile_number     ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">-->
                                 </div>
                             </div>
                             <!--                            <div class="col-md-8 pad-0">
@@ -59,10 +65,10 @@ use yii\widgets\ActiveForm;
                     <p class="contact-information">What happens when I update my email address (or mobile number)?</p>
                     <p class="contact-info-sub">our login email id (or mobile number) changes, likewise. You'll receive all your account related communication on your updated email address (or mobile number).</p>
 
-                    <p class="contact-information">When will my Flipkart account be updated with the new email address (or mobile number)?</p>
+                    <p class="contact-information">When will my Coral Perfume account be updated with the new email address (or mobile number)?</p>
                     <p class="contact-info-sub">It happens as soon as you confirm the verification code sent to your email (or mobile) and save the changes.</p>
 
-                    <p class="contact-information">What happens to my existing Flipkart account when I update my email address (or mobile number)?</p>
+                    <p class="contact-information">What happens to my existing Coral Perfume account when I update my email address (or mobile number)?</p>
                     <p class="contact-info-sub">Updating your email address (or mobile number) doesn't invalidate your account. Your account remains fully functional. You'll continue seeing your Order history, saved information and personal details.</p>
 
                     <p class="contact-information">Does my Seller account get affected when I update my email address?</p>

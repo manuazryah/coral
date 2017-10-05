@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -34,22 +35,33 @@ use yii\widgets\ActiveForm;
                     <div class="form-feild-box">
                         <?php $form = ActiveForm::begin(); ?>
                         <div class="form-group col-md-12 form-group1">
-                            <label for="usr">Name*</label>
+                            <!--<label for="usr">Name*</label>-->
                             <div class="col-md-12 first-name">
-                                <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'First Name'])->label(FALSE) ?>
+                                <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'First Name'])->label('First Name*') ?>
                             </div>
                             <div class="col-md-12 last-name">
-                                <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Last Name'])->label(FALSE) ?>
+                                <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Last Name'])->label('Last Name') ?>
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-8 dob" style="padding-left: 0px;">
                             <label for="pwd" style="color:#8c8c8c;">D.O.B*</label>
-                            <div class="date-dropdowns">
-                                <?=
-                                $form->field($model, 'dob')->widget(\yii\jui\DatePicker::classname(), [
-                                    //'language' => 'ru',
-                                    'dateFormat' => 'yyyy-MM-dd',
-                                    'options' => ['class' => 'form-control', 'placeholder' => 'Date']])->label(FALSE)
+                            <div class="date-dropdowns form-group">
+                                <?php
+                                if ($model->dob != '' && $model->dob != '0000-00-00') {
+                                    $model->dob = date("d-m-Y", strtotime($model->dob));
+                                } else {
+                                    $model->dob = date('d-m-Y');
+                                }
+                                echo DatePicker::widget([
+                                    'model' => $model,
+                                    'attribute' => 'dob',
+                                    'type' => DatePicker::TYPE_INPUT,
+                                    'pluginOptions' => [
+                                        'autoclose' => true,
+                                        'format' => 'dd-mm-yyyy',
+                                        'class' => 'form-control'
+                                    ]
+                                ]);
                                 ?>
                             </div>
                         </div>
