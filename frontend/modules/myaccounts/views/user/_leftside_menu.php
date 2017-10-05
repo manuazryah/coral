@@ -3,6 +3,10 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+
+$action = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
+//echo $action;
+//exit;
 ?>
 <div class="col-lg-4 col-md-4 col-sm-12 left-accordation">
 	<div class="panel panel-default">
@@ -13,7 +17,7 @@ use yii\helpers\Html;
 					<div class="panel list-sub" style="display: block">
 						<div class="panel-body">
 							<div class="list-group">
-<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/my-orders/index'], ['class' => 'list-group-item ']) ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/my-orders/index'], ['class' => 'list-group-item ']) ?>
 							</div>
 						</div>
 					</div>
@@ -22,8 +26,8 @@ use yii\helpers\Html;
 					<div class="panel list-sub" style="display: block">
 						<div class="panel-body">
 							<div class="list-group">
-<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span>', ['/myaccounts/user/my-reviews'], ['class' => 'list-group-item']) ?>
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My Wishlist</span>', ['/myaccounts/user/wish-list'], ['class' => 'list-group-item']) ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span>', ['/myaccounts/user/my-reviews'], ['class' => '' . $action == 'user/my-reviews' ? 'list-group-item active' : 'list-group-item']) ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My Wishlist</span>', ['/myaccounts/user/wish-list'], ['class' => '' . $action == 'user/wish-list' ? 'list-group-item active' : 'list-group-item']) ?>
 							</div>
 						</div>
 					</div>
@@ -32,12 +36,12 @@ use yii\helpers\Html;
 					<div class="panel list-sub" style="display: block">
 						<div class="panel-body">
 							<div class="list-group">
-<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>personal information</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>change password</span>', ['/myaccounts/user/change-password'], ['class' => 'list-group-item']) ?>
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>addresses</span>', ['/myaccounts/user/user-address'], ['class' => 'list-group-item']) ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>personal information</span>', ['/myaccounts/user/personal-info'], ['class' => '' . $action == 'user/personal-info' ? 'list-group-item active' : 'list-group-item']) ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>change password</span>', ['/myaccounts/user/change-password'], ['class' => '' . $action == 'user/change-password' ? 'list-group-item active' : 'list-group-item']) ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>addresses</span>', ['/myaccounts/user/user-address'], ['class' => '' . $action == 'user/user-address' ? 'list-group-item active' : 'list-group-item']) ?>
 								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>profile settings</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>update email/mobile</span>', ['/myaccounts/user/update-contact-info'], ['class' => 'list-group-item']) ?>
-								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>deactivate account</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item'])  ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>update email/mobile</span>', ['/myaccounts/user/update-contact-info'], ['class' => '' . $action == 'user/update-contact-info' ? 'list-group-item active' : 'list-group-item']) ?>
+								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>deactivate account</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item'])   ?>
 							</div>
 						</div>
 					</div>

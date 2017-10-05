@@ -64,7 +64,7 @@ and open the template in the editor.
 									</li>
 				    <!--                                    <li class="dropdown hidden-lg hidden-md hidden-sm"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="truck"></i></a>
 									    <ul class="dropdown-menu">
-										<li><?php // $shipping->content;     ?></li>
+										<li><?php // $shipping->content;      ?></li>
 									    </ul>
 									</li>-->
 									<li>
@@ -76,7 +76,7 @@ and open the template in the editor.
 									</li>
 									<li class="top-social"><a href="<?= $linkedin->content; ?>" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 									<li class="top-social"><a href="<?= $google->content; ?>" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									<!--<li class="top-social"><a href="<?php // $twitter->content; ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+									<!--<li class="top-social"><a href="<?php // $twitter->content;  ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
 								</ul>
 							</div>
 						</div>
@@ -226,7 +226,9 @@ and open the template in the editor.
 //$category_main = $_GET['category'];
 								$catag = Category::find()->where(['status' => 1, 'main_category' => 1])->one();
 								$catag_2 = Category::find()->where(['status' => 1, 'main_category' => 2])->one();
-								$prod_main_catag = Category::find()->where(['status' => 1, 'category_code' => $params['id']])->one();
+								if (isset($params['id']))
+									$prod_main_catag = Category::find()->where(['status' => 1, 'category_code' => $params['id']])->one();
+								?>
 								?>
 								<ul class="nav navbar-nav">
 									<li class="<?= $action == 'site/index' ? 'active' : '' ?>"><?= Html::a('<span>Home</span>', ['/site/index'], ['class' => '']) ?></li>
@@ -323,7 +325,7 @@ and open the template in the editor.
 							<div class="col-md-12 my-account-link">
 								<ul>
 									<li><?= Html::a('My Account', ['/myaccounts/user/index'], ['class' => '']) ?></li>
-									<!--<li><?php // Html::a('Private Label', ['/site/private-label'], ['class' => ''])        ?></li>-->
+									<!--<li><?php // Html::a('Private Label', ['/site/private-label'], ['class' => ''])         ?></li>-->
 									<!--<li><a href="#">Exclusive Brands</a></li>-->
 									<li><?= Html::a('Showrooms', ['/site/showrooms'], ['class' => '']) ?></li>
 									<!--<li><a href="#">Brands</a></li>-->
@@ -335,7 +337,7 @@ and open the template in the editor.
 						<div class="col-md-12 col-sm-12 hidden-xs foot-social">
 							<ul>
 								<li><a href="<?= $facebook->content; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<!--<li><a href="<?php // echo $twitter->content;     ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+								<!--<li><a href="<?php // echo $twitter->content;      ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
 								<li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
 								<li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 							</ul>
@@ -344,7 +346,7 @@ and open the template in the editor.
 					<div style="text-align: center;" class="hidden-lg hidden-md hidden-sm col-xs-12 foot-social">
 						<ul style="margin: 0 auto; display: inline-block;">
 							<li><a href="<?= $facebook->content; ?>"target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<!--<li><a href="<?php // echo $twitter->content;     ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+							<!--<li><a href="<?php // echo $twitter->content;      ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
 							<li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
 							<li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 						</ul>

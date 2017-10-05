@@ -15,7 +15,7 @@ $action = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
 					<div class="panel list-sub" style="display: block">
 						<div class="panel-body">
 							<div class="list-group">
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/my-orders/index'], ['class' => '' . $action == 'my-orders/index' ? 'list-group-item active' : '']) ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/my-orders/index'], ['class' => '' . $action == 'my-orders/index' ? 'list-group-item active' : 'list-group-item']) ?>
 							</div>
 						</div>
 					</div>
