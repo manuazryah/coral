@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                    <?php // ech  Html::a('<i class="fa-th-list"></i><span> Create Order Master</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                    <?php // echo  Html::a('<i class="fa-th-list"></i><span> Create Order Master</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                     <div class="table-responsive" style="border: none">
                         <button class="btn btn-white" id="search-option" style="float: right;">
                             <i class="linecons-search"></i>
@@ -49,11 +49,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'order_id',
                                 [
                                     'attribute' => 'user_id',
-//                                    'filter' => ArrayHelper::map(User::find()->all(), 'id', 'first_name'),
-                                    'value' => function($data) {
+                                    'format' => 'raw',
+                                    'filter' => ArrayHelper::map(User::find()->all(), 'id', 'first_name'),
+                                    'value' => function ($data) {
                                         $name = User::findOne($data->user_id);
-                                        return $name->first_name . ' ' . $name->last_name;
-                                    }
+                                        return \yii\helpers\Html::a($name->first_name . ' ' . $name->last_name, ['/user/user/update', 'id' => $data->user_id]);
+                                    },
                                 ],
                                 'net_amount',
                                 'order_date',
@@ -103,13 +104,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ]);
                                         },
                                         'print' => function ($url, $model) {
-//                                            if ($model->item_type == 1) {
-                                            return Html::a('<span><i class="fa fa-print" aria-hidden="true"></i></span>', $url, [
-                                                        'title' => Yii::t('app', 'print'),
-                                                        'class' => '',
-                                                        'target' => '_blank',
-                                            ]);
-//                                            }
+                                            if ($model->status == 4) {
+                                                return Html::a('<span><i class="fa fa-print" aria-hidden="true"></i></span>', $url, [
+                                                            'title' => Yii::t('app', 'print'),
+                                                            'class' => '',
+                                                            'target' => '_blank',
+                                                ]);
+                                            }
                                         },
                                     ],
                                     'urlCreator' => function ($action, $model) {

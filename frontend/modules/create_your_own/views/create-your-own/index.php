@@ -53,7 +53,7 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div class="step_col_left">
+                <div class="col-sm-12 col-xs-12 step_col_left">
                     <?php
                     $g = 0;
                     foreach ($gender as $value) {
@@ -67,7 +67,7 @@ use yii\helpers\Html;
                     <?php }
                     ?>
                 </div>
-                <div class="step_col_right">
+                <div class="col-sm-12 col-xs-12 step_col_right">
                     <div id="tab1show" class="tab-content">
                         <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="gender_image"/>
 <!--                        <img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />-->
@@ -92,9 +92,9 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div class="step_col_left">
+                <div class="col-sm-12 col-xs-12 step_col_left">
                 </div>
-                <div class="step_col_right">
+                <div class="col-sm-12 col-xs-12 step_col_right">
                     <div id="tab3show" class="tab-content">
                         <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="character_image"/>
                         <!--<img  src="images/create-your-own/Women.png" title="WOMEN" alt="image 1" id="image1" class="image-toggle img-responsive" />-->
@@ -120,9 +120,9 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div class="step_col_left">
+                <div class="col-sm-12 col-xs-12 step_col_left">
                 </div>
-                <div class="step_col_right">
+                <div class="col-sm-12 col-xs-12 step_col_right">
                     <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="scent_image"/>
                 </div>
                 <input type="button" name="previous" class="previous prev action-button" value="Previous" />
@@ -143,7 +143,7 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div class="step_col_left">
+                <div class="col-sm-12 col-xs-12 step_col_left">
                     <div id="notes">
                         <div class="product-info-tab">
                             <ul class="nav nav-tabs">
@@ -162,7 +162,7 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div class="step_col_right">
+                <div class="col-sm-12 col-xs-12 step_col_right">
                     <div id="tab9show" class="tab-content">
                         <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="notes_image"/>
                     </div>
@@ -194,7 +194,7 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div class="step_col_left">
+                <div class="col-sm-12 col-xs-12 step_col_left">
                     <div id="kryesore">
                         <?php
                         foreach ($bottle as $val) {
@@ -207,7 +207,7 @@ use yii\helpers\Html;
                         ?>
                     </div>
                 </div>
-                <div class="step_col_right">
+                <div class="col-sm-12 col-xs-12 step_col_right">
                     <img src="<?= Yii::$app->homeUrl; ?>images/coral/create_yourown_common.png" class="img-responsive" id="bottle_image"/>
                 </div>
                 <input type="button" name="previous" class="previous prev action-button" value="Previous" />
@@ -229,13 +229,13 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div class="step_col_left">
+                <div class="col-sm-12 col-xs-12 step_col_left">
                     <input class="max-len-limit" type="text" name="line-1" id="line-1" value="" placeholder="Enter label1 text here" maxlength=""/>
                     <p class="max-len" style="float:right;font-size: 11px;"></p>
                     <input class="max-len-limit" type="text" name="line-2" id="line-2" value="" placeholder="Enter label2 text here" maxlength=""/>
                     <p class="max-len" style="float:right;font-size: 11px;"></p>
                 </div>
-                <div class="step_col_right">
+                <div class="col-sm-12 col-xs-12 step_col_right">
                     <img src="" class="img-responsive" id="bottle1_image"/>
                 </div>
                 <input type="button" name="previous" class="previous prev action-button" value="Previous" />
@@ -255,23 +255,23 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div class="step_col_left" style="width: 435px;">
+                <div class="col-sm-12 col-xs-12 step_col_left">
                     <p style="text-align: center;font-weight: 600;padding-bottom: 15px;" id="done-heading"></p>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <h3 style="text-align:left;font-size: 20px;font-weight: 600;" id="first_line"></h3>
-                            <h4 style="text-align:left;font-size: 18px;font-weight: 600;" id="second_line"></h4>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <h3 style="text-align:left;font-size: 15px;font-weight: 600;" id="first_line"></h3>
+                            <h4 style="text-align:left;font-size: 14px;font-weight: 600;" id="second_line"></h4>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <h2 style="text-align:right;font-size: 22px;font-weight: 600;" id="tot-amt"></h2>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <h2 style="text-align:right;font-size: 16px;font-weight: 600;" id="tot-amt"></h2>
                         </div>
                     </div>
-                    <div class="row" style="padding-top: 35px;">
+                    <div class="row note-img">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="note-images" style="padding:0px;">
                         </div>
                     </div>
                 </div>
-                <div class="step_col_right" style="width: 465px;">
+                <div class="col-sm-12 col-xs-12 step_col_right">
                     <img src="" class="img-responsive" id="bottle2_image"/>
                 </div>
                 <input type="button" name="previous" class="previous prev action-button" value="Previous" />
@@ -402,7 +402,7 @@ use yii\helpers\Html;
         $(document).on("mouseleave", ".character-main", function () {
             var src_value = $('input[name=character]:checked', '#tab2').attr('data-val');
             if (src_value === undefined || src_value === null) {
-                $('#character_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+                $('#character_image').attr('src', '/images/coral/create_yourown_common.png');
             } else {
                 $('#character_image').attr('src', src_value);
             }
@@ -435,7 +435,7 @@ use yii\helpers\Html;
         $(document).on("mouseleave", ".scent-main", function () {
             var src_value = $('input[name=scent]:checked', '#tab3').attr('data-val');
             if (src_value === undefined || src_value === null) {
-                $('#scent_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+                $('#scent_image').attr('src', '/images/coral/create_yourown_common.png');
             } else {
                 $('#scent_image').attr('src', src_value);
             }
@@ -472,7 +472,7 @@ use yii\helpers\Html;
         $(document).on("mouseleave", ".notes-main", function () {
             var src_value = $('input[name="notes[]"]:checked', '#tab4').attr('data-val');
             if (src_value === undefined || src_value === null) {
-                $('#notes_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+                $('#notes_image').attr('src', '/images/coral/create_yourown_common.png');
             } else {
                 $('#notes_image').attr('src', src_value);
             }
@@ -543,7 +543,7 @@ use yii\helpers\Html;
         $(document).on("mouseleave", ".bottle-main", function () {
             var src_value = $('input[name=bottle]:checked', '#tab5').attr('data-val');
             if (src_value === undefined || src_value === null) {
-                $('#bottle_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+                $('#bottle_image').attr('src', '/images/coral/create_yourown_common.png');
             } else {
                 $('#bottle_image').attr('src', src_value);
             }
@@ -580,7 +580,7 @@ use yii\helpers\Html;
                 url: '<?= Yii::$app->homeUrl; ?>ajax/check-out',
                 success: function (data) {
                     if (data == 0) {
-                        alert('Before proceeding to checkout please login');
+//                        alert('Before proceeding to checkout please login');
                         window.open(
                                 '<?= Yii::$app->homeUrl; ?>site/login-signup',
                                 '_blank' // <- This is what makes it open in a new window.

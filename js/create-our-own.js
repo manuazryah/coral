@@ -90,7 +90,7 @@ $('.gender-main').hover(
         }, function () {
     var src_value = $('input[name=gender]:checked', '#tab1').attr('data-val');
     if (src_value === undefined || src_value === null) {
-        $('#gender_image').attr('src', '/coral/images/coral/create_yourown_common.png');
+        $('#gender_image').attr('src', '/images/coral/create_yourown_common.png');
     } else {
         $('#gender_image').attr('src', src_value);
     }
@@ -259,7 +259,7 @@ function validateLabel() {
             $('#tot-amt').text(res.result['tot-count']);
             $("#note-images").html(res.result['note-imgs']);
             $('#bottle2_image').attr('src', res.result['bottle-src']);
-            alert("Are you sure you wouldn't like to label your perfume?");
+//            alert("Are you sure you wouldn't like to label your perfume?");
         }
     });
     var valid = 0;

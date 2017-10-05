@@ -40,11 +40,11 @@ class OrderMaster extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-                [['order_id', 'user_id', 'total_amount', 'order_date'], 'required'],
-                [['user_id', 'ship_address_id', 'bill_address_id', 'currency_id', 'payment_mode', 'admin_comment', 'payment_status', 'admin_status', 'shipping_method', 'status'], 'integer'],
-                [['total_amount', 'discount_amount', 'net_amount'], 'number'],
-                [['order_date', 'doc'], 'safe'],
-                [['user_comment'], 'string'],
+            [['order_id', 'user_id', 'total_amount', 'order_date'], 'required'],
+            [['user_id', 'ship_address_id', 'bill_address_id', 'currency_id', 'payment_mode', 'admin_comment', 'payment_status', 'admin_status', 'shipping_method', 'status'], 'integer'],
+            [['total_amount', 'discount_amount', 'net_amount'], 'number'],
+            [['order_date', 'doc'], 'safe'],
+            [['user_comment'], 'string'],
 //            [['order_id'], 'string', 'max' => 200],
         ];
     }
@@ -56,7 +56,7 @@ class OrderMaster extends \yii\db\ActiveRecord {
         return [
             'id' => 'ID',
             'order_id' => 'Order ID',
-            'user_id' => 'User ID',
+            'user_id' => 'User Name',
             'total_amount' => 'Total Amount',
             'discount_amount' => 'Discount Amount',
             'net_amount' => 'Net Amount',

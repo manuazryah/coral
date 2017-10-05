@@ -1584,11 +1584,49 @@
     .category-grid img{
         width: 100%;
     }
-    #header .right .navbar-right li a {   
+    #header .right .navbar-right li a {
         padding: 0 5px;
     }
     .slide-text{
         top: 25%;
         display: none;
+    }
+    .step_col_left {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .step_col_right{
+        width: 100%;
+        height: auto;
+    }
+    #create-your-own #msform {
+        min-height: 660px;
+    }
+    #create-your-own .prev{
+        left: 0px !important;
+        bottom: 50px;
+        top: 365px;
+        height: 38px;
+    }
+    #create-your-own .nxt{
+        left: auto !important;
+        right: 0px !important;
+        bottom: 50px;
+        top: 365px;
+        height: 38px;
+    }
+    #create-your-own .chkout {
+        left: auto !important;
+        right: 0px !important;
+        bottom: 50px;
+        top: 365px;
+        height: 38px;
+    }
+    .note-img{
+        padding-top: 35px;
+        padding-right: 0px;
+    }
+    #create-your-own .hint-msg-box .hint-msg {
+        font-size: 12px;
     }
 }

@@ -4240,5 +4240,9 @@ fieldset .notes-selection{
     min-height: 248px;
 }
 #create-your-own .chkout {
-    left: 455px !important;
+    left: 295px !important;
+}
+.note-img{
+    padding-top: 35px;
+    padding-right: 25px;
 }
