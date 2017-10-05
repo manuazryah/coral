@@ -118,6 +118,7 @@ class CheckoutController extends \yii\web\Controller {
                 $model = OrderMaster::find()->where(['order_id' => Yii::$app->session['orderid']])->one();
                 $model->status = 4;
                 if ($model->save()) {
+                    $this->sendMail(Yii::$app->session['orderid']);
                     Yii::$app->session['orderid'] = '';
                     $model1 = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
                     $this->clearcart($model1);
@@ -129,6 +130,16 @@ class CheckoutController extends \yii\web\Controller {
         } else {
             $this->redirect(array('site/login'));
         }
+    }
+    public function sendMail($orderid) {
+        $mail= \common\models\User::findOne(Yii::$app->user->identity->id)->email;
+        $message = Yii::$app->mailer->compose('confirm_mail', ['orderid' => $orderid]) // a view rendering result becomes the message body here
+                ->setFrom('no-replay@coralperfumes.com')
+                ->setTo($mail)
+                ->setSubject('Order Confirm');
+//        echo $message;exit;
+        $message->send();
+        return TRUE;
     }
 
     public function actionPayment($id) {
@@ -162,13 +173,17 @@ class CheckoutController extends \yii\web\Controller {
     public function total($cart) {
         $subtotal = '0';
         foreach ($cart as $cart_item) {
-            $product = Product::findOne($cart_item->product_id);
-            if ($product->offer_price != '') {
-                $price = $product->offer_price;
+            if ($cart_item->item_type == 1) {
+                $subtotal += ($cart_item->rate * $cart_item->quantity);
             } else {
-                $price = $product->price;
+                $product = Product::findOne($cart_item->product_id);
+                if ($product->offer_price == '0' || $product->offer_price == '') {
+                    $price = $product->price;
+                } else {
+                    $price = $product->offer_price;
+                }
+                $subtotal += ($price * $cart_item->quantity);
             }
-            $subtotal += ($price * $cart_item->quantity);
         }
         return $subtotal;
     }

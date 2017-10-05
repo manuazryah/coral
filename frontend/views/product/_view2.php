@@ -40,7 +40,7 @@ use common\models\Fregrance;
             <div class="gp_products_item_caption">
 
                 <ul class="gp_products_caption_name">
-                    <li><a href="<?= Yii::$app->homeUrl . 'product_detail/' . $model->canonical_name ?>"><?= $model->product_name ?></a></li>
+                    <li><a href="<?= Yii::$app->homeUrl . 'product_detail/' . $model->canonical_name ?>" title="<?= $model->product_name ?>"><?= substr($model->product_name, 0, 35) ?></a></li>
                     <?php $product_type = Fregrance::findOne($model->product_type); ?>
                     <li><a href="<?= Yii::$app->homeUrl . 'product_detail/' . $model->canonical_name ?>"><?= $product_type->name; ?></a></li>
                 </ul>

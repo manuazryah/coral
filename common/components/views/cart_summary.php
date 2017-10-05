@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use common\models\Product;
-use common\models\Brand;
+use common\models\Fregrance;
 use common\models\OrderMaster;
 use common\models\Settings;
 ?>
@@ -53,7 +53,7 @@ use common\models\Settings;
                         $label2 = $product->label_2;
                     }
                     ?>
-                    <h5 class="brand-name"><a href="#"><?= $cart->item_type == 1 ? $label1 . ' , ' . $label2 : Brand::findOne($product->brand)->brand; ?></a></h5>
+                    <h5 class="brand-name"><a href="#"><?= $cart->item_type == 1 ? $label1 . ' , ' . $label2 : Fregrance::findOne($product->product_type)->name; ?></a></h5>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="top: 15px; text-align: right; padding-right: 0;">
                     <p class="price">AED <?= sprintf('%0.2f', $total) ?></p>

@@ -155,10 +155,12 @@ class CartController extends \yii\web\Controller {
     }
 
     public function actionMycart() {
-        $this->changecart(Yii::$app->session['temp_user']);
-        if (isset(Yii::$app->session['create_own'])) {
-            /* Change tempuser cart to login user */
-            $this->addtocart();
+        if (isset(Yii::$app->user->identity->id)) {
+            $this->changecart(Yii::$app->session['temp_user']);
+            if (isset(Yii::$app->session['create_own'])) {
+                /* Change tempuser cart to login user */
+                $this->addtocart();
+            }
         }
         $date = $this->date();
         $shipping_limit = Settings::findOne('1');
@@ -341,7 +343,7 @@ class CartController extends \yii\web\Controller {
             } else {
                 $prod_details = Product::findOne($cart->product_id);
             }
-            $check = OrderDetails::find()->where(['order_id' => $orders['order_id'], 'product_id' => $cart->product_id])->one();
+            $check = OrderDetails::find()->where(['order_id' => $orders['order_id'], 'product_id' => $cart->product_id, 'item_type' => $cart->item_type])->one();
             if (!empty($check)) {
                 $check->quantity = $cart->quantity;
                 if ($cart->item_type == 1) {
@@ -373,6 +375,7 @@ class CartController extends \yii\web\Controller {
                         $price = $prod_details->offer_price;
                     }
                 }
+                $model_prod->item_type = $cart->item_type;
                 $model_prod->amount = $price;
                 $model_prod->rate = ($cart->quantity) * ($price);
                 $model_prod->status = '0';
