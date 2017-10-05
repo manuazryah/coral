@@ -91,10 +91,10 @@ class UserController extends Controller {
                     Yii::$app->getSession()->setFlash('success', 'password changed successfully');
                     $this->redirect('index');
                 } else {
-                    Yii::$app->getSession()->setFlash('error', 'password mismatch  ');
+                    Yii::$app->getSession()->setFlash('error', 'Password mismatch  ');
                 }
             } else {
-                Yii::$app->getSession()->setFlash('error', 'Incorrect Password ');
+                Yii::$app->getSession()->setFlash('error', 'Incorrect Old Password ');
             }
         }
         return $this->render('change-password', [

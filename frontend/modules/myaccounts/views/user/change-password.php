@@ -36,17 +36,18 @@ use yii\bootstrap\ActiveForm;
                                         ]
                         );
                         ?>
+                        <div class="error-summary">
+                            <?= Yii::$app->session->getFlash('error'); ?>
+                        </div>
                         <div style="font-size: 17px;
                              color: hsla(0, 100%, 50%, 0.81);">
-
-                            <?= Yii::$app->session->getFlash('error'); ?>
                             <?= Yii::$app->session->getFlash('success'); ?>
                         </div>
 
                         <div class="form-group col-md-12">
                             <label for="pwd">Old Password*</label>
                             <input type="password" name="old-password" class="form-control" required="" placeholder="********" id="pwd">
-                        </div>
+                         </div>
                         <div class="form-group col-md-12">
                             <label for="pwd">New Password*</label>
                             <input type="password" class="form-control" name="new-password" required="" placeholder="********" id="pwd">

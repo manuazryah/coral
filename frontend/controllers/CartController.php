@@ -134,7 +134,13 @@ class CartController extends \yii\web\Controller {
                 if (!empty($cart_contents)) {
                     $this->cart_content($cart_contents);
                 } else {
-                    echo 'Cart box is Empty';
+//                    echo 'Cart box is Empty';
+                        echo '<div style="padding: 25px 0px; display: flow-root;">
+                               <a href=""><div class="col-md-12 empty-img text-center" >
+                               <img style="margin: 0 auto; float: none; left: 0px; right: 0px; vertical-align: middle; margin-bottom: 10px;" class="img-responsive" src="' . Yii::$app->homeUrl . 'images/empty-cart.png"/>
+                               </div>
+                              <span class="col-md-12 text-center">Cart is Empty. Click to Continue</span></a>
+                              </div>';
                 }
             } else {
                 if (isset(Yii::$app->session['temp_user'])) {
@@ -145,10 +151,22 @@ class CartController extends \yii\web\Controller {
                     if (!empty($cart_contents)) {
                         $this->cart_content($cart_contents);
                     } else {
-                        echo 'Cart box is Empty';
+//                        echo 'Cart box is Empty';
+                        echo '<div style="padding: 25px 0px; display: flow-root;">
+                               <a href=""><div class="col-md-12 empty-img text-center" >
+                               <img style="margin: 0 auto; float: none; left: 0px; right: 0px; vertical-align: middle; margin-bottom: 10px;" class="img-responsive" src="' . Yii::$app->homeUrl . 'images/empty-cart.png"/>
+                               </div>
+                              <span class="col-md-12 text-center">Cart is Empty. Click to Continue</span></a>
+                              </div>';
                     }
                 } else {
-                    echo 'Cart box is Empty';
+//                    echo 'Cart box is Empty';
+                        echo '<div style="padding: 25px 0px; display: flow-root;">
+                               <a href=""><div class="col-md-12 empty-img text-center" >
+                               <img style="margin: 0 auto; float: none; left: 0px; right: 0px; vertical-align: middle; margin-bottom: 10px;" class="img-responsive" src="' . Yii::$app->homeUrl . 'images/empty-cart.png"/>
+                               </div>
+                              <span class="col-md-12 text-center">Cart is Empty. Click to Continue</span></a>
+                              </div>';
                 }
             }
         }
@@ -427,7 +445,15 @@ class CartController extends \yii\web\Controller {
 //                <button title="Remove From Cart" class="remove-cart"><i class="fa fa-times" aria-hidden="true"></i></button>
             }
         } else {
-            echo 'Cart box is Empty';
+//            echo 'Cart box is Empty';
+                        echo '<div style="padding: 25px 0px; display: flow-root;">
+                               <a href=""><div class="col-md-12 empty-img text-center" >
+                               <img style="margin: 0 auto; float: none; left: 0px; right: 0px; vertical-align: middle; margin-bottom: 10px;" class="img-responsive" src="' . Yii::$app->homeUrl . 'images/empty-cart.png"/>
+                               </div>
+                              <span class="col-md-12 text-center">Cart is Empty. Click to Continue</span></a>
+                              </div>';
+//                   Html::a ('<button class="green2">Continue shopping</button>,'.['site/index'].','.['class' => 'button']).
+//                </div>';
         }
     }
 
