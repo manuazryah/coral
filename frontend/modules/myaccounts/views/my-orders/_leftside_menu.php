@@ -3,6 +3,8 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+
+$action = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
 ?>
 <div class="col-lg-4 col-md-4 col-sm-12 left-accordation">
 	<div class="panel panel-default">
@@ -13,7 +15,7 @@ use yii\helpers\Html;
 					<div class="panel list-sub" style="display: block">
 						<div class="panel-body">
 							<div class="list-group">
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/my-orders/index'], ['class' => 'list-group-item']) ?>
+								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/my-orders/index'], ['class' => '' . $action == 'my-orders/index' ? 'list-group-item active' : '']) ?>
 							</div>
 						</div>
 					</div>
@@ -37,7 +39,7 @@ use yii\helpers\Html;
 								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>addresses</span>', ['/myaccounts/user/user-address'], ['class' => 'list-group-item']) ?>
 								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>profile settings</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
 								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>update email/mobile</span>', ['/myaccounts/user/update-contact-info'], ['class' => 'list-group-item']) ?>
-								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>deactivate account</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
+								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>deactivate account</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item'])  ?>
 							</div>
 						</div>
 					</div>

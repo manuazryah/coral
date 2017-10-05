@@ -395,14 +395,14 @@ class ProductController extends \yii\web\Controller {
 		if (Yii::$app->request->isAjax) {
 
 			$keyword = $_POST['keyword'];
-			if ($keyword != '') {
+			if ($keyword != '' || !empty($keyword)) {
 				$search_tags = \common\models\MasterSearchTag::find()->select('tag_name')->where(['status' => 1])->andWhere((['like', 'tag_name', $keyword]))->all();
 				$products = Product::find()->where(['status' => 1])->select('product_name')->andWhere((['like', 'product_name', $keyword]))->all();
 				$category = Category::find()->where(['status' => 1])->select('category')->andWhere((['like', 'category', $keyword]))->all();
 				$results_temp = array_merge($search_tags, $products);
 				$results = array_merge($results_temp, $category);
 
-				$values = $this->renderPartial('_product_search', ['products' => $results]);
+				$values = $this->renderPartial('_product_search', ['products' => $results, 'keyword' => $keyword]);
 				echo $values;
 			}
 		}

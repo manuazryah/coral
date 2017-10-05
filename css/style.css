@@ -793,11 +793,11 @@ input[type="checkbox"]:checked + label:after {
 	text-transform: capitalize;
 }
 #header .search .search-dropdown li:hover{
-	background-color: #f5f5f5;
+	background-color: rgba(193, 193, 193, 0.5);
 	cursor: pointer;
 }
 #header .search .search-dropdown .search-selected{
-	background-color: #f5f5f5;
+	background-color:  rgba(193, 193, 193, 0.5);
 }
 
 
@@ -3752,6 +3752,7 @@ input[type="checkbox"]:checked:before {
 
 .fixed{
 	display: block;
+
 }
 
 /*******************************************************BLOG*********************************************/
@@ -4198,13 +4199,15 @@ fieldset .notes-selection{
 	opacity: 1;
 }
 #sticky-header{
-	transition: all 0.5s ease-in-out 0s;
+
+	/*transition: all 0.5s ease-in-out 0s;*/
 }
 .fixed{
 	position: fixed;
 	width: 100%;
 	z-index: 90000;
-	transition: all 0.5s ease-in-out 0s;
+
+	/*transition: all 0.5s ease-in-out 0s;*/
 }
 #sticky-header.fixed #header{
 	padding-bottom: 0px;

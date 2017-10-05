@@ -13,7 +13,7 @@ use yii\helpers\Html;
 					<div class="panel list-sub" style="display: block">
 						<div class="panel-body">
 							<div class="list-group">
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/my-orders/index'], ['class' => 'list-group-item']) ?>
+<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My orders</span>', ['/myaccounts/my-orders/index'], ['class' => 'list-group-item ']) ?>
 							</div>
 						</div>
 					</div>
@@ -22,7 +22,7 @@ use yii\helpers\Html;
 					<div class="panel list-sub" style="display: block">
 						<div class="panel-body">
 							<div class="list-group">
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span>', ['/myaccounts/user/my-reviews'], ['class' => 'list-group-item']) ?>
+<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My reviews & ratings</span>', ['/myaccounts/user/my-reviews'], ['class' => 'list-group-item']) ?>
 								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>My Wishlist</span>', ['/myaccounts/user/wish-list'], ['class' => 'list-group-item']) ?>
 							</div>
 						</div>
@@ -32,12 +32,12 @@ use yii\helpers\Html;
 					<div class="panel list-sub" style="display: block">
 						<div class="panel-body">
 							<div class="list-group">
-								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>personal information</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
+<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>personal information</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
 								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>change password</span>', ['/myaccounts/user/change-password'], ['class' => 'list-group-item']) ?>
 								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>addresses</span>', ['/myaccounts/user/user-address'], ['class' => 'list-group-item']) ?>
 								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>profile settings</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
 								<?= Html::a('<span class="fa fa-caret-left pull-left"></span><span>update email/mobile</span>', ['/myaccounts/user/update-contact-info'], ['class' => 'list-group-item']) ?>
-								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>deactivate account</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item']) ?>
+								<?php // Html::a('<span class="fa fa-caret-left pull-left"></span><span>deactivate account</span>', ['/myaccounts/user/personal-info'], ['class' => 'list-group-item'])  ?>
 							</div>
 						</div>
 					</div>

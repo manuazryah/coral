@@ -146,15 +146,21 @@ $(document).ready(function () {
 
 	/************ Serach ****************/
 	$('.search-keyword').on('keyup', function (e) {
-		if (e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 27) {
-			$.ajax({
-				url: homeUrl + 'product/search-keyword',
-				type: "POST",
-				data: {keyword: $(this).val()},
-				success: function (data) {
-					$('.search-keyword-dropdown').html(data);
-				}
-			});
+		if ($(this).val()[0] === " ") {
+
+
+		} else {
+
+			if (e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 27) {
+				$.ajax({
+					url: homeUrl + 'product/search-keyword',
+					type: "POST",
+					data: {keyword: $(this).val()},
+					success: function (data) {
+						$('.search-keyword-dropdown').html(data);
+					}
+				});
+			}
 		}
 	});
 
