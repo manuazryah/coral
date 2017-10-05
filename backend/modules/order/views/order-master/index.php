@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                    <?php // echo  Html::a('<i class="fa-th-list"></i><span> Create Order Master</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                    <?php // ech  Html::a('<i class="fa-th-list"></i><span> Create Order Master</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                     <div class="table-responsive" style="border: none">
                         <button class="btn btn-white" id="search-option" style="float: right;">
                             <i class="linecons-search"></i>
@@ -49,11 +49,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'order_id',
                                 [
                                     'attribute' => 'user_id',
-                                    'format' => 'raw',
                                     'filter' => ArrayHelper::map(User::find()->all(), 'id', 'first_name'),
+//                                    'value' => function($data) {
+//                                        $name = User::findOne($data->user_id);
+//                                        return $name->first_name . ' ' . $name->last_name;
+//                                    }
                                     'value' => function ($data) {
                                         $name = User::findOne($data->user_id);
-                                        return \yii\helpers\Html::a($name->first_name . ' ' . $name->last_name, ['/user/user/update', 'id' => $data->user_id]);
+                                        return \yii\helpers\Html::a($name->first_name . ' ' . $name->last_name, ['/admin/region/view', 'id' => $data->user_id]);
                                     },
                                 ],
                                 'net_amount',

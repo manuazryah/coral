@@ -26,7 +26,10 @@ else
 		<div class="row">
 			<div class="principals-section">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<?= $model->faq ?>
+					<div class="faq_content">
+						<?= $model->faq ?>
+					</div>
+
 				</div>
 			</div>
 		</div>
