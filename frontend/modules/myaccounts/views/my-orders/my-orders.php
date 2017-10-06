@@ -54,8 +54,8 @@ $order_products = OrderDetails::find()->where(['order_id' => $model->order_id])-
         }
         ?>
         <div class="pro-order-detail">
-            <p class="ordered-date">Ordered on <?= date('D, M dS y', strtotime($my_order->order_date)) ?> </p>
-            <p class="order-total">Order Total: AED <?= sprintf('%0.2f', $my_order->total_amount) ?></p>
+            <p class="ordered-date">Ordered on <?= date('D, M dS y', strtotime($model->order_date)) ?> </p>
+            <p class="order-total">Order Total: AED <?= sprintf('%0.2f', $model->total_amount) ?></p>
         </div>
 
     </div>
@@ -98,8 +98,8 @@ $order_products = OrderDetails::find()->where(['order_id' => $model->order_id])-
         }
         ?>
         <div class="pro-order-detail">
-            <p class="ordered-date">Ordered on <?= date('D, M dS y', strtotime($my_order->order_date)) ?> </p>
-            <p class="order-total">Order Total: AED <?= sprintf('%0.2f', $my_order->total_amount) ?></p>
+            <p class="ordered-date">Ordered on <?= date('D, M dS y', strtotime($model->order_date)) ?> </p>
+            <p class="order-total">Order Total: AED <?= sprintf('%0.2f', $model->total_amount) ?></p>
         </div>
     </div>
 </div>
