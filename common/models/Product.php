@@ -65,7 +65,7 @@ class Product extends \yii\db\ActiveRecord {
             [['canonical_name'], 'unique'],
             [['item_ean'], 'unique'],
             [['other_image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 3],
-            [['profile'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['profile'], 'file',  'extensions' => 'png, jpg, jpeg', 'on' => 'create'],
         ];
     }
 

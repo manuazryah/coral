@@ -76,13 +76,16 @@ class ProductController extends Controller {
      */
     public function actionCreate() {
         $model = new Product();
+        $model->setScenario('create');
 
         if ($model->load(Yii::$app->request->post())) {
+            $file11 = UploadedFile::getInstances($model, 'profile');
+            $file12 = UploadedFile::getInstances($model, 'other_image');
+            $model->profile = $file11[0]->extension;
             if ($model->validate()) {
-                $file11 = UploadedFile::getInstances($model, 'profile');
-                $file12 = UploadedFile::getInstances($model, 'other_image');
+
 //            $model->item_ean = date(Ymdhis);
-                $model->profile = $file11[0]->extension;
+
                 $tag = Yii::$app->request->post()['Product']['search_tag'];
                 if ($tag) {
                     $model->search_tag = implode(',', $tag);
@@ -241,7 +244,7 @@ class ProductController extends Controller {
         $model->stock = '';
         $serial_no = \common\models\Settings::findOne(3)->value;
         $prefix = \common\models\Settings::findOne(3)->prefix;
-        $model->item_ean = $this->generateProductEan($prefix.$serial_no);
+        $model->item_ean = $this->generateProductEan($prefix . $serial_no);
         $profile = $model->profile;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
