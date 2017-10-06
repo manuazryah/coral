@@ -462,9 +462,14 @@ class CartController extends \yii\web\Controller {
                     }
                 }
                 $product_name = $cart_content->item_type == 1 ? 'Custom Perfume' : $prod_details->product_name;
+                if (strlen($product_name) > 25) {
+                    $str = substr($product_name, 0, 25) . '...';
+                } else {
+                    $str = $product_name;
+                }
                 echo '<li class="clearfix">
                        ' . $image . '
-                       <span class="item-name">' . $product_name . '</span>
+                       <span class="item-name" title="' . $product_name . '">' . $str . '</span>
                        <span class="item-price">' . $price . '</span>
                        <span class="item-quantity">Quantity: ' . $cart_content->quantity . '</span>
                        </li>';

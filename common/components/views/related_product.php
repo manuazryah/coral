@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use common\models\Fregrance;
+use common\components\ProductLinksWidget;
 ?>
 <?php
 if (!empty($related_product)) {
@@ -42,12 +43,7 @@ if (!empty($related_product)) {
                                         </a>
                                         <?= Html::a(' <div class="img-overlay"></div>', $val->canonical_name, []) ?>
                                     </div>
-                                    <ul class="text-center">
-                                        <input type="hidden" value="1" class="q_ty">
-                                        <?= Html::a('<li><i class="fa fa-shopping-cart"></i></li>', '#', ['class' => 'add_to_cart', 'id' => $val->canonical_name]) ?>
-                                        <?= Html::a('<li><i class="fa fa-heart"></i></li>', 'javascript:void(0)', ['class' => 'add_to_wish_list', 'id' => $val->id]) ?>
-                                        <?= Html::a('<li><i class="fa fa-eye"></i></li>', ['/product/product_detail', 'product' => $val->canonical_name], ['class' => '']) ?>
-                                    </ul>
+                                    <?= ProductLinksWidget::widget(['id' => $val->id]) ?>
                                     <div class="gp_products_item_caption">
                                         <ul class="gp_products_caption_name">
                                             <li><a href="#"><?= $val->product_name ?></a></li>
