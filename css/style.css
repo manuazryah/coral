@@ -4279,3 +4279,24 @@ fieldset .notes-selection{
     min-height: 180px;
     max-height: 180px;
 }
+.empty-data .empty-img img{
+    margin: 0 auto;
+    display: block;
+}
+.empty-data h2{
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    color: rgba(84, 82, 81, 0.57);
+    margin-bottom: 20px;
+}
+.empty-data .green2 {
+    margin: 0 auto;
+    display: block;
+}
+.empty-data button.green2 {
+    width: auto;
+}
+.product-list .pagination{
+    padding-left: 15px;
+}

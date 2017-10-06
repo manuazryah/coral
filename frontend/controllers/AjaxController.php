@@ -9,6 +9,7 @@ use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\db\Expression;
 use common\models\CreateYourOwn;
+use common\models\WishList;
 
 class AjaxController extends \yii\web\Controller {
 
@@ -338,6 +339,40 @@ class AjaxController extends \yii\web\Controller {
                     exit;
                 } else {
                     echo 1;
+                    exit;
+                }
+            }
+        }
+    }
+
+    /**
+     * Save product to wish list.
+     * @param product id
+     * if user logged in set user id otherwise redirect to login
+     */
+    public function actionSavewishlist() {
+        if (Yii::$app->request->isAjax) {
+            $product_id = $_POST['product_id'];
+            if ($product_id != '') {
+                $user_id = '';
+                $sessonid = '';
+                if (isset(Yii::$app->user->identity->id)) {
+                    $user_id = Yii::$app->user->identity->id;
+                    $model = WishList::find()->where(['product' => $product_id])->one();
+                    if (empty($model)) {
+                        $model = new WishList();
+                        $model->user_id = $user_id;
+                        $model->session_id = $sessonid;
+                        $model->product = $product_id;
+                        $model->date = date('Y-m-d');
+                    } else {
+                        $model->date = date('Y-m-d');
+                    }
+                    $model->save();
+                    echo '1';
+                    exit;
+                } else {
+                    echo '0';
                     exit;
                 }
             }

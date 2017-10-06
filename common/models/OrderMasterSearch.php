@@ -10,13 +10,12 @@ use common\models\OrderMaster;
 /**
  * OrderMasterSearch represents the model behind the search form about `common\models\OrderMaster`.
  */
-class OrderMasterSearch extends OrderMaster
-{
+class OrderMasterSearch extends OrderMaster {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'user_id', 'ship_address_id', 'bill_address_id', 'currency_id', 'payment_mode', 'admin_comment', 'payment_status', 'admin_status', 'shipping_method', 'status'], 'integer'],
             [['order_id', 'order_date', 'user_comment', 'doc'], 'safe'],
@@ -27,8 +26,7 @@ class OrderMasterSearch extends OrderMaster
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -40,9 +38,8 @@ class OrderMasterSearch extends OrderMaster
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
-        $query = OrderMaster::find();
+    public function search($params) {
+        $query = OrderMaster::find()->orderBy(['id' => SORT_DESC]);
 
         // add conditions that should always apply here
 
@@ -79,8 +76,9 @@ class OrderMasterSearch extends OrderMaster
         ]);
 
         $query->andFilterWhere(['like', 'order_id', $this->order_id])
-            ->andFilterWhere(['like', 'user_comment', $this->user_comment]);
+                ->andFilterWhere(['like', 'user_comment', $this->user_comment]);
 
         return $dataProvider;
     }
+
 }

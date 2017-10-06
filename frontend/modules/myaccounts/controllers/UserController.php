@@ -109,7 +109,7 @@ class UserController extends Controller {
         if ($model->load(Yii::$app->request->post())) {
             $model->dob = date("Y-m-d", strtotime($model->dob));
             $model->save();
-            return $this->redirect(['index']);
+//            return $this->redirect(['index']);
         } else {
             return $this->render('personal-info', [
                         'model' => $model,
