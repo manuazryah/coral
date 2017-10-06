@@ -73,7 +73,7 @@ use common\models\Fregrance;
 					?>
 					<div class="pro-order-detail">
 						<p class="ordered-date">Ordered on <?= date('D, M dS y', strtotime($my_order->order_date)) ?> </p>
-						<p class="order-total">Order Total: AED <?= $my_order->total_amount ?></p>
+						<p class="order-total">Order Total: AED <?= $my_order->total_amount . '.00' ?></p>
 					</div>
 
 				</div>
