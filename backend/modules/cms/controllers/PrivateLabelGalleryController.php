@@ -111,6 +111,7 @@ class PrivateLabelGalleryController extends Controller {
 	 */
 	public function actionUpdate($id) {
 		$model = $this->findModel($id);
+		$model->setScenario('update');
 		$how_it_model = new PrivateLabelHowItWorks();
 		$banner_image_ = $model->banner_image;
 		$image_ = $model->image;

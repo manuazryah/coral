@@ -15,6 +15,10 @@ use Yii;
  * @property string $marketing_info
  * @property string $business_info
  * @property string $marketing_address
+ * * @property string $address_1
+ * @property string $address_2
+ * @property string $address_3
+ * @property string $address_4
  * @property string $date_1
  */
 class ContactPage extends \yii\db\ActiveRecord {
@@ -32,7 +36,7 @@ class ContactPage extends \yii\db\ActiveRecord {
 	public function rules() {
 		return [
 			[['content', 'accounts_info', 'administration_info', 'marketing_info', 'business_info', 'marketing_address', 'date_1'], 'string'],
-			[['map', 'accounts_info', 'administration_info', 'marketing_info', 'business_info', 'marketing_address'], 'required'],
+			[['map', 'accounts_info', 'administration_info', 'marketing_info', 'business_info', 'marketing_address', 'address_1', 'address_2', 'address_3', 'address_4'], 'required'],
 			[['map'], 'string', 'max' => 500],
 		];
 	}
@@ -50,6 +54,10 @@ class ContactPage extends \yii\db\ActiveRecord {
 		    'marketing_info' => 'Marketing Info',
 		    'business_info' => 'Business Info',
 		    'marketing_address' => 'Marketing Address',
+		    'address_1' => 'Address 1',
+		    'address_2' => 'Address 2',
+		    'address_3' => 'Address 3',
+		    'address_4' => 'Address 4',
 		    'date_1' => 'Date 1',
 		];
 	}

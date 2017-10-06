@@ -47,9 +47,37 @@ use dosamigos\ckeditor\CKEditor;
 		])
 		?>
 
-	</div><div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+	</div>
+	<div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
 		<?=
-		$form->field($model, 'marketing_address')->widget(CKEditor::className(), [
+		$form->field($model, 'address_1')->widget(CKEditor::className(), [
+		    'options' => ['rows' => 0],
+		    'preset' => 'custom'
+		])
+		?>
+
+	</div>
+	<div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+		<?=
+		$form->field($model, 'address_2')->widget(CKEditor::className(), [
+		    'options' => ['rows' => 0],
+		    'preset' => 'custom'
+		])
+		?>
+
+	</div>
+	<div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+		<?=
+		$form->field($model, 'address_3')->widget(CKEditor::className(), [
+		    'options' => ['rows' => 0],
+		    'preset' => 'custom'
+		])
+		?>
+
+	</div>
+	<div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+		<?=
+		$form->field($model, 'address_4')->widget(CKEditor::className(), [
 		    'options' => ['rows' => 0],
 		    'preset' => 'custom'
 		])

@@ -25,7 +25,7 @@ else
 		<?= $contact_data->map; ?>    </div>
 
         <div class="contact-info-box">
-                <div class="contact-addresses col-lg-7 col-md-12 col-sm-12 col-xs-12 white-smoke pad-0">
+                <div class="contact-addresses col-lg-6 col-md-12 col-sm-12 col-xs-12 white-smoke pad-0">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 box-1 colxs-widthfull box-min-height">
                                 <h6>Accounts</h6>
 				<?= $contact_data->accounts_info; ?>
@@ -47,10 +47,22 @@ else
 				<?= $contact_data->business_info; ?>
                         </div>
                 </div>
-                <div class="head-office-address col-lg-5 col-md-12 col-sm-12 col-xs-12 dark-lit-blue">
-                        <div class="address-box lit-blue">
-                                <h6>Marketing</h6>
-				<?= $contact_data->marketing_address; ?>
+                <div class="head-office-address col-lg-6 col-md-12 col-sm-12 col-xs-12 dark-lit-blue">
+                        <div class="address-box lit-blue col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <!--<h6>Marketing</h6>-->
+				<?= $contact_data->address_1; ?>
+                        </div>
+			<div class="address-box lit-blue col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <!--<h6>Marketing</h6>-->
+				<?= $contact_data->address_2; ?>
+                        </div>
+                        <div class="address-box lit-blue col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <!--<h6>Marketing</h6>-->
+				<?= $contact_data->address_3; ?>
+                        </div>
+                        <div class="address-box lit-blue col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <!--<h6>Marketing</h6>-->
+				<?= $contact_data->address_4; ?>
                         </div>
                 </div>
         </div>
@@ -99,4 +111,5 @@ else
                 </div>
         </div>
         <div class="pad-20"></div>
+</div>
 
