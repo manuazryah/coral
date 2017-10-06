@@ -33,7 +33,7 @@ class AppAsset extends AssetBundle {
 	public $js = [
 	    // 'js/jquery-3.2.1.min.js',
 	    'js/bootstrap.min.js',
-	    'https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.10/flickity.pkgd.min.js',
+//	    'https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.10/flickity.pkgd.min.js',
 	    'js/main-slider.js',
 	    'js/slick.js',
 //        'js/jquery.touchSwipe.min.js',
@@ -52,7 +52,7 @@ class AppAsset extends AssetBundle {
 //        'js/happy-slider.js',
 	    'https://www.google.com/recaptcha/api.js',
 	    'js/client-slider.js',
-	    'js/testimonial.js',
+//	    'js/testimonial.js',
 	    //'js/xzoom.min.js',
 	    'js/custom.js',
 	    'js/create-our-own.js',

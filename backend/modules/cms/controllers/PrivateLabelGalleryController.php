@@ -114,9 +114,9 @@ class PrivateLabelGalleryController extends Controller {
 		$how_it_model = new PrivateLabelHowItWorks();
 		$banner_image_ = $model->banner_image;
 		$image_ = $model->image;
-
 		if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->SaveExtension($model, $image_, $banner_image_)) {
-
+			$model->index_title = Yii::$app->request->post()['PrivateLabelGallery']['index_title'];
+			$model->index_content = Yii::$app->request->post()['PrivateLabelGallery']['index_content'];
 			if ($model->validate() && $model->save() && $this->SaveImage($model)) {
 				Yii::$app->getSession()->setFlash('success', "Updated Successfully");
 			}

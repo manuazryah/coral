@@ -24,9 +24,9 @@ else
 <div id="about-page">
 	<div class="container">
 		<div class="row">
-			<div class="principals-section">
+			<div class="principals-section terms_content">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<?= $model->terms_conditions ?>
+					<?= $model->terms_conditions ?>
 				</div>
 			</div>
 		</div>

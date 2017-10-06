@@ -64,7 +64,7 @@ and open the template in the editor.
 									</li>
 				    <!--                                    <li class="dropdown hidden-lg hidden-md hidden-sm"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="truck"></i></a>
 									    <ul class="dropdown-menu">
-										<li><?php // $shipping->content;           ?></li>
+										<li><?php // $shipping->content;               ?></li>
 									    </ul>
 									</li>-->
 									<li>
@@ -76,7 +76,7 @@ and open the template in the editor.
 									</li>
 									<li class="top-social"><a href="<?= $linkedin->content; ?>" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 									<li class="top-social"><a href="<?= $google->content; ?>" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									<!--<li class="top-social"><a href="<?php // $twitter->content;       ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+									<!--<li class="top-social"><a href="<?php // $twitter->content;           ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
 								</ul>
 							</div>
 						</div>
@@ -285,11 +285,11 @@ and open the template in the editor.
 		</div>
 		<div class="marg-855"></div>
 		<div class="clearfix"></div>
-		<div class="page-loading-overlay">
+
+		<?= $content ?>
+		<div class="page-loading-overlay loaded">
 			<div class="loader-2"></div>
 		</div>
-		<?= $content ?>
-
 		<div class="clearfix"></div>
 		<section id="footer">
 			<div class="container">
@@ -330,7 +330,7 @@ and open the template in the editor.
 							<div class="col-md-12 my-account-link">
 								<ul>
 									<li><?= Html::a('My Account', ['/myaccounts/user/index'], ['class' => '']) ?></li>
-									<!--<li><?php // Html::a('Private Label', ['/site/private-label'], ['class' => ''])              ?></li>-->
+									<!--<li><?php // Html::a('Private Label', ['/site/private-label'], ['class' => ''])                  ?></li>-->
 									<!--<li><a href="#">Exclusive Brands</a></li>-->
 									<li><?= Html::a('Showrooms', ['/site/showrooms'], ['class' => '']) ?></li>
 									<!--<li><a href="#">Brands</a></li>-->
@@ -342,7 +342,7 @@ and open the template in the editor.
 						<div class="col-md-12 col-sm-12 hidden-xs foot-social">
 							<ul>
 								<li><a href="<?= $facebook->content; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<!--<li><a href="<?php // echo $twitter->content;           ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+								<!--<li><a href="<?php // echo $twitter->content;               ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
 								<li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
 								<li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 							</ul>
@@ -351,7 +351,7 @@ and open the template in the editor.
 					<div style="text-align: center;" class="hidden-lg hidden-md hidden-sm col-xs-12 foot-social">
 						<ul style="margin: 0 auto; display: inline-block;">
 							<li><a href="<?= $facebook->content; ?>"target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<!--<li><a href="<?php // echo $twitter->content;           ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+							<!--<li><a href="<?php // echo $twitter->content;               ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
 							<li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
 							<li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 						</ul>
@@ -395,12 +395,7 @@ and open the template in the editor.
                     $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
                     });</script>-->
 <script>
-			function showLoader() {
-				$('.page-loading-overlay').removeClass('loaded');
-			}
-			function hideLoader() {
-				$('.page-loading-overlay').addClass('loaded');
-			}
+
 			(function () {
 				$("#cart").on("click", function () {
 					$(".shopping-cart").fadeToggle("fast");

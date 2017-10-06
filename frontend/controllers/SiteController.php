@@ -101,6 +101,7 @@ class SiteController extends Controller {
 		\Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $meta_tags->meta_keyword]);
 		\Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $meta_tags->meta_description]);
 		$model = new Subscribe();
+		$private_label = PrivateLabelGallery::find()->where(['id' => 1])->one();
 		if ($model->load(Yii::$app->request->post())) {
 			$model->date = date('Y-m-d');
 			$model->save();
@@ -116,6 +117,7 @@ class SiteController extends Controller {
 			    'catag' => $catag,
 			    'from_blogs' => $from_blogs,
 			    'meta_title' => $meta_tags->meta_title,
+			    'private_label' => $private_label,
 		]);
 	}
 

@@ -27,9 +27,9 @@ else
 <div id="privatelabel">
         <div class="inner-banner">
                 <img class="img-responsive" src="<?= Yii::$app->homeUrl; ?>uploads/cms/private-label/banner/large.<?= $gallery->banner_image ?>"/>
-                <div class="col-lg-12 banner-button">
-                        <button class="green2">request a quote</button>
-                </div>
+		<!--                <div class="col-lg-12 banner-button">
+					<button class="green2">request a quote</button>
+				</div>-->
         </div>
 
         <!--<div class="how-it-works">-->
@@ -37,18 +37,18 @@ else
         <div class="col-md-12">
                 <h3 class="innerpage-hdng text-center">Private Label Manufacturing</h3>
         </div>
-    <h5 class="heading text-center"><?= strtoupper($gallery->about_title) ?></h5>
-    <div class="about-us">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p style="font-size: 14px; font-family: roboto-light; color: #8c8c8c; text-align: center;">
-                        <?= $gallery->about_content ?> 
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+	<h5 class="heading text-center"><?= strtoupper($gallery->about_title) ?></h5>
+	<div class="about-us">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<p style="font-size: 14px; font-family: roboto-light; color: #8c8c8c; text-align: center;">
+						<?= $gallery->about_content ?>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
         <h5 class="heading text-center">HOW IT WORKS</h5>
         <div class="how-it-works">
                 <div class="container">
