@@ -372,6 +372,8 @@ class AjaxController extends \yii\web\Controller {
                         $flag = 2;
                     }
                     $model->save();
+                } else {
+                    yii::$app->session['wishlist-login'] = 1;
                 }
             }
             echo $flag;

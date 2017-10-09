@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use common\models\Fregrance;
 
 $product = \common\models\Product::findOne($model->product);
 ?>
@@ -17,29 +16,27 @@ $product = \common\models\Product::findOne($model->product);
                 $product_image = Yii::$app->basePath . '/../uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '_thumb.' . $product->profile;
                 if (file_exists($product_image)) {
                     ?>
-                    <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '_thumb.' . $product->profile ?>" height="100%" alt="1" />
+                    <?= Html::a('<img src="' . Yii::$app->homeUrl . 'uploads/product/' . $product->id . '/profile/' . $product->canonical_name . '_thumb.' . $product->profile . '" height="100%" alt="1" />', ['/product/product_detail', 'product' => $product->canonical_name], ['class' => '']) ?>
                     <?php
                 } else {
                     ?>
-                    <img src="<?= Yii::$app->homeUrl . 'uploads/product/profile_thumb.png' ?>" height="100%" alt="1" />
+                    <?= Html::a('<img src="' . Yii::$app->homeUrl . 'uploads/product/profile_thumb.png" height="100%" alt="1" />', ['/product/product_detail', 'product' => $product->canonical_name], ['class' => '']) ?>
                 <?php }
                 ?>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
-                <p class="product-name"> <?= $product->product_name ?></p>
-                <?php $product_type = Fregrance::findOne($product->product_type); ?>
-                <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $product->canonical_name ?>"><p class="cart-pro-subheading"><?= $product_type->name; ?></p>
-                    <?php
-                    if ($product->offer_price > "0") {
-                        $percentage = round(100 - (($product->offer_price / $product->price) * 100));
-                        ?>
-                        <p class="dashed-price"> AED <?= $product->offer_price; ?></p><span class="offer"><?= $percentage ?>%OFF</span>
-                        <p class="offer-price">AED <?= $product->price; ?></p>
-                    <?php } else {
-                        ?>
-                        <p class="offer-price">AED <?= $product->price; ?></p>
-                    <?php } ?>
-                    <span class="stock">In Stock</span>
+                <?= Html::a('<p class="product-name">' . $product->product_name . '</p>', ['/product/product_detail', 'product' => $product->canonical_name], ['class' => '']) ?>
+                <?php
+                if ($product->offer_price > "0") {
+                    $percentage = round(100 - (($product->offer_price / $product->price) * 100));
+                    ?>
+                    <p class="dashed-price"> AED <?= $product->offer_price; ?></p><span class="offer"><?= $percentage ?>%OFF</span>
+                    <p class="offer-price">AED <?= $product->price; ?></p>
+                <?php } else {
+                    ?>
+                    <p class="offer-price">AED <?= $product->price; ?></p>
+                <?php } ?>
+                <span class="stock">In Stock</span>
             </div>
         </div>
     </div>

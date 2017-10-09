@@ -137,9 +137,9 @@ class CartController extends \yii\web\Controller {
 //                    echo 'Cart box is Empty';
                     echo '<div style="padding: 25px 0px; display: flow-root;">
                                <a href="' . yii::$app->homeUrl . '"><div class="col-md-12 empty-img text-center" >
-                               <img style="margin: 0 auto; float: none; left: 0px; right: 0px; vertical-align: middle; margin-bottom: 10px;" class="img-responsive" src="' . Yii::$app->homeUrl . 'images/empty-cart.png"/>
+                               <img style="margin: 0 auto; float: none; left: 0px; right: 0px; vertical-align: middle; margin-bottom: 10px;" class="img-responsive" src="' . Yii::$app->homeUrl . 'images/empty-cart.jpg"/>
                                </div>
-                              <span class="col-md-12 text-center">Cart is Empty. Click to Continue</span></a>
+                              <span class="col-md-12 text-center">Cart is Empty. Start Shopping.</span></a>
                               </div>';
                 }
             } else {
@@ -306,7 +306,7 @@ class CartController extends \yii\web\Controller {
                 $this->changecart(Yii::$app->session['temp_user']);
             }
             $cart = Cart::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
-            $check = OrderMaster::find()->where('user_id = :user_id and status != :status', ['user_id' => Yii::$app->user->identity->id, 'status' => '4'])->one();
+            $check = OrderMaster::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['not in', 'status', [4, 5]])->one();
             if (!empty($check)) {
                 Yii::$app->session['orderid'] = $check->order_id;
             }

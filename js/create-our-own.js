@@ -259,7 +259,6 @@ function validateLabel() {
             $('#tot-amt').text(res.result['tot-count']);
             $("#note-images").html(res.result['note-imgs']);
             $('#bottle2_image').attr('src', res.result['bottle-src']);
-            alert("Are you sure you wouldn't like to label your perfume?");
         }
     });
     var valid = 0;

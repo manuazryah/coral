@@ -2286,6 +2286,7 @@ a[data-zoom-id], .mz-thumb, .mz-thumb:focus{
 .my-account .pro-img-box{
     text-align: center;
     top: 5px;
+    padding-top: 10px;
 }
 .my-account .pro-order-detail{
     width: 100%;

@@ -15,7 +15,7 @@ $order_products = OrderDetails::find()->where(['order_id' => $model->order_id])-
     <div class="orders-box">
         <div class="track">
             <button class="product-id"><?= $model->order_id ?></button>
-            <button class="track-btn"><i class="fa fa-map-marker" aria-hidden="true"></i>Track</button>
+            <?= Html::a('<i class="fa fa-ban" aria-hidden="true"></i>Cancel', ['/myaccounts/my-orders/cancel-order', 'id' => $model->order_id], ['class' => 'track-btn']) ?>
         </div>
         <?php
         foreach ($order_products as $order_product) {
@@ -65,8 +65,8 @@ $order_products = OrderDetails::find()->where(['order_id' => $model->order_id])-
     <div class="orders-box col-xs-12">
         <div class="track">
             <button class="product-id"><?= $model->order_id ?></button>
-            <button class="track-btn hidden-xs"><i class="fa fa-map-marker" aria-hidden="true"></i>Track</button>
-            <button title="Track Your Product" class="track-btn"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+            <?= Html::a('<i class="fa fa-ban" aria-hidden="true"></i>Cancel', ['/myaccounts/my-orders/cancel-order', 'id' => $model->order_id], ['class' => 'track-btn hidden-xs']) ?>
+            <?= Html::a('<i class="fa fa-ban" aria-hidden="true"></i>', ['/myaccounts/my-orders/cancel-order', 'id' => $model->order_id], ['class' => 'track-btn', 'title' => 'Cancel Your Product']) ?>
         </div>
         <?php
         foreach ($order_products as $order_product) {
