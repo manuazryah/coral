@@ -352,6 +352,7 @@ class AjaxController extends \yii\web\Controller {
      */
     public function actionSavewishlist() {
         if (Yii::$app->request->isAjax) {
+            $flag = 0;
             $product_id = $_POST['product_id'];
             if ($product_id != '') {
                 $user_id = '';
@@ -365,17 +366,15 @@ class AjaxController extends \yii\web\Controller {
                         $model->session_id = $sessonid;
                         $model->product = $product_id;
                         $model->date = date('Y-m-d');
+                        $flag = 1;
                     } else {
                         $model->date = date('Y-m-d');
+                        $flag = 2;
                     }
                     $model->save();
-                    echo '1';
-                    exit;
-                } else {
-                    echo '0';
-                    exit;
                 }
             }
+            echo $flag;
         }
     }
 

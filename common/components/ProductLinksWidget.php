@@ -33,8 +33,8 @@ class ProductLinksWidget extends Widget {
     }
 
     public function run() {
-        $product = Product::findOne($this->id);
-        return $this->render('product-links', ['product' => $product]);
+        $model = Product::findOne($this->id);
+        return $this->render('product-links', ['model' => $model]);
     }
 
 }

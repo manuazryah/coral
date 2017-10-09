@@ -28,46 +28,7 @@ if (!empty($recently_viewed)) {
                             }
                             ?>">
                                 <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                    <div class="gp_products_inner">
-                                        <div class="gp_products_item_image">
-                                            <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $model->canonical_name ?>">
-                                                <?php
-                                                $product_image = Yii::$app->basePath . '/../uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile;
-                                                if (file_exists($product_image)) {
-                                                    ?>
-                                                    <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $model->id . '/profile/' . $model->canonical_name . '.' . $model->profile ?>" height="100%" alt="1" />
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                    <img src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_perfume.png' ?>" height="100%" alt="1" />
-                                                <?php }
-                                                ?>
-                                            </a>
-                                            <?= Html::a(' <div class="img-overlay"></div>', $model->canonical_name, []) ?>
-                                        </div>
-                                        <?= ProductLinksWidget::widget(['id' => $model->id]) ?>
-                                        <div class="gp_products_item_caption">
-                                            <ul class="gp_products_caption_name">
-                                                <li><a href="#" title="<?= $model->product_name ?>"><?= substr($model->product_name, 0, 31) ?></a></li>
-                                                <?php $product_type = Fregrance::findOne($model->product_type); ?>
-                                                <li><a href="#"><?= $product_type->name; ?></a></li>
-                                            </ul>
-                                            <ul class="gp_products_caption_rating">
-                                                <?php
-                                                if ($model->offer_price != "0" && $model->offer_price != '') {
-                                                    $percentage = round(100 - (($model->offer_price / $model->price) * 100));
-                                                    ?>
-                                                    <li>AED <?= $model->offer_price; ?></li>
-                                                    <li class="center">AED <?= $model->price; ?></li>
-                                                    <li class="pull-right"><a href="#">(<?= $percentage ?>%OFF)</a></li>
-                                                <?php } else {
-                                                    ?>
-                                                    <li>AED <?= $model->price; ?></li>
-                                                    <li class="center"></li>
-                                                <?php } ?>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <?= ProductLinksWidget::widget(['id' => $model->id]) ?>
                                 </div>
                             </div>
                             <?php

@@ -26,45 +26,7 @@ if (!empty($related_product)) {
                         }
                         ?>">
                             <div class="col-xs-12 col-sm-6 col-md-3 gp_products_item">
-                                <div class="gp_products_inner">
-                                    <div class="gp_products_item_image">
-                                        <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $val->canonical_name ?>">
-                                            <?php
-                                            $product_image = Yii::$app->basePath . '/../uploads/product/' . $val->id . '/profile/' . $val->canonical_name . '.' . $val->profile;
-                                            if (file_exists($product_image)) {
-                                                ?>
-                                                <img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $val->id . '/profile/' . $val->canonical_name . '.' . $val->profile ?>" height="100%" alt="1" />
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <img src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_perfume.png' ?>" height="100%" alt="1" />
-                                            <?php }
-                                            ?>
-                                        </a>
-                                        <?= Html::a(' <div class="img-overlay"></div>', $val->canonical_name, []) ?>
-                                    </div>
-                                    <?= ProductLinksWidget::widget(['id' => $val->id]) ?>
-                                    <div class="gp_products_item_caption">
-                                        <ul class="gp_products_caption_name">
-                                            <li><a href="#"><?= $val->product_name ?></a></li>
-                                            <?php $product_type = Fregrance::findOne($val->product_type); ?>
-                                            <li><a href="#"><?= $product_type->name; ?></a></li>
-                                        </ul>
-                                        <ul class="gp_products_caption_rating">
-                                            <?php
-                                            if ($val->offer_price != "0") {
-                                                $percentage = round(100 - (($val->offer_price / $val->price) * 100));
-                                                ?>
-                                                <li>AED <?= $val->offer_price; ?></li>
-                                                <li class="center">AED <?= $val->price; ?></li>
-                                                <li class="pull-right"><a href="#">(<?= $percentage ?>%OFF)</a></li>
-                                            <?php } else {
-                                                ?>
-                                                <li class="center">AED <?= $val->price; ?></li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <?= ProductLinksWidget::widget(['id' => $val->id]) ?>
                             </div>
                         </div>
                         <?php

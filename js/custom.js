@@ -64,7 +64,7 @@ $(document).ready(function () {
 
     $(".add_to_wish_list").click(function () {
         var id = $(this).attr('id');
-        addwishlist(id);
+        addwishlist($(this), id);
     });
     $('.cart_quantity').on('click', function () {
         var id = $(this).attr('id');
@@ -270,7 +270,7 @@ function updatecart(id, quantity) {
     });
 }
 /******/
-function addwishlist(id) {
+function addwishlist(button, id) {
 
     $.ajax({
         type: "POST",
@@ -281,9 +281,21 @@ function addwishlist(id) {
     }).done(function (data) {
         if (data == 0) {
             window.location.href = homeUrl + "site/login-signup";
+        } else {
+            ShowWishlistPopup(button, id, data);
         }
         hideLoader();
     });
+}
+
+function ShowWishlistPopup(button, id, flag) {
+    var offset = button.offset();
+    if (flag == 2) {
+        $('#wish-list-popup-' + id).html('<i class="fa fa-check" aria-hidden="true"></i>Already Added to Wishlist');
+    } else {
+        $('#wish-list-popup-' + id).html('<i class="fa fa-check" aria-hidden="true"></i>Added to Your Wishlist');
+    }
+    $('#wish-list-popup-' + id).fadeIn('fast').delay(1500).fadeOut('slow');
 }
 
 function getcarttotal() {

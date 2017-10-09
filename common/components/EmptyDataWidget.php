@@ -35,7 +35,7 @@ class EmptyDataWidget extends Widget {
     }
 
     public function run() {
-        return $this->render('empty-data', ['path' => $this->path, 'msq' => $this->msg]);
+        return $this->render('empty-data', ['path' => $this->path, 'msg' => $this->msg]);
     }
 
 }
