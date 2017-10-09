@@ -6,6 +6,7 @@ use common\models\Unit;
 use common\models\Settings;
 use common\components\RecentlyViewedWidget;
 use common\components\RelatedProductWidget;
+use ijackua\sharelinks\ShareLinks;
 
 if (isset($product_details->meta_title) && $product_details->meta_title != '')
 	$this->title = $product_details->meta_title;
@@ -44,7 +45,7 @@ else
 							<img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>?scale.height='400'" alt=""/>
 							<?php
 							if ($product_details->offer_price != "0") {
-								//$percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
+								$percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
 								?>
 								<div class="offer-tag">
 									<img src="<?= Yii::$app->homeUrl ?>images/off-tag-bg.png"/><span><?= $percentage ?>% OFF</span>
@@ -58,7 +59,7 @@ else
 							<img src="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.png' ?>?scale.height='400'" alt=""/>
 							<?php
 							if ($product_details->offer_price != "0") {
-								//$percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
+								$percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
 								?>
 								<div class="offer-tag">
 									<img src="<?= Yii::$app->homeUrl ?>images/off-tag-bg.png"/><span><?= $percentage ?>% OFF</span>
