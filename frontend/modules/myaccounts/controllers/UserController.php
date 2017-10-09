@@ -62,7 +62,7 @@ class UserController extends Controller {
         $searchModel = new CustomerReviewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere(['user_id' => Yii::$app->user->identity->id]);
-        $dataProvider->pagination->pageSize = 4;
+        $dataProvider->pagination->pageSize = 10;
         return $this->render('reviews-ratings', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
@@ -73,7 +73,7 @@ class UserController extends Controller {
         $searchModel = new WishListSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere(['user_id' => Yii::$app->user->identity->id]);
-        $dataProvider->pagination->pageSize = 2;
+        $dataProvider->pagination->pageSize = 10;
         return $this->render('wish-list', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
@@ -109,12 +109,9 @@ class UserController extends Controller {
         if ($model->load(Yii::$app->request->post())) {
             $model->dob = date("Y-m-d", strtotime($model->dob));
             $model->save();
-//            return $this->redirect(['index']);
-        } else {
-            return $this->render('personal-info', [
-                        'model' => $model,
-            ]);
-        }
+        } return $this->render('personal-info', [
+                    'model' => $model,
+        ]);
     }
 
     /**
@@ -270,6 +267,30 @@ class UserController extends Controller {
                     exit;
                 } else {
                     echo 0;
+                    exit;
+                }
+            }
+        }
+    }
+
+    /*
+     * This function select chek email id	 * return result to the view
+     */
+
+    public function actionEmailUnique() {
+
+        if (Yii::$app->request->isAjax) {
+            $email = $_POST['email'];
+            if ($email == '') {
+                echo '0';
+                exit;
+            } else {
+                $data = \common\models\User::find()->where(['email' => $email])->andWhere(['<>', 'id', Yii::$app->user->identity->id])->one();
+                if (!empty($data)) {
+                    echo 0;
+                    exit;
+                } else {
+                    echo 1;
                     exit;
                 }
             }

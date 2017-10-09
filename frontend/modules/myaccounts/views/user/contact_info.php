@@ -49,7 +49,7 @@ use yii\widgets\ActiveForm;
                                         ?>
                                     </select>
                                     <?= $form->field($model, 'mobile_no')->textInput(['placeholder' => '555 555 5555', 'data-format' => '+1 (ddd) ddd-dddd', 'style' => 'padding-left: 70px;'])->label(FALSE) ?>
-                                    <!--<input style="padding-left: 70px;" type="phone" id="user-mobile_number" class="form-control" name="UserAddress[mobile_number]" value="<?php // $model->mobile_number     ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">-->
+                                    <!--<input style="padding-left: 70px;" type="phone" id="user-mobile_number" class="form-control" name="UserAddress[mobile_number]" value="<?php // $model->mobile_number                                    ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">-->
                                 </div>
                             </div>
                             <!--                            <div class="col-md-8 pad-0">
@@ -81,3 +81,34 @@ use yii\widgets\ActiveForm;
 </div>
 
 <div class="pad-20"></div>
+<script>
+    $("document").ready(function () {
+        $("#user-email").blur(function () {
+            emailunique();
+            //showLoader();
+        });
+        $("body").click(function () {
+            emailunique();
+            //showLoader();
+        });
+    });
+    function emailunique() {
+        //showLoader();
+        var email = $("#user-email").val();
+        $.ajax({
+            type: 'POST',
+            cache: false,
+            data: {email: email},
+            url: homeUrl + 'myaccounts/user/email-unique',
+            success: function (data) {
+                if (data == 0) {
+                    $(".field-user-email").addClass('has-error');
+                    if ($(".field-user-email div").text() === "") {
+                        $(".field-user-email div").append('Email "' + email + '" has already been taken.');
+                    }
+                }
+                hideLoader();
+            }
+        });
+    }
+</script>

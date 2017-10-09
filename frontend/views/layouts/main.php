@@ -66,7 +66,7 @@ and open the template in the editor.
                                     </li>
 <!--                                    <li class="dropdown hidden-lg hidden-md hidden-sm"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="truck"></i></a>
                                         <ul class="dropdown-menu">
-                                            <li><?php // $shipping->content;                       ?></li>
+                                            <li><?php // $shipping->content;                        ?></li>
                                         </ul>
                                     </li>-->
                                     <li>
@@ -78,7 +78,7 @@ and open the template in the editor.
                                     </li>
                                     <li class="top-social"><a href="<?= $linkedin->content; ?>" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                     <li class="top-social"><a href="<?= $google->content; ?>" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    <!--<li class="top-social"><a href="<?php // $twitter->content;                   ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+                                    <!--<li class="top-social"><a href="<?php // $twitter->content;                    ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
                                 </ul>
                             </div>
                         </div>
@@ -332,7 +332,7 @@ and open the template in the editor.
                             <div class="col-md-12 my-account-link">
                                 <ul>
                                     <li><?= Html::a('My Account', ['/myaccounts/user/index'], ['class' => '']) ?></li>
-                                    <!--<li><?php // Html::a('Private Label', ['/site/private-label'], ['class' => ''])                          ?></li>-->
+                                    <!--<li><?php // Html::a('Private Label', ['/site/private-label'], ['class' => ''])                           ?></li>-->
                                     <!--<li><a href="#">Exclusive Brands</a></li>-->
                                     <li><?= Html::a('Showrooms', ['/site/showrooms'], ['class' => '']) ?></li>
                                     <!--<li><a href="#">Brands</a></li>-->
@@ -344,7 +344,7 @@ and open the template in the editor.
                         <div class="col-md-12 col-sm-12 hidden-xs foot-social">
                             <ul>
                                 <li><a href="<?= $facebook->content; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <!--<li><a href="<?php // echo $twitter->content;                       ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+                                <!--<li><a href="<?php // echo $twitter->content;                        ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
                                 <li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                                 <li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
@@ -353,7 +353,7 @@ and open the template in the editor.
                     <div style="text-align: center;" class="hidden-lg hidden-md hidden-sm col-xs-12 foot-social">
                         <ul style="margin: 0 auto; display: inline-block;">
                             <li><a href="<?= $facebook->content; ?>"target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <!--<li><a href="<?php // echo $twitter->content;                       ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+                            <!--<li><a href="<?php // echo $twitter->content;                        ?>"target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
                             <li><a href="<?= $google->content; ?>"target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                             <li><a href="<?= $linkedin->content; ?>"target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                         </ul>
@@ -398,40 +398,40 @@ and open the template in the editor.
                     });</script>-->
 <script>
 
-                    (function () {
-                        $("#cart").on("click", function () {
-                            $(".shopping-cart").fadeToggle("fast");
-                        });
-                        $("#cart_2").on("click", function () {
-                            $(".shopping-cart").fadeToggle("fast");
-                        });
-                        $("#cart").hover(function () {
-                            $(".shopping-cart").show("fast");
-                        });
-                        $("#cart_2").hover(function () {
-                            $(".shopping-cart").show("fast");
-                        });
-                        $('.shopping-cart').hover(function () {
-                            $('.shopping-cart').show();
-                        });
-                        $('.shopping-cart').mouseleave(function () {
-                            $('.shopping-cart').hide();
-                        });
-                        $('#cart').hover(function () {
-                            $('.shopping-cart').hover("fast");
-                        });
-                    })();
+            (function () {
+                $("#cart").on("click", function () {
+                    $(".shopping-cart").fadeToggle("fast");
+                });
+                $("#cart_2").on("click", function () {
+                    $(".shopping-cart").fadeToggle("fast");
+                });
+                $("#cart").hover(function () {
+                    $(".shopping-cart").show("fast");
+                });
+                $("#cart_2").hover(function () {
+                    $(".shopping-cart").show("fast");
+                });
+                $('.shopping-cart').hover(function () {
+                    $('.shopping-cart').show();
+                });
+                $('.shopping-cart').mouseleave(function () {
+                    $('.shopping-cart').hide();
+                });
+                $('#cart').hover(function () {
+                    $('.shopping-cart').hover("fast");
+                });
+            })();
 //    jQuery('#cart').on('mouseover', function () {
 //        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeToggle("fast");
 //    });
 //    jQuery('#cart').on("mouseout", function () {
 //        jQuery(this).find('.shopping-cart').stop(true, true).delay(200).fadeOut("fast");
-                    //    });
-                    $(document).ready(function () {
+            //    });
+            $(document).ready(function () {
 
-                        $("#addSchool").click(function () {
-                            $("#schoolContainer").append('<option value="' + $("#newSchool").val() + '">' + $("#newSchool").val() + '</option>');
-                        });
+                $("#addSchool").click(function () {
+                    $("#schoolContainer").append('<option value="' + $("#newSchool").val() + '">' + $("#newSchool").val() + '</option>');
+                });
 //        $("example2").dateDropdowns({
 //            submitFormat: "dd/mm/yyyy"
 //        });
@@ -440,9 +440,9 @@ and open the template in the editor.
 //            cursor: "crosshair",
 //            zoomWindowFadeIn: 500,
 //            zoomWindowFadeOut: 750
-                        //        });
+                //        });
 
-                    });</script>
+            });</script>
 <script>
 //$(window).load(function () {
 //    $('#inwave-map').html('<div class="map-frame"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1553532.2927783665!2d54.475375168816676!3d25.259041996119326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5c4a00eebfbb%3A0xa181e9f8ed00124e!2sActive+Mopp+Cleaning+Services+L.L.C!5e0!3m2!1sen!2sin!4v1493452043945" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe></div>');
@@ -521,6 +521,12 @@ and open the template in the editor.
         } else {
             //remove the background property so it comes transparent again (defined in your css)
             $("#sticky-header").removeClass("fixed");
+        }
+        if ($(window).scrollTop() > 100) {
+            $("#fixed-sidebar").addClass("fixed");
+        } else {
+            //remove the background property so it comes transparent again (defined in your css)
+            $("#fixed-sidebar").removeClass("fixed");
         }
     });
 </script>
