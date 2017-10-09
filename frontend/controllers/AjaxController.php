@@ -373,7 +373,7 @@ class AjaxController extends \yii\web\Controller {
                     }
                     $model->save();
                 } else {
-                    yii::$app->session['wishlist-login'] = 1;
+                    yii::$app->session['wishlist-login'] = '<i class="fa fa-exclamation" aria-hidden="true"></i> Please login for wishlisting a product';
                 }
             }
             echo $flag;
