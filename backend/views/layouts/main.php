@@ -19,23 +19,23 @@ AppAsset::register($this);
                 <link rel="shortcut icon" href="<?= yii::$app->homeUrl; ?>../images/fav.png" type="image/png" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-		<?= Html::csrfMetaTags() ?>
+                <?= Html::csrfMetaTags() ?>
                 <title><?= Html::encode($this->title) ?></title>
                 <script src="<?= yii::$app->homeUrl; ?>/js/jquery-1.11.1.min.js"></script>
                 <script>
-			var homeUrl = '<?= yii::$app->homeUrl; ?>';
+                        var homeUrl = '<?= yii::$app->homeUrl; ?>';
                 </script>
-		<?php $this->head() ?>
+                <?php $this->head() ?>
         </head>
         <body>
-		<?php $this->beginBody() ?>
+                <?php $this->beginBody() ?>
 
         <body class="page-body">
 
 
 
                 <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebaowered By Azryah Networksr by default, "chat-visible" to make chat appear always -->
-owered By Azryah Networks
+                        owered By Azryah Networks
                         <!-- Add "fixed" class to make the sidebar fixed always to the broowered By Azryah Networkswser viewport. -->
                         <!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
                         <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
@@ -43,7 +43,7 @@ owered By Azryah Networks
 
                                 <div class="sidebar-menu-inner">
 
-                                    <header class="logo-env" >
+                                        <header class="logo-env" >
 
                                                 <!-- logo -->
                                                 <div class="logo">
@@ -83,10 +83,10 @@ owered By Azryah Networks
                                                         </a>
                                                         <ul>
                                                                 <li>
-									<?= Html::a('Admin Post', ['/admin/admin-post/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Admin Post', ['/admin/admin-post/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Admin User', ['/admin/admin-users/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Admin User', ['/admin/admin-users/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                         </ul>
                                                 </li>
@@ -102,24 +102,24 @@ owered By Azryah Networks
                                                                         </a>
                                                                         <ul>
                                                                                 <li>
-											<?= Html::a('Category', ['/product/category/index'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('Category', ['/product/category/index'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                                 <li>
-											<?= Html::a('Sub Category', ['/product/sub-category/index'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('Sub Category', ['/product/sub-category/index'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                                 <li>
-											<?= Html::a('Search Tag', ['/product/master-search-tag/index'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('Search Tag', ['/product/master-search-tag/index'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                                 <li>
-											<?= Html::a('Brand', ['/brand/index'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('Brand', ['/brand/index'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                                 <li>
-											<?= Html::a('Fregrance', ['/fregrance/index'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('Fregrance', ['/fregrance/index'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                         </ul>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Product', ['/product/product/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Product', ['/product/product/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                         </ul>
                                                 </li>
@@ -130,16 +130,16 @@ owered By Azryah Networks
                                                         </a>
                                                         <ul>
                                                                 <li>
-									<?= Html::a('Unit', ['/product/unit/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Unit', ['/product/unit/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Currency', ['/product/currency/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Currency', ['/product/currency/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Country Code', ['/product/country-code/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Country Code', ['/product/country-code/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Emirates', ['/emirates'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Emirates', ['/emirates'], ['class' => 'title']) ?>
                                                                 </li>
                                                         </ul>
                                                 </li>
@@ -157,10 +157,10 @@ owered By Azryah Networks
                                                         </a>
                                                         <ul>
                                                                 <li>
-									<?= Html::a('Users', ['/user/user/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Users', ['/user/user/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Reviews', ['/user/customer-reviews/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Reviews', ['/user/customer-reviews/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                         </ul>
                                                 </li>
@@ -172,19 +172,19 @@ owered By Azryah Networks
                                                         </a>
                                                         <ul>
                                                                 <li>
-									<?= Html::a('Gender', ['/create_your_own/gender/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Gender', ['/create_your_own/gender/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Character', ['/create_your_own/characters/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Character', ['/create_your_own/characters/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Scent', ['/create_your_own/scent/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Scent', ['/create_your_own/scent/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Notes', ['/create_your_own/notes/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Notes', ['/create_your_own/notes/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Bottle', ['/create_your_own/bottle/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Bottle', ['/create_your_own/bottle/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                         </ul>
                                                 </li>
@@ -196,31 +196,31 @@ owered By Azryah Networks
                                                         </a>
                                                         <ul>
                                                                 <li>
-									<?= Html::a('Slider', ['/cms/slider/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Slider', ['/cms/slider/index'], ['class' => 'title']) ?>
                                                                 </li>
 
                                                                 <li>
-									<?= Html::a('Shop By Category', ['/cms/shop-by-category/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Shop By Category', ['/cms/shop-by-category/index'], ['class' => 'title']) ?>
                                                                 </li>
 
                                                                 <li>
-									<?= Html::a('Blog', ['/cms/from-our-blog/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Blog', ['/cms/from-our-blog/index'], ['class' => 'title']) ?>
                                                                 </li>
 
                                                                 <li>
-									<?= Html::a('About Page', ['/cms/about/update?id=1'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('About Page', ['/cms/about/update?id=1'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Contact Page', ['/cms/contact-page/update?id=1'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Contact Page', ['/cms/contact-page/update?id=1'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Private Label Page', ['/cms/private-label-gallery/update?id=1'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Private Label Page', ['/cms/private-label-gallery/update?id=1'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Showrooms', ['/cms/showrooms/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Showrooms', ['/cms/showrooms/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Others', ['/cms/cms-others/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Others', ['/cms/cms-others/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
                                                                         <a href="">
@@ -228,21 +228,21 @@ owered By Azryah Networks
                                                                         </a>
                                                                         <ul>
                                                                                 <li>
-											<?= Html::a('Terms & Conditions', ['/cms/principals/terms-conditions'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('Terms & Conditions', ['/cms/principals/terms-conditions'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                                 <li>
-											<?= Html::a('Privacy Policy', ['/cms/principals/privacy-policy'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('Privacy Policy', ['/cms/principals/privacy-policy'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                                 <li>
-											<?= Html::a('Return Policy', ['/cms/principals/return-policy'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('Return Policy', ['/cms/principals/return-policy'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                                 <li>
-											<?= Html::a('FAQ', ['/cms/principals/faq'], ['class' => 'title']) ?>
+                                                                                        <?= Html::a('FAQ', ['/cms/principals/faq'], ['class' => 'title']) ?>
                                                                                 </li>
                                                                         </ul>
                                                                 </li>
-								<li>
-									<?= Html::a('Meta Tags', ['/cms/cms-meta-tags/index'], ['class' => 'title']) ?>
+                                                                <li>
+                                                                        <?= Html::a('Meta Tags', ['/cms/cms-meta-tags/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                         </ul>
                                                 </li>
@@ -254,15 +254,19 @@ owered By Azryah Networks
                                                         </a>
                                                         <ul>
                                                                 <li>
-									<?= Html::a('Subscribe', ['/contacts/subscribe/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Subscribe', ['/contacts/subscribe/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('Contact Us', ['/contacts/contact-us/index'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('Contact Us', ['/contacts/contact-us/index'], ['class' => 'title']) ?>
                                                                 </li>
                                                         </ul>
                                                 </li>
                                                 <li>
-							<?= Html::a('<i class="fa fa-lock"></i><span class="title">Order</span>', ['/order/order-master/index'], ['class' => 'title']) ?>
+                                                        <?= Html::a('<i class="fa fa-lock"></i><span class="title">Order</span>', ['/order/order-master/index'], ['class' => 'title']) ?>
+                                                </li>
+
+                                                <li>
+                                                        <?= Html::a('<i class="fa fa-cube"></i><span class="title">Promotions</span>', ['/promotions/promotions/index'], ['class' => 'title']) ?>
                                                 </li>
                                         </ul>
 
@@ -535,7 +539,7 @@ owered By Azryah Networks
                                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                                 <img src="<?= yii::$app->homeUrl; ?>images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
                                                                 <span>
-									<?= Yii::$app->user->identity->user_name ?>
+                                                                        <?= Yii::$app->user->identity->user_name ?>
                                                                         <i class="fa-angle-down"></i>
                                                                 </span>
                                                         </a>
@@ -543,21 +547,21 @@ owered By Azryah Networks
                                                         <ul class="dropdown-menu user-profile-menu list-unstyled">
 
                                                                 <li>
-									<?= Html::a('<i class="fa-wrench"></i>Change Password', ['/admin/admin-users/change-password'], ['class' => 'title']) ?>
+                                                                        <?= Html::a('<i class="fa-wrench"></i>Change Password', ['/admin/admin-users/change-password'], ['class' => 'title']) ?>
                                                                 </li>
                                                                 <li>
-									<?= Html::a('<i class="fa-pencil"></i>Edit Profile', ['/admin/admin-users/update?id=' . Yii::$app->user->identity->id], ['class' => 'title']) ?>
+                                                                        <?= Html::a('<i class="fa-pencil"></i>Edit Profile', ['/admin/admin-users/update?id=' . Yii::$app->user->identity->id], ['class' => 'title']) ?>
                                                                 </li>
 
-								<?php
-								echo '<li class="last">'
-								. Html::beginForm(['/site/logout'], 'post') . '<a>'
-								. Html::submitButton(
-									'<i class="fa-lock"></i> Logout', ['class' => 'btn logout_btn']
-								) . '</a>'
-								. Html::endForm()
-								. '</li>';
-								?>
+                                                                <?php
+                                                                echo '<li class="last">'
+                                                                . Html::beginForm(['/site/logout'], 'post') . '<a>'
+                                                                . Html::submitButton(
+                                                                        '<i class="fa-lock"></i> Logout', ['class' => 'btn logout_btn']
+                                                                ) . '</a>'
+                                                                . Html::endForm()
+                                                                . '</li>';
+                                                                ?>
 
 
                                                         </ul>
@@ -569,8 +573,8 @@ owered By Azryah Networks
 
                                 </nav>
 
-				<?= Alert::widget() ?>
-				<?= $content ?>
+                                <?= Alert::widget() ?>
+                                <?= $content ?>
 
                                 <!-- Main Footer -->
                                 <!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
@@ -607,48 +611,48 @@ owered By Azryah Networks
                         <div class="footer-sticked-chat"><!-- Start: Footer Sticked Chat -->
 
                                 <script type="text/javascript">
-					function toggleSampleChatWindow()
-					{
-						var $chat_win = jQuery("#sample-chat-window");
+                                        function toggleSampleChatWindow()
+                                        {
+                                                var $chat_win = jQuery("#sample-chat-window");
 
-						$chat_win.toggleClass('open');
+                                                $chat_win.toggleClass('open');
 
-						if ($chat_win.hasClass('open'))
-						{
-							var $messages = $chat_win.find('.ps-scrollbar');
+                                                if ($chat_win.hasClass('open'))
+                                                {
+                                                        var $messages = $chat_win.find('.ps-scrollbar');
 
-							if ($.isFunction($.fn.perfectScrollbar))
-							{
-								$messages.perfectScrollbar('destroy');
+                                                        if ($.isFunction($.fn.perfectScrollbar))
+                                                        {
+                                                                $messages.perfectScrollbar('destroy');
 
-								setTimeout(function () {
-									$messages.perfectScrollbar();
-									$chat_win.find('.form-control').focus();
-								}, 300);
-							}
-						}
+                                                                setTimeout(function () {
+                                                                        $messages.perfectScrollbar();
+                                                                        $chat_win.find('.form-control').focus();
+                                                                }, 300);
+                                                        }
+                                                }
 
-						jQuery("#sample-chat-window form").on('submit', function (ev)
-						{
-							ev.preventDefault();
-						});
-					}
+                                                jQuery("#sample-chat-window form").on('submit', function (ev)
+                                                {
+                                                        ev.preventDefault();
+                                                });
+                                        }
 
-					jQuery(document).ready(function ($)
-					{
-						$(".footer-sticked-chat .chat-user, .other-conversations-list a").on('click', function (ev)
-						{
-							ev.preventDefault();
-							toggleSampleChatWindow();
-						});
+                                        jQuery(document).ready(function ($)
+                                        {
+                                                $(".footer-sticked-chat .chat-user, .other-conversations-list a").on('click', function (ev)
+                                                {
+                                                        ev.preventDefault();
+                                                        toggleSampleChatWindow();
+                                                });
 
-						$(".mobile-chat-toggle").on('click', function (ev)
-						{
-							ev.preventDefault();
+                                                $(".mobile-chat-toggle").on('click', function (ev)
+                                                {
+                                                        ev.preventDefault();
 
-							$(".footer-sticked-chat").toggleClass('mobile-is-visible');
-						});
-					});
+                                                        $(".footer-sticked-chat").toggleClass('mobile-is-visible');
+                                                });
+                                        });
                                 </script>
 
 
@@ -664,7 +668,7 @@ owered By Azryah Networks
 
 
 
-			<?php $this->endBody() ?>
+                        <?php $this->endBody() ?>
         </body>
 </html>
 <?php $this->endPage() ?>
