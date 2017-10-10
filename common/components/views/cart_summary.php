@@ -41,7 +41,7 @@ use common\models\Settings;
             ?>
             <div class="media">
                 <a class="thumbnail col-lg-2 col-md-2 col-sm-2 col-xs-2" href="#"> <img class="media-object" src="<?= $image ?>"> </a>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="top: 10px; text-align: left">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="top: 0px; text-align: left">
                     <h4 class="product-heading"><a href="#" title='<?= $cart->item_type == 1 ? 'Custom Perfume' : $product->product_name; ?>'><?= $cart->item_type == 1 ? 'Custom Perfume' : substr($product->product_name, 0, 23); ?></a></h4>
                     <?php
                     $label1 = '';
@@ -66,16 +66,10 @@ use common\models\Settings;
     <div class=" sub-total">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pad-0" style="padding: 15px 15px; border-top: 1px solid #ddd; border-right: 1px solid #ddd;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 label">Subtotal</div>
-            <?php if (isset($subtotal->promotion_discount) && $subtotal->promotion_discount != '') { ?>      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 label">Promotion Discount</div> <?php } ?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 label">Shipping Charges</div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pad-0" style="padding: 15px 15px; border-top: 1px solid #ddd;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price"><?= sprintf('%0.2f', $subtotal->total_amount) ?></div>
-            <?php
-            $promotion_disvount = 0;
-            if (isset($subtotal->promotion_discount) && $subtotal->promotion_discount != '') {
-                $promotion_disvount = $subtotal->promotion_discount;
-                ?> <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price"><?= sprintf('%0.2f', $subtotal->promotion_discount) ?></div><?php } ?>
             <?php
             $shipextra = Settings::findOne('2')->value;
             $ship_charge = $subtotal->total_amount <= $shipping_limit ? sprintf('%0.2f', $shipextra) : 0.00
@@ -88,7 +82,7 @@ use common\models\Settings;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 label">Total</div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pad-0" style="padding: 15px 15px; border-top: 1px solid #ddd;">
-            <?php $grand_total = $subtotal->total_amount + $ship_charge - $promotion_disvount ?>
+            <?php $grand_total = $subtotal->total_amount + $ship_charge ?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price">AED <?= sprintf('%0.2f', $grand_total) ?></div>
         </div>
     </div>

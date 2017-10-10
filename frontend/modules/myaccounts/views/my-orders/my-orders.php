@@ -10,12 +10,20 @@ use common\models\Fregrance;
 $order_products = OrderDetails::find()->where(['order_id' => $model->order_id])->all();
 ?>
 
-<div class="col-lg-8 col-md-8 col-sm-12 hidden-xs my-account-cntnt">
+<div class="col-lg-8 col-md-8 col-sm-12 hidden-xs my-order-list">
 
     <div class="orders-box">
         <div class="track">
             <button class="product-id"><?= $model->order_id ?></button>
-            <?= Html::a('<i class="fa fa-ban" aria-hidden="true"></i>Cancel', ['/myaccounts/my-orders/cancel-order', 'id' => $model->order_id], ['class' => 'track-btn']) ?>
+            <?php
+            if ($model->admin_status != 4) {
+                ?>
+                <?= Html::a('<i class="fa fa-ban" aria-hidden="true"></i>Cancel', ['/myaccounts/my-orders/cancel-order', 'id' => $model->order_id], ['class' => 'track-btn']) ?>
+            <?php } else {
+                ?>
+                <button class="track-btn">Delivered</button>
+            <?php }
+            ?>
         </div>
         <?php
         foreach ($order_products as $order_product) {
@@ -23,21 +31,16 @@ $order_products = OrderDetails::find()->where(['order_id' => $model->order_id])-
             ?>
             <div class="ordered-pro-dtls">
                 <div class="pro-img-box col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        <!--<img src="<?= yii::$app->homeUrl; ?>images/products/escape2tumb.png"/>-->
-                    <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $product_detail->canonical_name ?>"><img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_detail->id . '/profile/' . $product_detail->canonical_name . '_thumb.' . $product_detail->profile ?>"/></a>
+                    <?= Html::a('<img src="' . Yii::$app->homeUrl . 'uploads/product/' . $product_detail->id . '/profile/' . $product_detail->canonical_name . '_thumb.' . $product_detail->profile . '" height="100%" alt="1" />', ['/product/product_detail', 'product' => $product_detail->canonical_name], ['target' => '_blank']) ?>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $product_detail->canonical_name ?>"><p class="cart-pro-heading"><?= $product_detail->product_name ?></p></a>
+                    <?= Html::a('<p class="cart-pro-heading">' . $product_detail->product_name . '</p>', ['/product/product_detail', 'product' => $product_detail->canonical_name], ['target' => '_blank']) ?>
                     <?php $product_type = Fregrance::findOne($product_detail->product_type); ?>
-                    <a href="<?= Yii::$app->homeUrl . 'product_detail/' . $product_detail->canonical_name ?>"><p class="cart-pro-subheading"><?= $product_type->name; ?></p>
+                    <?= Html::a('<p class="cart-pro-subheading">' . $product_type->name . '</p>', ['/product/product_detail', 'product' => $product_detail->canonical_name], ['target' => '_blank']) ?>
                     </a>
-    <!--<p class="product-discp"><?= $product_detail->main_description; ?></p>-->
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 price">AED  <?= $product_detail->price; ?></div>
 
-                <!--							<div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 delivered-date">Delivered on <?= date('D, M y', strtotime($order_product->delivered_date)) ?>
-                                                                                <span>Your item has been delivered</span>
-                                                                        </div>-->
                 <?php if ($order_product->status == 1) { ?>
                     <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 delivered-date">Delivered on <?= date('D, M dS y', strtotime($order_product->delivered_date)) ?>
                         <span>Your item has been delivered</span>
@@ -61,7 +64,7 @@ $order_products = OrderDetails::find()->where(['order_id' => $model->order_id])-
     </div>
 </div>
 
-<div class="hidden-lg hidden-md hidden-sm col-xs-12 my-account-cntnt">
+<div class="hidden-lg hidden-md hidden-sm col-xs-12">
     <div class="orders-box col-xs-12">
         <div class="track">
             <button class="product-id"><?= $model->order_id ?></button>

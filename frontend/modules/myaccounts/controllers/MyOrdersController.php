@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use common\models\OrderMaster;
 use common\models\OrderMasterSearch;
+use common\models\Notification;
 
 class MyOrdersController extends Controller {
 
@@ -51,7 +52,17 @@ class MyOrdersController extends Controller {
     public function actionCancelOrder($id) {
         $order_master = OrderMaster::find()->where(['order_id' => $id])->one();
         $order_master->status = 5;
-        $order_master->save();
+        if ($order_master->save()) {
+            $notification = new Notification();
+            $notification->notification_type = 1;
+            $notification->order_id = $order_master->id;
+            $msg = 'Order Number <span class="data-highlite">' . $order_master->order_id . '</span> has to be canceled';
+            $msg1 = 'Order Number ' . $order_master->order_id . ' has to be canceled';
+            $notification->content = $msg;
+            $notification->message = $msg1;
+            $notification->date = date('Y-m-d');
+            $notification->save();
+        }
         return $this->redirect('index');
     }
 

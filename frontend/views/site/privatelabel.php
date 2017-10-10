@@ -237,5 +237,3 @@ else
 </div>
 
 <div class="pad-20"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.10/flickity.pkgd.min.js"></script>
-<script src="<?= yii::$app->homeUrl; ?>js/testimonial.js"></script>

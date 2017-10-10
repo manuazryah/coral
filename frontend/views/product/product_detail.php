@@ -6,8 +6,6 @@ use common\models\Unit;
 use common\models\Settings;
 use common\components\RecentlyViewedWidget;
 use common\components\RelatedProductWidget;
-use kartik\social\TwitterPlugin;
-use kartik\social\FacebookPlugin;
 
 if (isset($product_details->meta_title) && $product_details->meta_title != '')
 	$this->title = $product_details->meta_title;
@@ -46,7 +44,7 @@ else
 							<img src="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>?scale.height='400'" alt=""/>
 							<?php
 							if ($product_details->offer_price != "0") {
-								$percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
+								//$percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
 								?>
 								<div class="offer-tag">
 									<img src="<?= Yii::$app->homeUrl ?>images/off-tag-bg.png"/><span><?= $percentage ?>% OFF</span>
@@ -56,11 +54,11 @@ else
 						<?php
 					} else {
 						?>
-						<a  title="" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.png' ?>">
+						<a id="Zoom-1" class="MagicZoom" title="" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.png' ?>">
 							<img src="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.png' ?>?scale.height='400'" alt=""/>
 							<?php
 							if ($product_details->offer_price != "0") {
-								$percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
+								//$percentage = round(100 - (($product_details->offer_price / $product_details->price) * 100));
 								?>
 								<div class="offer-tag">
 									<img src="<?= Yii::$app->homeUrl ?>images/off-tag-bg.png"/><span><?= $percentage ?>% OFF</span>
@@ -69,44 +67,40 @@ else
 						</a>
 					<?php }
 					?>
-					<?php
-					if (file_exists($product_image)) {
-						?>
 
-						<div class="selectors">
-							<a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>">
-								<img srcset="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>" width="94px" height="93px"/>
-							</a>
-							<?php
-							$path = Yii::getAlias('@paths') . '/product/' . $product_details->id . '/gallery_thumb';
-							if (count(glob("{$path}/*")) > 0) {
+					<div class="selectors">
+						<a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>">
+							<img srcset="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/profile/' . $product_details->canonical_name . '_big.' . $product_details->profile ?>" width="94px" height="93px"/>
+						</a>
+						<?php
+						$path = Yii::getAlias('@paths') . '/product/' . $product_details->id . '/gallery_thumb';
+						if (count(glob("{$path}/*")) > 0) {
 
-								$k = 0;
-								foreach (glob("{$path}/*") as $file) {
-									if ($k <= '2') {
-										$k++;
-										$arry = explode('/', $file);
-										$img_nmee = end($arry);
-										$img_nmees = explode('.', $img_nmee);
-										if ($img_nmees['1'] != '') {
-											?>
-											<a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>">
-												<img srcset="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>" width="94px" height="93px"/>
-											</a>
-											<?php
-										}
+							$k = 0;
+							foreach (glob("{$path}/*") as $file) {
+								if ($k <= '2') {
+									$k++;
+									$arry = explode('/', $file);
+									$img_nmee = end($arry);
+									$img_nmees = explode('.', $img_nmee);
+									if ($img_nmees['1'] != '') {
+										?>
+										<a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>">
+											<img srcset="<?= Yii::$app->homeUrl . 'uploads/product/' . $product_details->id . '/gallery/' . end($arry) ?>" width="94px" height="93px"/>
+										</a>
+										<?php
 									}
 								}
-							} else {
-								?>
-								<a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>" data-image="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>?scale.height=400" >
-									<img srcset="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>?scale.width=112 2x" src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_gallery_thump.png' ?>?scale.width=56"/>
-								</a>
-							<?php }
+							}
+						} else {
 							?>
+							<a data-zoom-id="Zoom-1" href="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>" data-image="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>?scale.height=400" >
+								<img srcset="<?= Yii::$app->homeUrl . 'uploads/product/gallery_dummy.jpg' ?>?scale.width=112 2x" src="<?= Yii::$app->homeUrl . 'uploads/product/dummy_gallery_thump.png' ?>?scale.width=56"/>
+							</a>
+						<?php }
+						?>
 
-						</div>
-					<?php } ?>
+					</div>
 				</div>
 				<span class="company-speciality col-md-12">Safe and Secure Payments. Easy returns. 100% Authentic products.</span>
 			</div>
@@ -163,29 +157,12 @@ else
 							<?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping buy_now', 'id' => $product_details->canonical_name]) ?>
 						</div>
 					<?php } ?>
-					<ul class="share">
-
-						<!--					<ul>
-												<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus" aria-hidden="true"></i></a>
-													<ul class="dropdown-menu">
-
-
-														<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-														<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-														<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-														<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-													</ul>
-												</li>
-											</ul>-->
-						<li>
-							<?= FacebookPlugin::widget(['type' => FacebookPlugin::SHARE, 'settings' => ['size' => 'small', 'layout' => 'button ', 'mobile_iframe' => 'true']]);
-							?>
-						</li>
-						<li>
-							<?= TwitterPlugin::widget(['type' => TwitterPlugin::SHARE, 'settings' => ['size' => 'default']]);
-							?>
-						</li>
-					</ul>
+					<div class="share">
+						<a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+						<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+						<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+						<a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+					</div>
 				</div>
 			</div>
 			<div class="hidden-lg hidden-md col-sm-12 col-xs-12 product-option-buttons">
@@ -206,34 +183,18 @@ else
 						<?= Html::a('buy now', 'javascript:void(0)', ['class' => 'start-shopping buy_now', 'id' => $product_details->canonical_name]) ?>
 					</div>
 				<?php } ?>
-
-				<ul class="share">
-
-					<!--					<ul>
-											<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus" aria-hidden="true"></i></a>
-												<ul class="dropdown-menu">
-
-
-													<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-												</ul>
-											</li>
-										</ul>-->
-					<li>
-						<?= FacebookPlugin::widget(['type' => FacebookPlugin::SHARE, 'settings' => ['size' => 'small', 'layout' => 'button ', 'mobile_iframe' => 'true']]);
-						?>
-					</li>
-					<li>
-						<?= TwitterPlugin::widget(['type' => TwitterPlugin::SHARE, 'settings' => ['size' => 'default']]);
-						?>
-					</li>
-				</ul>
-				<!--				<div class="share" >
-				<?= TwitterPlugin::widget(['type' => TwitterPlugin::SHARE, 'settings' => ['size' => 'default']]);
-				?>
-								</div>-->
+				<div class="share">
+					<ul>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus" aria-hidden="true"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

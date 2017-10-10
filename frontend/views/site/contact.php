@@ -48,19 +48,19 @@ else
                         </div>
                 </div>
                 <div class="head-office-address col-lg-6 col-md-12 col-sm-12 col-xs-12 dark-lit-blue">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 box-4 colxs-widthfull box-min-height">
+                        <div class="address-box lit-blue col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <!--<h6>Marketing</h6>-->
 				<?= $contact_data->address_1; ?>
                         </div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 box-4 colxs-widthfull box-min-height">
+			<div class="address-box lit-blue col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <!--<h6>Marketing</h6>-->
 				<?= $contact_data->address_2; ?>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 box-4 colxs-widthfull box-min-height">
+                        <div class="address-box lit-blue col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <!--<h6>Marketing</h6>-->
 				<?= $contact_data->address_3; ?>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 box-4 colxs-widthfull box-min-height">
+                        <div class="address-box lit-blue col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <!--<h6>Marketing</h6>-->
 				<?= $contact_data->address_4; ?>
                         </div>

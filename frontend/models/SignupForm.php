@@ -10,6 +10,7 @@ use common\models\User;
  */
 class SignupForm extends Model {
 
+	public $username;
 	public $email;
 	public $password;
 	public $first_name;
@@ -31,6 +32,10 @@ class SignupForm extends Model {
 	 */
 	public function rules() {
 		return [
+			['username', 'trim'],
+			['username', 'required'],
+			['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+			['username', 'string', 'min' => 2, 'max' => 255],
 			['email', 'trim'],
 			['email', 'required'],
 			['email', 'email'],
@@ -39,7 +44,7 @@ class SignupForm extends Model {
 			['password', 'required'],
 			['password', 'string', 'min' => 6],
 			[['country', 'gender'], 'integer'],
-			[['day', 'month', 'year', 'password_repeat', 'notification', 'country_code'], 'safe'],
+			[['dob', 'mobile_no', 'day', 'month', 'year', 'password_repeat', 'notification', 'country_code'], 'safe'],
 			[['first_name', 'last_name'], 'string', 'max' => 50],
 			[['first_name'], 'required'],
 			['rules', 'required', 'requiredValue' => 1, 'message' => 'Please agree the terms and conditions'],
@@ -68,6 +73,7 @@ class SignupForm extends Model {
 		}
 
 		$user = new User();
+		$user->username = $this->username;
 		$user->first_name = $this->first_name;
 		$user->last_name = $this->last_name;
 		$user->country = $this->country;

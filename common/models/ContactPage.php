@@ -38,7 +38,6 @@ class ContactPage extends \yii\db\ActiveRecord {
 			[['content', 'accounts_info', 'administration_info', 'marketing_info', 'business_info', 'marketing_address', 'date_1'], 'string'],
 			[['map', 'accounts_info', 'administration_info', 'marketing_info', 'business_info', 'marketing_address', 'address_1', 'address_2', 'address_3', 'address_4'], 'required'],
 			[['map'], 'string', 'max' => 500],
-			[['address_1', 'address_2', 'address_3', 'address_4'], 'string', 'max' => 300]
 		];
 	}
 

@@ -22,7 +22,7 @@ use yii\helpers\Html;
 
 		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 my-account-cntnt">
 			<p class="span-msg">The account information has been saved.</p>
-			<p class="customer-name">Hello, <?= ucwords(Yii::$app->user->identity->first_name); ?>!</p>
+			<p class="customer-name">Hello, <?= ucwords(Yii::$app->user->identity->username); ?>!</p>
 			<p>From  My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account
 				information. Select a link  to view or edit information.</p>
 		</div>

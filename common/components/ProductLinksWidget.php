@@ -23,21 +23,19 @@ use common\models\Product;
 
 class ProductLinksWidget extends Widget {
 
-	public $id;
-	public $div_id;
+    public $id;
 
-	public function init() {
-		parent::init();
-		if ($this->id === null) {
-			return '';
-		}
-	}
+    public function init() {
+        parent::init();
+        if ($this->id === null) {
+            return '';
+        }
+    }
 
-	public function run() {
-
-		$model = Product::findOne($this->id);
-		return $this->render('product-links', ['model' => $model, 'div_id' => $this->div_id]);
-	}
+    public function run() {
+        $model = Product::findOne($this->id);
+        return $this->render('product-links', ['model' => $model]);
+    }
 
 }
 

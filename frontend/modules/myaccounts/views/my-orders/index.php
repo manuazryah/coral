@@ -27,34 +27,36 @@ use common\components\EmptyDataWidget;
 <div id="our-product" class="my-account">
     <div class="container">
         <?= Yii::$app->controller->renderPartial('_leftside_menu'); ?>
-        <?php
-        if ($dataProvider->totalCount > 0) {
-            ?>
-            <?=
-            ListView::widget([
-                'dataProvider' => $dataProvider,
-                'itemView' => 'my-orders',
-                'pager' => [
-                    'firstPageLabel' => 'first',
-                    'lastPageLabel' => 'last',
-                    'prevPageLabel' => '<',
-                    'nextPageLabel' => '>',
-                    'maxButtonCount' => 3,
-                ],
-            ]);
-            ?>
+        <div class="my-account-cntnt">
             <?php
-        } else {
+            if ($dataProvider->totalCount > 0) {
+                ?>
+                <?=
+                ListView::widget([
+                    'dataProvider' => $dataProvider,
+                    'itemView' => 'my-orders',
+                    'pager' => [
+                        'firstPageLabel' => 'first',
+                        'lastPageLabel' => 'last',
+                        'prevPageLabel' => '<',
+                        'nextPageLabel' => '>',
+                        'maxButtonCount' => 3,
+                    ],
+                ]);
+                ?>
+                <?php
+            } else {
+                ?>
+                <div class="col-lg-8 col-md-8 col-sm-12 hidden-xs my-account-cntnt empty-data">
+                    <?= EmptyDataWidget::widget(['path' => Yii::$app->homeUrl . 'images/empty-cart.png', 'msg' => 'Your Orders is Empty']) ?>
+                </div>
+                <div class="hidden-lg hidden-md hidden-sm col-xs-12 my-account-cntnt empty-data">
+                    <?= EmptyDataWidget::widget(['path' => Yii::$app->homeUrl . 'images/empty-cart.png', 'msg' => 'Your Orders is Empty']) ?>
+                </div>
+                <?php
+            }
             ?>
-            <div class="col-lg-8 col-md-8 col-sm-12 hidden-xs my-account-cntnt empty-data">
-                <?= EmptyDataWidget::widget(['path' => Yii::$app->homeUrl . 'images/empty-cart.png', 'msg' => 'Your Orders is Empty']) ?>
-            </div>
-            <div class="hidden-lg hidden-md hidden-sm col-xs-12 my-account-cntnt empty-data">
-                <?= EmptyDataWidget::widget(['path' => Yii::$app->homeUrl . 'images/empty-cart.png', 'msg' => 'Your Orders is Empty']) ?>
-            </div>
-            <?php
-        }
-        ?>
+        </div>
     </div>
 </div>
 
