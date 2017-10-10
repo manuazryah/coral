@@ -45,20 +45,6 @@ $this->title = 'Checkout-Delivery';
                         </select>
                     </div>
                     <div>OR ADD NEW</div>
-                    <!--                    <div class="form-group col-md-12">
-                                            <label for="usr">Name*</label>
-                                            <div class="col-md-6 col-sm-6 first-name"><input required="" type="text" class="form-control" placeholder="First Name" id="usr-first-name"></div>
-                                            <div class="col-md-6 col-sm-6 last-name"><input required="" type="text" class="form-control" placeholder="Last Name" id="usr-last-name"></div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 email-field">
-                                            <label for="usr">E-Mail Address*</label>
-                                            <input required="" type="email" class="form-control" placeholder="yourname@domain.com" id="mail">
-                                        </div>
-                                        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 number-field">
-                                            <label for="pwd">Mobile Number*</label>
-                                            <input type="phone" class="form-control" data-format="+91 (ddd) ddd-dddd" name="phone" id="phone" />
-                                        </div>-->
                     <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12 address-field">
                         <label for="usr">Name</label>
                         <?= $form->field($model, 'name')->textInput(['class' => 'form-control delivery'])->label(FALSE) ?>
@@ -77,7 +63,7 @@ $this->title = 'Checkout-Delivery';
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 emirate-field">
                         <label for="pwd">Emirate</label>
-                        <?= $form->field($model, 'emirate')->dropDownList(ArrayHelper::map(Emirates::find()->all(), 'id', 'name'), ['prompt' => 'select'])->label(FALSE); ?>
+                        <?= $form->field($model, 'emirate')->dropDownList(ArrayHelper::map(Emirates::find()->all(), 'id', 'name'))->label(FALSE); ?>
                     </div>
                     <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12 post-code-field">
                         <label for="pwd">Post Code</label>
@@ -123,8 +109,12 @@ $this->title = 'Checkout-Delivery';
         var id = $(this).val();
         if (id === '') {
             $('.delivery').prop('readonly', false);
+            $('#useraddress-emirate').prop('disabled', false);
+            $('#useraddress-country_code').prop('disabled', false);
         }else{
             $('.delivery').prop('readonly', true);
+            $('#useraddress-emirate').prop('disabled', true);
+            $('#useraddress-country_code').prop('disabled', true);
         }
         changeaddress('useraddress', id);
     });
@@ -152,7 +142,7 @@ $this->title = 'Checkout-Delivery';
                 $('#' + formclass + '-address').val('');
                 $('#' + formclass + '-landmark').val('');
                 $('#' + formclass + '-location').val('');
-                $('#' + formclass + '-emirate').val('');
+                $('#' + formclass + '-emirate').val('1');
                 $('#' + formclass + '-post_code').val('');
                 $('#' + formclass + '-mobile_number').val('');
 //                $('#' + formclass + '-country_code').val('');

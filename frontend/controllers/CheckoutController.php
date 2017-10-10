@@ -20,31 +20,23 @@ class CheckoutController extends \yii\web\Controller {
     public function actionCheckout() {
 
         if (isset(Yii::$app->user->identity->id)) {
-//            if (Yii::$app->session['orderid']) {
             $address = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id])->all();
-            $model = UserAddress::find()->where(['user_id' => Yii::$app->user->identity->id, 'status' => '1'])->one();
             $country_codes = ArrayHelper::map(\common\models\CountryCode::find()->where(['status' => 1])->orderBy(['id' => SORT_ASC])->all(), 'id', 'country_code');
-            if (empty($model)) {
-                $model = new UserAddress();
-                if ($model->load(Yii::$app->request->post())) {
-                    Yii::$app->SetValues->Attributes($model);
-                    $model->user_id = Yii::$app->user->identity->id;
-                    $model->status = 1;
-                    if ($model->save()) {
-                        $this->orderbilling($model->id);
-                    }
-                }
-                return $this->render('new_billing_address', ['model' => $model, 'country_codes' => $country_codes,]);
-            }
+//			if (empty($model)) {
+            $model = new UserAddress();
             if ($model->load(Yii::$app->request->post())) {
-                $bill_address = Yii::$app->request->post()['UserAddress']['billing'];
-                $this->orderbilling($bill_address);
+                if (isset(Yii::$app->request->post()['UserAddress']['billing'])) {
+                    $bill_address = Yii::$app->request->post()['UserAddress']['billing'];
+                    $this->orderbilling($bill_address);
+                }
+                Yii::$app->SetValues->Attributes($model);
+                $model->user_id = Yii::$app->user->identity->id;
+                $model->status = 1;
+                if ($model->save()) {
+                    $this->orderbilling($model->id);
+                }
             }
             return $this->render('billing', ['model' => $model, 'addresses' => $address, 'country_codes' => $country_codes,]);
-//            } else {
-//                $this->redirect(array('cart/mycart'));
-//            }
-//            $this->redirect(array('checkout/billing'));
         } else {
             $this->redirect(array('site/login'));
         }

@@ -32,34 +32,41 @@ $this->title = 'Checkout';
             <div class="content lit-blue">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?php $form = ActiveForm::begin(); ?>
-
                     <div class="form-group col-lg-12 col-md-8 col-sm-8 col-xs-12 address-field">
                         <label for="usr">Delivery Address*</label>
                         <select class="form-control" id="billing" name="UserAddress[billing]">
+                            <option value=''>Select</option>
                             <?php foreach ($addresses as $address) { ?>
-                                <option value="<?= $address->id ?>" <?php if ($address->status == '1') { ?>selected="selected"<?php } ?>><?= $address->address . ', ' . $address->landmark . ', ' . $address->location ?></option>
+                                <option value="<?= $address->id ?>" ><?= $address->address . ', ' . $address->landmark . ', ' . $address->location ?></option>
                             <?php } ?>
                         </select>
                     </div>
+
+                    <div>OR ADD NEW</div>
+
+                    <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12 address-field">
+                        <label for="usr">Name</label>
+                        <?= $form->field($model, 'name')->textInput(['class' => 'form-control delivery'])->label(FALSE) ?>
+                    </div>
                     <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12 address-field">
                         <label for="usr">Address</label>
-                        <?= $form->field($model, 'address')->textInput(['class' => 'form-control', 'readOnly' => true])->label(FALSE) ?>
+                        <?= $form->field($model, 'address')->textInput(['class' => 'form-control'])->label(FALSE) ?>
                     </div>
                     <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <label for="usr">Landmark</label>
-                        <?= $form->field($model, 'landmark')->textInput(['class' => 'form-control', 'readOnly' => true])->label(FALSE) ?>
+                        <?= $form->field($model, 'landmark')->textInput(['class' => 'form-control'])->label(FALSE) ?>
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 location-field">
                         <label for="usr">Location</label>
-                        <?= $form->field($model, 'location')->textInput(['class' => 'form-control', 'readOnly' => true])->label(FALSE) ?>
+                        <?= $form->field($model, 'location')->textInput(['class' => 'form-control'])->label(FALSE) ?>
                     </div>
                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 emirate-field">
                         <label for="pwd">Emirate</label>
                         <?= $form->field($model, 'emirate')->dropDownList(ArrayHelper::map(Emirates::find()->all(), 'id', 'name'), ['prompt' => 'select'])->label(FALSE); ?>
-                   </div>
+                    </div>
                     <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12 post-code-field">
                         <label for="pwd">Post Code</label>
-                        <?= $form->field($model, 'post_code')->textInput(['class' => 'form-control', 'readOnly' => true])->label(FALSE) ?>
+                        <?= $form->field($model, 'post_code')->textInput(['class' => 'form-control'])->label(FALSE) ?>
                     </div>
                     <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12 number-field">
                         <label for="pwd">Mobile Number</label>
@@ -71,7 +78,7 @@ $this->title = 'Checkout';
                                 <?php }
                                 ?>
                             </select>
-                            <?= $form->field($model, 'mobile_number')->textInput(['class' => 'form-control', 'style' => 'padding-left: 70px', 'readOnly' => true])->label(FALSE) ?>
+                            <?= $form->field($model, 'mobile_number')->textInput(['class' => 'form-control', 'style' => 'padding-left: 70px'])->label(FALSE) ?>
                             <!--<input style="padding-left: 70px;" type="phone" id="user-mobile_number" class="form-control" name="UserAddress[mobile_number]" value="<?= $model->mobile_number ?>" maxlength="15" aria-invalid="false" data-format="+1 (ddd) ddd-dddd">-->
                         </div>
                     </div>
@@ -104,9 +111,18 @@ $this->title = 'Checkout';
 <script>
     $('#billing').on('change', function () {
         var id = $(this).val();
+        if (id === '') {
+            $('.billing').prop('readonly', false);
+            $('#useraddress-emirate').prop('disabled', false);
+            $('#useraddress-country_code').prop('disabled', false);
+        }else{
+            $('.billing').prop('readonly', true);
+            $('#useraddress-emirate').prop('disabled', true);
+            $('#useraddress-country_code').prop('disabled', true);
+        }
         changeaddress('useraddress', id);
     });
-   
+
     function changeaddress(formclass, id) {
         $.ajax({
             type: "POST",
@@ -117,6 +133,7 @@ $this->title = 'Checkout';
         }).done(function (data) {
             var $data = JSON.parse(data);
             if ($data.rslt === "success") {
+                $('#' + formclass + '-name').val($data.name);
                 $('#' + formclass + '-address').val($data.address);
                 $('#' + formclass + '-landmark').val($data.landmark);
                 $('#' + formclass + '-location').val($data.location);
@@ -125,6 +142,14 @@ $this->title = 'Checkout';
                 $('#' + formclass + '-mobile_number').val($data.mobile_number);
                 $('#' + formclass + '-country_code').val($data.country_code);
 
+            }else{
+               $('#' + formclass + '-name').val('');
+                $('#' + formclass + '-address').val('');
+                $('#' + formclass + '-landmark').val('');
+                $('#' + formclass + '-location').val('');
+                $('#' + formclass + '-emirate').val('1');
+                $('#' + formclass + '-post_code').val('');
+                $('#' + formclass + '-mobile_number').val(''); 
             }
         });
     }
