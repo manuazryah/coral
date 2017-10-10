@@ -39,7 +39,8 @@ class Slider extends \yii\db\ActiveRecord {
             [['status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['img'], 'string', 'max' => 100],
-            [['slider_first_tittle', 'slider_second_tittle'], 'string', 'max' => 200],
+            [['slider_first_tittle'], 'string', 'max' => 35],
+            [['slider_second_tittle'], 'string', 'max' => 15],
             [['slider_link'], 'string', 'max' => 500],
             [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];

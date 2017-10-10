@@ -8,54 +8,59 @@ use dosamigos\ckeditor\CKEditor;
 /* @var $model common\models\Slider */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<style>
+    .form-inline .form-group {
+        min-height: 63px;
+    }
+</style>
 
 <div class="slider-form form-inline">
 
-        <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
+    <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
+        <?= $form->field($model, 'img')->fileInput()->label('Image (File Size : 1500x558)') ?>
+
+    </div>
+    <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
+        <?= $form->field($model, 'slider_first_tittle')->textInput(['maxlength' => true]) ?>
+        <p class="max-len" style="float:right;font-size: 11px;">Max :35 characters </p>
+    </div>
+    <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
+        <?= $form->field($model, 'slider_second_tittle')->textInput(['maxlength' => true]) ?>
+        <p class="max-len" style="float:right;font-size: 11px;">Max :15 characters </p>
+    </div>
+    <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
+        <?= $form->field($model, 'slider_link')->textInput(['maxlength' => true]) ?>
+
+    </div>
+    <div class="rows">
         <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-                <?= $form->field($model, 'img')->fileInput()->label('Image (File Size : 1500x558)') ?>
+            <?php if (isset($model->img)) { ?>
+                <img src="<?= Yii::$app->homeUrl ?>../uploads/cms/slider/<?= $model->id ?>/small.<?= $model->img; ?>?<?= rand() ?>" width="300" height="110"/>
 
+                <?php
+            } elseif (!empty($model->img)) {
+                echo "";
+            }
+            ?>
         </div>
-        <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-                <?= $form->field($model, 'slider_first_tittle')->textInput(['maxlength' => true]) ?>
+    </div>
+    <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
+        <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
 
+    </div>
+
+    <div class='col-md-12 col-sm-12 col-xs-12' style="padding-left: 0px;">
+        <div class="form-group">
+            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+            <?php if (!empty($model->id)) { ?>
+                <?= Html::a('Reset', ['index'], ['class' => 'btn btn-gray btn-reset', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
+            <?php }
+            ?>
         </div>
-        <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-                <?= $form->field($model, 'slider_second_tittle')->textInput(['maxlength' => true]) ?>
+    </div>
 
-        </div>
-        <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-                <?= $form->field($model, 'slider_link')->textInput(['maxlength' => true]) ?>
-
-        </div>
-        <div class="rows">
-                <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-                        <?php if (isset($model->img)) { ?>
-                                <img src="<?= Yii::$app->homeUrl ?>../uploads/cms/slider/<?= $model->id ?>/small.<?= $model->img; ?>?<?= rand() ?>" width="300" height="110"/>
-
-                                <?php
-                        } elseif (!empty($model->img)) {
-                                echo "";
-                        }
-                        ?>
-                </div>
-        </div>
-        <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-                <?= $form->field($model, 'status')->dropDownList(['1' => 'Enable', '0' => 'Disable']) ?>
-
-        </div>
-
-        <div class='col-md-12 col-sm-12 col-xs-12' style="padding-left: 0px;">
-                <div class="form-group">
-                        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-success', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
-                        <?php if (!empty($model->id)) { ?>
-                                <?= Html::a('Reset', ['index'], ['class' => 'btn btn-gray btn-reset', 'style' => 'margin-top: 18px; height: 36px; width:100px;']) ?>
-                        <?php }
-                        ?>
-                </div>
-        </div>
-
-        <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 
 </div>
